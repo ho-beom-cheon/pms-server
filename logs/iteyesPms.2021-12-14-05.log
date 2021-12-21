@@ -1,0 +1,247 @@
+2021-12-14 17:08:50,147 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:08:50,150 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:08:50,160 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:08:50,160 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:08:50,161 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:08:50,161 [http-nio-8080-exec-2] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:08:50,161 [http-nio-8080-exec-2] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0Njk2MzAsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.f_jxlacvSY4g_TterREne7u9DrxPmA5HyTA4P_JScWE
+2021-12-14 17:09:11,557 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:09:11,557 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:09:11,561 [http-nio-8080-exec-3] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:09:11,561 [http-nio-8080-exec-3] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:09:11,561 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:09:11,562 [http-nio-8080-exec-3] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:09:11,562 [http-nio-8080-exec-3] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0Njk2NTEsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.GxmOefXE0SmQ8u1OcxMElLtmVk5nZwQGAndfCYaKxIc
+2021-12-14 17:15:31,918 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:15:31,919 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:15:31,925 [http-nio-8080-exec-3] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:15:31,925 [http-nio-8080-exec-3] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:15:31,925 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:15:31,926 [http-nio-8080-exec-3] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:15:31,927 [http-nio-8080-exec-3] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzAwMzEsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.Mg5kzQ26K1hoTd6VHjCbNYN1Xl42XkrSDLrJ0t6BtJY
+2021-12-14 17:15:53,494 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:15:53,494 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:15:53,499 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:15:53,499 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:15:53,500 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:15:53,500 [http-nio-8080-exec-4] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:15:53,501 [http-nio-8080-exec-4] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzAwNTMsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.QhNH6-23JMsbub2EKuTl8en1yLD8nlXrgoxwAV7DTFs
+2021-12-14 17:17:57,368 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:17:57,368 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:17:57,379 [http-nio-8080-exec-6] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:17:57,379 [http-nio-8080-exec-6] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:17:57,380 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:17:57,380 [http-nio-8080-exec-6] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:17:57,380 [http-nio-8080-exec-6] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzAxNzcsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.leZNrwfAKFHmBmb2TIci0-0SDWMXPveUDsq63yD5HAc
+2021-12-14 17:19:25,051 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:19:25,052 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:19:25,062 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:19:25,063 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:19:25,065 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:19:25,066 [http-nio-8080-exec-9] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:19:25,067 [http-nio-8080-exec-9] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzAyNjUsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.YW1mEY34eXuT9DX3OLhTWTc-BwWseBjCX3IzuPDxxRo
+2021-12-14 17:24:44,095 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:24:44,096 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:24:44,101 [http-nio-8080-exec-10] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:24:44,101 [http-nio-8080-exec-10] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:24:44,102 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:24:44,102 [http-nio-8080-exec-10] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:24:44,102 [http-nio-8080-exec-10] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzA1ODQsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.vlkTo9ulYUCk8XENHsT6FIDVZH-GSHSF24Z9DUYH6J0
+2021-12-14 17:25:45,202 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:25:45,202 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:25:45,207 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:25:45,207 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:25:45,207 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:25:45,207 [http-nio-8080-exec-2] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:25:45,208 [http-nio-8080-exec-2] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzA2NDUsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.Q2X1WB2gYUMHBI4y6EVPWDtezeAYqFI0ZV0FmqjCi_M
+2021-12-14 17:27:32,874 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:27:32,874 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:27:32,878 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:27:32,879 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:27:32,879 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:27:32,879 [http-nio-8080-exec-4] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:27:32,880 [http-nio-8080-exec-4] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzA3NTIsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.Do9CCAQFDyJNSYRlLIUjO6buNv9n6EHZnEuwbMU5oq0
+2021-12-14 17:28:30,079 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:28:30,079 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:28:30,083 [http-nio-8080-exec-5] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:28:30,083 [http-nio-8080-exec-5] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:28:30,084 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:28:30,084 [http-nio-8080-exec-5] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:28:30,085 [http-nio-8080-exec-5] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzA4MTAsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.MP7BfFIOpQ_0o7Bn7C4yr5g2wdwYbRAJ8ENEXicCiLs
+2021-12-14 17:30:24,583 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:30:24,583 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 10234(String)
+2021-12-14 17:30:24,586 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 0
+2021-12-14 17:30:24,586 [http-nio-8080-exec-8] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.GeneratedMethodAccessor51.invoke(Unknown Source) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-14 17:30:31,130 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:30:31,130 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:30:31,134 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:30:31,134 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:30:31,134 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:30:31,134 [http-nio-8080-exec-9] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:30:31,135 [http-nio-8080-exec-9] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzA5MzEsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.MhFL40JuNQifEjwYXAGGzh_Nh1NPfX-3I2bdGMZ0aKs
+2021-12-14 17:31:45,708 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:31:45,708 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: (String), (String)
+2021-12-14 17:31:45,712 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 0
+2021-12-14 17:31:45,713 [http-nio-8080-exec-10] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.GeneratedMethodAccessor51.invoke(Unknown Source) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-14 17:31:52,137 [http-nio-8080-exec-1] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:31:52,137 [http-nio-8080-exec-1] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:31:52,141 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:31:52,142 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:31:52,142 [http-nio-8080-exec-1] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:31:52,142 [http-nio-8080-exec-1] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:31:52,143 [http-nio-8080-exec-1] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzEwMTIsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.2BOPDoi0eZ6EZ9H3vLtbDu3xjv-Sb-hhLbt0a0VmrKE
+2021-12-14 17:32:12,396 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:32:12,396 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:32:12,401 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:32:12,401 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:32:12,401 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:32:12,401 [http-nio-8080-exec-2] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:32:12,402 [http-nio-8080-exec-2] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzEwMzIsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.rPjuYjfNVAG1OPTyDBbijx58kgGkWsSn9jYDDSafGI0
+2021-12-14 17:32:41,354 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:32:41,355 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:32:41,358 [http-nio-8080-exec-3] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:32:41,358 [http-nio-8080-exec-3] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:32:41,358 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:32:41,358 [http-nio-8080-exec-3] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:32:41,359 [http-nio-8080-exec-3] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzEwNjEsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.jiwU36YzLUo2jus-ZcfvKU5059FiQ6IbPNlhWDtx6ic
+2021-12-14 17:35:27,677 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-14 17:35:27,678 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-14 17:35:27,682 [http-nio-8080-exec-5] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-14 17:35:27,682 [http-nio-8080-exec-5] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-14 17:35:27,683 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-14 17:35:27,683 [http-nio-8080-exec-5] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-14 17:35:27,684 [http-nio-8080-exec-5] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk0NzEyMjcsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.3JI2mSiiW7ZEVnOPvYkr4cqMm2spogScuLxNbEzq1Cw
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: 
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: 
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: 
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: 
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: 000
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: 000
+2021-12-14 17:35:39,043 [http-nio-8080-exec-8] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: 000
+2021-12-14 17:35:39,066 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==>  Preparing: SELECT BKUP_ID /*백업ID */ , PRJT_ID /*프로젝트ID */ , PGM_ID /*프로그램ID */ , BZCD /*업무구분 */ , PGM_NM /*프로그램명 */ , BZ_DTLS_TXT /*업무세부 */ , DVLP_DIS_CD /*개발구분*/ , PGM_DIS_CD /*프로그램구분*/ , ENLPE_NM /*프로그램세부구분코드 */ , FRCS_STA_DT /*예상시작일자 */ , FRCS_END_DT /*예상종료일자 */ , STA_DT /*실제시작일자 */ , END_DT /*실제종료일자 */ , PRG_TXT /*진행현황 */ , DVLPE_NO /*개발자번호 */ , DVLPE_CNF_DT /*개발자확인일자 */ , PL_NO /*PL번호 */ , PL_CNF_DT /*PL확인일자 */ , CRPE_NO /*담당자번호 */ , RMRK /*비고 */ , OPR_NO /*조작자번호 */ , DB_CHG_TS /*DB변경일시 */ FROM PMS_PGM_MNG WHERE 1=1 /*프로그램ID*/ /*프로그램명*/ /*개발자번호*/ /*PL번호*/ /*개발구분*/ /*업무구분*/ /*프로그램구분*/
+2021-12-14 17:35:39,066 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==> Parameters: 
+2021-12-14 17:35:39,088 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, PGM_NM, BZ_DTLS_TXT, DVLP_DIS_CD, PGM_DIS_CD, ENLPE_NM, FRCS_STA_DT, FRCS_END_DT, STA_DT, END_DT, PRG_TXT, DVLPE_NO, DVLPE_CNF_DT, PL_NO, PL_CNF_DT, CRPE_NO, RMRK, OPR_NO, DB_CHG_TS
+2021-12-14 17:35:39,089 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_C, AAA, 업체연혁-화면, 신용조사의 업체이력, 100, 100, 100, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:27.0
+2021-12-14 17:35:39,089 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_L, AAA, 업체개요-로직, 신용조사의 업체이력, 100, 100, 200, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:02.0
+2021-12-14 17:35:39,090 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_C, AAA, 업체개요-화면, 신용조사의 업체개요, 100, 100, 100, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:55:30.0
+2021-12-14 17:35:39,090 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_L, AAA, 업체개요-로직, 신용조사의 업체개요, 100, 100, 200, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:57:50.0
+2021-12-14 17:35:39,090 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - <==      Total: 4
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: 
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: 
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: 
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: 
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: 000
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: 000
+2021-12-14 17:35:39,268 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: 000
+2021-12-14 17:35:39,269 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==>  Preparing: SELECT BKUP_ID /*백업ID */ , PRJT_ID /*프로젝트ID */ , PGM_ID /*프로그램ID */ , BZCD /*업무구분 */ , PGM_NM /*프로그램명 */ , BZ_DTLS_TXT /*업무세부 */ , DVLP_DIS_CD /*개발구분*/ , PGM_DIS_CD /*프로그램구분*/ , ENLPE_NM /*프로그램세부구분코드 */ , FRCS_STA_DT /*예상시작일자 */ , FRCS_END_DT /*예상종료일자 */ , STA_DT /*실제시작일자 */ , END_DT /*실제종료일자 */ , PRG_TXT /*진행현황 */ , DVLPE_NO /*개발자번호 */ , DVLPE_CNF_DT /*개발자확인일자 */ , PL_NO /*PL번호 */ , PL_CNF_DT /*PL확인일자 */ , CRPE_NO /*담당자번호 */ , RMRK /*비고 */ , OPR_NO /*조작자번호 */ , DB_CHG_TS /*DB변경일시 */ FROM PMS_PGM_MNG WHERE 1=1 /*프로그램ID*/ /*프로그램명*/ /*개발자번호*/ /*PL번호*/ /*개발구분*/ /*업무구분*/ /*프로그램구분*/
+2021-12-14 17:35:39,269 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==> Parameters: 
+2021-12-14 17:35:39,274 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, PGM_NM, BZ_DTLS_TXT, DVLP_DIS_CD, PGM_DIS_CD, ENLPE_NM, FRCS_STA_DT, FRCS_END_DT, STA_DT, END_DT, PRG_TXT, DVLPE_NO, DVLPE_CNF_DT, PL_NO, PL_CNF_DT, CRPE_NO, RMRK, OPR_NO, DB_CHG_TS
+2021-12-14 17:35:39,274 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_C, AAA, 업체연혁-화면, 신용조사의 업체이력, 100, 100, 100, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:27.0
+2021-12-14 17:35:39,275 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_L, AAA, 업체개요-로직, 신용조사의 업체이력, 100, 100, 200, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:02.0
+2021-12-14 17:35:39,275 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_C, AAA, 업체개요-화면, 신용조사의 업체개요, 100, 100, 100, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:55:30.0
+2021-12-14 17:35:39,275 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_L, AAA, 업체개요-로직, 신용조사의 업체개요, 100, 100, 200, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:57:50.0
+2021-12-14 17:35:39,275 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - <==      Total: 4

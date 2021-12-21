@@ -1,0 +1,492 @@
+2021-12-15 14:10:06,504 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 12124 (C:\workspace\ProjectEyes\PMS\bin\main started by iteyes in C:\workspace\ProjectEyes\PMS)
+2021-12-15 14:10:06,506 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-12-15 14:10:06,506 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
+2021-12-15 14:10:06,647 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$63577c55] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-12-15 14:10:06,648 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2021-12-15 14:10:06,671 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2021-12-15 14:10:06,689 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 181 ms
+2021-12-15 14:10:06,765 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
+2021-12-15 14:10:06,796 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:58) - LiveReload server is running on port 35729
+2021-12-15 14:10:06,803 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
+2021-12-15 14:10:06,806 [restartedMain] INFO  com.iteyes.PmsApplication(logStarted:61) - Started PmsApplication in 0.33 seconds (JVM running for 80587.604)
+2021-12-15 14:10:06,806 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener(onApplicationEvent:63) - Condition evaluation unchanged
+2021-12-15 14:15:03,363 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:525) - Initializing Servlet 'dispatcherServlet'
+2021-12-15 14:15:03,364 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:547) - Completed initialization in 1 ms
+2021-12-15 14:15:03,394 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:15:03,394 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:15:03,398 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:15:03,398 [http-nio-8080-exec-2] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:15:20,082 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:15:20,082 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:15:20,086 [http-nio-8080-exec-3] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:15:20,087 [http-nio-8080-exec-3] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:15:46,110 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:15:46,111 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:15:46,114 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:15:46,114 [http-nio-8080-exec-4] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:15:49,641 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:15:49,642 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:15:49,646 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:15:49,646 [http-nio-8080-exec-5] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:16:32,903 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:16:32,903 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:16:32,910 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:16:32,910 [http-nio-8080-exec-6] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:18:18,981 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:18:18,982 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:18:18,988 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:18:18,988 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:18:18,989 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:18:18,989 [http-nio-8080-exec-7] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:18:18,991 [http-nio-8080-exec-7] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDU3OTgsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.k4MaBwsVEFNZKxJOfNw7uued7MsPt9o7h2SrhC_yfG8
+2021-12-15 14:19:16,515 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:19:16,515 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:19:16,518 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:19:16,518 [http-nio-8080-exec-8] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:19:16,518 [http-nio-8080-exec-8] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:19:16,518 [http-nio-8080-exec-8] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:19:16,519 [http-nio-8080-exec-8] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDU4NTYsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.R2GMj4yWIzYsfA-VwwXpoy463W0V-w8mWo4ICdnbIUA
+2021-12-15 14:19:26,929 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:19:26,930 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:19:26,934 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:19:26,935 [http-nio-8080-exec-9] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:19:31,210 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:19:31,210 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:19:31,213 [http-nio-8080-exec-10] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:19:31,213 [http-nio-8080-exec-10] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:19:31,213 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:19:31,213 [http-nio-8080-exec-10] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:19:31,214 [http-nio-8080-exec-10] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDU4NzEsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.DsdfyKDIlrSqLpoPf6ud7QftslbE9BuRm71CVoKBE_I
+2021-12-15 14:27:55,917 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:27:55,918 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:27:55,921 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:27:55,921 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:27:55,921 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:27:55,921 [http-nio-8080-exec-2] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:27:55,922 [http-nio-8080-exec-2] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDYzNzUsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.LXdj_WUpz-BFmY3S8qAeoCcxMZ6Ba-RwlKhCAOMTeWo
+2021-12-15 14:29:01,309 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:29:01,310 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:29:01,313 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:29:01,313 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:29:01,313 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:29:01,313 [http-nio-8080-exec-4] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:29:01,313 [http-nio-8080-exec-4] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDY0NDEsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.LU0kJYOPvi62QFGxYcAG9K2EP8_DpLfdYTn9UCjVWwA
+2021-12-15 14:29:10,507 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:29:10,507 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: (String), (String), (String)
+2021-12-15 14:29:10,514 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 0
+2021-12-15 14:29:10,514 [http-nio-8080-exec-5] ERROR com.iteyes.controller.UserRestController(signin:67) - 로그인 실패
+java.lang.RuntimeException: 사용자가 없습니다
+	at com.iteyes.service.impl.pms.UserServiceImpl.signin(UserServiceImpl.java:40) ~[main/:?]
+	at com.iteyes.controller.UserRestController.signin(UserRestController.java:53) [main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:567) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.9.jar:5.3.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.9.jar:5.3.9]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.52.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.9.jar:5.3.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.9.jar:5.3.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.52.jar:9.0.52]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-12-15 14:29:14,023 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:29:14,024 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:29:14,027 [http-nio-8080-exec-6] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:29:14,027 [http-nio-8080-exec-6] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:29:14,027 [http-nio-8080-exec-6] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:29:14,028 [http-nio-8080-exec-6] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:29:14,028 [http-nio-8080-exec-6] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDY0NTQsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.GlkEbeXpmssl3CATa2-_vAms925qzDyGVwzJZt1pxT4
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: 
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: 
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: 
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: 
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: 000
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: 000
+2021-12-15 14:31:17,993 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: 000
+2021-12-15 14:31:17,997 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==>  Preparing: SELECT BKUP_ID /*백업ID */ , PRJT_ID /*프로젝트ID */ , PGM_ID /*프로그램ID */ , BZCD /*업무구분 */ , PGM_NM /*프로그램명 */ , BZ_DTLS_TXT /*업무세부 */ , DVLP_DIS_CD /*개발구분*/ , PGM_DIS_CD /*프로그램구분*/ , ENLPE_NM /*프로그램세부구분코드 */ , FRCS_STA_DT /*예상시작일자 */ , FRCS_END_DT /*예상종료일자 */ , STA_DT /*실제시작일자 */ , END_DT /*실제종료일자 */ , PRG_TXT /*진행현황 */ , DVLPE_NO /*개발자번호 */ , DVLPE_CNF_DT /*개발자확인일자 */ , PL_NO /*PL번호 */ , PL_CNF_DT /*PL확인일자 */ , CRPE_NO /*담당자번호 */ , RMRK /*비고 */ , OPR_NO /*조작자번호 */ , DB_CHG_TS /*DB변경일시 */ FROM PMS_PGM_MNG WHERE 1=1 /*프로그램ID*/ /*프로그램명*/ /*개발자번호*/ /*PL번호*/ /*개발구분*/ /*업무구분*/ /*프로그램구분*/
+2021-12-15 14:31:17,997 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==> Parameters: 
+2021-12-15 14:31:18,001 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, PGM_NM, BZ_DTLS_TXT, DVLP_DIS_CD, PGM_DIS_CD, ENLPE_NM, FRCS_STA_DT, FRCS_END_DT, STA_DT, END_DT, PRG_TXT, DVLPE_NO, DVLPE_CNF_DT, PL_NO, PL_CNF_DT, CRPE_NO, RMRK, OPR_NO, DB_CHG_TS
+2021-12-15 14:31:18,002 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_C, AAA, 업체연혁-화면, 신용조사의 업체이력, 100, 100, 100, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:27.0
+2021-12-15 14:31:18,002 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_L, AAA, 업체개요-로직, 신용조사의 업체이력, 100, 100, 200, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:02.0
+2021-12-15 14:31:18,003 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_C, AAA, 업체개요-화면, 신용조사의 업체개요, 100, 100, 100, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:55:30.0
+2021-12-15 14:31:18,003 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_L, AAA, 업체개요-로직, 신용조사의 업체개요, 100, 100, 200, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:57:50.0
+2021-12-15 14:31:18,003 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - <==      Total: 4
+2021-12-15 14:31:25,822 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? || '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-15 14:31:25,822 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 1234(String), 100(String)
+2021-12-15 14:31:25,825 [http-nio-8080-exec-10] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-15 14:31:25,825 [http-nio-8080-exec-10] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, C
+2021-12-15 14:31:25,826 [http-nio-8080-exec-10] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-15 14:31:25,826 [http-nio-8080-exec-10] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 14:31:25,826 [http-nio-8080-exec-10] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1NDY1ODUsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.2SeCHJrxdCcf9QdB7Ch9Gtpgg_Omuje8ej2tveJwcBs
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: 
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: 
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: 
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: 
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: 000
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: 000
+2021-12-15 14:31:38,369 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: 000
+2021-12-15 14:31:38,372 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==>  Preparing: SELECT BKUP_ID /*백업ID */ , PRJT_ID /*프로젝트ID */ , PGM_ID /*프로그램ID */ , BZCD /*업무구분 */ , PGM_NM /*프로그램명 */ , BZ_DTLS_TXT /*업무세부 */ , DVLP_DIS_CD /*개발구분*/ , PGM_DIS_CD /*프로그램구분*/ , ENLPE_NM /*프로그램세부구분코드 */ , FRCS_STA_DT /*예상시작일자 */ , FRCS_END_DT /*예상종료일자 */ , STA_DT /*실제시작일자 */ , END_DT /*실제종료일자 */ , PRG_TXT /*진행현황 */ , DVLPE_NO /*개발자번호 */ , DVLPE_CNF_DT /*개발자확인일자 */ , PL_NO /*PL번호 */ , PL_CNF_DT /*PL확인일자 */ , CRPE_NO /*담당자번호 */ , RMRK /*비고 */ , OPR_NO /*조작자번호 */ , DB_CHG_TS /*DB변경일시 */ FROM PMS_PGM_MNG WHERE 1=1 /*프로그램ID*/ /*프로그램명*/ /*개발자번호*/ /*PL번호*/ /*개발구분*/ /*업무구분*/ /*프로그램구분*/
+2021-12-15 14:31:38,373 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==> Parameters: 
+2021-12-15 14:31:38,377 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, PGM_NM, BZ_DTLS_TXT, DVLP_DIS_CD, PGM_DIS_CD, ENLPE_NM, FRCS_STA_DT, FRCS_END_DT, STA_DT, END_DT, PRG_TXT, DVLPE_NO, DVLPE_CNF_DT, PL_NO, PL_CNF_DT, CRPE_NO, RMRK, OPR_NO, DB_CHG_TS
+2021-12-15 14:31:38,377 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_C, AAA, 업체연혁-화면, 신용조사의 업체이력, 100, 100, 100, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:27.0
+2021-12-15 14:31:38,377 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_L, AAA, 업체개요-로직, 신용조사의 업체이력, 100, 100, 200, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:02.0
+2021-12-15 14:31:38,377 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_C, AAA, 업체개요-화면, 신용조사의 업체개요, 100, 100, 100, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:55:30.0
+2021-12-15 14:31:38,378 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_L, AAA, 업체개요-로직, 신용조사의 업체개요, 100, 100, 200, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:57:50.0
+2021-12-15 14:31:38,378 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - <==      Total: 4
