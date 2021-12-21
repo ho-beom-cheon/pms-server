@@ -1,0 +1,8 @@
+2021-12-16 14:03:54,698 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
+2021-12-16 14:03:54,706 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 100(String), 100(String)
+2021-12-16 14:03:54,786 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
+2021-12-16 14:03:54,787 [http-nio-8080-exec-4] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, Y
+2021-12-16 14:03:54,788 [http-nio-8080-exec-4] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
+2021-12-16 14:03:54,788 [http-nio-8080-exec-4] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-16 14:03:54,789 [http-nio-8080-exec-4] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk2MzEzMzQsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.OdWUGSCZdxqKeIOXH_7sZGqHxmkefl8YWHvLgxkyf1Y
+2021-12-16 14:33:10,569 [RMI TCP Connection(41)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin(shutdown:159) - Application shutdown requested.
