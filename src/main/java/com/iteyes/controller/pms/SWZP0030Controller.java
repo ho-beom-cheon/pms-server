@@ -7,10 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.SWZP0030DTO;
@@ -25,7 +22,7 @@ public class SWZP0030Controller {
 	@Autowired
 	private SWZP0030Service swzp0030Service;
 
-	@PostMapping(value = "/select")
+	@GetMapping(value = "/select")
 	public @ResponseBody String select(HttpServletRequest request) throws Exception{
 
 		ObjectMapper mapper = new ObjectMapper();
