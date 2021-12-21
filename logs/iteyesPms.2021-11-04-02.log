@@ -1,0 +1,47 @@
+2021-11-04 14:17:33,625 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 10696 (C:\Users\iteyes\git\ProjectEyes\PMS\bin\main started by iteyes in C:\Users\iteyes\git\ProjectEyes\PMS)
+2021-11-04 14:17:33,642 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-11-04 14:17:33,642 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
+2021-11-04 14:17:33,708 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-11-04 14:17:33,709 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-11-04 14:17:34,832 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$4a1440cb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-04 14:17:34,890 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2021-11-04 14:17:35,325 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2021-11-04 14:17:35,486 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 1776 ms
+2021-11-04 14:17:36,214 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
+2021-11-04 14:17:36,429 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:58) - LiveReload server is running on port 35729
+2021-11-04 14:17:36,521 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
+2021-11-04 14:17:36,535 [restartedMain] INFO  com.iteyes.PmsApplication(logStarted:61) - Started PmsApplication in 3.51 seconds (JVM running for 5.529)
+2021-11-04 14:17:47,372 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:525) - Initializing Servlet 'dispatcherServlet'
+2021-11-04 14:17:47,375 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:547) - Completed initialization in 2 ms
+2021-11-04 14:17:56,437 [http-nio-8080-exec-6] DEBUG com.iteyes.controller.MainController(loginResult:35) - ## loginResult 
+2021-11-04 14:17:56,437 [http-nio-8080-exec-6] DEBUG com.iteyes.controller.MainController(loginResult:36) - ## request :: null
+2021-11-04 14:17:56,438 [http-nio-8080-exec-6] DEBUG com.iteyes.controller.MainController(loginResult:37) - ## request :: null
+2021-11-04 14:19:33,877 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.MainController(loginResult:35) - ## loginResult 
+2021-11-04 14:19:33,877 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.MainController(loginResult:36) - ## request :: null
+2021-11-04 14:19:33,877 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.MainController(loginResult:37) - ## request :: null
+2021-11-04 14:20:31,472 [RMI TCP Connection(13)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin(shutdown:159) - Application shutdown requested.
+2021-11-04 14:59:25,573 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 1244 (C:\Users\iteyes\git\ProjectEyes\PMS\bin\main started by iteyes in C:\Users\iteyes\git\ProjectEyes\PMS)
+2021-11-04 14:59:25,583 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-11-04 14:59:25,584 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
+2021-11-04 14:59:25,652 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-11-04 14:59:25,652 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-11-04 14:59:26,960 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$7f98954c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-04 14:59:27,022 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2021-11-04 14:59:27,414 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2021-11-04 14:59:27,559 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 1906 ms
+2021-11-04 14:59:28,230 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
+2021-11-04 14:59:28,471 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:58) - LiveReload server is running on port 35729
+2021-11-04 14:59:28,567 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
+2021-11-04 14:59:28,584 [restartedMain] INFO  com.iteyes.PmsApplication(logStarted:61) - Started PmsApplication in 3.545 seconds (JVM running for 5.393)
+2021-11-04 14:59:34,238 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 1244 (C:\Users\iteyes\git\ProjectEyes\PMS\bin\main started by iteyes in C:\Users\iteyes\git\ProjectEyes\PMS)
+2021-11-04 14:59:34,239 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-11-04 14:59:34,239 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
+2021-11-04 14:59:34,561 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$7f98954c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-04 14:59:34,564 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2021-11-04 14:59:34,612 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2021-11-04 14:59:34,644 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 400 ms
+2021-11-04 14:59:34,786 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
+2021-11-04 14:59:34,856 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:58) - LiveReload server is running on port 35729
+2021-11-04 14:59:34,869 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
+2021-11-04 14:59:34,875 [restartedMain] INFO  com.iteyes.PmsApplication(logStarted:61) - Started PmsApplication in 0.701 seconds (JVM running for 11.683)
+2021-11-04 14:59:34,880 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener(onApplicationEvent:63) - Condition evaluation unchanged

@@ -1,0 +1,34 @@
+2021-12-15 10:31:17,506 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: 
+2021-12-15 10:31:17,508 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: 
+2021-12-15 10:31:17,508 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: 
+2021-12-15 10:31:17,508 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: 
+2021-12-15 10:31:17,508 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: 000
+2021-12-15 10:31:17,509 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: 000
+2021-12-15 10:31:17,509 [http-nio-8080-exec-10] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: 000
+2021-12-15 10:31:47,555 [http-nio-8080-exec-10] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver(logException:207) - Resolved [org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30036ms.
+### The error may exist in file [C:\workspace\ProjectEyes\PMS\bin\main\mapper\pms\SWZP0010.xml]
+### The error may involve com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30036ms.]
+2021-12-15 10:51:35,938 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 12124 (C:\workspace\ProjectEyes\PMS\bin\main started by iteyes in C:\workspace\ProjectEyes\PMS)
+2021-12-15 10:51:35,939 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-12-15 10:51:35,939 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
+2021-12-15 10:51:36,285 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$63577c55] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-12-15 10:51:36,288 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2021-12-15 10:51:36,334 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2021-12-15 10:51:36,358 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 417 ms
+2021-12-15 10:51:36,496 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
+2021-12-15 10:51:36,539 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:58) - LiveReload server is running on port 35729
+2021-12-15 10:51:36,548 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
+2021-12-15 10:51:36,551 [restartedMain] INFO  com.iteyes.PmsApplication(logStarted:61) - Started PmsApplication in 0.67 seconds (JVM running for 68677.349)
+2021-12-15 10:51:36,552 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener(onApplicationEvent:63) - Condition evaluation unchanged
+2021-12-15 10:55:20,093 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:525) - Initializing Servlet 'dispatcherServlet'
+2021-12-15 10:55:20,093 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:547) - Completed initialization in 0 ms
+2021-12-15 10:55:20,139 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==>  Preparing: SELECT * FROM PMS_EMP_INFO WHERE EMPNO = ? AND LGN_PWD = ?
+2021-12-15 10:55:20,140 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - ==> Parameters: 100(String), 1234(String)
+2021-12-15 10:55:20,189 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, EMPNO, EMPNM, EMAIL_ADDR, CPNO, LGN_PWD, BZCD, CATN_DCD, AUT_CD, IP_ADDR, PLAN_THW_STDT, PLAN_THW_ENDT, REAL_THW_STDT, REAL_THW_ENDT, OPR_NO, DB_CHG_TS
+2021-12-15 10:55:20,189 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.MainMapper.userInfo_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, 100, 황일섭, null, null, 1234, null, 100, 500, null, null, null, null, null, null, null
+2021-12-15 10:55:20,189 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.MainMapper.userInfo_0010_01(debug:137) - <==      Total: 1
+2021-12-15 10:55:20,189 [http-nio-8080-exec-2] TRACE com.iteyes.service.JwtService(create:35) - time: 5
+2021-12-15 10:55:20,190 [http-nio-8080-exec-2] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk1MzM2MjAsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.SicvgbNIQRpKHLHca_K5JMG67Xc7kfMJS0JYcjnApLM

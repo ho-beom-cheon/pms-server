@@ -1,0 +1,4 @@
+2021-10-21 17:11:34,860 [http-nio-8080-exec-5] DEBUG com.iteyes.controller.MainController(loginResult:36) - ## loginResult 
+2021-10-21 17:11:34,863 [http-nio-8080-exec-5] DEBUG com.iteyes.controller.MainController(loginResult:37) - ## request :: null
+2021-10-21 17:11:34,863 [http-nio-8080-exec-5] DEBUG com.iteyes.controller.MainController(loginResult:38) - ## request :: null
+2021-10-21 17:39:35,630 [RMI TCP Connection(127)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin(shutdown:159) - Application shutdown requested.
