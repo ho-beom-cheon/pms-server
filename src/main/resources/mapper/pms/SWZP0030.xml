@@ -4,7 +4,42 @@
    
 <mapper namespace="com.iteyes.mapper.pms.SWZP0030Mapper">
   <select id="select_0030_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP0030DTO">
-  		   SELECT *
-  		     FROM PMS_PGM_MNG
+
+      SELECT BKUP_ID/*백업ID 확인 */
+           , PRJT_ID/*프로젝트ID  */
+           , PGM_ID/*프로그램ID  */
+           , BZCD/*업무구분 */
+           , SQN_CD/*차수 */
+           , SCNR_ID/*시나리오ID*/
+           , SCNR_NM/*시나리오명*/
+           , TST_CASE_ID
+           , TST_CASE_NM
+           , FRCS_STA_DT
+           , FRCS_END_DT
+           , DVLPE_CNF_DT
+           , PL_CNF_DT
+           , DVLPE_ENO
+           , PL_ENO
+           , CRPE_ENO
+           , ITG_TST_PRC_CD
+           , PRR_CND
+           , INP_VAL
+           , TST_DES
+           , OUP_VAL
+           , TP
+           , OUP_MENS
+           , PGM_ID
+           , SCRN_ID
+           , TRN_CD
+           , RQU_SBH_ID
+           , TST_RST
+           , TST_ACHI_RST
+           , RMRK
+           , ATFL_MNG_ID
+           , OPR_NO
+           , DB_CHG_TS
+      FROM PMS_ITG_TST_MNG
+      WHERE 1=1
+
   </select>
 </mapper>
