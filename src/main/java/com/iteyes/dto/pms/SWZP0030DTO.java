@@ -37,7 +37,4 @@ public class SWZP0030DTO {
 	private String atfl_mng_id;
 	private String opr_no;
 	private String db_chg_ts;
-
-
-
 }
