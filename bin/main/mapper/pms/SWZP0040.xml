@@ -35,7 +35,7 @@
 	  <if test='err_tycd != "" and err_tycd != null and err_tycd != "999"'>
 		  AND ERR_TYCD = #{err_tycd}
 	  </if>
-	  /*처리단계*/
+	  /*처리단계1*/
 	  <if test='prc_step_cd != "" and prc_step_cd != null and prc_step_cd != "999"'>
 		  AND PRC_STEP_CD = #{prc_step_cd}
 	  </if>
