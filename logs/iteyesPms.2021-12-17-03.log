@@ -1,7 +1,0 @@
-2021-12-17 15:51:03,521 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==>  Preparing: SELECT A.EMPNO , A.EMPNM , A.EMAIL_ADDR , A.CPNO , A.BZCD , A.AUT_CD , A.LGN_PWD , CASE WHEN A.LGN_PWD != ? THEN 'N' WHEN A.LGN_PWD = ? '211111' THEN 'C' ELSE 'Y' END AS LOGIN_YN FROM PMS_EMP_INFO A WHERE 1=1 AND A.EMPNO = ? AND A.PRJT_ID = '1000000001' AND A.BKUP_ID = '0000000000'
-2021-12-17 15:51:03,526 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - ==> Parameters: 1234(String), 100(String), 100(String)
-2021-12-17 15:51:03,537 [http-nio-8080-exec-5] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==    Columns: EMPNO, EMPNM, EMAIL_ADDR, CPNO, BZCD, AUT_CD, LGN_PWD, LOGIN_YN
-2021-12-17 15:51:03,538 [http-nio-8080-exec-5] TRACE com.iteyes.mapper.MainMapper.select_0120_01(trace:143) - <==        Row: 100, 황일섭, null, null, null, 500, 1234, Y
-2021-12-17 15:51:03,539 [http-nio-8080-exec-5] DEBUG com.iteyes.mapper.MainMapper.select_0120_01(debug:137) - <==      Total: 1
-2021-12-17 15:51:03,539 [http-nio-8080-exec-5] TRACE com.iteyes.service.JwtService(create:35) - time: 5
-2021-12-17 15:51:03,540 [http-nio-8080-exec-5] DEBUG com.iteyes.service.JwtService(create:51) - 토큰 발행: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLroZzqt7jsnbjthqDtgbAiLCJleHAiOjE2Mzk3MjQxNjMsIlVzZXIiOnsidXNlcklkIjoiMTAwIiwicGFzc3dvcmQiOiIxMjM0In0sInNlY29uZCI6Iuy2lOqwgOygleuztCJ9.b1FURN0Uz-FjB7BXSaC4-Re3G_Yk1efajxwBKsW6W3Q
