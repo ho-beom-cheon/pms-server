@@ -29,6 +29,7 @@ public class SWZP0040Controller {
 
 		SWZP0040DTO SWZP0040 = new SWZP0040DTO();
 
+		SWZP0040.setRgpe_no(request.getParameter("rgpe_no"));
 		SWZP0040.setDvlpe_no(request.getParameter("dvlpe_no"));
 		SWZP0040.setPl_no(request.getParameter("pl_no"));
 		SWZP0040.setMng_id(request.getParameter("mng_id"));

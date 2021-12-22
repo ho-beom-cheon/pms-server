@@ -23,7 +23,6 @@
 			  PMS_ERR_MNG
 	  WHERE 1=1
 
-
 	  /*업무구분*/
 	  <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
 		  AND BZCD = #{bzcd}
@@ -33,12 +32,12 @@
 		  AND RGS_DSCD = #{rgs_dscd}
 	  </if>
 	  /*결함유형*/
-	  <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
-		  AND BZCD = #{bzcd}
+	  <if test='err_tycd != "" and err_tycd != null and err_tycd != "999"'>
+		  AND ERR_TYCD = #{err_tycd}
 	  </if>
 	  /*처리단계*/
-	  <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
-		  AND BZCD = #{bzcd}
+	  <if test='prc_step_cd != "" and prc_step_cd != null and prc_step_cd != "999"'>
+		  AND PRC_STEP_CD = #{prc_step_cd}
 	  </if>
 	  /*결함등록자*/
 	  <if test='rgpe_no != "" and rgpe_no != null'>
@@ -53,8 +52,8 @@
 		  AND PL_NO = #{pl_no}
 	  </if>
 	 /*프로그램ID*/
-	  <if test='pgm_id != "" and pgm_id != null'>
-		  AND PGM_ID = #{pgm_id}
+	  <if test='mng_id != "" and mng_id != null'>
+		  AND PGM_ID = #{mng_id}
 	  </if>
 	 /*결함내용*/
 	  <if test='err_txt != "" and err_txt != null'>
