@@ -23,7 +23,7 @@
 			  PMS_ERR_MNG
 	  WHERE 1=1
 
-	  /*업무구분*/
+	  /*업무구분 1*/
 	  <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
 		  AND BZCD = #{bzcd}
 	  </if>
