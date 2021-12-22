@@ -5,8 +5,8 @@
 <mapper namespace="com.iteyes.mapper.pms.SWZP0050Mapper">
 	<select id="select_0050_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP050DTO">
 		SELECT
-			MNG_ID
-			 ,BZCD
+			 MNG_ID
+			 ,BZCD    /**/
 			 ,REQ_DSCD
 			 ,REQ_DT
 			 ,REQPE_NO
