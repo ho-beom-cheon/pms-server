@@ -1,74 +1,32 @@
-2021-12-21 09:05:17,173 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 4984 (C:\workspace\ProjectEyes\pms-server\build\classes\java\main started by iteyes in C:\workspace\ProjectEyes\pms-server)
-2021-12-21 09:05:17,183 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
-2021-12-21 09:05:17,184 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
-2021-12-21 09:05:17,221 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2021-12-21 09:05:17,222 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2021-12-21 09:05:18,113 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$b907393f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-12-21 09:05:18,150 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2021-12-21 09:05:18,366 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
-2021-12-21 09:05:18,465 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 1243 ms
-2021-12-21 09:05:18,866 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
-2021-12-21 09:05:19,020 [restartedMain] WARN  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:61) - Unable to start LiveReload server
-2021-12-21 09:05:19,041 [restartedMain] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext(refresh:591) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
-2021-12-21 09:05:19,069 [restartedMain] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener(logMessage:136) - 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2021-12-21 09:05:19,089 [restartedMain] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter(report:40) - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Web server failed to start. Port 8080 was already in use.
-
-Action:
-
-Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
-
-2021-12-21 09:35:39,162 [restartedMain] INFO  com.iteyes.PmsApplication(logStarting:55) - Starting PmsApplication using Java 16.0.2 on DESKTOP-H5GEA9U with PID 12624 (C:\workspace\ProjectEyes\pms-server\build\classes\java\main started by iteyes in C:\workspace\ProjectEyes\pms-server)
-2021-12-21 09:35:39,164 [restartedMain] DEBUG com.iteyes.PmsApplication(logStarting:56) - Running with Spring Boot v2.5.4, Spring v5.3.9
-2021-12-21 09:35:39,164 [restartedMain] INFO  com.iteyes.PmsApplication(logStartupProfileInfo:659) - No active profile set, falling back to default profiles: default
-2021-12-21 09:35:39,204 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2021-12-21 09:35:39,204 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2021-12-21 09:35:40,193 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker(postProcessAfterInitialization:376) - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$d06fb5cf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-12-21 09:35:40,220 [restartedMain] INFO  org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping(afterPropertiesSet:239) - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2021-12-21 09:35:40,446 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
-2021-12-21 09:35:40,530 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:290) - Root WebApplicationContext: initialization completed in 1311 ms
-2021-12-21 09:35:40,916 [restartedMain] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping(<init>:53) - Adding welcome page: class path resource [static/index.html]
-2021-12-21 09:35:41,047 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:58) - LiveReload server is running on port 35729
-2021-12-21 09:35:41,088 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
-2021-12-21 09:35:41,096 [restartedMain] INFO  com.iteyes.PmsApplication(logStarted:61) - Started PmsApplication in 2.25 seconds (JVM running for 3.036)
-2021-12-21 09:36:17,775 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:525) - Initializing Servlet 'dispatcherServlet'
-2021-12-21 09:36:17,776 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:547) - Completed initialization in 1 ms
-2021-12-21 09:36:17,793 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: null
-2021-12-21 09:36:17,793 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: null
-2021-12-21 09:36:17,793 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: null
-2021-12-21 09:36:17,793 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: null
-2021-12-21 09:36:17,794 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: null
-2021-12-21 09:36:17,794 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: null
-2021-12-21 09:36:17,794 [http-nio-8080-exec-1] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: null
-2021-12-21 09:36:17,906 [http-nio-8080-exec-1] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==>  Preparing: SELECT BKUP_ID /*백업ID */ , PRJT_ID /*프로젝트ID */ , PGM_ID /*프로그램ID */ , BZCD /*업무구분 */ , PGM_NM /*프로그램명 */ , BZ_DTLS_TXT /*업무세부 */ , DVLP_DIS_CD /*개발구분*/ , PGM_DIS_CD /*프로그램구분*/ , ENLPE_NM /*프로그램세부구분코드 */ , FRCS_STA_DT /*예상시작일자 */ , FRCS_END_DT /*예상종료일자 */ , STA_DT /*실제시작일자 */ , END_DT /*실제종료일자 */ , PRG_TXT /*진행현황 */ , DVLPE_NO /*개발자번호 */ , DVLPE_CNF_DT /*개발자확인일자 */ , PL_NO /*PL번호 */ , PL_CNF_DT /*PL확인일자 */ , CRPE_NO /*담당자번호 */ , RMRK /*비고 */ , OPR_NO /*조작자번호 */ , DB_CHG_TS /*DB변경일시 */ FROM PMS_PGM_MNG WHERE 1=1 /*프로그램ID*/ /*프로그램명*/ /*개발자번호*/ /*PL번호*/ /*개발구분*/ /*업무구분*/ /*프로그램구분*/
-2021-12-21 09:36:17,916 [http-nio-8080-exec-1] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==> Parameters: 
-2021-12-21 09:36:17,928 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, PGM_NM, BZ_DTLS_TXT, DVLP_DIS_CD, PGM_DIS_CD, ENLPE_NM, FRCS_STA_DT, FRCS_END_DT, STA_DT, END_DT, PRG_TXT, DVLPE_NO, DVLPE_CNF_DT, PL_NO, PL_CNF_DT, CRPE_NO, RMRK, OPR_NO, DB_CHG_TS
-2021-12-21 09:36:17,929 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_C, AAA, 업체연혁-화면, 신용조사의 업체이력, 100, 100, 100, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:27.0
-2021-12-21 09:36:17,930 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_L, AAA, 업체개요-로직, 신용조사의 업체이력, 100, 100, 200, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:02.0
-2021-12-21 09:36:17,931 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_C, AAA, 업체개요-화면, 신용조사의 업체개요, 100, 100, 100, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:55:30.0
-2021-12-21 09:36:17,931 [http-nio-8080-exec-1] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_L, AAA, 업체개요-로직, 신용조사의 업체개요, 100, 100, 200, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:57:50.0
-2021-12-21 09:36:17,932 [http-nio-8080-exec-1] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - <==      Total: 4
-2021-12-21 09:36:26,387 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:35) - # pgm_id :: null
-2021-12-21 09:36:26,388 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:36) - # pgm_nm :: null
-2021-12-21 09:36:26,388 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:37) - # pl_no :: null
-2021-12-21 09:36:26,388 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:38) - # dvlpe_no :: null
-2021-12-21 09:36:26,388 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:39) - # pgm_dis_cd :: null
-2021-12-21 09:36:26,388 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:40) - # bzcd :: null
-2021-12-21 09:36:26,388 [http-nio-8080-exec-2] DEBUG com.iteyes.controller.pms.SWZP0010Controller(select:41) - # dvlp_dis_cd :: null
-2021-12-21 09:36:26,397 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==>  Preparing: SELECT BKUP_ID /*백업ID */ , PRJT_ID /*프로젝트ID */ , PGM_ID /*프로그램ID */ , BZCD /*업무구분 */ , PGM_NM /*프로그램명 */ , BZ_DTLS_TXT /*업무세부 */ , DVLP_DIS_CD /*개발구분*/ , PGM_DIS_CD /*프로그램구분*/ , ENLPE_NM /*프로그램세부구분코드 */ , FRCS_STA_DT /*예상시작일자 */ , FRCS_END_DT /*예상종료일자 */ , STA_DT /*실제시작일자 */ , END_DT /*실제종료일자 */ , PRG_TXT /*진행현황 */ , DVLPE_NO /*개발자번호 */ , DVLPE_CNF_DT /*개발자확인일자 */ , PL_NO /*PL번호 */ , PL_CNF_DT /*PL확인일자 */ , CRPE_NO /*담당자번호 */ , RMRK /*비고 */ , OPR_NO /*조작자번호 */ , DB_CHG_TS /*DB변경일시 */ FROM PMS_PGM_MNG WHERE 1=1 /*프로그램ID*/ /*프로그램명*/ /*개발자번호*/ /*PL번호*/ /*개발구분*/ /*업무구분*/ /*프로그램구분*/
-2021-12-21 09:36:26,397 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - ==> Parameters: 
-2021-12-21 09:36:26,406 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, PGM_NM, BZ_DTLS_TXT, DVLP_DIS_CD, PGM_DIS_CD, ENLPE_NM, FRCS_STA_DT, FRCS_END_DT, STA_DT, END_DT, PRG_TXT, DVLPE_NO, DVLPE_CNF_DT, PL_NO, PL_CNF_DT, CRPE_NO, RMRK, OPR_NO, DB_CHG_TS
-2021-12-21 09:36:26,406 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_C, AAA, 업체연혁-화면, 신용조사의 업체이력, 100, 100, 100, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:27.0
-2021-12-21 09:36:26,407 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_History_L, AAA, 업체개요-로직, 신용조사의 업체이력, 100, 100, 200, 20211206, 20211208, null, null, null, 104, null, 101, null, 100, null, 101, 2021-12-01 16:59:02.0
-2021-12-21 09:36:26,408 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_C, AAA, 업체개요-화면, 신용조사의 업체개요, 100, 100, 100, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:55:30.0
-2021-12-21 09:36:26,408 [http-nio-8080-exec-2] TRACE com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(trace:143) - <==        Row: 0000000000, 1000000001, Cust_summary_L, AAA, 업체개요-로직, 신용조사의 업체개요, 100, 100, 200, 20211206, 20211208, null, null, null, 103, null, 101, null, 100, null, 101, 2021-12-01 16:57:50.0
-2021-12-21 09:36:26,408 [http-nio-8080-exec-2] DEBUG com.iteyes.mapper.pms.SWZP0010Mapper.select_0010_01(debug:137) - <==      Total: 4
+2021-12-22 13:18:08,214 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:33) - # pgm_id :: null
+2021-12-22 13:18:08,218 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:34) - # tst_case_id :: null
+2021-12-22 13:18:08,218 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:35) - # dvlpe_eno :: null
+2021-12-22 13:18:08,218 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:36) - # pl_eno :: null
+2021-12-22 13:18:08,218 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:37) - # crpe_eno :: null
+2021-12-22 13:18:08,219 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:38) - # rqu_sbh_id :: null
+2021-12-22 13:18:08,219 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:39) - # prjt_nm :: 1
+2021-12-22 13:18:08,219 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:40) - # bzcd_ :: 999
+2021-12-22 13:18:08,219 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:41) - # sqn_cd :: null
+2021-12-22 13:18:08,219 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:42) - # itg_tst_prc_cd :: null
+2021-12-22 13:18:08,219 [http-nio-8080-exec-7] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:43) - # tp :: null
+2021-12-22 13:18:08,225 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(debug:137) - ==>  Preparing: SELECT BKUP_ID/*백업ID 확인 */ , PRJT_ID/*프로젝트ID */ , PGM_ID/*프로그램ID */ , BZCD/*업무구분 */ , SQN_CD/*차수 */ , SCNR_ID/*시나리오ID*/ , SCNR_NM/*시나리오명*/ , TST_CASE_ID , TST_CASE_NM , FRCS_STA_DT , FRCS_END_DT , DVLPE_CNF_DT , PL_CNF_DT , DVLPE_ENO , PL_ENO , CRPE_ENO , ITG_TST_PRC_CD , PRR_CND , INP_VAL , TST_DES , OUP_VAL , TP , OUP_MENS , PGM_ID , SCRN_ID , TRN_CD , RQU_SBH_ID , TST_RST , TST_ACHI_RST , RMRK , ATFL_MNG_ID , OPR_NO , DB_CHG_TS FROM PMS_ITG_TST_MNG WHERE 1=1
+2021-12-22 13:18:08,226 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(debug:137) - ==> Parameters: 
+2021-12-22 13:18:08,233 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, SQN_CD, SCNR_ID, SCNR_NM, TST_CASE_ID, TST_CASE_NM, FRCS_STA_DT, FRCS_END_DT, DVLPE_CNF_DT, PL_CNF_DT, DVLPE_ENO, PL_ENO, CRPE_ENO, ITG_TST_PRC_CD, PRR_CND, INP_VAL, TST_DES, OUP_VAL, TP, OUP_MENS, PGM_ID, SCRN_ID, TRN_CD, RQU_SBH_ID, TST_RST, TST_ACHI_RST, RMRK, ATFL_MNG_ID, OPR_NO, DB_CHG_TS
+2021-12-22 13:18:08,233 [http-nio-8080-exec-7] TRACE com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(trace:143) - <==        Row: 0000000000, 1000000001, 11111, 0000, 1, TS-001, 사건레벨, TS-001-TC-001, ORM담당자-원인 조회, 20210104, 20210115, 20210215, 20210216, 123123, 159159, 753753, 0, 없음, 없음, 없음, 없음, 0, 01, 11111, SWZP0030, null, null, null, null, null, null, null, null
+2021-12-22 13:18:08,234 [http-nio-8080-exec-7] DEBUG com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(debug:137) - <==      Total: 1
+2021-12-22 13:18:08,460 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:33) - # pgm_id :: null
+2021-12-22 13:18:08,460 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:34) - # tst_case_id :: null
+2021-12-22 13:18:08,460 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:35) - # dvlpe_eno :: null
+2021-12-22 13:18:08,460 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:36) - # pl_eno :: null
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:37) - # crpe_eno :: null
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:38) - # rqu_sbh_id :: null
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:39) - # prjt_nm :: 1
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:40) - # bzcd_ :: 999
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:41) - # sqn_cd :: null
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:42) - # itg_tst_prc_cd :: null
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.controller.pms.SWZP0030Controller(select:43) - # tp :: null
+2021-12-22 13:18:08,461 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(debug:137) - ==>  Preparing: SELECT BKUP_ID/*백업ID 확인 */ , PRJT_ID/*프로젝트ID */ , PGM_ID/*프로그램ID */ , BZCD/*업무구분 */ , SQN_CD/*차수 */ , SCNR_ID/*시나리오ID*/ , SCNR_NM/*시나리오명*/ , TST_CASE_ID , TST_CASE_NM , FRCS_STA_DT , FRCS_END_DT , DVLPE_CNF_DT , PL_CNF_DT , DVLPE_ENO , PL_ENO , CRPE_ENO , ITG_TST_PRC_CD , PRR_CND , INP_VAL , TST_DES , OUP_VAL , TP , OUP_MENS , PGM_ID , SCRN_ID , TRN_CD , RQU_SBH_ID , TST_RST , TST_ACHI_RST , RMRK , ATFL_MNG_ID , OPR_NO , DB_CHG_TS FROM PMS_ITG_TST_MNG WHERE 1=1
+2021-12-22 13:18:08,462 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(debug:137) - ==> Parameters: 
+2021-12-22 13:18:08,467 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(trace:143) - <==    Columns: BKUP_ID, PRJT_ID, PGM_ID, BZCD, SQN_CD, SCNR_ID, SCNR_NM, TST_CASE_ID, TST_CASE_NM, FRCS_STA_DT, FRCS_END_DT, DVLPE_CNF_DT, PL_CNF_DT, DVLPE_ENO, PL_ENO, CRPE_ENO, ITG_TST_PRC_CD, PRR_CND, INP_VAL, TST_DES, OUP_VAL, TP, OUP_MENS, PGM_ID, SCRN_ID, TRN_CD, RQU_SBH_ID, TST_RST, TST_ACHI_RST, RMRK, ATFL_MNG_ID, OPR_NO, DB_CHG_TS
+2021-12-22 13:18:08,467 [http-nio-8080-exec-9] TRACE com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(trace:143) - <==        Row: 0000000000, 1000000001, 11111, 0000, 1, TS-001, 사건레벨, TS-001-TC-001, ORM담당자-원인 조회, 20210104, 20210115, 20210215, 20210216, 123123, 159159, 753753, 0, 없음, 없음, 없음, 없음, 0, 01, 11111, SWZP0030, null, null, null, null, null, null, null, null
+2021-12-22 13:18:08,468 [http-nio-8080-exec-9] DEBUG com.iteyes.mapper.pms.SWZP0030Mapper.select_0030_01(debug:137) - <==      Total: 1
