@@ -38,7 +38,7 @@
            , ATFL_MNG_ID
            , OPR_NO
            , DB_CHG_TS
-      FROM PMS_ITG_TST_MNG
+      FROM pms_itg_tst_mng
       WHERE 1=1
 
   </select>

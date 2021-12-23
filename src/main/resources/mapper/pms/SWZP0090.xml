@@ -6,7 +6,7 @@
   <select id="select_0090_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP0090DTO">
      <![CDATA[
      		SELECT *
-     		  FROM pms_exc
+     		  FROM pms_pgm_mng
      ]]>
   </select>
 </mapper>
