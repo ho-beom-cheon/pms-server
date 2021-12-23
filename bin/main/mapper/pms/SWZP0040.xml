@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.iteyes.mapper.pms.SWZP0040Mapper">
+  <select id="select_0040_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP040DTO">
+	  SELECT
+			  BZCD,
+			  RGS_DSCD,
+			  PRJT_ID,
+			  ERR_TYCD,
+			  ERR_PRC_STEP_CD,
+			  RGS_DT,
+			  RGPE_NO,
+			  ERR_TXT,
+			  TTMN_SCD_DT,
+			  TTMN_DT,
+			  DVLPE_NO,
+			  PL_NO,
+			  TTMN_TXT,
+			  BFJR_BZCD
+	  FROM
+			  PMS_ERR_MNG
+	  WHERE 1=1
+
+	  /*업무구분*/
+	  <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
+		  AND BZCD = #{bzcd}
+	  </if>
+	  /*등록단계구분*/
+	  <if test='rgs_dscd != "" and rgs_dscd != null and rgs_dscd != "999"'>
+		  AND RGS_DSCD = #{rgs_dscd}
+	  </if>
+	  /*결함유형*/
+	  <if test='err_tycd != "" and err_tycd != null and err_tycd != "999"'>
+		  AND ERR_TYCD = #{err_tycd}
+	  </if>
+	  /*처리단계1*/
+	  <if test='prc_step_cd != "" and prc_step_cd != null and prc_step_cd != "999"'>
+		  AND PRC_STEP_CD = #{prc_step_cd}
+	  </if>
+	  /*결함등록자*/
+	  <if test='rgpe_no != "" and rgpe_no != null'>
+		  AND RGPE_NO = #{rgpe_no}
+	  </if>
+	  /*담당자*/
+	  <if test='dvlpe_no != "" and dvlpe_no != null'>
+		  AND DVLPE_NO = #{dvlpe_no}
+	  </if>
+	  /*담당PL*/
+	  <if test='pl_no != "" and pl_no != null'>
+		  AND PL_NO = #{pl_no}
+	  </if>
+	 /*프로그램ID*/
+	  <if test='mng_id != "" and mng_id != null'>
+		  AND PGM_ID = #{mng_id}
+	  </if>
+	 /*결함내용*/
+	  <if test='err_txt != "" and err_txt != null'>
+		  AND ERR_TXT = #{err_txt}
+	  </if>
+  </select>
+</mapper>

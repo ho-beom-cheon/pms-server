@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.SWZP0050Mapper">
+	<select id="select_0050_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP050DTO">
+		SELECT
+			 MNG_ID
+			 ,BZCD    /**/
+			 ,REQ_DSCD
+			 ,REQ_DT
+			 ,REQPE_NO
+			 ,REQ_TXT
+			 ,PRC_DT
+			 ,PRCPE_NO
+			 ,REQ_PRC_STEP_CD
+		FROM
+			PMS_RQ_MNG
+
+	</select>
+</mapper>
