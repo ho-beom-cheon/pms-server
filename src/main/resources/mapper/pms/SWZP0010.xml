@@ -27,7 +27,7 @@
 				, RMRK				/*비고 */
 				, OPR_NO			/*조작자번호 */
 				, DB_CHG_TS			/*DB변경일시 */ 
-  		     FROM PMS_PGM_MNG
+  		     FROM pms_pgm_mng
             ]]>
             WHERE 1=1
 	   		 /*프로그램ID*/
