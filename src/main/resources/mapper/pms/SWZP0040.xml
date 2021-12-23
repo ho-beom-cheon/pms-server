@@ -3,7 +3,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.iteyes.mapper.pms.SWZP0040Mapper">
-  <select id="select_0040_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP040DTO">
+  <select id="select_0040_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP0040DTO">
 	  SELECT
 			  BZCD,
 			  RGS_DSCD,
@@ -19,8 +19,7 @@
 			  PL_NO,
 			  TTMN_TXT,
 			  BFJR_BZCD
-	  FROM
-			  PMS_ERR_MNG
+	  FROM pms_err_mng
 	  WHERE 1=1
 
 	  /*업무구분 1*/

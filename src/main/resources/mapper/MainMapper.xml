@@ -17,7 +17,7 @@
 	                THEN 'C'
 	                ELSE 'Y'
 	                 END AS LOGIN_YN
-	      FROM PMS_EMP_INFO   A
+	      FROM pms_emp_info   A
 	     WHERE 1=1
 	       AND A.EMPNO   = #{empno}
 	       AND A.PRJT_ID = '1000000001' 
