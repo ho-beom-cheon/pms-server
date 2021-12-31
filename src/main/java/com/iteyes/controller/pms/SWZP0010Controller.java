@@ -7,17 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.board.BoardDTO;
 import com.iteyes.dto.pms.SWZP0010DTO;
 import com.iteyes.service.SWZP0010Service;
 
-import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
@@ -27,7 +22,21 @@ public class SWZP0010Controller {
 	@Autowired
 	private SWZP0010Service swzp0010Service;
 
-	@RequestMapping(value = "/select")
+	@GetMapping(value = "/pjtInfo")
+	public @ResponseBody String projectInfo(HttpServletRequest request) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+
+		List<String> list = swzp0010Service.select_0000();
+
+		HashMap<String, Object> hm = new HashMap();
+		hm.put("data", list);
+
+		String jsonStr = mapper.writeValueAsString(hm);
+
+		return jsonStr;
+	}
+
+	@GetMapping(value = "/select")
     public @ResponseBody String select(HttpServletRequest request) throws Exception{
 
 		ObjectMapper mapper = new ObjectMapper();

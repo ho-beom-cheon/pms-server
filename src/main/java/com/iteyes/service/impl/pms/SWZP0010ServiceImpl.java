@@ -13,11 +13,15 @@ import com.iteyes.service.SWZP0010Service;
 public class SWZP0010ServiceImpl implements SWZP0010Service{
 	@Autowired
 	private SWZP0010Mapper swzp0010Mapper;
-	
+
+	@Override
+	public List<String> select_0000() throws Exception {
+		return swzp0010Mapper.select_0000_01();
+	}
+
 	@Override
 	public List<SWZP0010DTO> select_0010(SWZP0010DTO SWZP0010) throws Exception {
-		
-		
+
 		return swzp0010Mapper.select_0010_01(SWZP0010);
 	}
 }

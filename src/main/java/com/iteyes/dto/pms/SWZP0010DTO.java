@@ -39,4 +39,6 @@ public class SWZP0010DTO {
 	private String atfl_mng_id;             // 첨부파일관리id
 	private String opr_no;                  // 조작자번호
 	private String db_chg_ts;               // db변경일시
+	private String dtls_tycd;               // 세부유형코드
+	private String dtls_tynm;               // 세부유형명
 }
