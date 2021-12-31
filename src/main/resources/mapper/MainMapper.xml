@@ -20,7 +20,7 @@
 	      FROM pms_emp_info   A
 	     WHERE 1=1
 	       AND A.EMPNO   = #{empno}
-	       AND A.PRJT_ID = '1000000001' 
+	       AND A.PRJT_ID = #{prjt_id}
 	       AND A.BKUP_ID = '0000000000'
   </select>
 </mapper>

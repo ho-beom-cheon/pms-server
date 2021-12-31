@@ -45,13 +45,14 @@ public class UserRestController {
         	MainDTO mainDto = new MainDTO();
         	mainDto.setEmpno(user.getUserId());
         	mainDto.setLgn_pwd(user.getPassword());
-        	
+        	mainDto.setPrjt_id(user.getPjt_selected());
+
         	List<MainDTO> list = userService.userInfo(mainDto);
         	
         	if(list.size() == 0){
-        		User loginUser = userService.signin(null, null);
+        		User loginUser = userService.signin(null, null, null);
         	} else if (list.size() != 0) {
-        		User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd());
+        		User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id());
         		// 로그인 성공했다면 토큰을 생성한다.
                 String token = jwtService.create(loginUser);
                 // 토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자.
