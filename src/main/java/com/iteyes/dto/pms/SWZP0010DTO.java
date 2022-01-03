@@ -46,5 +46,4 @@ public class SWZP0010DTO {
 	private List<SWZP0010DTO> updatedRows;
 	private List<SWZP0010DTO> createdRows;
 	private List<SWZP0010DTO> deletedRows;
-
 }
