@@ -1,10 +1,18 @@
 package com.iteyes.controller.pms;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.User;
 import com.iteyes.dto.pms.SWZP0010DTO;
 import com.iteyes.service.SWZP0010Service;
+
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -25,37 +33,61 @@ import java.util.Map;
 @CrossOrigin("*")
 @RequestMapping(value = "/SWZP0010")
 public class SWZP0010Controller {
-    @Autowired
-    private SWZP0010Service swzp0010Service;
+	@Autowired
+	private SWZP0010Service swzp0010Service;
 
-    @GetMapping(value = "/select")
-    public @ResponseBody
-    String select(HttpServletRequest request) throws Exception {
+	@GetMapping(value = "/pjtInfo")
+	public @ResponseBody String projectInfo(HttpServletRequest request) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
 
-        ObjectMapper mapper = new ObjectMapper();
+		List<String> list = swzp0010Service.select_0000();
 
-        /* 데이터 로그 확인 */
-        log.debug("# pgm_id :: " + request.getParameter("pgm_id"));
-        log.debug("# pgm_nm :: " + request.getParameter("pgm_nm"));
-        log.debug("# pl_no :: " + request.getParameter("pl_no"));
-        log.debug("# dvlpe_no :: " + request.getParameter("dvlpe_no"));
-        log.debug("# pgm_dis_cd :: " + request.getParameter("pgm_dis_cd_selected"));
-        log.debug("# bzcd :: " + request.getParameter("bzcd_selected"));
-        log.debug("# dvlp_dis_cd :: " + request.getParameter("dvlp_dis_cd_selected"));
-        log.debug("# prc_step_cd :: " + request.getParameter("prc_step_cd_selected"));
+		HashMap<String, Object> hm = new HashMap();
+		hm.put("data", list);
 
-        /* 빈 dto 생성 */
-        SWZP0010DTO SWZP0010 = new SWZP0010DTO();
+		String jsonStr = mapper.writeValueAsString(hm);
 
-        /* dto 값 셋팅*/
-        SWZP0010.setPgm_id(request.getParameter("pgm_id"));
-        SWZP0010.setPgm_nm(request.getParameter("pgm_nm"));
-        SWZP0010.setPl_no(request.getParameter("pl_no"));
-        SWZP0010.setDvlpe_no(request.getParameter("dvlpe_no"));
-        SWZP0010.setPgm_dis_cd(request.getParameter("pgm_dis_cd_selected"));
-        SWZP0010.setBzcd(request.getParameter("bzcd_selected"));
-        SWZP0010.setDvlp_dis_cd(request.getParameter("dvlp_dis_cd_selected"));
-        SWZP0010.setPrc_step_cd(request.getParameter("prc_step_cd_selected"));
+		return jsonStr;
+	}
+
+	@GetMapping(value = "/select")
+    public @ResponseBody String select(HttpServletRequest request) throws Exception{
+
+		ObjectMapper mapper = new ObjectMapper();
+    	
+    	log.debug("# pgm_id :: "   + request.getParameter("pgm_id"));
+    	log.debug("# pgm_nm :: "   + request.getParameter("pgm_nm"));
+    	log.debug("# pl_no :: "    + request.getParameter("pl_no"));
+    	log.debug("# dvlpe_no :: " + request.getParameter("dvlpe_no"));
+    	log.debug("# pgm_dis_cd :: " + request.getParameter("pgm_dis_cd_selected"));
+    	log.debug("# bzcd :: " + request.getParameter("bzcd_selected"));
+    	log.debug("# dvlp_dis_cd :: " + request.getParameter("dvlp_dis_cd_selected"));
+    	
+    	SWZP0010DTO SWZP0010 = new SWZP0010DTO();
+    	
+    	SWZP0010.setPgm_id(request.getParameter("pgm_id"));
+    	SWZP0010.setPgm_nm(request.getParameter("pgm_nm"));
+    	SWZP0010.setPl_no(request.getParameter("pl_no"));
+    	SWZP0010.setDvlpe_no(request.getParameter("dvlpe_no"));
+    	SWZP0010.setPgm_dis_cd(request.getParameter("pgm_dis_cd_selected"));
+    	SWZP0010.setBzcd(request.getParameter("bzcd_selected"));
+    	SWZP0010.setDvlp_dis_cd(request.getParameter("dvlp_dis_cd_selected"));
+    	
+    	List<SWZP0010DTO> list = swzp0010Service.select_0010(SWZP0010);
+    	
+    	HashMap<String, Object> hm = new HashMap();
+    	HashMap<String, Object> hm1 = new HashMap();
+    	HashMap<String, Object> hm1_pagination = new HashMap();
+    	hm.put("result", true);
+    	hm1.put("contents", list);
+    	hm1_pagination.put("page", 1);
+    	hm1_pagination.put("totalCount", 100);
+    	hm1.put("pagination", hm1_pagination);
+    	hm.put("data", hm1);
+
+    	String jsonStr = mapper.writeValueAsString(hm);
+
+    	return jsonStr;
 
         /* 서비스 요청 */
         List<SWZP0010DTO> list = swzp0010Service.select_0010(SWZP0010);

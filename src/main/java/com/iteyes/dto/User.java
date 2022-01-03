@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 
-    private String userId;
-    private String password;
+    private String userId;            /*ID*/
+    private String password;          /*패스워드*/
+    private String pjt_selected;      /*프로젝트명*/
 }
