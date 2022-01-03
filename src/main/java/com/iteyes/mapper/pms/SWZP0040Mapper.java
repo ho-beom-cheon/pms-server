@@ -8,5 +8,4 @@ import java.util.List;
 @Mapper
 public interface SWZP0040Mapper {
 	List<SWZP0040DTO> select_0040_01(SWZP0040DTO SWZP0040) throws Exception;
-
 }
