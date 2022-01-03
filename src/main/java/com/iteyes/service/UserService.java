@@ -11,6 +11,9 @@ import com.iteyes.dto.pms.SWZP9000DTO;
 
 public interface UserService {
 
+    // 프로젝트 명 리스트 셋팅.
+    public List<String> select_0000() throws Exception ;
+
     // 로그인 계정은 고정값을 이용한다.
     public User signin(String userId, String password, String pjt_selected);
 
