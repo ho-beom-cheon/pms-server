@@ -16,6 +16,7 @@ public class SWZP0010ServiceImpl implements SWZP0010Service{
 
 	@Override
 	public List<SWZP0010DTO> select_0010(SWZP0010DTO SWZP0010) throws Exception {
+
 		return swzp0010Mapper.select_0010_01(SWZP0010);
 	}
 

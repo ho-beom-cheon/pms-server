@@ -12,7 +12,7 @@ import com.iteyes.dto.pms.SWZP9000DTO;
 public interface UserService {
 
     // 로그인 계정은 고정값을 이용한다.
-    public User signin(String userId, String password);
+    public User signin(String userId, String password, String pjt_selected);
 
     // 귀중한 정보를 전달한다.
     public String getServerInfo();

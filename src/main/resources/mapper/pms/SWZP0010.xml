@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.iteyes.mapper.pms.SWZP0010Mapper">
+  <select id="select_0000_01" parameterType="Map" resultType="Map">
+		<![CDATA[
+	  		SELECT DTLS_TYCD      /*세부유형코드*/
+	  		     , DTLS_TYNM      /*세부유형명*/
+	  		  FROM pms_cd_del_mng
+	  		 WHERE GRP_TYCD = 000000000
+	  ]]>
+  </select>
   <select id="select_0010_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP0010DTO">
   <![CDATA[
   		   SELECT BKUP_ID			/*백업ID */
