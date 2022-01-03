@@ -19,7 +19,13 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private MainMapper mainMapper;
-	
+
+    @Override
+    public List<String> select_0000() throws Exception {
+
+        return mainMapper.select_0000_01();
+    }
+
 	@Override
 	public List<MainDTO> userInfo(MainDTO mainDto) throws Exception {
 		

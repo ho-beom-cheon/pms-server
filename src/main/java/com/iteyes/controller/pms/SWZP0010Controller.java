@@ -36,20 +36,6 @@ public class SWZP0010Controller {
 	@Autowired
 	private SWZP0010Service swzp0010Service;
 
-	@GetMapping(value = "/pjtInfo")
-	public @ResponseBody String projectInfo(HttpServletRequest request) throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-
-		List<String> list = swzp0010Service.select_0000();
-
-		HashMap<String, Object> hm = new HashMap();
-		hm.put("data", list);
-
-		String jsonStr = mapper.writeValueAsString(hm);
-
-		return jsonStr;
-	}
-
 	@GetMapping(value = "/select")
     public @ResponseBody String select(HttpServletRequest request) throws Exception{
 

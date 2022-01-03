@@ -7,14 +7,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.iteyes.dto.MainDTO;
@@ -26,7 +24,7 @@ import com.iteyes.service.impl.pms.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 @Slf4j
 public class UserRestController {
 
@@ -35,6 +33,20 @@ public class UserRestController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @GetMapping(value = "/pjtInfo")
+    public @ResponseBody String projectInfo(HttpServletRequest request) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<String> list = userService.select_0000();
+
+        HashMap<String, Object> hm = new HashMap();
+        hm.put("data", list);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+    }
 
     @PostMapping("/user/signin")
     public ResponseEntity<Map<String, Object>> signin(@RequestBody User user,

@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.MainMapper">
-  <select id="select_0120_01" parameterType="Map" resultType="com.iteyes.dto.MainDTO">
-	    SELECT A.EMPNO
-	         , A.EMPNM
-	         , A.EMAIL_ADDR
-	         , A.CPNO
-	         , A.BZCD
-	         , A.AUT_CD
-	         , A.LGN_PWD
-	         , CASE WHEN A.LGN_PWD != #{lgn_pwd}
-	                THEN 'N'
-	                WHEN A.LGN_PWD = #{empno} '211111'
+	<select id="select_0000_01" parameterType="Map" resultType="Map">
+		<![CDATA[
+		SELECT DTLS_TYCD      /*세부유형코드*/
+			 , DTLS_TYNM      /*세부유형명*/
+		FROM pms_cd_del_mng
+		WHERE GRP_TYCD = 000000000
+		]]>
+    </select>
+
+	<select id="select_0120_01" parameterType="Map" resultType="com.iteyes.dto.MainDTO">
+		SELECT A.EMPNO
+			 , A.EMPNM
+			 , A.EMAIL_ADDR
+			 , A.CPNO
+			 , A.BZCD
+			 , A.AUT_CD
+			 , A.LGN_PWD
+			 , CASE WHEN A.LGN_PWD != #{lgn_pwd}
+						THEN 'N'
+					WHEN A.LGN_PWD = #{empno} '211111'
 	                THEN 'C'
-	                ELSE 'Y'
-	                 END AS LOGIN_YN
-	      FROM pms_emp_info   A
-	     WHERE 1=1
-	       AND A.EMPNO   = #{empno}
-	       AND A.PRJT_ID = #{prjt_id}
-	       AND A.BKUP_ID = '0000000000'
-  </select>
+					ELSE 'Y'
+			END AS LOGIN_YN
+		FROM pms_emp_info   A
+		WHERE 1=1
+		  AND A.EMPNO   = #{empno}
+		  AND A.PRJT_ID = #{prjt_id}
+		  AND A.BKUP_ID = '0000000000'
+	</select>
 </mapper>
