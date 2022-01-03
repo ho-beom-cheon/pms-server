@@ -24,4 +24,25 @@ public class SWZP0010ServiceImpl implements SWZP0010Service{
 
 		return swzp0010Mapper.select_0010_01(SWZP0010);
 	}
+
+	/* create */
+	@Override
+	public boolean insert_0010(SWZP0010DTO swzp0010) throws Exception {
+
+		return swzp0010Mapper.insert_0010_01(swzp0010);
+	}
+
+	/* update */
+	@Override
+	public boolean update_0010(SWZP0010DTO swzp0010) throws Exception {
+
+		return swzp0010Mapper.update_0010_01(swzp0010);
+	}
+
+	/* delete */
+	@Override
+	public boolean delete_0010(SWZP0010DTO swzp0010) throws Exception {
+
+		return swzp0010Mapper.update_0010_02(swzp0010);
+	}
 }

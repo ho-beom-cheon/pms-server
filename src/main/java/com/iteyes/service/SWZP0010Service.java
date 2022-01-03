@@ -2,6 +2,7 @@ package com.iteyes.service;
 
 import java.util.List;
 
+import com.iteyes.dto.board.BoardDTO;
 import com.iteyes.dto.pms.SWZP0010DTO;
 
 public interface SWZP0010Service {

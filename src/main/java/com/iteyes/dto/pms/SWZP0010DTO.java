@@ -2,6 +2,8 @@ package com.iteyes.dto.pms;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class SWZP0010DTO {
 	private String bkup_id;                 // 백업id

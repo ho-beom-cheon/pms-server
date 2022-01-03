@@ -3,7 +3,7 @@ package com.iteyes.dto.pms;
 import lombok.Data;
 
 @Data
-public class SWZP0030DTO {
+public class SWZP0070DTO {
     private String bkup_id;             //백업ID
     private String prjt_id;             //프로젝트ID
     private String prjt_nm;             //프로젝트명
@@ -40,3 +40,4 @@ public class SWZP0030DTO {
     private String opr_no;              //조작자번호
     private String db_chg_ts;           //DB변경일시
 }
+

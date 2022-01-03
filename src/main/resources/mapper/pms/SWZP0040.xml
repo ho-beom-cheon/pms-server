@@ -21,7 +21,6 @@
 			  BFJR_BZCD
 	  FROM pms_err_mng
 	  WHERE 1=1
-
 	  /*업무구분 1*/
 	  <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
 		  AND BZCD = #{bzcd}
