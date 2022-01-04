@@ -43,6 +43,7 @@ public class SWZP0010DTO {
 	private String db_chg_ts;               // db변경일시
 	private String aut_id;                  // 권한
 	private String empno;
+	private String array_length;
 	private List<SWZP0010DTO> updatedRows;
 	private List<SWZP0010DTO> createdRows;
 	private List<SWZP0010DTO> deletedRows;
