@@ -69,30 +69,30 @@
    <![CDATA[
 		INSERT INTO pms_pgm_mng
 		(
-			BKUP_ID      /*백업ID*/
-		, PRJT_ID      /*프로젝트ID*/
-		, BZCD         /*업무구분코드*/
-		, PGM_ID       /*프로그램ID*/
-		, BZ_DTLS_TXT  /*업무세부내용*/
-		, PGM_NM       /*프로그램명*/
-		, DVLP_DIS_CD  /*개발구분코드*/
-		, PGM_DIS_CD   /*프로그램구분코드*/
-		, ENLPE_NM     /*프로그램세부구분코드*/
-		, FRCS_STA_DT  /*계획시작일자*/
-		, FRCS_END_DT  /*계획종료일자*/
-		, STA_DT       /*실제시작일자*/
-		, END_DT       /*실제종료일자*/
-		, PRC_STEP_CD  /*처리단계코드*/
-		, PRG_TXT      /*진행현황*/
-		, DVLPE_NO     /*개발자번호*/
-		, DVLPE_CNF_DT /*개발자확인일자*/
-		, PL_NO        /*PL번호*/
-		, PL_CNF_DT    /*PL확인일자*/
-		, CRPE_NO      /*담당자번호*/
-		, RMRK         /*비고*/
-		, ATFL_MNG_ID  /*첨부파일관리ID*/
-		, OPR_NO       /*조작자번호 */
-		, DB_CHG_TS    /*DB변경일시*/
+			  BKUP_ID      /*백업ID*/
+			, PRJT_ID      /*프로젝트ID*/
+			, BZCD         /*업무구분코드*/
+			, PGM_ID       /*프로그램ID*/
+			, BZ_DTLS_TXT  /*업무세부내용*/
+			, PGM_NM       /*프로그램명*/
+			, DVLP_DIS_CD  /*개발구분코드*/
+			, PGM_DIS_CD   /*프로그램구분코드*/
+			, ENLPE_NM     /*프로그램세부구분코드*/
+			, FRCS_STA_DT  /*계획시작일자*/
+			, FRCS_END_DT  /*계획종료일자*/
+			, STA_DT       /*실제시작일자*/
+			, END_DT       /*실제종료일자*/
+			, PRC_STEP_CD  /*처리단계코드*/
+			, PRG_TXT      /*진행현황*/
+			, DVLPE_NO     /*개발자번호*/
+			, DVLPE_CNF_DT /*개발자확인일자*/
+			, PL_NO        /*PL번호*/
+			, PL_CNF_DT    /*PL확인일자*/
+			, CRPE_NO      /*담당자번호*/
+			, RMRK         /*비고*/
+			, ATFL_MNG_ID  /*첨부파일관리ID*/
+			, OPR_NO       /*조작자번호 */
+			, DB_CHG_TS    /*DB변경일시*/
 		)
 		VALUES
 			(
@@ -155,7 +155,7 @@
 
 	<update id="update_0010_02" parameterType="Map">
    <![CDATA[
-		UPDATE PMS_MSG
+		UPDATE pms_pgm_mng
 		   SET ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
 		     , OPR_NO       = #{empno}
 		     , DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d')

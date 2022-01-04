@@ -167,28 +167,23 @@ public class SWZP0010Controller {
 
         return result;
     }
-    @DeleteMapping("/delete")
-    public @ResponseBody boolean delete(HttpServletRequest request) throws Exception{
+
+    @PutMapping("/delete")
+    public @ResponseBody boolean delete(@RequestBody SWZP0010DTO swzp0010) throws Exception{
 
         boolean result = false;
 
         SWZP0010DTO SWZP0010D = new SWZP0010DTO();
-//            SWZP0010D.setAtfl_mng_id(request.getParameter("deletedRows["+-i+"][atfl_mng_id]"));
-//            SWZP0010D.setEmpno(request.getParameter(i+"[empno]"));
-//            SWZP0010D.setPgm_id(request.getParameter(i+"[pgm_id]"));
-//            SWZP0010D.setBzcd(request.getParameter(i+"[bzcd]"));
-//            SWZP0010D.setPrjt_id(request.getParameter(i+"[prjt_id]"));
-//            SWZP0010D.setBkup_id(request.getParameter(i+"[bkup_id]"));
-//        for(int i=0; i<request.getParameter("getDeletedRows").size(); i++) {
-//            SWZP0010D.setAtfl_mng_id(request.getParameter(i+"[atfl_mng_id]"));
-//            SWZP0010D.setEmpno(request.getParameter(i+"[empno]"));
-//            SWZP0010D.setPgm_id(request.getParameter(i+"[pgm_id]"));
-//            SWZP0010D.setBzcd(request.getParameter(i+"[bzcd]"));
-//            SWZP0010D.setPrjt_id(request.getParameter(i+"[prjt_id]"));
-//            SWZP0010D.setBkup_id(request.getParameter(i+"[bkup_id]"));
-//
-//            result = swzp0010Service.delete_0010(SWZP0010D);
-//        }
+        for(int i=0; i<swzp0010.getDeletedRows().size(); i++) {
+            SWZP0010D.setAtfl_mng_id(swzp0010.getDeletedRows().get(i).getAtfl_mng_id());
+            SWZP0010D.setEmpno(swzp0010.getDeletedRows().get(i).getEmpno());
+            SWZP0010D.setPgm_id(swzp0010.getDeletedRows().get(i).getPgm_id());
+            SWZP0010D.setBzcd(swzp0010.getDeletedRows().get(i).getBzcd());
+            SWZP0010D.setPrjt_id(swzp0010.getDeletedRows().get(i).getPrjt_id());
+            SWZP0010D.setBkup_id(swzp0010.getDeletedRows().get(i).getBkup_id());
+        }
+
+        result = swzp0010Service.delete_0010(SWZP0010D);
 
         return result;
     }

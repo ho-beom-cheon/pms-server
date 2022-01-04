@@ -14,6 +14,7 @@
 
 	<select id="select_0120_01" parameterType="Map" resultType="com.iteyes.dto.MainDTO">
 		SELECT A.EMPNO
+		     , A.PRJT_ID
 			 , A.EMPNM
 			 , A.EMAIL_ADDR
 			 , A.CPNO
