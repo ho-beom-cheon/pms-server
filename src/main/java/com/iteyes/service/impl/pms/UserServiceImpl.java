@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.iteyes.dto.MainDTO;
 import com.iteyes.dto.User;
-import com.iteyes.dto.pms.SWZP9000DTO;
 import com.iteyes.mapper.MainMapper;
 import com.iteyes.service.UserService;
 
@@ -31,7 +30,12 @@ public class UserServiceImpl implements UserService{
 		
 		return mainMapper.select_0120_01(mainDto);
 	}
-	
+
+    @Override
+    public boolean pw_change_0000(MainDTO user) throws Exception {
+        return mainMapper.pw_change_0000(user);
+    }
+
     // 로그인 계정은 고정값을 이용한다.
 	@Override
     public User signin(String userId, String password, String prjt_id) {
