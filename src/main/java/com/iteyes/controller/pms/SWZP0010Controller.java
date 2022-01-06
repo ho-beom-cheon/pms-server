@@ -1,32 +1,15 @@
 package com.iteyes.controller.pms;
 
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.SWZP0010DTO;
 import com.iteyes.service.SWZP0010Service;
-
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @Log4j2
@@ -72,7 +55,7 @@ public class SWZP0010Controller {
 
     }
 
-    @PostMapping("/modify")
+    @PostMapping("/create")
     public @ResponseBody boolean create(@RequestBody SWZP0010DTO swzp0010) throws Exception{
         boolean result = false;
 
@@ -95,14 +78,10 @@ public class SWZP0010Controller {
             SWZP0010C.setRmrk(swzp0010.getCreatedRows().get(i).getRmrk());
             SWZP0010C.setAtfl_mng_id(swzp0010.getCreatedRows().get(i).getAtfl_mng_id());
             SWZP0010C.setEmpno(swzp0010.getCreatedRows().get(i).getEmpno());
-            SWZP0010C.setPgm_id("세션에서추가");
-//            SWZP0010C.setPgm_id(swzp0010.getCreatedRows().get(i).getPgm_id());
-            SWZP0010C.setBzcd("세션에서추가");
-//            SWZP0010C.setBzcd(swzp0010.getCreatedRows().get(i).getBzcd());
-            SWZP0010C.setPrjt_id("세션에서추가");
-//            SWZP0010C.setPrjt_id(swzp0010.getCreatedRows().get(i).getPrjt_id());
-            SWZP0010C.setBkup_id("세션에서추가");
-//            SWZP0010C.setBkup_id(swzp0010.getCreatedRows().get(i).getBkup_id());
+            SWZP0010C.setPgm_id(swzp0010.getCreatedRows().get(i).getPgm_id());
+            SWZP0010C.setBzcd(swzp0010.getCreatedRows().get(i).getBzcd());
+            SWZP0010C.setPrjt_id(swzp0010.getCreatedRows().get(i).getPrjt_id());
+            SWZP0010C.setBkup_id(swzp0010.getCreatedRows().get(i).getBkup_id());
 
             result = swzp0010Service.insert_0010(SWZP0010C);
         }

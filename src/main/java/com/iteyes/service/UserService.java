@@ -22,4 +22,7 @@ public interface UserService {
     
     // 사용자 정보를 가져온다.
     public List<MainDTO> userInfo(MainDTO mainDto) throws Exception;
+
+    // 비밀번호 변경 정보
+    public boolean pw_change_0000(MainDTO user) throws Exception;
 }
