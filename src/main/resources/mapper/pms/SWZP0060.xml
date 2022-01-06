@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
 <mapper namespace="com.iteyes.mapper.pms.SWZP0060Mapper">
-    <select id="select_0060_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP0060DTO">
-        <![CDATA[
+  <select id="select_0060_01" parameterType="Map" resultType="com.iteyes.dto.pms.SWZP0060DTO">
+  <![CDATA[
            SELECT BKUP_ID                  /*백업ID */
                 , PRJT_ID                  /*프로젝트ID  */
                 , MNG_ID                   /*관리ID  */
@@ -103,4 +103,58 @@
           AND PRJT_ID = '1000000001'
           AND MNG_ID = #{mng_id}
     </update>
+    <insert id="insert_0060_01" parameterType="Map">
+       <![CDATA[
+        INSERT INTO pms_iss_risk_mng
+            (
+              BKUP_ID        /*백업ID*/
+            , PRJT_ID        /*프로젝트ID*/
+            , MNG_ID         /*관리ID*/
+            , RGS_DIS_CD     /*관리구분코드 */
+            , TITL_NM        /*제목  */
+            , REQ_DIS_TXT    /*요청내용 */
+            , REQ_DIS_CD     /*요청구분코드*/
+            , RGS_DT         /*요청일자*/
+            , ACHI_NM        /*요청자 */
+            , PRC_STEP_CD    /*이슈처리단계구분코드 */
+            , TGT_BIZ_NM     /*대상업무명 */
+            , TTMN_CRPE_NM   /*조치담당자 */
+            , TTMN_SCD_DT    /*조치예정일자*/
+            , TTMN_DT        /*조치일자*/
+            , TTMN_TXT       /*조치내용*/
+            , SLV_MPLN_TXT   /*해결방안내용*/
+            , IFNC_CD        /*영향도코드*/
+            , GD_TXT         /*등급내용*/
+            , URGN_CD        /*긴급코드*/
+            , RMRK           /*비고*/
+            , OPR_NO         /*조작자번호*/
+            , DB_CHG_TS      /*DB변경일시*/
+            )
+        VALUES
+            (
+              '0000000000'                 /*백업ID*/
+            , '1000000001'                 /*프로젝트ID*/
+            ,  (SELECT NVL( MAX(mng_id) , 0) + 1 FROM pms_iss_risk_mng B)  /*관리ID*/
+            ,  #{rgs_dis_cd}               /*관리구분코드 */
+            ,  #{titl_nm}                  /*제목  */
+            ,  #{req_dis_txt}              /*요청내용 */
+            ,  #{req_dis_cd}               /*요청구분코드*/
+            ,  #{rgs_dt}                   /*요청일자*/
+            ,  #{achi_nm}                  /*요청자 */
+            ,  #{prc_step_cd}              /*이슈처리단계구분코드 */
+            ,  #{tgt_biz_nm}               /*대상업무명 */
+            ,  #{ttmn_crpe_nm}             /*조치담당자 */
+            ,  #{ttmn_scd_dt}              /*조치예정일자*/
+            ,  #{ttmn_dt}                  /*조치일자*/
+            ,  #{ttmn_txt}                 /*조치내용*/
+            ,  #{slv_mpln_txt}             /*해결방안내용*/
+            ,  #{ifnc_cd}                  /*영향도코드*/
+            ,  #{gd_txt}                   /*등급내용*/
+            ,  #{urgn_cd}                  /*긴급코드*/
+            ,  #{rmrk}                     /*비고*/
+            ,  '1211'                      /*조작자번호*/
+            ,  DATE_FORMAT(NOW(),'%Y%m%d') /*DB변경일시*/
+            )
+        ]]>
+  </insert>
 </mapper>

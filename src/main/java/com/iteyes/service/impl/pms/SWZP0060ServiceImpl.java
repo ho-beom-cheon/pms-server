@@ -26,4 +26,11 @@ public class SWZP0060ServiceImpl implements SWZP0060Service {
        
         return swzp0060Mapper.update_0060_01(SWZP0060);
     }
+
+    /* insert */
+    @Override
+    public boolean insert_0060(SWZP0060DTO SWZP0060) throws Exception {
+
+        return swzp0060Mapper.insert_0060_01(SWZP0060);
+    }
 }

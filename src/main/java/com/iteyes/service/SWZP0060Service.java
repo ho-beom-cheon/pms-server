@@ -10,4 +10,7 @@ public interface SWZP0060Service {
 
     /* update */
     boolean update_0060(SWZP0060DTO swzp0060) throws Exception;
+
+    /* insert */
+    boolean insert_0060(SWZP0060DTO swzp0060) throws Exception;
 }

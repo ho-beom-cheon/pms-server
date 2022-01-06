@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
-
+@CrossOrigin
 @Controller
 @Log4j2
 @RequestMapping(value = "/SWZP0060")
@@ -60,7 +60,6 @@ public class SWZP0060Controller {
 
     }
 
-    @CrossOrigin
     @PutMapping(value = "/update")
     public @ResponseBody
     boolean update(@RequestBody SWZP0060DTO SWZP0060) throws Exception {
@@ -94,5 +93,35 @@ public class SWZP0060Controller {
 
     }
 
+    @PostMapping(value = "/insert")
+    public @ResponseBody
+    boolean insert(@RequestBody SWZP0060DTO SWZP0060C) throws Exception {
 
+        boolean result = false;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        SWZP0060C.setRgs_dis_cd(SWZP0060C.getD_rgs_dis_cd());
+        SWZP0060C.setPrc_step_cd(SWZP0060C.getD_prc_step_cd());
+        SWZP0060C.setReq_dis_cd(SWZP0060C.getD_req_dis_cd());
+        SWZP0060C.setRgs_dt(SWZP0060C.getRgs_dt());
+        SWZP0060C.setAchi_nm(SWZP0060C.getD_achi_nm());
+        SWZP0060C.setTtmn_crpe_nm(SWZP0060C.getD_ttmn_crpe_nm());
+        SWZP0060C.setTgt_biz_nm(SWZP0060C.getD_tgt_biz_nm());
+        SWZP0060C.setTtmn_scd_dt(SWZP0060C.getTtmn_scd_dt());
+        SWZP0060C.setTtmn_dt(SWZP0060C.getTtmn_dt());
+        SWZP0060C.setIfnc_cd(SWZP0060C.getIfnc_cd());
+        SWZP0060C.setUrgn_cd(SWZP0060C.getUrgn_cd());
+        SWZP0060C.setGd_txt(SWZP0060C.getGd_txt());
+        SWZP0060C.setTitl_nm(SWZP0060C.getD_titl_nm());
+        SWZP0060C.setReq_dis_txt(SWZP0060C.getD_req_dis_txt());
+        SWZP0060C.setTtmn_txt(SWZP0060C.getD_ttmn_txt());
+        SWZP0060C.setSlv_mpln_txt(SWZP0060C.getD_slv_mpln_txt());
+        SWZP0060C.setRmrk(SWZP0060C.getRmrk());
+
+        result = swzp0060Service.insert_0060(SWZP0060C);
+
+        return result;
+
+    }
 }
