@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.service.UserService;
 import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping
+@CrossOrigin
 @Slf4j
 public class UserRestController {
 
@@ -46,6 +48,26 @@ public class UserRestController {
         String jsonStr = mapper.writeValueAsString(hm);
 
         return jsonStr;
+    }
+    @PutMapping(value = "/pwChange")
+    public @ResponseBody boolean pwChange(@RequestBody User user) throws Exception{
+        boolean result = false;
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        try {
+            MainDTO updateUser = new MainDTO();
+
+            updateUser.setEmpno(user.getUserId());
+            updateUser.setLgn_pwd(user.getPassword());
+            updateUser.setPrjt_id(user.getPjt_selected());
+
+            result = userService.pw_change_0000(updateUser);
+        } catch (RuntimeException e) {
+            log.error("변경 실패", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return result;
     }
 
     @PostMapping("/user/signin")
