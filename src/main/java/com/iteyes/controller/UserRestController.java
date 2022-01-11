@@ -8,17 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.service.UserService;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.iteyes.dto.MainDTO;
 import com.iteyes.dto.User;
-import com.iteyes.dto.pms.SWZP0010DTO;
 import com.iteyes.service.JwtService;
 import com.iteyes.service.impl.pms.UserServiceImpl;
 

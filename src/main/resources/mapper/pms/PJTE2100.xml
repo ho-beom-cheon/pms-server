@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE2100Mapper">
+	<select id="select_0000_01" parameterType="Map" resultType="Map">
+		SELECT GRP_TYCD
+			  ,DTLS_TYCD
+			  ,DTLS_TYNM
+			  ,SORT_SEQ
+		  FROM pms_cd_del_mng
+		 WHERE USE_YN   = 'Y'
+		   AND GRP_TYCD = '0000000000'
+		 UNION
+		SELECT GRP_TYCD
+			 , DTLS_TYCD
+			 , DTLS_TYNM
+		 	 , SORT_SEQ
+		  FROM pms_cd_del_mng
+		 WHERE USE_YN   = 'Y'
+		   AND PRJT_ID = #{prjt_id}
+		 ORDER BY 1, 4
+	</select>
+  <select id="select_2100_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2100DTO">
+	  SELECT
+		     A.BZCD               /* 업무구분 */
+		   , A.BZ_DTLS_TXT        /* 업무세부 */
+		   , A.PGM_ID             /* 프로그램ID */
+		   , A.PGM_NM             /* 프로그램명 */
+		   , A.DVLP_DIS_CD        /* 개발구분 */
+		   , A.PGM_DIS_CD         /* 프로그램구분 */
+		   , A.ENLPE_NM           /* 프로그램세부구분코드 */
+		   , A.FRCS_STA_DT        /* 예상시작일자 */
+		   , A.FRCS_END_DT        /* 예상종료일자 */
+		   , A.STA_DT             /* 실제시작일자 */
+		   , A.END_DT             /* 실제종료일자 */
+		   , A.DVLPE_CNF_DT       /* 개발자확인일자 */
+		   , A.PL_CNF_DT          /* PL확인일자 */
+		   , A.PRC_STEP_CD        /* 처리단계 */
+		   , A.PRG_TXT            /* 진행현황 */
+		   , B.EMPNM  AS DVLPE_NM /* 개발명 */
+		   , C.EMPNO  AS PL_NM    /* PL명 */
+		   , D.EMPNM  AS CRPE_NM  /* 담당자명 */
+		   , (
+			  SELECT COUNT(*)
+			    FROM pms_err_mng
+			   WHERE CCTN_ID   = A.PGM_ID
+				 AND CCTN_BZCD = A.BZCD
+				 AND PRJT_ID   = A.PRJT_ID
+			 	 AND BKUP_ID   = A.BKUP_ID
+		     ) AS ERR_TOT_CNT /* 전체 결함등록 건수 */
+		   , (
+			  SELECT COUNT(*)
+			    FROM pms_err_mng
+			   WHERE ERR_PRC_STEP_CD IN ('600', '700', '800')
+				 AND CCTN_ID   = A.PGM_ID
+				 AND CCTN_BZCD = A.BZCD
+				 AND PRJT_ID   = A.PRJT_ID
+				 AND BKUP_ID   = A.BKUP_ID
+		     ) AS ERR_CMPL_CNT /* 결함완료 건수 */
+		   , (
+			  SELECT COUNT(*)
+			    FROM pms_err_mng
+			   WHERE ERR_PRC_STEP_CD IN ('100', '200', '300', '400', '500')
+				 AND CCTN_ID   = A.PGM_ID
+				 AND CCTN_BZCD = A.BZCD
+				 AND PRJT_ID   = A.PRJT_ID
+				 AND BKUP_ID   = A.BKUP_ID
+		     ) AS ERR_NCMPL_CNT /* 결함진행 건수 */
+		   , A.ATFL_MNG_ID      /* 단위테스트결과서 첨부파일관리ID*/
+		   , A.PAL_ATFL_MNG_ID  /* 설계서 첨부파일관리ID*/
+		   , A.RMRK             /* 비고 */
+		   , A.DVLPE_NO         /* 개발자번호 */
+		   , A.PL_NO            /* PL번호 */
+		   , A.CRPE_NO          /* 담당자번호 */
+		   , 'Y'    AS SAVE_YN  /* 등록여부*/
+		   , A.BKUP_ID          /* 백업ID */
+		   , A.PRJT_ID          /* 프로젝트ID  */
+	    FROM pms_pgm_mng A          /* PMS프로그램관리 */
+	    LEFT OUTER JOIN
+	         pms_emp_info   B
+	      ON B.EMPNO   = A.DVLPE_NO
+	     AND B.PRJT_ID = A.PRJT_ID
+	     AND B.BKUP_ID = A.BKUP_ID
+	    LEFT OUTER JOIN
+	         pms_emp_info   C
+	      ON C.EMPNO   = A.PL_NO
+	     AND C.PRJT_ID = A.PRJT_ID
+	     AND C.BKUP_ID = A.BKUP_ID
+	    LEFT OUTER JOIN
+	         pms_emp_info   D
+	      ON D.EMPNO   = A.CRPE_NO
+	     AND D.PRJT_ID = A.PRJT_ID
+	     AND D.BKUP_ID = A.BKUP_ID
+	   WHERE 1=1
+      /*백업ID*/
+	  <if test='bkup_id != "" and bkup_id != null'>
+        AND A.BKUP_ID LIKE '%' #{bkup_id} '%'
+	  </if>
+      /*프로젝트ID*/
+      <if test='prjt_id != "" and prjt_id != null'>
+		AND A.PRJT_ID LIKE '%' #{prjt_id} '%'
+	  </if>
+      /*업무구분*/
+	  <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
+		AND A.BZCD LIKE '%' #{bzcd} '%'
+	  </if>
+	  /*개발구분*/
+	  <if test='dvlp_dis_cd != "" and dvlp_dis_cd != null and dvlp_dis_cd != "TTT"'>
+		AND A.DVLP_DIS_CD = #{dvlp_dis_cd}
+	  </if>
+	   /*프로그램구분*/
+	  <if test='pgm_dis_cd != "" and pgm_dis_cd != null and pgm_dis_cd != "TTT"'>
+		AND A.PGM_DIS_CD = #{pgm_dis_cd}
+	  </if>
+	  /*처리구분*/
+	  <if test='prc_step_cd != "" and prc_step_cd != null and prc_step_cd != "TTT"'>
+		AND A.PRC_STEP_CD = #{prc_step_cd}
+	  </if>
+      /* 예상종료일자 */
+	  <if test='frcs_sta_dt != ""  and frcs_sta_dt != null and frcs_end_dt != ""  and frcs_end_dt != null'>
+		AND A.FRCS_END_DT BETWEEN #{frcs_sta_dt} AND #{frcs_end_dt}
+	  </if>
+      /* 개발자종료일자 */
+	  <if test='dvlpe_sta_dt != "" and dvlpe_sta_dt != null and dvlpe_end_dt != "" and dvlpe_end_dt != null'>
+		AND A.DVLPE_CNF_DT BETWEEN #{dvlpe_sta_dt} AND #{dvlpe_end_dt}
+	  </if>
+      /*프로그램ID*/
+	  <if test='pgm_id != "" and pgm_id != null'>
+		AND A.PGM_ID LIKE '%' #{pgm_id} '%'
+	  </if>
+	  /*프로그램명*/
+	  <if test='pgm_nm != "" and pgm_nm != null'>
+		AND A.PGM_NM LIKE '%' #{pgm_nm} '%'
+	  </if>
+	  /*개발자번호*/
+	  <if test='dvlpe_no != "" and dvlpe_no != null'>
+		AND A.DVLPE_NO  #{dvlpe_no}
+	  </if>
+	  /*PL번호*/
+	  <if test='pl_no != "" and pl_no != null'>
+		AND A.PL_NO = #{pl_no}
+	  </if>
+	  ORDER BY A.BZCD, A.FRCS_STA_DT
+    </select>
+
+	<insert id="insert_2100_01" parameterType="Map">
+   <![CDATA[
+		INSERT INTO pms_pgm_mng
+		(
+			  BKUP_ID      /*백업ID*/
+			, PRJT_ID      /*프로젝트ID*/
+			, BZCD         /*업무구분코드*/
+			, PGM_ID       /*프로그램ID*/
+			, BZ_DTLS_TXT  /*업무세부내용*/
+			, PGM_NM       /*프로그램명*/
+			, DVLP_DIS_CD  /*개발구분코드*/
+			, PGM_DIS_CD   /*프로그램구분코드*/
+			, ENLPE_NM     /*프로그램세부구분코드*/
+			, FRCS_STA_DT  /*계획시작일자*/
+			, FRCS_END_DT  /*계획종료일자*/
+			, STA_DT       /*실제시작일자*/
+			, END_DT       /*실제종료일자*/
+			, PRC_STEP_CD  /*처리단계코드*/
+			, PRG_TXT      /*진행현황*/
+			, DVLPE_NO     /*개발자번호*/
+			, DVLPE_CNF_DT /*개발자확인일자*/
+			, PL_NO        /*PL번호*/
+			, PL_CNF_DT    /*PL확인일자*/
+			, CRPE_NO      /*담당자번호*/
+			, RMRK         /*비고*/
+			, ATFL_MNG_ID  /*첨부파일관리ID*/
+			, OPR_NO       /*조작자번호 */
+			, DB_CHG_TS    /*DB변경일시*/
+		)
+		VALUES
+			(
+				'0000000000'
+			, #{prjt_id}     /*프로젝트ID*/
+			, #{bzcd}        /*업무구분코드*/
+			, #{pgm_id}      /*프로그램ID*/
+			, #{bz_dtls_txt} /*업무세부내용*/
+			, #{pgm_nm}      /*프로그램명*/
+			, #{dvlp_dis_cd} /*개발구분코드*/
+			, #{pgm_dis_cd}  /*프로그램구분코드*/
+			, #{enlpe_nm}    /*프로그램세부구분코드*/
+			, #{frcs_sta_dt} /*계획시작일자*/
+			, #{frcs_end_dt} /*계획종료일자*/
+			, ''             /*실제시작일자*/
+			, ''             /*실제종료일자*/
+			, '000'          /*처리단계코드*/
+			, #{prg_txt}     /*진행현황*/
+			, #{dvlpe_no}    /*개발자번호*/
+			, ''             /*개발자확인일자*/
+			, #{pl_no}       /*PL번호*/
+			, ''             /*PL확인일자*/
+			, #{crpe_no}     /*담당자번호*/
+			, #{rmrk}        /*비고*/
+			, #{atfl_mng_id} /*첨부파일관리ID*/
+			, #{empno}       /*조작자번호*/
+			, DATE_FORMAT(NOW(),'%Y%m%d')   /*DB변경일시*/
+			)
+		]]>
+  </insert>
+  <update id="update_2100_01" parameterType="Map">
+   <![CDATA[
+	UPDATE pms_pgm_mng
+	   SET BZ_DTLS_TXT   = #{bz_dtls_txt}  /*업무세부내용*/
+		  , PGM_NM       = #{pgm_nm}       /*프로그램명*/
+		  , DVLP_DIS_CD  = #{dvlp_dis_cd}  /*개발구분코드*/
+		  , PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
+		  , ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
+		  , FRCS_STA_DT  = CASE WHEN #{aut_id} IN ('500','600') THEN #{frcs_sta_dt} ELSE FRCS_STA_DT END /*계획시작일자*/
+		  , FRCS_END_DT  = CASE WHEN #{aut_id} IN ('500','600') THEN #{frcs_end_dt} ELSE FRCS_END_DT END /*계획종료일자*/
+		  , STA_DT       = CASE WHEN #{prc_step_cd} IN ('100','200') AND STA_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END /*실제시작일자*/
+		  , END_DT       = CASE WHEN #{prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END  /*실제종료일자*/
+		  , PRC_STEP_CD  = #{prc_step_cd}  /*처리단계코드*/
+	      , PRG_TXT      = #{prg_txt}      /*진행현황*/
+	      , DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
+	      , DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT END /*개발자확인일자*/
+		  , PL_NO        = #{pl_no}        /*PL번호*/
+	      , PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT END    /*PL확인일자*/
+		  , CRPE_NO      = #{crpe_no}      /*담당자번호*/
+	      , RMRK         = #{rmrk}         /*비고*/
+	      , ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
+	      , OPR_NO       = #{empno}        /*조작자번호*/
+		  , DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d')    /*DB변경일시*/
+	  WHERE PGM_ID       = #{pgm_id}
+	    AND BZCD         = #{bzcd}
+	    AND PRJT_ID      = #{prjt_id}
+	    AND BKUP_ID      = #{bkup_id}
+	  ]]>
+  </update>
+
+	<update id="update_2100_02" parameterType="Map">
+   <![CDATA[
+		UPDATE pms_pgm_mng
+		   SET ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
+		     , OPR_NO       = #{empno}
+		     , DVLP_DIS_CD  = '400'
+		     , DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d')
+		WHERE PGM_ID        = #{pgm_id}
+		   AND BZCD         = #{bzcd}
+		   AND PRJT_ID      = #{prjt_id}
+		   AND BKUP_ID      = #{bkup_id}
+		]]>
+  </update>
+</mapper>
