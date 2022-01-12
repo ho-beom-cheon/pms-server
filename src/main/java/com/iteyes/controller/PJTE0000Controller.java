@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.service.impl.pms.PJTE0000ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.iteyes.dto.MainDTO;
+import com.iteyes.dto.PJTE0000DTO;
 import com.iteyes.dto.User;
 import com.iteyes.service.JwtService;
-import com.iteyes.service.impl.pms.UserServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,13 +24,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping
 @CrossOrigin
 @Slf4j
-public class UserRestController {
+public class PJTE0000Controller {
 
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private UserServiceImpl userService;
+    private PJTE0000ServiceImpl userService;
 
     @GetMapping(value = "/pjtInfo")
     public @ResponseBody String projectInfo(HttpServletRequest request) throws Exception {
@@ -51,7 +51,7 @@ public class UserRestController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         try {
-            MainDTO updateUser = new MainDTO();
+            PJTE0000DTO updateUser = new PJTE0000DTO();
 
             updateUser.setEmpno(user.getUserId());
             updateUser.setLgn_pwd(user.getPassword());
@@ -72,12 +72,12 @@ public class UserRestController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         try {
-        	MainDTO mainDto = new MainDTO();
-        	mainDto.setEmpno(user.getUserId());
-        	mainDto.setLgn_pwd(user.getPassword());
-        	mainDto.setPrjt_id(user.getPjt_selected());
+        	PJTE0000DTO PJTE0000Dto = new PJTE0000DTO();
+        	PJTE0000Dto.setEmpno(user.getUserId());
+        	PJTE0000Dto.setLgn_pwd(user.getPassword());
+        	PJTE0000Dto.setPrjt_id(user.getPjt_selected());
 
-        	List<MainDTO> list = userService.userInfo(mainDto);
+        	List<PJTE0000DTO> list = userService.userInfo(PJTE0000Dto);
         	
         	if(list.size() == 0){
         		User loginUser = userService.signin(null, null, null);

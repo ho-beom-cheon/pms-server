@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SWZP0030DTO {
+public class PJTE2200DTO {
     private String bkup_id         ;   // 백업ID
     private String prjt_id         ;   // 프로젝트ID
     private String bzcd            ;   // 업무구분코드
@@ -64,7 +64,7 @@ public class SWZP0030DTO {
     private String ttmn_atfl_mng_id;   //
 
     private String array_length;
-    private List<SWZP0010DTO> updatedRows;
-    private List<SWZP0010DTO> createdRows;
-    private List<SWZP0010DTO> deletedRows;
+    private List<PJTE2200DTO> updatedRows;
+    private List<PJTE2200DTO> createdRows;
+    private List<PJTE2200DTO> deletedRows;
 }

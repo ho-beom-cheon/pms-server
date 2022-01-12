@@ -3,7 +3,7 @@ package com.iteyes.dto.pms;
 import lombok.Data;
 
 @Data
-public class SWZP0040DTO {
+public class PJTE3000DTO {
 	private String bkup_id;
 	private String prjt_nm;
 	private String prjt_id;
