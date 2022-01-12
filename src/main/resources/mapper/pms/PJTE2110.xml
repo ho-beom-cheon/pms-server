@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE2110Mapper">
+    <select id="select_2110_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
+        SELECT BKUP_ID			/*백업ID */
+             , PRJT_ID			/*프로젝트ID  */
+             , PGM_ID			/*프로그램ID  */
+             , BZCD				/*업무구분 */
+             , PGM_NM			/*프로그램명  */
+             , BZ_DTLS_TXT       /*업무세부 */
+             , DVLP_DIS_CD       /*개발구분*/
+             , PGM_DIS_CD        /*프로그램구분*/
+             , ENLPE_NM			/*프로그램세부구분코드 */
+             , FRCS_STA_DT		/*예상시작일자 */
+             , FRCS_END_DT		/*예상종료일자 */
+             , STA_DT			/*실제시작일자 */
+             , END_DT			/*실제종료일자 */
+             , PRG_TXT			/*진행현황 */
+             , DVLPE_NO			/*개발자번호 */
+             , DVLPE_CNF_DT		/*개발자확인일자 */
+             , PL_NO				/*PL번호 */
+             , PL_CNF_DT			/*PL확인일자 */
+             , CRPE_NO			/*담당자번호 */
+             , RMRK				/*비고 */
+             , OPR_NO			/*조작자번호 */
+             , DB_CHG_TS			/*DB변경일시 */
+        FROM pms_pgm_mng
+        WHERE 1=1
+    </select>
+    <select id="select_2110_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
+        SELECT BKUP_ID			/*백업ID */
+             , PRJT_ID			/*프로젝트ID  */
+             , PGM_ID			/*프로그램ID  */
+             , BZCD				/*업무구분 */
+             , PGM_NM			/*프로그램명  */
+             , BZ_DTLS_TXT       /*업무세부 */
+             , DVLP_DIS_CD       /*개발구분*/
+             , PGM_DIS_CD        /*프로그램구분*/
+             , ENLPE_NM			/*프로그램세부구분코드 */
+             , FRCS_STA_DT		/*예상시작일자 */
+             , FRCS_END_DT		/*예상종료일자 */
+             , STA_DT			/*실제시작일자 */
+             , END_DT			/*실제종료일자 */
+             , PRG_TXT			/*진행현황 */
+             , DVLPE_NO			/*개발자번호 */
+             , DVLPE_CNF_DT		/*개발자확인일자 */
+             , PL_NO				/*PL번호 */
+             , PL_CNF_DT			/*PL확인일자 */
+             , CRPE_NO			/*담당자번호 */
+             , RMRK				/*비고 */
+             , OPR_NO			/*조작자번호 */
+             , DB_CHG_TS			/*DB변경일시 */
+        FROM pms_pgm_mng
+        WHERE 1=1
+    </select>
+	<select id="select_2110_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
+        SELECT BKUP_ID			/*백업ID */
+             , PRJT_ID			/*프로젝트ID  */
+             , PGM_ID			/*프로그램ID  */
+             , BZCD				/*업무구분 */
+             , PGM_NM			/*프로그램명  */
+             , BZ_DTLS_TXT       /*업무세부 */
+             , DVLP_DIS_CD       /*개발구분*/
+             , PGM_DIS_CD        /*프로그램구분*/
+             , ENLPE_NM			/*프로그램세부구분코드 */
+             , FRCS_STA_DT		/*예상시작일자 */
+             , FRCS_END_DT		/*예상종료일자 */
+             , STA_DT			/*실제시작일자 */
+             , END_DT			/*실제종료일자 */
+             , PRG_TXT			/*진행현황 */
+             , DVLPE_NO			/*개발자번호 */
+             , DVLPE_CNF_DT		/*개발자확인일자 */
+             , PL_NO				/*PL번호 */
+             , PL_CNF_DT			/*PL확인일자 */
+             , CRPE_NO			/*담당자번호 */
+             , RMRK				/*비고 */
+             , OPR_NO			/*조작자번호 */
+             , DB_CHG_TS			/*DB변경일시 */
+        FROM pms_pgm_mng
+        WHERE 1=1
+	</select>
+	<select id="select_2110_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
+        SELECT BKUP_ID			/*백업ID */
+             , PRJT_ID			/*프로젝트ID  */
+             , PGM_ID			/*프로그램ID  */
+             , BZCD				/*업무구분 */
+             , PGM_NM			/*프로그램명  */
+             , BZ_DTLS_TXT       /*업무세부 */
+             , DVLP_DIS_CD       /*개발구분*/
+             , PGM_DIS_CD        /*프로그램구분*/
+             , ENLPE_NM			/*프로그램세부구분코드 */
+             , FRCS_STA_DT		/*예상시작일자 */
+             , FRCS_END_DT		/*예상종료일자 */
+             , STA_DT			/*실제시작일자 */
+             , END_DT			/*실제종료일자 */
+             , PRG_TXT			/*진행현황 */
+             , DVLPE_NO			/*개발자번호 */
+             , DVLPE_CNF_DT		/*개발자확인일자 */
+             , PL_NO				/*PL번호 */
+             , PL_CNF_DT			/*PL확인일자 */
+             , CRPE_NO			/*담당자번호 */
+             , RMRK				/*비고 */
+             , OPR_NO			/*조작자번호 */
+             , DB_CHG_TS			/*DB변경일시 */
+        FROM pms_pgm_mng
+        WHERE 1=1
+	</select>
+</mapper>
