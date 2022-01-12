@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE2210Mapper">
+    <select id="select_2210_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
+        SELECT BKUP_ID/*백업ID 확인 */
+             , PRJT_ID/*프로젝트ID  */
+             , PGM_ID/*프로그램ID  */
+             , BZCD/*업무구분 */
+             , SQN_CD/*차수 */
+             , SCNR_ID/*시나리오ID*/
+             , SCNR_NM/*시나리오명*/
+             , TST_CASE_ID
+             , TST_CASE_NM
+             , FRCS_STA_DT
+             , FRCS_END_DT
+             , DVLPE_CNF_DT
+             , PL_CNF_DT
+             , DVLPE_ENO
+             , PL_ENO
+             , CRPE_ENO
+             , ITG_TST_PRC_CD
+             , PRR_CND
+             , INP_VAL
+             , TST_DES
+             , OUP_VAL
+             , TP
+             , OUP_MENS
+             , PGM_ID
+             , SCRN_ID
+             , TRN_CD
+             , RQU_SBH_ID
+             , TST_RST
+             , TST_ACHI_RST
+             , RMRK
+             , ATFL_MNG_ID
+             , OPR_NO
+             , DB_CHG_TS
+        FROM pms_itg_tst_mng
+        WHERE 1 = 1
+    </select>
+    <select id="select_2210_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
+        SELECT BKUP_ID/*백업ID 확인 */
+             , PRJT_ID/*프로젝트ID  */
+             , PGM_ID/*프로그램ID  */
+             , BZCD/*업무구분 */
+             , SQN_CD/*차수 */
+             , SCNR_ID/*시나리오ID*/
+             , SCNR_NM/*시나리오명*/
+             , TST_CASE_ID
+             , TST_CASE_NM
+             , FRCS_STA_DT
+             , FRCS_END_DT
+             , DVLPE_CNF_DT
+             , PL_CNF_DT
+             , DVLPE_ENO
+             , PL_ENO
+             , CRPE_ENO
+             , ITG_TST_PRC_CD
+             , PRR_CND
+             , INP_VAL
+             , TST_DES
+             , OUP_VAL
+             , TP
+             , OUP_MENS
+             , PGM_ID
+             , SCRN_ID
+             , TRN_CD
+             , RQU_SBH_ID
+             , TST_RST
+             , TST_ACHI_RST
+             , RMRK
+             , ATFL_MNG_ID
+             , OPR_NO
+             , DB_CHG_TS
+        FROM pms_itg_tst_mng
+        WHERE 1 = 1
+    </select>
+	<select id="select_2210_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
+		SELECT BKUP_ID/*백업ID 확인 */
+			 , PRJT_ID/*프로젝트ID  */
+			 , PGM_ID/*프로그램ID  */
+			 , BZCD/*업무구분 */
+			 , SQN_CD/*차수 */
+			 , SCNR_ID/*시나리오ID*/
+			 , SCNR_NM/*시나리오명*/
+			 , TST_CASE_ID
+			 , TST_CASE_NM
+			 , FRCS_STA_DT
+			 , FRCS_END_DT
+			 , DVLPE_CNF_DT
+			 , PL_CNF_DT
+			 , DVLPE_ENO
+			 , PL_ENO
+			 , CRPE_ENO
+			 , ITG_TST_PRC_CD
+			 , PRR_CND
+			 , INP_VAL
+			 , TST_DES
+			 , OUP_VAL
+			 , TP
+			 , OUP_MENS
+			 , PGM_ID
+			 , SCRN_ID
+			 , TRN_CD
+			 , RQU_SBH_ID
+			 , TST_RST
+			 , TST_ACHI_RST
+			 , RMRK
+			 , ATFL_MNG_ID
+			 , OPR_NO
+			 , DB_CHG_TS
+		FROM pms_itg_tst_mng
+		WHERE 1 = 1
+	</select>
+	<select id="select_2210_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
+		SELECT BKUP_ID/*백업ID 확인 */
+			 , PRJT_ID/*프로젝트ID  */
+			 , PGM_ID/*프로그램ID  */
+			 , BZCD/*업무구분 */
+			 , SQN_CD/*차수 */
+			 , SCNR_ID/*시나리오ID*/
+			 , SCNR_NM/*시나리오명*/
+			 , TST_CASE_ID
+			 , TST_CASE_NM
+			 , FRCS_STA_DT
+			 , FRCS_END_DT
+			 , DVLPE_CNF_DT
+			 , PL_CNF_DT
+			 , DVLPE_ENO
+			 , PL_ENO
+			 , CRPE_ENO
+			 , ITG_TST_PRC_CD
+			 , PRR_CND
+			 , INP_VAL
+			 , TST_DES
+			 , OUP_VAL
+			 , TP
+			 , OUP_MENS
+			 , PGM_ID
+			 , SCRN_ID
+			 , TRN_CD
+			 , RQU_SBH_ID
+			 , TST_RST
+			 , TST_ACHI_RST
+			 , RMRK
+			 , ATFL_MNG_ID
+			 , OPR_NO
+			 , DB_CHG_TS
+		FROM pms_itg_tst_mng
+		WHERE 1 = 1
+	</select>
+</mapper>
