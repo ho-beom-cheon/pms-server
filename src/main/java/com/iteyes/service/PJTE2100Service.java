@@ -6,7 +6,7 @@ import com.iteyes.dto.pms.PJTE2100DTO;
 
 public interface PJTE2100Service {
 	/*콤보박스*/
-	List<PJTE2100DTO> select_0000(PJTE2100DTO PJTE2100) throws Exception ;
+	List<PJTE2100DTO> select_0000_01(PJTE2100DTO PJTE2100) throws Exception ;
 	/*조회*/
 	List<PJTE2100DTO> select_2100_01(PJTE2100DTO PJTE2100) throws Exception ;
 	/*등록*/

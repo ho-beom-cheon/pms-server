@@ -2,38 +2,38 @@ package com.iteyes.service.impl.pms;
 
 import java.util.List;
 
+import com.iteyes.mapper.PJTE0000Mapper;
+import com.iteyes.service.PJTE0000Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iteyes.dto.MainDTO;
+import com.iteyes.dto.PJTE0000DTO;
 import com.iteyes.dto.User;
-import com.iteyes.mapper.MainMapper;
-import com.iteyes.service.UserService;
 
 /**
- * UserService
+ * PJTE0000Service
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class PJTE0000ServiceImpl implements PJTE0000Service {
 
 	@Autowired
-	private MainMapper mainMapper;
+	private PJTE0000Mapper PJTE0000Mapper;
 
     @Override
     public List<String> select_0000() throws Exception {
 
-        return mainMapper.select_0000_01();
+        return PJTE0000Mapper.select_0000_01();
     }
 
 	@Override
-	public List<MainDTO> userInfo(MainDTO mainDto) throws Exception {
+	public List<PJTE0000DTO> userInfo(PJTE0000DTO PJTE0000) throws Exception {
 		
-		return mainMapper.select_0120_01(mainDto);
+		return PJTE0000Mapper.select_0120_01(PJTE0000);
 	}
 
     @Override
-    public boolean pw_change_0000(MainDTO user) throws Exception {
-        return mainMapper.pw_change_0000(user);
+    public boolean pw_change_0000(PJTE0000DTO user) throws Exception {
+        return PJTE0000Mapper.pw_change_0000(user);
     }
 
     // 로그인 계정은 고정값을 이용한다.

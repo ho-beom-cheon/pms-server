@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.iteyes.mapper.MainMapper">
+<mapper namespace="com.iteyes.mapper.PJTE0000Mapper">
 	<update id="pw_change_0000" parameterType="Map">
 		<![CDATA[
 		UPDATE pms_emp_info
@@ -25,7 +25,7 @@
 		]]>
     </select>
 
-	<select id="select_0120_01" parameterType="Map" resultType="com.iteyes.dto.MainDTO">
+	<select id="select_0120_01" parameterType="Map" resultType="com.iteyes.dto.PJTE0000DTO">
 		SELECT A.EMPNO
 		     , A.PRJT_ID
 			 , A.EMPNM
