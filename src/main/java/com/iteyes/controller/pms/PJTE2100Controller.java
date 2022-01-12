@@ -31,7 +31,7 @@ public class PJTE2100Controller {
         PJTE2100.setPrjt_id(request.getParameter("prjt_id"));
 
         /* 서비스 요청 */
-        List<PJTE2100DTO> list = pjte2100Service.select_0000(PJTE2100);
+        List<PJTE2100DTO> list = pjte2100Service.select_0000_01(PJTE2100);
 
         /* map 형태로 저장 */
         Map<String, Object> hm = new HashMap();

@@ -15,7 +15,7 @@ public class PJTE2100ServiceImpl implements PJTE2100Service {
 	private PJTE2100Mapper pjte2100Mapper;
 
 	@Override
-	public List<PJTE2100DTO> select_0000(PJTE2100DTO PJTE2100) throws Exception {
+	public List<PJTE2100DTO> select_0000_01(PJTE2100DTO PJTE2100) throws Exception {
 
 		return pjte2100Mapper.select_0000_01(PJTE2100);
 	}

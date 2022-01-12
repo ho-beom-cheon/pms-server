@@ -1,8 +1,8 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.pms.SWZP0030DTO;
-import com.iteyes.service.SWZP0030Service;
+import com.iteyes.dto.pms.PJTE2200DTO;
+import com.iteyes.service.PJTE2200Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.HashMap;
 
-import org.springframework.stereotype.Controller;
-
 @RestController
 @Log4j2
 @CrossOrigin("*")
-@RequestMapping(value = "/SWZP0030")
-public class SWZP0030Controller {
+@RequestMapping(value = "/PJTE2200")
+public class PJTE2200Controller {
     @Autowired
-    private SWZP0030Service swzp0030Service;
+    private PJTE2200Service pjte2200service;
 
     @GetMapping(value = "/select")
     public @ResponseBody
@@ -27,10 +25,10 @@ public class SWZP0030Controller {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        SWZP0030DTO SWZP0030 = new SWZP0030DTO();
+        PJTE2200DTO PJTE2200 = new PJTE2200DTO();
         
         /* 서비스 요청 */
-        List<SWZP0030DTO> list = swzp0030Service.select_0030(SWZP0030);
+        List<PJTE2200DTO> list = pjte2200service.select_0030_01(PJTE2200);
 
         /* map 형태로 저장 */
         HashMap<String, Object> hm = new HashMap();

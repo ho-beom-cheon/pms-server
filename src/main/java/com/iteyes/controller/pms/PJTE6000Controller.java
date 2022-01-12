@@ -1,8 +1,8 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.pms.SWZP0050DTO;
-import com.iteyes.service.SWZP0050Service;
+import com.iteyes.dto.pms.PJTE6000DTO;
+import com.iteyes.service.PJTE6000Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,29 +17,29 @@ import java.util.List;
 
 @Controller
 @Log4j2
-@RequestMapping(value = "/SWZP0050", method = {RequestMethod.GET, RequestMethod.POST})
-public class SWZP0050Controller {
+@RequestMapping(value = "/PJTE6000", method = {RequestMethod.GET, RequestMethod.POST})
+public class PJTE6000Controller {
 	@Autowired
-	private SWZP0050Service swzp0050Service;
+	private PJTE6000Service PJTE6000Service;
 
 	@PostMapping(value = "/select")
 	public @ResponseBody String select(HttpServletRequest request) throws Exception{
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		SWZP0050DTO SWZP0050 = new SWZP0050DTO();
+		PJTE6000DTO PJTE6000 = new PJTE6000DTO();
 
-		SWZP0050.setReqpe_no(request.getParameter("reqe_no"));
-		SWZP0050.setPrcpe_no(request.getParameter("prcpe_no"));
-		SWZP0050.setReq_txt(request.getParameter("req_txt"));
+		PJTE6000.setReqpe_no(request.getParameter("reqe_no"));
+		PJTE6000.setPrcpe_no(request.getParameter("prcpe_no"));
+		PJTE6000.setReq_txt(request.getParameter("req_txt"));
 
-		SWZP0050.setPrjt_id(request.getParameter("prjt_id_selected"));
-		SWZP0050.setBzcd(request.getParameter("bzcd_selected"));
-		SWZP0050.setReq_dscd(request.getParameter("req_dscd_selected"));
-		SWZP0050.setReq_prc_step_cd(request.getParameter("req_prc_step_cd_selected"));
+		PJTE6000.setPrjt_id(request.getParameter("prjt_id_selected"));
+		PJTE6000.setBzcd(request.getParameter("bzcd_selected"));
+		PJTE6000.setReq_dscd(request.getParameter("req_dscd_selected"));
+		PJTE6000.setReq_prc_step_cd(request.getParameter("req_prc_step_cd_selected"));
 
 
-		List<SWZP0050DTO> list = swzp0050Service.select_0050(SWZP0050);
+		List<PJTE6000DTO> list = PJTE6000Service.select_0050_01(PJTE6000);
 
 		HashMap<String, Object> hm = new HashMap();
 		HashMap<String, Object> hm1 = new HashMap();

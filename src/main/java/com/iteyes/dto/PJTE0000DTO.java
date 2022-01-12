@@ -3,7 +3,7 @@ package com.iteyes.dto;
 import lombok.Data;
 
 @Data
-public class MainDTO {
+public class PJTE0000DTO {
 	private String bkup_id;				// 백업ID
 	private String prjt_id;				// 프로젝트ID
 	private String empno;				// 직원번호
