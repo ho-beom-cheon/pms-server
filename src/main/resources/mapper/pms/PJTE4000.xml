@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE4000Mapper">
+    <select id="select_4000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE4000DTO">
+        <![CDATA[
+           SELECT BKUP_ID                  /*백업ID */
+                , PRJT_ID                  /*프로젝트ID  */
+                , MNG_ID                   /*관리ID  */
+                , RGS_DIS_CD               /*관리구분코드 */
+                , TITL_NM                  /*제목  */
+                , REQ_DIS_TXT              /*요청내용 */
+                , REQ_DIS_CD               /*요청구분코드*/
+                , RGS_DT                   /*요청일자*/
+                , ACHI_NM                  /*요청자 */
+                , PRC_STEP_CD              /*이슈처리단계구분코드 */
+                , TGT_BIZ_NM               /*대상업무명 */
+                , TTMN_CRPE_NM             /*조치담당자 */
+                , TTMN_SCD_DT              /*조치예정일자*/
+                , TTMN_DT                  /*조치일자*/
+                , TTMN_TXT                 /*조치내용*/
+                , IFNC_CD                  /*영향도코드*/
+                , GD_TXT                   /*등급내용*/
+                , URGN_CD                  /*긴급코드*/
+                , RMRK                     /*비고*/
+                , OPR_NO                   /*조작자번호*/
+                , DB_CHG_TS                /*DB변경일시*/
+            FROM pms_iss_risk_mng
+        ]]>
+        WHERE 1=1
+        /*관리구분*/
+        <if test='rgs_dis_cd != "" and rgs_dis_cd != null and rgs_dis_cd != "999"'>
+            AND RGS_DIS_CD = #{rgs_dis_cd}
+        </if>
+        /*요청구분*/
+        <if test='req_dis_cd != "" and req_dis_cd != null and req_dis_cd != "999"'>
+            AND REQ_DIS_CD = #{req_dis_cd}
+        </if>
+        /*처리상태*/
+        <if test='prc_step_cd != "" and prc_step_cd != null and prc_step_cd != "999"'>
+            AND PRC_STEP_CD = #{prc_step_cd}
+        </if>
+        /*조치업무명*/
+        <if test='tgt_biz_nm != "" and tgt_biz_nm != null'>
+            AND TGT_BIZ_NM = '%' #{tgt_biz_nm} '%'
+        </if>
+        /*요청자*/
+        <if test='achi_nm != "" and achi_nm != null'>
+            AND ACHI_NM = '%' #{achi_nm} '%'
+        </if>
+        /*조치담당자*/
+        <if test='ttmn_crpe_nm != "" and ttmn_crpe_nm != null'>
+            AND TTMN_CRPE_NM = '%' #{ttmn_crpe_nm} '%'
+        </if>
+        /*제목*/
+        <if test='titl_nm != "" and titl_nm != null'>
+            AND TITL_NM = '%' #{titl_nm} '%'
+        </if>
+        /*요청내용*/
+        <if test='req_dis_txt != "" and req_dis_txt != null'>
+            AND REQ_DIS_TXT = '%' #{req_dis_txt} '%'
+        </if>
+        /*조치내용*/
+        <if test='ttmn_txt != "" and ttmn_txt != null'>
+            AND TTMN_TXT = '%' #{ttmn_txt} '%'
+        </if>
+        /*해결방안내용*/
+        <if test='slv_mpln_txt != "" and slv_mpln_txt != null'>
+            AND SLV_MPLN_TXT = '%' #{slv_mpln_txt} '%'
+        </if>
+        /*요청일자*/
+        <if test='rgs_dt != "" and rgs_dt != null'>
+            AND RGS_DT BETWEEN #{rgs_sta_dt} AND #{rgs_end_dt}
+        </if>
+        /*조치일자*/
+        <if test='ttmn_dt != "" and ttmn_dt != null'>
+            AND TTMN_DT BETWEEN #{ttmn_sta_dt} AND #{ttmn_end_dt}
+        </if>
+        ORDER BY DB_CHG_TS
+    </select>
+    <update id="update_4000_01" parameterType="Map">
+        UPDATE pms_iss_risk_mng
+        SET RGS_DIS_CD   = #{rgs_dis_cd}
+          , PRC_STEP_CD  = #{prc_step_cd}
+          , REQ_DIS_CD   = #{req_dis_cd}
+          , RGS_DT       = #{rgs_dt}
+          , ACHI_NM      = #{achi_nm}
+          , TTMN_CRPE_NM = #{ttmn_crpe_nm}
+          , TGT_BIZ_NM   = #{tgt_biz_nm}
+          , TTMN_SCD_DT  = #{ttmn_scd_dt}
+          , TTMN_DT      = #{ttmn_dt}
+          , IFNC_CD      = #{ifnc_cd}
+          , URGN_CD      = #{urgn_cd}
+          , GD_TXT       = #{gd_txt}
+          , TITL_NM      = #{titl_nm}
+          , REQ_DIS_TXT  = #{req_dis_txt}
+          , TTMN_TXT     = #{ttmn_txt}
+          , SLV_MPLN_TXT = #{slv_mpln_txt}
+          , RMRK         = #{rmrk}
+        WHERE 1 = 1
+          AND BKUP_ID = '0000000000'
+          AND PRJT_ID = '1000000001'
+          AND MNG_ID = #{mng_id}
+    </update>
+    <insert id="insert_4000_01" parameterType="Map">
+       <![CDATA[
+        INSERT INTO pms_iss_risk_mng
+        ( BKUP_ID /*백업ID*/
+        , PRJT_ID /*프로젝트ID*/
+        , MNG_ID /*관리ID*/
+        , RGS_DIS_CD /*관리구분코드 */
+        , TITL_NM /*제목  */
+        , REQ_DIS_TXT /*요청내용 */
+        , REQ_DIS_CD /*요청구분코드*/
+        , RGS_DT /*요청일자*/
+        , ACHI_NM /*요청자 */
+        , PRC_STEP_CD /*이슈처리단계구분코드 */
+        , TGT_BIZ_NM /*대상업무명 */
+        , TTMN_CRPE_NM /*조치담당자 */
+        , TTMN_SCD_DT /*조치예정일자*/
+        , TTMN_DT /*조치일자*/
+        , TTMN_TXT /*조치내용*/
+        , SLV_MPLN_TXT /*해결방안내용*/
+        , IFNC_CD /*영향도코드*/
+        , GD_TXT /*등급내용*/
+        , URGN_CD /*긴급코드*/
+        , RMRK /*비고*/
+        , OPR_NO /*조작자번호*/
+        , DB_CHG_TS /*DB변경일시*/
+        )
+        VALUES ( '0000000000' /*백업ID*/
+               , '1000000001' /*프로젝트ID*/
+               , (
+                     SELECT CONCAT(#{rgs_dis_cd}, '-', A.MAX_MNG_NUM) AS MAX_MNG_NUM
+                     FROM (
+                              SELECT MAX(CASE WHEN SUBSTR(MNG_ID, 1, 1) = RGS_DIS_CD THEN SUBSTR(MNG_ID, 3, 5)
+                                              ELSE '' END) + 1 AS MAX_MNG_NUM
+                                   , RGS_DIS_CD
+                              FROM pms_iss_risk_mng
+                              WHERE 1 = 1
+                                AND RGS_DIS_CD = #{rgs_dis_cd}
+                          ) A
+                 ) /*관리ID*/
+               , #{rgs_dis_cd} /*관리구분코드 */
+               , #{titl_nm} /*제목  */
+               , #{req_dis_txt} /*요청내용 */
+               , #{req_dis_cd} /*요청구분코드*/
+               , #{rgs_dt} /*요청일자*/
+               , #{achi_nm} /*요청자 */
+               , #{prc_step_cd} /*이슈처리단계구분코드 */
+               , #{tgt_biz_nm} /*대상업무명 */
+               , #{ttmn_crpe_nm} /*조치담당자 */
+               , #{ttmn_scd_dt} /*조치예정일자*/
+               , #{ttmn_dt} /*조치일자*/
+               , #{ttmn_txt} /*조치내용*/
+               , #{slv_mpln_txt} /*해결방안내용*/
+               , #{ifnc_cd} /*영향도코드*/
+               , #{gd_txt} /*등급내용*/
+               , #{urgn_cd} /*긴급코드*/
+               , #{rmrk} /*비고*/
+               , '1211' /*조작자번호*/
+               , DATE_FORMAT(NOW(), '%Y%m%d') /*DB변경일시*/
+               )
+        ]]>
+  </insert>
+</mapper>
