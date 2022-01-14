@@ -14,13 +14,15 @@ import java.util.Map;
 
 @RestController
 @Log4j2
+@CrossOrigin("*")
 @RequestMapping(value = "/PJTE3000")
 public class PJTE3000Controller {
 	@Autowired
 	private PJTE3000Service PJTE3000Service;
 
-	@PostMapping(value = "/select")
-	public @ResponseBody String select(HttpServletRequest request) throws Exception{
+	@GetMapping(value = "/select")
+	public @ResponseBody
+	String select(HttpServletRequest request) throws Exception{
 
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -37,7 +39,7 @@ public class PJTE3000Controller {
 		PJTE3000.setErr_tycd(request.getParameter("err_tycd_selected"));
 		PJTE3000.setErr_prc_step_cd(request.getParameter("err_prc_step_cd_selected"));
 
-		List<PJTE3000DTO> list = PJTE3000Service.select_0040_01(PJTE3000);
+		List<PJTE3000DTO> list = PJTE3000Service.select_3000_01(PJTE3000);
 
 		Map<String, Object> hm = new HashMap();
 		Map<String, Object> hm1 = new HashMap();
