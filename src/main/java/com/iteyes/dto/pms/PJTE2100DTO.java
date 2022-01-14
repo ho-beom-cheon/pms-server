@@ -6,6 +6,10 @@ import java.util.List;
 
 @Data
 public class PJTE2100DTO {
+	private String login_emp_no;			// 직원번호
+	private String login_proj_id;           // 프로젝트 ID
+	private String login_bzcd;              // 업무구분
+	private String login_aut_cd;            // 권한 ID
 
 	private String bzcd;                    // 업무구분코드
 	private String bz_dtls_txt;             // 업무세부내용
@@ -27,7 +31,7 @@ public class PJTE2100DTO {
 	private String crpe_nm;                 // 담당자명
 	private int err_tot_cnt;                // 총 건수
 	private int err_cmpl_cnt;               //결함완료 건수
-	private int err_ncmpl_cnt;             //결함진행 건수
+	private int err_ncmpl_cnt;              //결함진행 건수
 	private String atfl_mng_id;             // 단위테스트결과서 첨부파일관리ID
 	private String pal_atfl_mng_id;         // 설계서 첨부파일관리ID
 	private String rmrk;                    // 비고

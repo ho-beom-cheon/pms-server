@@ -38,10 +38,10 @@ public class PJTE0000ServiceImpl implements PJTE0000Service {
 
     // 로그인 계정은 고정값을 이용한다.
 	@Override
-    public User signin(String userId, String password, String prjt_id) {
+    public User signin(String userId, String password, String prjt_id, String btn_gubun) {
 
         if (userId != null && password != null) {
-            return new User(userId, password, prjt_id);
+            return new User(userId, password, prjt_id, btn_gubun);
         } else {
             throw new RuntimeException("사용자가 없습니다");
         }

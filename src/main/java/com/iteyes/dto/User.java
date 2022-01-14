@@ -12,4 +12,5 @@ public class User {
     private String userId;            /*ID*/
     private String password;          /*패스워드*/
     private String pjt_selected;      /*프로젝트명*/
+    private String btn_gubun;
 }

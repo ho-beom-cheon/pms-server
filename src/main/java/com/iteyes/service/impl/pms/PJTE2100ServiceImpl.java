@@ -22,8 +22,18 @@ public class PJTE2100ServiceImpl implements PJTE2100Service {
 
 	@Override
 	public List<PJTE2100DTO> select_2100_01(PJTE2100DTO PJTE2100) throws Exception {
+		List<PJTE2100DTO> list = pjte2100Mapper.select_2100_01(PJTE2100);
 
-		return pjte2100Mapper.select_2100_01(PJTE2100);
+		// 날짜포맷 (YYYY-MM-DD) - 화면 공통 만들면 삭제
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getFrcs_sta_dt() != null) {
+				String frcs_sta_dt = list.get(i).getFrcs_sta_dt().substring(0, 4) + "-"
+						+ list.get(i).getFrcs_sta_dt().substring(4, 6) + "-" +
+						list.get(i).getFrcs_sta_dt().substring(6, 8);
+				list.get(i).setFrcs_sta_dt(frcs_sta_dt);
+			}
+		}
+		return list;
 	}
 
 	/* create */

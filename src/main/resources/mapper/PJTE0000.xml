@@ -45,6 +45,9 @@
 		  AND A.EMPNO   = #{empno}
 		  AND A.PRJT_ID = #{prjt_id}
 		  AND A.BKUP_ID = '0000000000'
-		  AND A.LGN_PWD = #{lgn_pwd}
+		<if test='btn_gubun == "Y"'>
+			AND A.LGN_PWD = #{lgn_pwd}
+		</if>
+
 	</select>
 </mapper>
