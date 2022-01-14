@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9002Mapper">
+     <select id="select_9002_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9002DTO">
+          SELECT BKUP_ID
+               ,PRJT_ID
+               ,ATFL_MNG_ID
+               ,FILE_RGS_DSCD
+               ,SQNO
+               ,FILE_PATH
+               ,FILE_NM
+               ,ORG_FILE_NM
+               ,RMRMK
+               ,OPR_NO
+               ,DB_CHG_TS
+          FROM   pms_atfl_mng
+          WHERE  1 = 1
+            AND    BKUP_ID       = #{bkup_id}
+            AND    PRJT_ID       = #{prjt_id}
+            AND    ATFL_MNG_ID   = #{atfl_mng_id}
+            AND    FILE_RGS_DSCD = #{file_rgs_dscd}
+          ORDER BY SQNO
+     </select>
+
+    <insert id="insert_9002_01" parameterType="Map">
+
+
+        INSERT INTO pms_atfl_mng
+        (
+        BKUP_ID
+        ,PRJT_ID
+        ,ATFL_MNG_ID
+        ,FILE_RGS_DSCD
+        ,SQNO
+        ,FILE_PATH
+        ,FILE_NM
+        ,ORG_FILE_NM
+        ,RMRMK
+        ,OPR_NO
+        ,DB_CHG_TS
+        )
+        VALUES
+        (
+        '0000000000'
+        , #{prjt_id}     /*프로젝트ID*/
+        , #{atfl_mng_id}        /*첨부파일관리ID*/
+        , #{file_rgs_dscd}      /*파일등록구분코드*/
+        , (SELECT NVL(MAX(A.SQNO)+1,1)
+        FROM   pms_atfl_mng A
+        WHERE A.BKUP_ID = '0000000000'
+        AND   A.PRJT_ID = #{prjt_id}
+        AND   A.ATFL_MNG_ID = #{atfl_mng_id}
+        AND   A.FILE_RGS_DSCD = #{file_rgs_dscd})
+        , #{file_path}      /*파일경로*/
+        , #{file_nm} /*파일명*/
+        , #{org_file_nm}  /*원파일명*/
+        , #{rmrmk}        /*비고*/
+        , #{login_emp_no}       /*조작자번호*/
+        , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+        )
+    </insert>
+
+
+</mapper>
