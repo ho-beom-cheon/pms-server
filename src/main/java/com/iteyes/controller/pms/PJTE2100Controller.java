@@ -128,7 +128,6 @@ public class PJTE2100Controller {
 
             result = pjte2100Service.insert_2100_01(PJTE2100C);
         }
-
         return result;
     }
 
