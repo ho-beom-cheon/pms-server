@@ -76,13 +76,14 @@ public class PJTE0000Controller {
         	PJTE0000Dto.setEmpno(user.getUserId());
         	PJTE0000Dto.setLgn_pwd(user.getPassword());
         	PJTE0000Dto.setPrjt_id(user.getPjt_selected());
+        	PJTE0000Dto.setBtn_gubun(user.getBtn_gubun());
 
         	List<PJTE0000DTO> list = userService.userInfo(PJTE0000Dto);
         	
         	if(list.size() == 0){
-        		User loginUser = userService.signin(null, null, null);
+        		User loginUser = userService.signin(null, null, null, null);
         	} else if (list.size() != 0) {
-        		User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id());
+        		User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id(), list.get(0).getBtn_gubun());
         		// 로그인 성공했다면 토큰을 생성한다.
                 String token = jwtService.create(loginUser);
                 // 토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자.

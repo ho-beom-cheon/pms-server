@@ -12,7 +12,7 @@ public interface PJTE0000Service {
     List<String> select_0000() throws Exception ;
 
     // 로그인 계정은 고정값을 이용한다.
-    User signin(String userId, String password, String pjt_selected);
+    User signin(String userId, String password, String pjt_selected, String btn_gubun);
 
     // 귀중한 정보를 전달한다.
     String getServerInfo();

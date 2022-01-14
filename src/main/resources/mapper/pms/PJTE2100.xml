@@ -4,23 +4,37 @@
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE2100Mapper">
 	<select id="select_0000_01" parameterType="Map" resultType="Map">
-		SELECT GRP_TYCD
-			  ,DTLS_TYCD
-			  ,DTLS_TYNM
-			  ,SORT_SEQ
-		  FROM pms_cd_del_mng
-		 WHERE USE_YN   = 'Y'
-		   AND GRP_TYCD = '0000000000'
-		 UNION
-		SELECT GRP_TYCD
-			 , DTLS_TYCD
-			 , DTLS_TYNM
-		 	 , SORT_SEQ
-		  FROM pms_cd_del_mng
-		 WHERE USE_YN   = 'Y'
-		   AND PRJT_ID = #{prjt_id}
-		 ORDER BY 1, 4
-	</select>
+	   SELECT GRP_TYCD
+			, DTLS_TYCD
+			, DTLS_TYNM
+			, SORT_SEQ
+		 FROM pms_cd_del_mng
+		WHERE USE_YN   = 'Y'
+		  AND GRP_TYCD = '0000000000'
+		  AND PRJT_ID  = '0000000000'
+		  AND BKUP_ID  = '0000000000'
+		UNION
+	   SELECT GRP_TYCD
+			, DTLS_TYCD
+			, DTLS_TYNM
+			, SORT_SEQ
+		 FROM pms_cd_del_mng
+		WHERE USE_YN    = 'Y'
+		  AND GRP_TYCD  != '1000000027'
+          AND PRJT_ID   = #{prjt_id}
+		  AND BKUP_ID   = '0000000000'
+		UNION
+	   SELECT GRP_TYCD
+			, DTLS_TYCD
+			, DTLS_TYNM
+			, CASE WHEN DTLS_TYCD = '0000000000' THEN -99999999999 ELSE 0 - SORT_SEQ END AS SORT_SEQ
+	 	 FROM pms_cd_del_mng
+		WHERE USE_YN   = 'Y'
+		  AND GRP_TYCD = '1000000027'
+		  AND PRJT_ID  = #{prjt_id}
+		  AND BKUP_ID  = '0000000000'
+		ORDER BY 1, 4
+		</select>
   <select id="select_2100_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2100DTO">
 	  SELECT
 		     A.BZCD               /* 업무구분 */
@@ -39,7 +53,7 @@
 		   , A.PRC_STEP_CD        /* 처리단계 */
 		   , A.PRG_TXT            /* 진행현황 */
 		   , B.EMPNM  AS DVLPE_NM /* 개발명 */
-		   , C.EMPNO  AS PL_NM    /* PL명 */
+		   , C.EMPNM  AS PL_NM    /* PL명 */
 		   , D.EMPNM  AS CRPE_NM  /* 담당자명 */
 		   , (
 			  SELECT COUNT(*)
@@ -170,6 +184,7 @@
 			, CRPE_NO      /*담당자번호*/
 			, RMRK         /*비고*/
 			, ATFL_MNG_ID  /*첨부파일관리ID*/
+		    , PAL_ATFL_MNG_ID  /*설계서첨부파일관리ID*/
 			, OPR_NO       /*조작자번호 */
 			, DB_CHG_TS    /*DB변경일시*/
 		)
@@ -195,9 +210,11 @@
 			, #{pl_no}       /*PL번호*/
 			, ''             /*PL확인일자*/
 			, #{crpe_no}     /*담당자번호*/
+			, ''             /*첨부파일관리ID*/
+			, ''             /*설계서첨부파일관리ID*/
 			, #{rmrk}        /*비고*/
 			, #{atfl_mng_id} /*첨부파일관리ID*/
-			, #{empno}       /*조작자번호*/
+			, #{login_emp_no}       /*조작자번호*/
 			, DATE_FORMAT(NOW(),'%Y%m%d')   /*DB변경일시*/
 			)
 		]]>
@@ -207,19 +224,19 @@
 	UPDATE pms_pgm_mng
 	   SET BZ_DTLS_TXT   = #{bz_dtls_txt}  /*업무세부내용*/
 		  , PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		  , DVLP_DIS_CD  = #{dvlp_dis_cd}  /*개발구분코드*/
+		  , DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
 		  , PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
 		  , ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
 		  , FRCS_STA_DT  = CASE WHEN #{aut_id} IN ('500','600') THEN #{frcs_sta_dt} ELSE FRCS_STA_DT END /*계획시작일자*/
 		  , FRCS_END_DT  = CASE WHEN #{aut_id} IN ('500','600') THEN #{frcs_end_dt} ELSE FRCS_END_DT END /*계획종료일자*/
 		  , STA_DT       = CASE WHEN #{prc_step_cd} IN ('100','200') AND STA_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END /*실제시작일자*/
-		  , END_DT       = CASE WHEN #{prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END  /*실제종료일자*/
+		  , END_DT       = CASE WHEN #{prc_step_cd} = '400' AND END_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END  /*실제종료일자*/
 		  , PRC_STEP_CD  = #{prc_step_cd}  /*처리단계코드*/
 	      , PRG_TXT      = #{prg_txt}      /*진행현황*/
 	      , DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
-	      , DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT END /*개발자확인일자*/
+		  , DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND DVLPE_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT END /*개발자확인일자*/
 		  , PL_NO        = #{pl_no}        /*PL번호*/
-	      , PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT END    /*PL확인일자*/
+		  , PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND PL_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT END    /*PL확인일자*/
 		  , CRPE_NO      = #{crpe_no}      /*담당자번호*/
 	      , RMRK         = #{rmrk}         /*비고*/
 	      , ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
