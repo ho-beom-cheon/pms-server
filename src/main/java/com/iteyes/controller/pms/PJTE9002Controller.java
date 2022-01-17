@@ -56,8 +56,8 @@ public class PJTE9002Controller {
 	}
 
 	@PostMapping("/insert")
-	public @ResponseBody String insert(HttpServletRequest request, @RequestParam("file") MultipartFile files) throws Exception{
-		String result = "success";
+	public @ResponseBody boolean insert(HttpServletRequest request, @RequestParam("file") MultipartFile files) throws Exception{
+		boolean result = false;
 
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -92,7 +92,7 @@ public class PJTE9002Controller {
 
 		result = pjte9002Service.insert_9002_01(PJTE9002);
 
-		return "success";
+		return result;
 
 	}
 }
