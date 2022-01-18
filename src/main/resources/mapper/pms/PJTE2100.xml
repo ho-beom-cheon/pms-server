@@ -149,7 +149,7 @@
 	  </if>
 	  /*개발자번호*/
 	  <if test='dvlpe_no != "" and dvlpe_no != null'>
-		AND A.DVLPE_NO  #{dvlpe_no}
+		AND A.DVLPE_NO = #{dvlpe_no}
 	  </if>
 	  /*PL번호*/
 	  <if test='pl_no != "" and pl_no != null'>
