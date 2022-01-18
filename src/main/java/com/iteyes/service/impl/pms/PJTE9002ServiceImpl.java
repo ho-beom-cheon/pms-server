@@ -20,7 +20,7 @@ public class PJTE9002ServiceImpl implements PJTE9002Service {
 
     }
     @Override
-    public String insert_9002_01(PJTE9002DTO PJTE9002) throws Exception {
+    public boolean insert_9002_01(PJTE9002DTO PJTE9002) throws Exception {
 
         return pjte9002Mapper.insert_9002_01(PJTE9002);
 
