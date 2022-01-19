@@ -36,7 +36,6 @@
 
     <insert id="insert_9002_01" parameterType="Map">
 
-
         INSERT INTO pms_atfl_mng
         (
         BKUP_ID

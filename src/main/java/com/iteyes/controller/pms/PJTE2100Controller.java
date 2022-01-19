@@ -63,6 +63,10 @@ public class PJTE2100Controller {
         log.debug("# pgm_dis_cd :: " + request.getParameter("pgm_dis_cd_selected"));
         log.debug("# bzcd :: " + request.getParameter("bzcd_selected"));
         log.debug("# dvlp_dis_cd :: " + request.getParameter("dvlp_dis_cd_selected"));
+        log.debug("# frcs_sta_dt :: " + request.getParameter("frcs_sta_dt"));
+        log.debug("# frcs_end_dt :: " + request.getParameter("frcs_end_dt"));
+        log.debug("# dvlpe_sta_dt :: " + request.getParameter("dvlpe_sta_dt"));
+        log.debug("# dvlpe_sta_dt :: " + request.getParameter("dvlpe_sta_dt"));
 
         /* 빈 dto 생성 */
         PJTE2100DTO PJTE2100 = new PJTE2100DTO();
@@ -76,6 +80,10 @@ public class PJTE2100Controller {
         PJTE2100.setBzcd(request.getParameter("bzcd_selected"));
         PJTE2100.setDvlp_dis_cd(request.getParameter("dvlp_dis_cd_selected"));
         PJTE2100.setPrc_step_cd(request.getParameter("prc_step_cd_selected"));
+        PJTE2100.setFrcs_sta_dt(request.getParameter("frcs_sta_dt"));
+        PJTE2100.setFrcs_end_dt(request.getParameter("frcs_end_dt"));
+        PJTE2100.setDvlpe_sta_dt(request.getParameter("dvlpe_sta_dt"));
+        PJTE2100.setDvlpe_end_dt(request.getParameter("dvlpe_end_dt"));
 
         /* 서비스 요청 */
         List<PJTE2100DTO> list = pjte2100Service.select_2100_01(PJTE2100);
@@ -116,15 +124,20 @@ public class PJTE2100Controller {
             PJTE2100C.setPrc_step_cd(PJTE2100.getCreatedRows().get(i).getPrc_step_cd());
             PJTE2100C.setPrg_txt(PJTE2100.getCreatedRows().get(i).getPrg_txt());
             PJTE2100C.setDvlpe_no(PJTE2100.getCreatedRows().get(i).getDvlpe_no());
+            PJTE2100C.setDvlpe_cnf_dt(PJTE2100.getCreatedRows().get(i).getDvlpe_cnf_dt());
             PJTE2100C.setPl_no(PJTE2100.getCreatedRows().get(i).getPl_no());
             PJTE2100C.setCrpe_no(PJTE2100.getCreatedRows().get(i).getCrpe_no());
+            PJTE2100C.setPl_cnf_dt(PJTE2100.getCreatedRows().get(i).getPl_cnf_dt());
             PJTE2100C.setRmrk(PJTE2100.getCreatedRows().get(i).getRmrk());
             PJTE2100C.setAtfl_mng_id(PJTE2100.getCreatedRows().get(i).getAtfl_mng_id());
             PJTE2100C.setEmpno(PJTE2100.getCreatedRows().get(i).getEmpno());
             PJTE2100C.setPgm_id(PJTE2100.getCreatedRows().get(i).getPgm_id());
             PJTE2100C.setBzcd(PJTE2100.getCreatedRows().get(i).getBzcd());
             PJTE2100C.setPrjt_id(PJTE2100.getCreatedRows().get(i).getPrjt_id());
-            PJTE2100C.setBkup_id(PJTE2100.getCreatedRows().get(i).getBkup_id());
+            PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
+            PJTE2100C.setLogin_emp_no(PJTE2100.getLogin_emp_no());
+            PJTE2100C.setLogin_bzcd(PJTE2100.getLogin_bzcd());
+            PJTE2100C.setLogin_proj_id(PJTE2100.getLogin_proj_id());
 
             result = pjte2100Service.insert_2100_01(PJTE2100C);
         }
@@ -132,7 +145,7 @@ public class PJTE2100Controller {
     }
 
     @PutMapping("/update")
-    public @ResponseBody boolean update(@RequestBody PJTE2100DTO PJTE2100) throws Exception{
+    public @ResponseBody boolean update(HttpServletRequest request, @RequestBody PJTE2100DTO PJTE2100) throws Exception{
         boolean result = false;
 
         PJTE2100DTO PJTE2100U = new PJTE2100DTO();
@@ -146,10 +159,14 @@ public class PJTE2100Controller {
             PJTE2100U.setAut_id(PJTE2100.getUpdatedRows().get(i).getAut_id());
             PJTE2100U.setFrcs_sta_dt(PJTE2100.getUpdatedRows().get(i).getFrcs_sta_dt());
             PJTE2100U.setFrcs_end_dt(PJTE2100.getUpdatedRows().get(i).getFrcs_end_dt());
+            PJTE2100U.setSta_dt(PJTE2100.getUpdatedRows().get(i).getSta_dt());
+            PJTE2100U.setEnd_dt(PJTE2100.getUpdatedRows().get(i).getEnd_dt());
             PJTE2100U.setPrc_step_cd(PJTE2100.getUpdatedRows().get(i).getPrc_step_cd());
             PJTE2100U.setPrg_txt(PJTE2100.getUpdatedRows().get(i).getPrg_txt());
             PJTE2100U.setDvlpe_no(PJTE2100.getUpdatedRows().get(i).getDvlpe_no());
+            PJTE2100U.setDvlpe_cnf_dt(PJTE2100.getUpdatedRows().get(i).getDvlpe_cnf_dt());
             PJTE2100U.setPl_no(PJTE2100.getUpdatedRows().get(i).getPl_no());
+            PJTE2100U.setPl_cnf_dt(PJTE2100.getUpdatedRows().get(i).getPl_cnf_dt());
             PJTE2100U.setCrpe_no(PJTE2100.getUpdatedRows().get(i).getCrpe_no());
             PJTE2100U.setRmrk(PJTE2100.getUpdatedRows().get(i).getRmrk());
             PJTE2100U.setAtfl_mng_id(PJTE2100.getUpdatedRows().get(i).getAtfl_mng_id());
@@ -158,6 +175,10 @@ public class PJTE2100Controller {
             PJTE2100U.setBzcd(PJTE2100.getUpdatedRows().get(i).getBzcd());
             PJTE2100U.setPrjt_id(PJTE2100.getUpdatedRows().get(i).getPrjt_id());
             PJTE2100U.setBkup_id(PJTE2100.getUpdatedRows().get(i).getBkup_id());
+            PJTE2100U.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
+            PJTE2100U.setLogin_emp_no(PJTE2100.getLogin_emp_no());
+            PJTE2100U.setLogin_bzcd(PJTE2100.getLogin_bzcd());
+            PJTE2100U.setLogin_proj_id(PJTE2100.getLogin_proj_id());
 
             result = pjte2100Service.update_2100_01(PJTE2100U);
         }

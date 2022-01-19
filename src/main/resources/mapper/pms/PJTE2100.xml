@@ -44,12 +44,20 @@
 		   , A.DVLP_DIS_CD        /* 개발구분 */
 		   , A.PGM_DIS_CD         /* 프로그램구분 */
 		   , A.ENLPE_NM           /* 프로그램세부구분코드 */
-		   , A.FRCS_STA_DT        /* 예상시작일자 */
-		   , A.FRCS_END_DT        /* 예상종료일자 */
-		   , A.STA_DT             /* 실제시작일자 */
-		   , A.END_DT             /* 실제종료일자 */
-		   , A.DVLPE_CNF_DT       /* 개발자확인일자 */
-		   , A.PL_CNF_DT          /* PL확인일자 */
+	       , NVL2(A.FRCS_STA_DT,STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d'),'') AS FRCS_STA_DT        /* 예상시작일자 */
+		   , NVL2(A.FRCS_END_DT,STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d'),'') AS FRCS_END_DT        /* 예상종료일자 */
+	  	   , CASE WHEN A.STA_DT IS NOT NULL AND A.STA_DT != ''
+	  	          THEN STR_TO_DATE(A.STA_DT, '%Y%m%d') ELSE A.STA_DT
+	  	      END AS STA_DT /* 실제시작일자 */
+		   , CASE WHEN A.END_DT IS NOT NULL AND A.END_DT != ''
+		          THEN STR_TO_DATE(A.END_DT, '%Y%m%d') ELSE A.END_DT
+		      END AS END_DT /* 실제종료일자 */
+		   , CASE WHEN A.DVLPE_CNF_DT IS NOT NULL AND A.DVLPE_CNF_DT != ''
+			      THEN STR_TO_DATE(A.DVLPE_CNF_DT, '%Y%m%d') ELSE A.DVLPE_CNF_DT
+			  END AS DVLPE_CNF_DT /* 개발자확인일자 */
+		   , CASE WHEN A.PL_CNF_DT IS NOT NULL AND A.PL_CNF_DT != ''
+		          THEN STR_TO_DATE(A.PL_CNF_DT, '%Y%m%d') ELSE A.PL_CNF_DT
+		      END AS PL_CNF_DT /* PL확인일자 */
 		   , A.PRC_STEP_CD        /* 처리단계 */
 		   , A.PRG_TXT            /* 진행현황 */
 		   , B.EMPNM  AS DVLPE_NM /* 개발명 */
@@ -133,11 +141,11 @@
 	  </if>
       /* 예상종료일자 */
 	  <if test='frcs_sta_dt != ""  and frcs_sta_dt != null and frcs_end_dt != ""  and frcs_end_dt != null'>
-		AND A.FRCS_END_DT BETWEEN #{frcs_sta_dt} AND #{frcs_end_dt}
+		AND A.FRCS_END_DT BETWEEN REPLACE(#{frcs_sta_dt}, '-', '') AND REPLACE(#{frcs_end_dt}, '-', '')
 	  </if>
       /* 개발자종료일자 */
 	  <if test='dvlpe_sta_dt != "" and dvlpe_sta_dt != null and dvlpe_end_dt != "" and dvlpe_end_dt != null'>
-		AND A.DVLPE_CNF_DT BETWEEN #{dvlpe_sta_dt} AND #{dvlpe_end_dt}
+		AND A.DVLPE_CNF_DT BETWEEN REPLACE(#{dvlpe_sta_dt}, '-', '') AND REPLACE(#{dvlpe_end_dt}, '-', '')
 	  </if>
       /*프로그램ID*/
 	  <if test='pgm_id != "" and pgm_id != null'>
@@ -149,7 +157,7 @@
 	  </if>
 	  /*개발자번호*/
 	  <if test='dvlpe_no != "" and dvlpe_no != null'>
-		AND A.DVLPE_NO  #{dvlpe_no}
+		AND A.DVLPE_NO = #{dvlpe_no}
 	  </if>
 	  /*PL번호*/
 	  <if test='pl_no != "" and pl_no != null'>
@@ -199,8 +207,8 @@
 			, #{dvlp_dis_cd} /*개발구분코드*/
 			, #{pgm_dis_cd}  /*프로그램구분코드*/
 			, #{enlpe_nm}    /*프로그램세부구분코드*/
-			, #{frcs_sta_dt} /*계획시작일자*/
-			, #{frcs_end_dt} /*계획종료일자*/
+			, REPLACE(#{frcs_sta_dt}, '-', '') /*계획시작일자*/
+			, REPLACE(#{frcs_end_dt}, '-', '') /*계획종료일자*/
 			, ''             /*실제시작일자*/
 			, ''             /*실제종료일자*/
 			, '000'          /*처리단계코드*/
@@ -221,31 +229,30 @@
   </insert>
   <update id="update_2100_01" parameterType="Map">
    <![CDATA[
-	UPDATE pms_pgm_mng
-	   SET BZ_DTLS_TXT   = #{bz_dtls_txt}  /*업무세부내용*/
-		  , PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		  , DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
-		  , PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
-		  , ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
-		  , FRCS_STA_DT  = CASE WHEN #{aut_id} IN ('500','600') THEN #{frcs_sta_dt} ELSE FRCS_STA_DT END /*계획시작일자*/
-		  , FRCS_END_DT  = CASE WHEN #{aut_id} IN ('500','600') THEN #{frcs_end_dt} ELSE FRCS_END_DT END /*계획종료일자*/
-		  , STA_DT       = CASE WHEN #{prc_step_cd} IN ('100','200') AND STA_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END /*실제시작일자*/
-		  , END_DT       = CASE WHEN #{prc_step_cd} = '400' AND END_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END  /*실제종료일자*/
-		  , PRC_STEP_CD  = #{prc_step_cd}  /*처리단계코드*/
-	      , PRG_TXT      = #{prg_txt}      /*진행현황*/
-	      , DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
-		  , DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND DVLPE_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT END /*개발자확인일자*/
-		  , PL_NO        = #{pl_no}        /*PL번호*/
-		  , PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND PL_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT END    /*PL확인일자*/
-		  , CRPE_NO      = #{crpe_no}      /*담당자번호*/
-	      , RMRK         = #{rmrk}         /*비고*/
-	      , ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
-	      , OPR_NO       = #{empno}        /*조작자번호*/
-		  , DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d')    /*DB변경일시*/
-	  WHERE PGM_ID       = #{pgm_id}
-	    AND BZCD         = #{bzcd}
-	    AND PRJT_ID      = #{prjt_id}
-	    AND BKUP_ID      = #{bkup_id}
+	  UPDATE pms_pgm_mng
+	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
+		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
+		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
+		, PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
+		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
+		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
+		, FRCS_END_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END /*계획종료일자*/
+		, STA_DT       = CASE WHEN #{prc_step_cd} IN ('100','200') AND STA_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  REPLACE(#{sta_dt}, '-', '') END /*실제시작일자*/
+		, END_DT       = CASE WHEN #{prc_step_cd} = '400' AND #{end_dt} IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{end_dt}, '-', '') END  /*실제종료일자*/
+		, PRC_STEP_CD  = #{prc_step_cd}  /*처리단계코드*/
+		, PRG_TXT      = #{prg_txt}      /*진행현황*/
+		, DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
+		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND DVLPE_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{dvlpe_cnf_dt}, '-', '')  END /*개발자확인일자*/
+		, PL_NO        = #{pl_no}        /*PL번호*/
+		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND PL_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{pl_cnf_dt}, '-', '')  END    /*PL확인일자*/
+		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
+		, RMRK         = #{rmrk}         /*비고*/
+		, OPR_NO       = #{login_emp_no}        /*조작자번호*/
+		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+	  WHERE PGM_ID      = #{pgm_id}
+		AND BZCD        = #{bzcd}
+		AND PRJT_ID     = #{prjt_id}
+		AND BKUP_ID     = #{bkup_id}
 	  ]]>
   </update>
 
