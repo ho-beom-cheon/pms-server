@@ -1,8 +1,9 @@
 package com.iteyes.dto.pms;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+
 public class PJTE9002DTO {
 
     private String bkup_id;            // 백업ID
@@ -84,5 +85,16 @@ public class PJTE9002DTO {
     private String plan_thw_endt;      // 계획투입종료일자
     private String real_thw_stdt;      // 실제투입시작일자
     private String real_thw_endt;      // 실제투입종료일자
+
+    /*PMS 프로그램관리*/
+    private String pgm_id;             // 프로그램 ID
+
+    /*PMS 결함관리*/
+    private String mng_id;             // 프로그램 ID
+
+    /*PMS 통합테스트관리*/
+    private String sqn_cd;             // 차수구분코드
+    private String tst_case_id;        // 테스트 케이스 ID
+
 };
 ;

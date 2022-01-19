@@ -20,9 +20,58 @@ public class PJTE9002ServiceImpl implements PJTE9002Service {
 
     }
     @Override
-    public String insert_9002_01(PJTE9002DTO PJTE9002) throws Exception {
+    public boolean insert_9002_01(PJTE9002DTO PJTE9002) throws Exception {
 
         return pjte9002Mapper.insert_9002_01(PJTE9002);
+
+    }
+
+    @Override
+    public boolean delete_9002_01(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.delete_9002_01(PJTE9002);
+
+    }
+
+    @Override
+    public boolean update_9002_01(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_01(PJTE9002);
+
+    }
+
+    @Override
+    public boolean update_9002_02(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_02(PJTE9002);
+
+    }
+
+    @Override
+    public boolean update_9002_03(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_03(PJTE9002);
+
+    }
+
+    @Override
+    public boolean update_9002_04(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_04(PJTE9002);
+
+    }
+
+    @Override
+    public boolean update_9002_05(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_05(PJTE9002);
+
+    }
+
+    @Override
+    public boolean update_9002_06(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_06(PJTE9002);
 
     }
 }

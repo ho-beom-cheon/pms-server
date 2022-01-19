@@ -24,6 +24,16 @@
           ORDER BY SQNO
      </select>
 
+    <delete id="delete_9002_01" parameterType="Map">
+        DELETE
+        FROM   pms_atfl_mng
+        WHERE  1 = 1
+          AND    BKUP_ID       = #{bkup_id}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    ATFL_MNG_ID   = #{atfl_mng_id}
+          AND    FILE_RGS_DSCD = #{file_rgs_dscd}
+    </delete>
+
     <insert id="insert_9002_01" parameterType="Map">
 
 
@@ -61,6 +71,78 @@
         , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
         )
     </insert>
+
+    <update id="update_9002_01" parameterType="Map" >
+        UPDATE pms_err_mng
+        SET    RGS_ATFL_MNG_ID  = CASE WHEN #{file_rgs_dscd} = '300' THEN #{atfl_mng_id} ELSE RGS_ATFL_MNG_ID  END
+          ,TTMN_ATFL_MNG_ID = CASE WHEN #{file_rgs_dscd} = '400' THEN #{atfl_mng_id} ELSE TTMN_ATFL_MNG_ID END
+          ,OPR_NO           = #{login_emp_no}
+          ,DB_CHG_TS        = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    MNG_ID	       = #{mng_id}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    BKUP_ID	     = #{bkup_id}
+    </update>
+
+    <update id="update_9002_02" parameterType="Map">
+        UPDATE pms_itg_tst_mng
+        SET    ATFL_MNG_ID   = #{atfl_mng_id}
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    TST_CASE_ID   = #{tst_case_id}
+          AND    SQN_CD        = #{sqn_cd}
+          AND    BZCD	         = #{bzcd}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    BKUP_ID	     = #{bkup_id}
+    </update>
+
+    <update id="update_9002_03" parameterType="Map" >
+        UPDATE pms_ntar_mng
+        SET    ATFL_MNG_ID   = #{atfl_mng_id}
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    MNG_ID	       = #{mng_id}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    BKUP_ID	     = #{bkup_id}
+    </update>
+
+    <update id="update_9002_04" parameterType="Map">
+        UPDATE pms_pgm_mng
+        SET    ATFL_MNG_ID     = CASE WHEN #{file_rgs_dscd} = '100' THEN #{atfl_mng_id} ELSE ATFL_MNG_ID     END
+          ,PAL_ATFL_MNG_ID = CASE WHEN #{file_rgs_dscd} = '101' THEN #{atfl_mng_id} ELSE PAL_ATFL_MNG_ID END
+          ,OPR_NO          = #{login_emp_no}
+          ,DB_CHG_TS       = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    PGM_ID          = #{pgm_id}
+          AND    BZCD	           = #{bzcd}
+          AND    PRJT_ID         = #{prjt_id}
+          AND    BKUP_ID	       = #{bkup_id}
+    </update>
+
+    <update id="update_9002_05" parameterType="Map">
+        UPDATE pms_rq_mng
+        SET    ATFL_MNG_ID   = #{atfl_mng_id}
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    MNG_ID	       = #{mng_id}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    BKUP_ID	     = #{bkup_id}
+    </update>
+
+    <update id="update_9002_06" parameterType="Map">
+        UPDATE pms_rq_mng
+        SET    ATFL_MNG_ID   = #{atfl_mng_id}
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    BZCD	         = #{bzcd}
+          AND    MNG_ID	       = #{mng_id}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    BKUP_ID	     = #{bkup_id}
+    </update>
 
 
 </mapper>
