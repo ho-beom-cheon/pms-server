@@ -4,41 +4,55 @@ import lombok.Data;
 
 @Data
 public class PJTE2110DTO {
-    private String bkup_id;                 // 백업id
-    private String prjt_id;                 // 프로젝트id
-    private String prjt_nm;                 // 프로젝트명
-    private String bzcd;                    // 업무구분코드
-    private String pgm_id;                  // 프로그램id
-    private String mng_id;                  // 관리ID
-    private String bz_dtls_txt;             // 업무세부내용
-    private String pgm_nm;                  // 프로그램명
-    private String dvlp_dis_cd;             // 개발구분코드
-    private String bz_dtls_cd;			    // 업무세부코드
-    private String pgm_dis_cd;              // 프로그램구분코드
-    private String enlpe_nm;                // 프로그램세부구분코드
-    private String frcs_sta_dt;             // 예상시작일자
-    private String frcs_end_dt;             // 예상종료일자
-    private String sta_dt;                  // 실제시작일자
-    private String end_dt;                  // 실제종료일자
-    private String prc_step_cd;             // 처리단계코드
-    private String prg_txt;                 // 진행현황
-    private String dvlpe_no;                // 개발자번호
-    private String dvlpe_cnf_dt;            // 개발자확인일자
-    private String pl_no;                   // pl번호
-    private String pl_cnf_dt;               // pl확인일자
-    private String crpe_no;                 // 담당자번호
-    private String mgpe_cnf_dis;			// 관리자확인구분
-    private String sorc_path;				// 소스경로
-    private String exc_dt;					// 이행일자
-    private String exc_tim;					// 이행시간
-    private String exc_crpe_nm;				// 이행담당자
-    private String chck_dt;					// 점검일자
-    private String chck_tim;		   	 	// 점검시간
-    private String exc_cnf_crpe_nm;			// 이행확인담당자
-    private String exc_prg_dis;				// 이행진행구분
-    private String rmrk;                    // 비고
-    private String atfl_mng_id;             // 첨부파일관리id
-    private String opr_no;                  // 조작자번호
-    private String db_chg_ts;               // db변경일시
+    private String bkup_id;            // 백업 ID
+    private String prjt_id;            // 프로젝트 ID
+
+    /* grid1 */
+    private String bzcd;               //업무코드
+    private String bznm;               //업무명
+    private String tot_cnt;            //전체
+    private String af_tot_cnt;         //전체계획_전체
+    private String cmpl_cnt;           //전체계획_계획완료
+    private String af_cmpl_cnt;        //전체계획_선완료
+    private String ncmpl_cnt;          //전체계획_미완료
+    private String prnr_rt;            //전체계획_진척율
+    private String tot_cnt1;           //금주담당자_전체
+    private String cmpl_cnt1;          //금주담당자_완료
+    private String ncmpl_cnt1;         //금주담당자_미완료
+    private String prnr_rt1;           //금주담당자_진척율
+    private String pl_tot_cnt;         //금주 PL_전체
+    private String pl_cmpl_cnt;        //금주 PL_완료
+    private String pl_ncmpl_cnt;       //금주 PL_미완료
+    private String pl_prnr_rt;         //금주 PL_진척율
+    private String tot_cnt2;           //차주_계획
+    private String cmpl_cnt2;          //차주_완료
+
+    /* grid2 */
+    private String emp_nm;             //담당자명
+
+    /* grid3 */
+    private String tot_err_cnt;         //전체
+    private String err_cnt;             //결함건수
+    private String impt_cnt;            //개선건수
+    private String etc_err_cnt;         //기타건수
+    private String nerr_cnt;            //결함아님건수
+    private String spnd_cnt;            //보류건수
+
+    /* grid4 */
+    private String nprrn_kbn;            // 미진구분
+    private String pgm_id;               // 프로그램ID
+    private String pgm_nm;               // 프로그램명
+    private String frcs_end_dt;          // 예상종료일자
+    private String dvlpe_cnf_dt;         // 개발완료일자/조치일자
+    private String dvlpe_nm;             // 담당자명
+    private String pl_yn;                // PL명
+    private String crpe_yn;              // 담당자완료여부
+    private String nprrn;                // 미진사유
+
+    private String inp_date;                
+    private String proc_days;               
+
+    private String gubun;
+
 }
 
