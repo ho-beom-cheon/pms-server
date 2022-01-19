@@ -5,19 +5,16 @@ import com.iteyes.dto.pms.PJTE2110DTO;
 import com.iteyes.service.PJTE2110Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
-@Controller
+@RestController
 @Log4j2
-@RequestMapping(value = "/PJTE2110", method = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin("*")
+@RequestMapping(value = "/PJTE2110")
 public class PJTE2110Controller {
 	@Autowired
 	private PJTE2110Service pjte2110Service;
@@ -27,19 +24,16 @@ public class PJTE2110Controller {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		log.debug("# prjt_nm :: " + request.getParameter("prjt_nm_selected"));
-		log.debug("# bzcd :: " + request.getParameter("bzcd_selected"));
-		log.debug("# sta_dt :: "   + request.getParameter("sta_dt"));
-		log.debug("# crpe_no :: "   + request.getParameter("crpe_no"));
-
 		PJTE2110DTO PJTE2110 = new PJTE2110DTO();
 
-		PJTE2110.setPrjt_nm(request.getParameter("prjt_nm_selected"));
+		PJTE2110.setBkup_id(request.getParameter("bkup_id_selected"));
+		PJTE2110.setPrjt_id(request.getParameter("prjt_nm_selected"));
 		PJTE2110.setBzcd(request.getParameter("bzcd_selected"));
-		PJTE2110.setSta_dt(request.getParameter("sta_dt"));
-		PJTE2110.setCrpe_no(request.getParameter("crpe_no"));
+		PJTE2110.setInp_date(request.getParameter("inq_date"));
+		PJTE2110.setEmp_nm(request.getParameter("emp_nm"));
+		PJTE2110.setGubun(request.getParameter("gubun"));
 
-		List<PJTE2110DTO> list = pjte2110Service.select_2110_01(PJTE2110);
+		List<PJTE2110DTO> list = pjte2110Service.select_2110(PJTE2110);
 
 		HashMap<String, Object> hm = new HashMap();
 		HashMap<String, Object> hm1 = new HashMap();
