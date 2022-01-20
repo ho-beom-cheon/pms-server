@@ -60,6 +60,8 @@ public class PJTE2100Controller {
         PJTE2100DTO PJTE2100 = new PJTE2100DTO();
 
         /* dto 값 셋팅*/
+        PJTE2100.setBkup_id(request.getParameter("bkup_id_selected"));
+        PJTE2100.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE2100.setPgm_id(request.getParameter("pgm_id"));
         PJTE2100.setPgm_nm(request.getParameter("pgm_nm"));
         PJTE2100.setPl_no(request.getParameter("pl_no"));

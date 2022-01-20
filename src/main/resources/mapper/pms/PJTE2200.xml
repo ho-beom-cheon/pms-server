@@ -3,88 +3,238 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE2200Mapper">
-    <select id="select_0030_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2200DTO">
-        <![CDATA[
-      SELECT BKUP_ID
-           , PRJT_ID
-           , PGM_ID
-           , BZCD
-           , SQN_CD
-           , SCNR_ID
-           , SCNR_NM
-           , TST_CASE_ID
-           , TST_CASE_NM
-           , FRCS_STA_DT
-           , FRCS_END_DT
-           , DVLPE_CNF_DT
-           , PL_CNF_DT
-           , DVLPE_ENO
-           , PL_ENO
-           , CRPE_ENO
-           , ITG_TST_PRC_CD
-           , PRR_CND
-           , INP_VAL
-           , TST_DES
-           , OUP_VAL
-           , TP
-           , OUP_MENS
-           , PGM_ID
-           , SCRN_ID
-           , TRN_CD
-           , RQU_SBH_ID
-           , TST_RST
-           , TST_ACHI_RST
-           , RMRK
-           , ATFL_MNG_ID
-           , OPR_NO
-           , DB_CHG_TS
-      FROM pms_itg_tst_mng
-      ]]>
+    <select id="select_2200_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2200DTO">
+        SELECT A.BZCD
+             , A.SQN_CD
+             , A.SCNR_ID
+             , A.SCNR_NM
+             , A.TST_CASE_ID
+             , A.TST_CASE_NM
+             , A.ITG_TST_PRC_CD
+             , NVL2(A.FRCS_STA_DT,STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d'),'') AS FRCS_STA_DT
+             , NVL2(A.FRCS_END_DT,STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d'),'') AS FRCS_END_DT
+             , NVL2(A.STA_DT,STR_TO_DATE(A.STA_DT , '%Y%m%d'),'') AS STA_DT
+             , NVL2(A.END_DT,STR_TO_DATE(A.END_DT , '%Y%m%d'),'') AS END_DT
+             , NVL2(A.DVLPE_CNF_DT,STR_TO_DATE(A.DVLPE_CNF_DT , '%Y%m%d'),'') AS DVLPE_CNF_DT
+             , NVL2(A.PL_CNF_DT,STR_TO_DATE(A.PL_CNF_DT , '%Y%m%d'),'') AS PL_CNF_DT
+             , B.EMPNM      AS DVLPE_ENM
+             , A.DVLPE_ENO
+             , C.EMPNM      AS PL_ENM
+             , A.PL_ENO
+             , D.EMPNM      AS CRPE_ENM
+             , A.CRPE_ENO
+             ,  (SELECT COUNT(*)
+                 FROM   pms_err_mng
+                 WHERE  CCTN_SQN_CD = A.SQN_CD
+                   AND    CCTN_ID     = A.TST_CASE_ID
+                   AND    CCTN_BZCD   = A.BZCD
+                   AND    PRJT_ID     = A.PRJT_ID
+                   AND    BKUP_ID     = A.BKUP_ID)    AS ERR_TOT_CNT
+             , (SELECT COUNT(*)
+                FROM   pms_err_mng
+                WHERE  ERR_PRC_STEP_CD IN ('600', '700', '800')
+                  AND    CCTN_SQN_CD = A.SQN_CD
+                  AND    CCTN_ID     = A.TST_CASE_ID
+                  AND    CCTN_BZCD   = A.BZCD
+                  AND    PRJT_ID     = A.PRJT_ID
+                  AND    BKUP_ID     = A.BKUP_ID)    AS ERR_CMPL_CNT
+             , (SELECT COUNT(*)
+                FROM   pms_err_mng
+                WHERE  ERR_PRC_STEP_CD IN ('100', '200', '300', '400', '500')
+                  AND    CCTN_SQN_CD = A.SQN_CD
+                  AND    CCTN_ID     = A.TST_CASE_ID
+                  AND    CCTN_BZCD   = A.BZCD
+                  AND    PRJT_ID     = A.PRJT_ID
+                  AND    BKUP_ID     = A.BKUP_ID)    AS ERR_NCMPL_CNT
+             ,A.RMRK
+             ,A.PGM_ID
+             ,A.SCRN_ID
+             ,A.TRN_CD
+             ,A.RQU_SBH_ID
+             ,A.PRR_CND
+             ,A.INP_VAL
+             ,A.TST_DES
+             ,A.OUP_VAL
+             ,A.TP
+             ,A.OUP_MENS
+             ,A.TST_RST
+             ,A.TST_ACHI_RST
+             ,A.ATFL_MNG_ID
+             ,A.BKUP_ID
+             ,A.PRJT_ID
+        FROM pms_itg_tst_mng A
+                 LEFT OUTER JOIN
+             pms_emp_info   B
+             ON B.EMPNO   = A.DVLPE_ENO
+                 AND B.PRJT_ID = A.PRJT_ID
+                 AND B.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             pms_emp_info   C
+             ON C.EMPNO   = A.PL_ENO
+                 AND C.PRJT_ID = A.PRJT_ID
+                 AND C.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             pms_emp_info   D
+             ON D.EMPNO   = A.CRPE_ENO
+                 AND D.PRJT_ID = A.PRJT_ID
+                 AND D.BKUP_ID = A.BKUP_ID
         WHERE 1=1
-        /*차수구분*/
-        <if test='sqn_cd != "" and sqn_cd != null and sqn_cd != "999"'>
-            AND SQN_CD = #{sqn_cd}
-        </if>
-        /*처리단계*/
-        <if test='itg_tst_prc_cd != "" and itg_tst_prc_cd != null and itg_tst_prc_cd != "999"'>
-            AND ITG_TST_PRC_CD = #{itg_tst_prc_cd}
-        </if>
-        /*유형*/
-        <if test='tp != "" and tp != null and tp != "999"'>
-            AND TP = #{tp}
-        </if>
-        /*시나리오ID*/
-        <if test='scnr_id != "" and scnr_id != null'>
-            AND SCNR_ID = '%' #{scnr_id} '%'
-        </if>
-        /*테스트케이스ID*/
-        <if test='tst_case_nm != "" and tst_case_nm != null'>
-            AND TST_CASE_NM = '%' #{tst_case_nm} '%'
-        </if>
-        /*개발자명*/
-        <if test='dvlpe_eno != "" and dvlpe_eno != null'>
-            AND DVLPE_ENO = '%' #{dvlpe_eno} '%'
-        </if>
-        /*담당PL번호*/
-        <if test='pl_eno != "" and pl_eno != null'>
-            AND PL_ENO = '%' #{pl_eno} '%'
-        </if>
-        /*담당현업번호*/
-        <if test='crpe_eno != "" and crpe_eno != null'>
-            AND CRPE_ENO = '%' #{crpe_eno} '%'
-        </if>
-        /*요구사항ID*/
-        <if test='rqu_sbh_id != "" and rqu_sbh_id != null'>
-            AND RQU_SBH_ID = '%' #{rqu_sbh_id} '%'
-        </if>
-        /*예상종료일자*/
-        <if test='frcs_end_dt != "" and frcs_end_dt != null'>
-            AND FRCS_END_DT BETWEEN #{frcs_end_dt01} AND #{frcs_end_dt02}
-        </if>
-        /*개발자확인일자*/
-        <if test='dvlpe_cnf_dt != "" and dvlpe_cnf_dt != null'>
-            AND DVLPE_CNF_DT BETWEEN #{dvlpe_cnf_dt01} AND #{dvlpe_cnf_dt02}
-        </if>
+          AND A.BKUP_ID = #{bkup_id}
+          AND A.PRJT_ID = #{prjt_id}
+            <if test='bzcd != "TTT"'>
+		   AND A.BZCD = #{bzcd}
+            </if>
+            <if test='sqn_cd != "TTT"'>
+          AND A.SQN_CD = #{sqn_cd}
+            </if>
+            <if test='itg_tst_prc_cd != "TTT"'>
+          AND A.ITG_TST_PRC_CD = #{itg_tst_prc_cd}
+            </if>
+            <if test='scnr_id != "" and scnr_id != null'>
+          AND A.SCNR_ID LIKE CONCAT(#{scnr_id},'%')
+            </if>
+            <if test='frcs_sta_dt != ""  and frcs_sta_dt != null and frcs_end_dt != ""  and frcs_end_dt != null'>
+          AND A.FRCS_END_DT BETWEEN REPLACE(#{frcs_sta_dt}, '-', '') AND REPLACE(#{frcs_end_dt}, '-', '')
+            </if>
+            /* 개발자종료일자 */
+            <if test='dvlpe_sta_dt != "" and dvlpe_sta_dt != null and dvlpe_end_dt != "" and dvlpe_end_dt != null'>
+          AND A.DVLPE_CNF_DT BETWEEN REPLACE(#{dvlpe_sta_dt}, '-', '') AND REPLACE(#{dvlpe_end_dt}, '-', '')
+            </if>
+            <if test='tst_case_id != "" and tst_case_id != null'>
+          AND A.TST_CASE_ID LIKE CONCAT(#{tst_case_id},'%')
+            </if>
+            <if test='rqu_sbh_id != "" and rqu_sbh_id != null'>
+          AND A.RQU_SBH_ID LIKE CONCAT(#{rqu_sbh_id},'%')
+            </if>
+            <if test='dvlpe_eno != "" and dvlpe_eno != null'>
+          AND A.DVLPE_ENO = #{dvlpe_eno}
+            </if>
+            <if test='pl_eno != "" and pl_eno != null'>
+          AND A.PL_ENO = #{pl_eno}
+            </if>
+            <if test='crpe_eno != "" and crpe_eno != null'>
+          AND A.CRPE_ENO = #{crpe_eno}
+            </if>
+            <if test='dvlpe_sta_dt != "" and dvlpe_sta_dt != null and dvlpe_end_dt != "" and dvlpe_end_dt != null'>
+          AND A.DVLPE_CNF_DT BETWEEN #{dvlpe_sta_dt} AND #{dvlpe_end_dt}
+            </if>
+        ORDER BY A.BZCD, A.FRCS_STA_DT
 
-    </select>
+     </select>
+
+    <insert id="insert_2200_01" parameterType="Map">
+   <![CDATA[
+        INSERT INTO pms_itg_tst_mng
+        (
+            BKUP_ID
+          , PRJT_ID
+          , BZCD
+          , SQN_CD
+          , TST_CASE_ID
+          , TST_CASE_NM
+          , SCNR_ID
+          , SCNR_NM
+          , FRCS_STA_DT
+          , FRCS_END_DT
+          , STA_DT
+          , END_DT
+          , DVLPE_ENO
+          , PL_ENO
+          , CRPE_ENO
+          , DVLPE_CNF_DT
+          , PL_CNF_DT
+          , ITG_TST_PRC_CD
+          , PRR_CND
+          , INP_VAL
+          , TST_DES
+          , OUP_VAL
+          , TP
+          , OUP_MENS
+          , PGM_ID
+          , SCRN_ID
+          , TRN_CD
+          , RQU_SBH_ID
+          , TST_RST
+          , TST_ACHI_RST
+          , RMRK
+          , ATFL_MNG_ID
+          , OPR_NO
+          , DB_CHG_TS
+        )
+        VALUES
+            (
+                '0000000000'
+               , #{prjt_id}
+               , #{bzcd}
+               , #{sqn_cd}
+               , #{tst_case_id}
+               , #{tst_case_nm}
+               , #{scnr_id}
+               , #{scnr_nm}
+               , DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%')
+               , DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%')
+               , DATE_FORMAT(#{sta_dt},'%Y%m%d%')
+               , DATE_FORMAT(#{end_dt},'%Y%m%d%')
+               , #{dvlpe_eno}
+               , #{pl_eno}
+               , #{crpe_eno}
+               , DATE_FORMAT(#{dvlpe_cnf_dt},'%Y%m%d%')
+               , DATE_FORMAT(#{pl_cnf_dt},'%Y%m%d%')
+               , #{itg_tst_prc_cd}
+               , #{prr_cnd}
+               , #{inp_val}
+               , #{tst_des}
+               , #{oup_val}
+               , #{tp}
+               , #{oup_mens}
+               , #{pgm_id}
+               , #{scrn_id}
+               , #{trn_cd}
+               , #{rqu_sbh_id}
+               , #{tst_rst}
+               , #{tst_achi_rst}
+               , #{rmrk}
+               , #{atfl_mng_id}
+               , #{login_emp_no}
+               , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+            )
+        ]]>
+  </insert>
+
+    <update id="update_2200_01" parameterType="Map">
+   <![CDATA[
+        UPDATE pms_itg_tst_mng
+           SET TST_CASE_NM    = #{tst_case_nm}
+             , SCNR_ID        = #{scnr_id}
+             , SCNR_NM        = #{scnr_nm}
+             , FRCS_STA_DT    = CASE WHEN #{login_aut_cd} IN ('500','600') THEN DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%') ELSE FRCS_STA_DT END
+             , FRCS_END_DT    = CASE WHEN #{login_aut_cd} IN ('500','600') THEN DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%') ELSE FRCS_END_DT END
+             , DVLPE_ENO      = #{dvlpe_eno}
+             , PL_ENO         = #{pl_eno}
+             , CRPE_ENO       = #{crpe_eno}
+             , ITG_TST_PRC_CD = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{itg_tst_prc_cd} ELSE ITG_TST_PRC_CD END
+             , PRR_CND        = #{prr_cnd}
+             , INP_VAL        = #{inp_val}
+             , TST_DES        = #{tst_des}
+             , OUP_VAL        = #{oup_val}
+             , TP             = #{tp}
+             , OUP_MENS       = #{oup_mens}
+             , PGM_ID         = #{pgm_id}
+             , SCRN_ID        = #{scrn_id}
+             , TRN_CD         = #{trn_cd}
+             , RQU_SBH_ID     = #{rqu_sbh_id}
+             , TST_RST        = #{tst_rst}
+             , TST_ACHI_RST   = #{tst_achi_rst}
+             , RMRK           = #{rmrk}
+             , ATFL_MNG_ID    = #{atfl_mng_id}
+             , OPR_NO         = #{login_emp_no}
+             , DB_CHG_TS      = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+         WHERE TST_CASE_ID    = #{tst_case_id}
+           AND SQN_CD         = #{sqn_cd}
+           AND BZCD           = #{bzcd}
+           AND PRJT_ID        = #{prjt_id}
+           AND BKUP_ID        = #{bkup_id}
+        ]]>
+  </update>
+
 </mapper>
