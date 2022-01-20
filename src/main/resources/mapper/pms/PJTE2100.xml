@@ -121,7 +121,7 @@
 	  </if>
       /*프로젝트ID*/
       <if test='prjt_id != "" and prjt_id != null'>
-		AND A.PRJT_ID LIKE '%' #{prjt_id} '%'
+		AND A.PRJT_ID = #{prjt_id}
 	  </if>
       /*업무구분*/
 	  <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
@@ -153,7 +153,7 @@
 	  </if>
 	  /*프로그램명*/
 	  <if test='pgm_nm != "" and pgm_nm != null'>
-		AND A.PGM_NM LIKE '%' #{pgm_nm} '%'
+		AND A.PGM_NM = #{pgm_nm}
 	  </if>
 	  /*개발자번호*/
 	  <if test='dvlpe_no != "" and dvlpe_no != null'>

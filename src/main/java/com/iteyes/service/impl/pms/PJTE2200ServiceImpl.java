@@ -13,31 +13,22 @@ import com.iteyes.service.PJTE2200Service;
 public class PJTE2200ServiceImpl implements PJTE2200Service {
 	@Autowired
 	private PJTE2200Mapper PJTE2200Mapper;
-
+	/* select */
 	@Override
-	public List<PJTE2200DTO> select_0030_01(PJTE2200DTO SWZP0030) throws Exception {
+	public List<PJTE2200DTO> select_2200_01(PJTE2200DTO PJTE2200) throws Exception {
 
-		return PJTE2200Mapper.select_0030_01(SWZP0030);
+		return PJTE2200Mapper.select_2200_01(PJTE2200);
 	}
-	
 	/* create */
 	@Override
-	public boolean insert_0030_01(PJTE2200DTO PJTE2200) throws Exception {
+	public boolean insert_2200_01(PJTE2200DTO PJTE2200) throws Exception {
 
-		return PJTE2200Mapper.insert_0030_01(PJTE2200);
+		return PJTE2200Mapper.insert_2200_01(PJTE2200);
 	}
-
 	/* update */
 	@Override
-	public boolean update_0030_01(PJTE2200DTO PJTE2200) throws Exception {
+	public boolean update_2200_01(PJTE2200DTO PJTE2200) throws Exception {
 
-		return PJTE2200Mapper.update_0030_01(PJTE2200);
-	}
-
-	/* delete */
-	@Override
-	public boolean update_0030_02(PJTE2200DTO PJTE2200) throws Exception {
-
-		return PJTE2200Mapper.update_0030_02(PJTE2200);
+		return PJTE2200Mapper.update_2200_01(PJTE2200);
 	}
 }
