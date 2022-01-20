@@ -117,15 +117,15 @@
 	   WHERE 1=1
       /*백업ID*/
 	  <if test='bkup_id != "" and bkup_id != null'>
-        AND A.BKUP_ID LIKE '%' #{bkup_id} '%'
+        AND A.BKUP_ID = #{bkup_id}
 	  </if>
       /*프로젝트ID*/
       <if test='prjt_id != "" and prjt_id != null'>
-		AND A.PRJT_ID LIKE '%' #{prjt_id} '%'
+		AND A.PRJT_ID = #{prjt_id}
 	  </if>
       /*업무구분*/
 	  <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
-		AND A.BZCD LIKE '%' #{bzcd} '%'
+		AND A.BZCD = #{bzcd}
 	  </if>
 	  /*개발구분*/
 	  <if test='dvlp_dis_cd != "" and dvlp_dis_cd != null and dvlp_dis_cd != "TTT"'>
@@ -149,11 +149,11 @@
 	  </if>
       /*프로그램ID*/
 	  <if test='pgm_id != "" and pgm_id != null'>
-		AND A.PGM_ID LIKE '%' #{pgm_id} '%'
+		AND A.PGM_ID = #{pgm_id}
 	  </if>
 	  /*프로그램명*/
 	  <if test='pgm_nm != "" and pgm_nm != null'>
-		AND A.PGM_NM LIKE '%' #{pgm_nm} '%'
+		AND A.PGM_NM = #{pgm_nm}
 	  </if>
 	  /*개발자번호*/
 	  <if test='dvlpe_no != "" and dvlpe_no != null'>

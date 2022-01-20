@@ -56,22 +56,12 @@ public class PJTE2100Controller {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        log.debug("# pgm_id :: "   + request.getParameter("pgm_id"));
-        log.debug("# pgm_nm :: "   + request.getParameter("pgm_nm"));
-        log.debug("# pl_no :: "    + request.getParameter("pl_no"));
-        log.debug("# dvlpe_no :: " + request.getParameter("dvlpe_no"));
-        log.debug("# pgm_dis_cd :: " + request.getParameter("pgm_dis_cd_selected"));
-        log.debug("# bzcd :: " + request.getParameter("bzcd_selected"));
-        log.debug("# dvlp_dis_cd :: " + request.getParameter("dvlp_dis_cd_selected"));
-        log.debug("# frcs_sta_dt :: " + request.getParameter("frcs_sta_dt"));
-        log.debug("# frcs_end_dt :: " + request.getParameter("frcs_end_dt"));
-        log.debug("# dvlpe_sta_dt :: " + request.getParameter("dvlpe_sta_dt"));
-        log.debug("# dvlpe_sta_dt :: " + request.getParameter("dvlpe_sta_dt"));
-
         /* 빈 dto 생성 */
         PJTE2100DTO PJTE2100 = new PJTE2100DTO();
 
         /* dto 값 셋팅*/
+        PJTE2100.setBkup_id(request.getParameter("bkup_id_selected"));
+        PJTE2100.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE2100.setPgm_id(request.getParameter("pgm_id"));
         PJTE2100.setPgm_nm(request.getParameter("pgm_nm"));
         PJTE2100.setPl_no(request.getParameter("pl_no"));
