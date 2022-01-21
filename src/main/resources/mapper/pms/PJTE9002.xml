@@ -35,6 +35,13 @@
     </delete>
 
     <insert id="insert_9002_01" parameterType="Map">
+        <selectKey resultType = "string" keyProperty="atfl_mng_id" order="BEFORE">
+            SELECT CONCAT(#{file_rgs_dscd},TRIM(LPAD(CONCAT(NVL(MAX(SUBSTR(ATFL_MNG_ID,4,7))+1,1)),7,'0'))) AS ATFL_MNG_ID
+            FROM pms_atfl_mng
+            WHERE BKUP_ID       = #{bkup_id}
+            AND    PRJT_ID       = #{prjt_id}
+            AND    FILE_RGS_DSCD = #{file_rgs_dscd}
+        </selectKey>
 
         INSERT INTO pms_atfl_mng
         (
