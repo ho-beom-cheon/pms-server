@@ -7,5 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface PJTE3000Mapper {
-	List<PJTE3000DTO> select_3000_01(PJTE3000DTO PJTE3000) throws Exception;
+    /* select */
+    List<PJTE3000DTO> select_3000_01(PJTE3000DTO PJTE3000) throws Exception;
 }
