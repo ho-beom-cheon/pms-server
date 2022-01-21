@@ -26,7 +26,6 @@ public class PJTE3000Controller {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        log.info("보여달라 ::" + request.getParameter("cmpl_yn"));
         PJTE3000DTO PJTE3000 = new PJTE3000DTO();
 
         PJTE3000.setPrjt_id(request.getParameter("prjt_id_selected"));
