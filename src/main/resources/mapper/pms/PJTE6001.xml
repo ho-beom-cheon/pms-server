@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE6001Mapper">
+	<select id="select_6001_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE6001DTO">
+		SELECT A.MNG_ID
+			 ,A.BZCD
+			 ,A.REQ_DSCD
+			 ,A.REQ_DT
+			 ,B.EMPNM AS REQPE_NM
+			 ,A.REQ_TXT
+			 ,A.PRC_DT
+			 ,C.EMPNM AS PRCPE_NM
+			 ,A.PRC_TXT
+			 ,A.REQ_PRC_STEP_CD
+			 ,A.ATFL_MNG_ID
+			 ,D.ORG_FILE_NM
+		FROM   pms_rq_mng A
+				   LEFT OUTER JOIN
+			   pms_emp_info  B
+			   ON B.EMPNO    = A.REQPE_NO
+				   AND B.PRJT_ID  = A.PRJT_ID
+				   AND B.BKUP_ID  = A.BKUP_ID
+				   LEFT OUTER JOIN
+			   pms_emp_info  C
+			   ON C.EMPNO    = A.PRCPE_NO
+				   AND C.PRJT_ID  = A.PRJT_ID
+				   AND C.BKUP_ID  = A.BKUP_ID
+				   LEFT OUTER JOIN
+			   pms_atfl_mng  D
+			   ON D.SQNO          = 1
+				   AND D.FILE_RGS_DSCD = '500'
+				   AND D.ATFL_MNG_ID   = A.ATFL_MNG_ID
+				   AND D.PRJT_ID       = A.PRJT_ID
+				   AND D.BKUP_ID       = A.BKUP_ID
+		WHERE  1 = 1
+		  AND    A.MNG_ID  = #{mng_id}
+		  AND    A.BKUP_ID = #{bkup_id}
+		  AND    A.PRJT_ID = #{prjt_id}
+	</select>
+
+	<insert id="insert_6001_01" parameterType="Map">
+		<selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
+			SELECT NVL(MAX(CAST(MNG_ID AS INT))+1,'1000000000') AS MNG_ID
+			FROM   pms_rq_mng
+			WHERE  PRJT_ID  = #{prjt_id}
+			AND    BKUP_ID  = #{bkup_id}
+		</selectKey>
+		INSERT INTO pms_rq_mng
+		(
+		BKUP_ID
+		,PRJT_ID
+		,MNG_ID
+		,BZCD
+		,REQ_DSCD
+		,REQPE_NO
+		,REQ_DT
+		,REQ_TXT
+		,PRCPE_NO
+		,PRC_DT
+		,PRC_TXT
+		,REQ_PRC_STEP_CD
+		,ATFL_MNG_ID
+		,OPR_NO
+		,DB_CHG_TS
+		)
+		VALUES
+		(
+		'0000000000'
+		, #{prjt_id}
+		, #{mng_id}
+		, #{bzcd}
+		, #{req_dscd}
+		, #{reqpe_no}
+		, DATE_FORMAT(NOW(),'%Y%m%d')
+		, #{req_txt}
+		, ''
+		, ''
+		, ''
+		, '100'
+		, ''
+		, #{login_emp_no}
+		, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+		)
+	</insert>
+
+	<update id="update_6001_01" parameterType="Map">
+		UPDATE pms_rq_mng
+		SET    BZCD	           = #{bzcd}
+		  ,REQ_DSCD	       = #{req_dscd}
+		  ,REQPE_NO	       = #{reqpe_no}
+		  ,REQ_DT	         = #{req_dt}
+		  ,REQ_TXT	       = #{req_txt}
+		  ,PRCPE_NO	       = #{prcpe_no}
+		  ,PRC_DT	         = CASE WHEN #{req_prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
+		  ,PRC_TXT	       = #{prc_txt}
+		  ,REQ_PRC_STEP_CD = #{req_prc_step_cd}
+		  ,OPR_NO	         = #{login_emp_no}
+		  ,DB_CHG_TS	     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+		WHERE  1 = 1
+		  AND    BKUP_ID  = #{bkup_id}
+		  AND    PRJT_ID  = #{prjt_id}
+		  AND    MNG_ID   = #{mng_id}
+	</update>
+</mapper>
