@@ -4,6 +4,12 @@ import lombok.Data;
 
 @Data
 public class PJTE4000DTO {
+	private String login_emp_no;        /*직원번호*/
+	private String login_emp_nm;        /*직원명*/
+	private String login_proj_id;       /*프로젝트ID*/
+	private String login_bzcd;          /*업무구분*/
+	private String login_catn_dcd;      /*구성원 구분코드*/
+	private String login_aut_cd;        /*권한ID*/
 	private String  bkup_id;          //백업ID
 	private String  prjt_id;          //프로젝트ID
 	private String  mng_id;           //관리ID
@@ -30,10 +36,10 @@ public class PJTE4000DTO {
 	private String  opr_no;           //조작자번호
 	private String  db_chg_ts;        //DB변경일시
 	private String  slv_mpln_txt;     //해결방안내용
-	private String  check_Yn;         //완료/제외/미발생해소 포함 여부
+	private String  cmpl_yn;          //완료건포함
 
-	private String  d_bkup_id;          //백업ID
-	private String  d_prjt_id;          //프로젝트ID
+	private String  bkup_id_selected;          //백업ID
+	private String  prjt_id_selected;          //프로젝트ID
 	private String  d_mng_id;           //관리ID
 	private String  d_rgs_dis_cd;       //관리구분코드
 	private String  d_rgs_dis_cd_selected;       //관리구분코드
