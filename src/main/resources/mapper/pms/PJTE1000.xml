@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE1000Mapper">
+    <select id="select_1000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE1000DTO">
+	 	<![CDATA[
+        SELECT MAX(A.S_DAY)         AS S_DAY
+             , MAX(A.PROC_DT)       AS PROC_DT
+             , MAX(A.PROC_DAYS)     AS PROC_DAYS
+             , MAX(A.ERR_PROC_DT)   AS ERR_PROC_DT
+             , MAX(A.ERR_PROC_DAYS) AS ERR_PROC_DAYS
+        FROM (SELECT DATE_FORMAT(NOW(), '%Y%m%d') AS S_DAY
+                   , A.DATE                       AS PROC_DT
+                   , A.N_ROWS                     AS PROC_DAYS
+                   , '00000000'                   AS ERR_PROC_DT
+                   , 0                            AS ERR_PROC_DAYS
+              FROM (SELECT A.DATE
+                         , ROW_NUMBER() OVER(PARTITION BY A.PRJT_ID ORDER BY A.DATE) AS N_ROWS
+                    FROM pms_holiday_mng A
+                    WHERE A.PRJT_ID = #{prjt_id}
+                      AND A.HOLIDAY_CD = '1'
+                      AND A.DATE >= CASE
+                                        WHEN #{bkup_id} = '0000000000' THEN DATE_FORMAT(NOW(), '%Y%m%d')
+                                        ELSE SUBSTRING(#{bkup_id}, 1, 8) END) A
+                       INNER JOIN
+                   (SELECT CAST(DTLS_TYCD AS INT) AS PROC_DAYS
+                    FROM pms_cd_del_mng
+                    WHERE BKUP_ID = #{bkup_id}
+                      AND PRJT_ID = #{prjt_id}
+                      AND GRP_TYCD = '1000000032') B
+                   ON B.PROC_DAYS = A.N_ROWS
+              UNION
+              SELECT DATE_FORMAT(NOW(), '%Y%m%d') AS S_DAY
+                   , '00000000'                   AS PROC_DT
+                   , 0                            AS PROC_DAYS
+                   , A.DATE                       AS ERR_PROC_DT
+                   , A.N_ROWS                     AS ERR_PROC_DAYS
+              FROM (SELECT A.DATE
+                         , ROW_NUMBER() OVER(PARTITION BY A.PRJT_ID ORDER BY A.DATE) AS N_ROWS
+                    FROM pms_holiday_mng A
+                    WHERE A.PRJT_ID = #{prjt_id}
+                      AND A.HOLIDAY_CD = '1'
+                      AND A.DATE >= CASE
+                                        WHEN #{bkup_id} = '0000000000' THEN DATE_FORMAT(NOW(), '%Y%m%d')
+                                        ELSE SUBSTRING(#{bkup_id}, 1, 8) END) A
+                       INNER JOIN
+                   (SELECT CAST(DTLS_TYCD AS INT) AS PROC_DAYS
+                    FROM pms_cd_del_mng
+                    WHERE BKUP_ID = #{bkup_id}
+                      AND PRJT_ID = #{prjt_id}
+                      AND GRP_TYCD = '1000000033') B
+                   ON B.PROC_DAYS = A.N_ROWS) A
+        ]]>
+  </select>
+
+    <select id="select_1000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE1000DTO">
+        <![CDATA[
+        SELECT ROW_NUMBER()   OVER(PARTITION BY A.TODO_CD ORDER BY B.ETC_TXT1) AS SQNO
+         , A.TODO_CD
+             , B.DTLS_TYNM AS TODO_NM
+             , A.TODO_CNT
+        FROM (SELECT '10'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_pgm_mng A
+              WHERE A.PRC_STEP_CD = '000'
+                AND A.DVLP_DIS_CD IN (SELECT DTLS_TYCD
+                                      FROM pms_cd_del_mng
+                                      WHERE BKUP_ID = A.BKUP_ID
+                                        AND PRJT_ID = A.PRJT_ID
+                                        AND GRP_TYCD = '1000000030'
+                                        AND USE_YN = 'Y')
+                AND A.FRCS_END_DT <= #{proc_dt}
+                AND A.FRCS_END_DT >= #{s_day}
+                AND A.DVLPE_NO = #{login_emp_no}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '11'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_pgm_mng A
+              WHERE A.PRC_STEP_CD = '200'
+                AND A.DVLP_DIS_CD IN (SELECT DTLS_TYCD
+                                      FROM pms_cd_del_mng
+                                      WHERE BKUP_ID = A.BKUP_ID
+                                        AND PRJT_ID = A.PRJT_ID
+                                        AND GRP_TYCD = '1000000030'
+                                        AND USE_YN = 'Y')
+                AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
+                AND A.PL_NO = CASE
+                                  WHEN #{login_aut_cd} IN ('500', '600')
+                                      THEN A.PL_NO
+                                  ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '12'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_pgm_mng A
+              WHERE A.PRC_STEP_CD = '300'
+                AND A.DVLP_DIS_CD IN (SELECT DTLS_TYCD
+                                      FROM pms_cd_del_mng
+                                      WHERE BKUP_ID = A.BKUP_ID
+                                        AND PRJT_ID = A.PRJT_ID
+                                        AND GRP_TYCD = '1000000030'
+                                        AND USE_YN = 'Y')
+                AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
+                AND A.CRPE_NO = CASE
+                                    WHEN #{login_aut_cd} IN ('500', '600')
+                                        THEN A.CRPE_NO
+                                    ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '13'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_pgm_mng A
+              WHERE A.PRC_STEP_CD IN ('000', '100')
+                AND A.DVLP_DIS_CD IN (SELECT DTLS_TYCD
+                                      FROM pms_cd_del_mng
+                                      WHERE BKUP_ID = A.BKUP_ID
+                                        AND PRJT_ID = A.PRJT_ID
+                                        AND GRP_TYCD = '1000000030'
+                                        AND USE_YN = 'Y')
+                AND A.FRCS_END_DT < #{s_day}
+                AND A.BZCD = CASE
+                                 WHEN #{login_aut_cd} IN ('200')
+                                     THEN #{login_bzcd}
+                                 ELSE A.BZCD END
+                AND A.DVLPE_NO = CASE
+                                     WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                         THEN A.DVLPE_NO
+                                     ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '20'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_itg_tst_mng A
+              WHERE A.ITG_TST_PRC_CD = '000'
+                AND A.FRCS_END_DT <= #{proc_dt}
+                AND A.FRCS_END_DT >= #{s_day}
+                AND A.DVLPE_ENO = #{login_emp_no}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '21'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_itg_tst_mng A
+              WHERE A.ITG_TST_PRC_CD = '200'
+                AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
+                AND A.PL_ENO = CASE
+                                   WHEN #{login_aut_cd} IN ('500', '600')
+                                       THEN A.PL_ENO
+                                   ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '22'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_itg_tst_mng A
+              WHERE A.ITG_TST_PRC_CD = '300'
+                AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
+                AND A.CRPE_ENO = CASE
+                                     WHEN #{login_aut_cd} IN ('500', '600')
+                                         THEN A.CRPE_ENO
+                                     ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '23'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_itg_tst_mng A
+              WHERE A.ITG_TST_PRC_CD IN ('000', '100')
+                AND A.FRCS_END_DT < #{s_day}
+                AND A.BZCD = CASE
+                                 WHEN #{login_aut_cd} IN ('200')
+                                     THEN #{login_bzcd}
+                                 ELSE A.BZCD END
+                AND A.DVLPE_ENO = CASE
+                                      WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                          THEN A.DVLPE_ENO
+                                      ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '30'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_err_mng A
+              WHERE A.ERR_PRC_STEP_CD IN ('100', '200', '300', '400', '500')
+                AND A.BZCD = CASE
+                                 WHEN #{login_aut_cd} IN ('200')
+                                     THEN #{login_bzcd}
+                                 ELSE A.BZCD END
+                AND A.DVLPE_NO = CASE
+                                     WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                         THEN A.DVLPE_NO
+                                     ELSE #{login_emp_no} END
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '31'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_err_mng A
+              WHERE A.ERR_PRC_STEP_CD = '600'
+                AND A.PL_NO = #{login_emp_no}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '32'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_err_mng A
+              WHERE A.ERR_PRC_STEP_CD = '700'
+                AND A.RGPE_NO = #{login_emp_no}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '33'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_err_mng A
+              WHERE A.ERR_PRC_STEP_CD IN ('200', '300')
+                AND A.DVLPE_NO = CASE
+                                     WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                         THEN A.DVLPE_NO
+                                     ELSE #{login_emp_no} END
+                AND DATE_ADD(A.RGS_DT, INTERVAL #{err_proc_days} DAY) <= #{s_day}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '40'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_rq_mng A
+              WHERE A.REQ_PRC_STEP_CD = '100'
+                AND #{login_aut_cd} IN ('500', '600')
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '41'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_rq_mng A
+              WHERE A.REQ_PRC_STEP_CD = '200'
+                AND #{login_aut_cd} IN ('500', '600')
+                AND A.PRCPE_NO = #{login_emp_no}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '50'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_iss_risk_mng A
+              WHERE A.PRC_STEP_CD IN ('100', '200', '300', '400')
+                AND A.TTMN_CRPE_NM LIKE CONCAT(CONCAT('%', #{login_emp_nm}), '%')
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '60'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_wbs_mng A
+              WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.CRPE_NM LIKE CASE
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                           THEN A.CRPE_NM
+                                       ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
+                AND A.PLN_STA_DT < #{proc_dt}
+                AND A.PLN_END_DT >= #{s_day}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '61'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_wbs_mng A
+              WHERE A.WBS_PRC_STS_CD = '200'
+                AND A.CRPE_NM LIKE CASE
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                           THEN A.CRPE_NM
+                                       ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
+                AND A.PLN_STA_DT < #{proc_dt}
+                AND A.PLN_END_DT >= #{s_day}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '62'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_wbs_mng A
+              WHERE A.WBS_PRC_STS_CD IN ('100', '200')
+                AND A.CRPE_NM LIKE CASE
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                           THEN A.CRPE_NM
+                                       ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
+                AND A.PLN_END_DT < #{s_day}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+             ) A
+                 LEFT OUTER JOIN
+             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1
+              FROM pms_cd_del_mng
+              WHERE GRP_TYCD = '1000000030'
+                AND PRJT_ID = #{prjt_id}
+                AND BKUP_ID = #{bkup_id}) B
+             ON B.DTLS_TYCD = A.TODO_CD
+                 AND B.PRJT_ID = B.PRJT_ID
+                 AND B.BKUP_ID = B.BKUP_ID
+        WHERE A.TODO_CNT > 0
+        ORDER BY B.ETC_TXT1
+        ]]>
+  </select>
+
+</mapper>
