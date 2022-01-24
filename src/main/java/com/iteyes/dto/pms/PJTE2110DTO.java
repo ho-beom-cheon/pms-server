@@ -45,10 +45,9 @@ public class PJTE2110DTO {
     private String frcs_end_dt;          // 예상종료일자
     private String dvlpe_cnf_dt;         // 개발완료일자/조치일자
     private String dvlpe_nm;             // 담당자명
-    private String pl_yn;                //
+    private String pl_yn;                // PL명
     private String crpe_yn;              // 담당자완료여부
     private String nprrn;                // 미진사유
-    private String pl_nm;                // PL명
 
     private String inp_date;                
     private String proc_days;               
