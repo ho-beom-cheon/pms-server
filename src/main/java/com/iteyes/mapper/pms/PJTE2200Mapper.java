@@ -8,9 +8,11 @@ import com.iteyes.dto.pms.PJTE2200DTO;
 
 @Mapper
 public interface PJTE2200Mapper {
-	List<PJTE2200DTO> select_2200_01(PJTE2200DTO PJTE2200) throws Exception;
+	List<PJTE2200DTO> select_0030_01(PJTE2200DTO PJTE2200) throws Exception;
 	/*등록*/
-	boolean insert_2200_01(PJTE2200DTO PJTE2200) throws Exception ;
+	boolean insert_0030_01(PJTE2200DTO PJTE2200) throws Exception ;
 	/*수정*/
-	boolean update_2200_01(PJTE2200DTO PJTE2200) throws Exception ;
+	boolean update_0030_01(PJTE2200DTO PJTE2200) throws Exception ;
+	/*삭제*/
+	boolean update_0030_02(PJTE2200DTO PJTE2200) throws Exception ;
 }
