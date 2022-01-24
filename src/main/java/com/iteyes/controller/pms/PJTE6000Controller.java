@@ -29,17 +29,27 @@ public class PJTE6000Controller {
 
 		PJTE6000DTO PJTE6000 = new PJTE6000DTO();
 
-		PJTE6000.setReqpe_no(request.getParameter("reqe_no"));
+		PJTE6000.setReqpe_no(request.getParameter("reqpe_no"));
 		PJTE6000.setPrcpe_no(request.getParameter("prcpe_no"));
 		PJTE6000.setReq_txt(request.getParameter("req_txt"));
 
-		PJTE6000.setPrjt_id(request.getParameter("prjt_id_selected"));
+		PJTE6000.setBkup_id(request.getParameter("bkup_id_selected"));
+		PJTE6000.setPrjt_id(request.getParameter("prjt_nm_selected"));
 		PJTE6000.setBzcd(request.getParameter("bzcd_selected"));
 		PJTE6000.setReq_dscd(request.getParameter("req_dscd_selected"));
 		PJTE6000.setReq_prc_step_cd(request.getParameter("req_prc_step_cd_selected"));
 
+		PJTE6000.setReq_sta_dt(request.getParameter("req_sta_dt"));
+		PJTE6000.setReq_end_dt(request.getParameter("req_end_dt"));
+		PJTE6000.setPrc_sta_dt(request.getParameter("prc_sta_dt"));
+		PJTE6000.setPrc_end_dt(request.getParameter("prc_end_dt"));
 
-		List<PJTE6000DTO> list = PJTE6000Service.select_0050_01(PJTE6000);
+		PJTE6000.setCmpl_yn(request.getParameter("check_Yn"));
+
+
+
+
+		List<PJTE6000DTO> list = PJTE6000Service.select_6000_01(PJTE6000);
 
 		HashMap<String, Object> hm = new HashMap();
 		HashMap<String, Object> hm1 = new HashMap();

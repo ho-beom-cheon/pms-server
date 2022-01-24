@@ -3,18 +3,58 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE6000Mapper">
-	<select id="select_0050_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE6000DTO">
-		SELECT
-			 MNG_ID
-			 ,BZCD    /**/
-			 ,REQ_DSCD
-			 ,REQ_DT
-			 ,REQPE_NO
-			 ,REQ_TXT
-			 ,PRC_DT
-			 ,PRCPE_NO
-			 ,REQ_PRC_STEP_CD
-		FROM pms_rq_mng
-
+	<select id="select_6000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE6000DTO">
+		SELECT A.MNG_ID
+		,A.BZCD
+		,A.REQ_DSCD
+		,NVL(str_to_date(A.REQ_DT, '%Y%m%d'), '') AS REQ_DT
+		,B.EMPNM AS REQPE_NM
+		,A.REQ_TXT
+		,NVL(str_to_date(A.PRC_DT, '%Y%m%d'), '') AS PRC_DT
+		,C.EMPNM AS PRCPE_NM
+		,A.PRC_TXT
+		,A.REQ_PRC_STEP_CD
+		FROM   pms_rq_mng A
+		LEFT OUTER JOIN
+		pms_emp_info  B
+		ON B.EMPNO    = A.REQPE_NO
+		AND B.PRJT_ID  = A.PRJT_ID
+		AND B.BKUP_ID  = A.BKUP_ID
+		LEFT OUTER JOIN
+		pms_emp_info  C
+		ON C.EMPNO    = A.PRCPE_NO
+		AND C.PRJT_ID  = A.PRJT_ID
+		AND C.BKUP_ID  = A.BKUP_ID
+		WHERE  1 = 1
+		AND    A.BKUP_ID = #{bkup_id}
+		AND    A.PRJT_ID = #{prjt_id}
+		<if test='bzcd != "TTT"'>
+			AND    A.BZCD  = #{bzcd}
+		</if>
+		<if test='req_dscd != "TTT"'>
+			AND    A.REQ_DSCD  = #{req_dscd}
+		</if>
+		<if test='req_prc_step_cd != "TTT"'>
+			AND    A.REQ_PRC_STEP_CD = #{req_prc_step_cd}
+		</if>
+		<if test='req_prc_step_cd == "TTT" and cmpl_yn != "Y"'>
+			AND    A.REQ_PRC_STEP_CD IN ('100','200','300')
+		</if>
+		<if test='reqpe_no != "" and reqpe_no != null'>
+			AND    A.REQPE_NO  = #{reqpe_no}
+		</if>
+		<if test='prcpe_no != "" and prcpe_no != null'>
+			AND    A.PRCPE_NO  = #{prcpe_no}
+		</if>
+		<if test='req_sta_dt != ""  and req_sta_dt != null and req_end_dt != ""  and req_end_dt != null'>
+			AND    A.REQ_DT  BETWEEN #{req_sta_dt} AND #{req_end_dt}
+		</if>
+		<if test='prc_sta_dt != ""  and prc_sta_dt != null and prc_end_dt != ""  and prc_end_dt != null'>
+			AND    A.PRC_DT  BETWEEN #{prc_sta_dt} AND #{prc_end_dt}
+		</if>
+		<if test='req_txt != "" and req_txt != null'>
+			AND    A.REQ_TXT  LIKE CONCAT('%', #{req_txt}, '%')
+		</if>
+		ORDER BY A.BZCD, A.REQ_DT DESC
 	</select>
 </mapper>
