@@ -87,6 +87,7 @@ public class PJTE6001Controller {
 		PJTE6001C.setBzcd(PJTE6001C.getBzcd());
 		PJTE6001C.setReq_dscd(PJTE6001C.getReq_dscd());
 		PJTE6001C.setReqpe_no(PJTE6001C.getReqpe_no());
+		PJTE6001C.setPrcpe_no(PJTE6001C.getPrcpe_no());
 		PJTE6001C.setReq_dt(PJTE6001C.getReq_dt());
 		PJTE6001C.setReq_txt(PJTE6001C.getReq_txt());
 		PJTE6001C.setPrc_txt(PJTE6001C.getPrc_txt());
