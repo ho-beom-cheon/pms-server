@@ -432,6 +432,7 @@
 	<select id="select_2110_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
          <![CDATA[
          SELECT A.BZNM
+              , A.BZCD
               , D.NPRRN_KBN
               , D.PGM_ID
               , D.PGM_NM
