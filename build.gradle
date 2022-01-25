@@ -8,6 +8,32 @@ group = 'com.iteyes'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '16'
 
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+def repoUrl = "https://nexus3.iteyes-lab.gurmwi.io/repository/"
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.iteyes'
+            artifactId 'pms-server'
+            version '0.0.1-SNAPSHOT'
+
+            artifact 'pms-server-0.0.1-SNAPSHOT.jar'
+        }
+    }
+	repositories {
+      maven {
+          credentials {
+              username 'deployer'
+              password 'deployer!2'
+          }
+          url "${repoUrl}/maven-releases/"
+      }
+  }
+}
+
 configurations {
   	implementation.exclude module: 'spring-boot-starter-logging'
 	compileOnly {
@@ -17,6 +43,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	//maven { url "http://nexus.XXXXX.com:8081/nexus/content/groups/public/" }
 }
 
 dependencies {
