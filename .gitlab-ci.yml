@@ -1,0 +1,26 @@
+variables:
+  REVISION: "1.0"
+  CHANGELIST: "-SNAPSHOT"
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true -Dmaven.repo.local=./.m2/repository"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  MAVEN_CLI_OPTS: "-s $SETTINGS_FILE --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  SONAR_OPTS: "-Dsonar.login=$SONAR_TOKEN -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME"
+
+  GIT_STRATEGY: clone
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+    - build/
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - ./gradlew clean
+    - ./gradlew build
+  except:
+    - tags
