@@ -20,7 +20,7 @@ stages:
 build:
   stage: build
   script:
-    - ./gradlew clean
-    - ./gradlew build
+    - gradle clean
+    - gradle build
   except:
     - tags
