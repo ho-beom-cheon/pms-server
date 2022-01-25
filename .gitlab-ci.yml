@@ -22,6 +22,8 @@ stages:
 
 build:
   stage: build
+  before_script:
+    - gradle wrapper
   script:
     - ./gradlew clean
     - ./gradlew build
