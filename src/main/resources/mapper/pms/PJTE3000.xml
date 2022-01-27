@@ -6,92 +6,95 @@
     <select id="select_3000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3000DTO">
         SELECT *
         FROM (SELECT A.BZCD
-        ,A.RGS_DSCD
-        ,A.CCTN_ID
-        ,CASE WHEN B.PGM_NM IS NOT NULL
-        THEN B.PGM_NM ELSE C.TST_CASE_NM END AS CCTN_NM
-        ,A.ERR_TYCD
-        ,A.ERR_PRC_STEP_CD
-        ,A.RGS_DT
-        ,D.EMPNM AS RGPE_NM
-        ,A.ERR_TXT
-        ,A.TTMN_TXT
-        ,A.TTMN_SCD_DT
-        ,A.TTMN_DT
-        ,E.EMPNM AS DVLPE_NM
-        ,F.EMPNM AS PL_NM
-        ,A.BFJR_BZCD
-        ,A.MNG_ID
-        FROM pms_err_mng A
-        LEFT OUTER JOIN
-        pms_pgm_mng B
-        ON  B.PGM_ID = A.CCTN_ID
-        AND B.BZCD = A.CCTN_BZCD
-        AND B.PRJT_ID = A.PRJT_ID
-        AND B.BKUP_ID = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_itg_tst_mng C
-        ON  C.TST_CASE_ID = A.CCTN_ID
-        AND C.SQN_CD = A.CCTN_SQN_CD
-        AND C.BZCD = A.CCTN_BZCD
-        AND C.PRJT_ID = A.PRJT_ID
-        AND C.BKUP_ID = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_emp_info D
-        ON  D.EMPNO = A.RGPE_NO
-        AND D.PRJT_ID = A.PRJT_ID
-        AND D.BKUP_ID = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_emp_info E
-        ON  E.EMPNO = A.DVLPE_NO
-        AND E.PRJT_ID = A.PRJT_ID
-        AND E.BKUP_ID = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_emp_info F
-        ON F.EMPNO = A.PL_NO
-        AND F.PRJT_ID = A.PRJT_ID
-        AND F.BKUP_ID = A.BKUP_ID
-        WHERE 1 = 1
-        AND A.BKUP_ID = #{bkup_id}
-        AND A.PRJT_ID = #{prjt_id}
-        <if test='bzcd != "TTT"'>
-            AND A.BZCD = #{bzcd}
-        </if>
-        <if test='rgs_dscd != "TTT"'>
-            AND A.RGS_DSCD = #{rgs_dscd}
-        </if>
-        <if test='err_tycd != "TTT"'>
-            AND A.ERR_TYCD = #{err_tycd}
-        </if>
-        <if test='err_prc_step_cd != "TTT"'>
-            AND A.ERR_PRC_STEP_CD = #{err_prc_step_cd}
-        </if>
-        <if test='err_prc_step_cd == "TTT" and cmpl_yn != "true"'>
-            AND A.ERR_PRC_STEP_CD IN ('100','200','300','400','500','600','700')
-        </if>
-        <if test='rgpe_no != "" and rgpe_no != null'>
-            AND A.RGPE_NO = #{rgpe_no}
-        </if>
-        <if test='dvlpe_no != "" and dvlpe_no != null'>
-            AND A.DVLPE_NO = #{dvlpe_no}
-        </if>
-        <if test='pl_no != "" and pl_no != null'>
-            AND A.PL_NO = #{pl_no}
-        </if>
-        <if test='cctn_id != "" and cctn_id != null'>
-            AND A.CCTN_ID LIKE CONCAT(#{cctn_id},'%')
-        </if>
-        <if test='err_txt != "" and err_txt != null'>
-            AND A.ERR_TXT LIKE CONCAT(CONCAT('%',#{err_txt}),'%')
-        </if>
-        <if test='rgs_sta_dt != ""  and rgs_sta_dt != null and rgs_end_dt != ""  and rgs_end_dt != null'>
-            AND A.RGS_DT BETWEEN #{rgs_sta_dt} AND #{rgs_end_dt}
-        </if>
-        <if test='ttmn_sta_dt != ""  and ttmn_end_dt != null and ttmn_sta_dt != ""  and ttmn_end_dt != null'>
-            AND A.TTMN_DT BETWEEN #{ttmn_sta_dt} AND #{ttmn_end_dt}
-        </if>
-        ) A
-        WHERE 1 = 1
+                    ,A.RGS_DSCD
+                    ,A.CCTN_ID
+                    ,CASE WHEN B.PGM_NM IS NOT NULL
+                          THEN B.PGM_NM ELSE C.TST_CASE_NM END AS CCTN_NM
+                    ,A.ERR_TYCD
+                    ,A.ERR_PRC_STEP_CD
+                    ,A.RGS_DT
+                    ,D.EMPNM AS RGPE_NM
+                    ,D.EMPNO AS RGPE_NO
+                    ,A.ERR_TXT
+                    ,A.TTMN_TXT
+                    ,A.TTMN_SCD_DT
+                    ,A.TTMN_DT
+                    ,E.EMPNM AS DVLPE_NM
+                    ,E.EMPNO AS DVLPE_NO
+                    ,F.EMPNM AS PL_NM
+                    ,F.EMPNO AS PL_NO
+                    ,A.BFJR_BZCD
+                    ,A.MNG_ID
+              FROM  pms_err_mng A
+              LEFT OUTER JOIN
+              pms_pgm_mng B
+              ON B.PGM_ID = A.CCTN_ID
+              AND B.BZCD = A.CCTN_BZCD
+              AND B.PRJT_ID = A.PRJT_ID
+              AND B.BKUP_ID = A.BKUP_ID
+              LEFT OUTER JOIN
+              pms_itg_tst_mng C
+              ON C.TST_CASE_ID = A.CCTN_ID
+              AND C.SQN_CD = A.CCTN_SQN_CD
+              AND C.BZCD = A.CCTN_BZCD
+              AND C.PRJT_ID = A.PRJT_ID
+              AND C.BKUP_ID = A.BKUP_ID
+              LEFT OUTER JOIN
+              pms_emp_info D
+              ON D.EMPNO = A.RGPE_NO
+              AND D.PRJT_ID = A.PRJT_ID
+              AND D.BKUP_ID = A.BKUP_ID
+              LEFT OUTER JOIN
+              pms_emp_info E
+              ON E.EMPNO = A.DVLPE_NO
+              AND E.PRJT_ID = A.PRJT_ID
+              AND E.BKUP_ID = A.BKUP_ID
+              LEFT OUTER JOIN
+              pms_emp_info F
+              ON F.EMPNO = A.PL_NO
+              AND F.PRJT_ID = A.PRJT_ID
+              AND F.BKUP_ID = A.BKUP_ID
+              WHERE 1 = 1
+              AND A.BKUP_ID = #{bkup_id}
+              AND A.PRJT_ID = #{prjt_id}
+              <if test='bzcd != "TTT"'>
+                  AND A.BZCD = #{bzcd}
+              </if>
+              <if test='rgs_dscd != "TTT"'>
+                  AND A.RGS_DSCD = #{rgs_dscd}
+              </if>
+              <if test='err_tycd != "TTT"'>
+                  AND A.ERR_TYCD = #{err_tycd}
+              </if>
+              <if test='err_prc_step_cd != "TTT"'>
+                  AND A.ERR_PRC_STEP_CD = #{err_prc_step_cd}
+              </if>
+              <if test='err_prc_step_cd == "TTT" and cmpl_yn != "true"'>
+                  AND A.ERR_PRC_STEP_CD IN ('100','200','300','400','500','600','700')
+              </if>
+              <if test='rgpe_no != "" and rgpe_no != null'>
+                  AND A.RGPE_NO = #{rgpe_no}
+              </if>
+              <if test='dvlpe_no != "" and dvlpe_no != null'>
+                  AND A.DVLPE_NO = #{dvlpe_no}
+              </if>
+              <if test='pl_no != "" and pl_no != null'>
+                  AND A.PL_NO = #{pl_no}
+              </if>
+              <if test='cctn_id != "" and cctn_id != null'>
+                  AND A.CCTN_ID LIKE CONCAT(#{cctn_id},'%')
+              </if>
+              <if test='err_txt != "" and err_txt != null'>
+                  AND A.ERR_TXT LIKE CONCAT(CONCAT('%',#{err_txt}),'%')
+              </if>
+              <if test='rgs_sta_dt != ""  and rgs_sta_dt != null and rgs_end_dt != ""  and rgs_end_dt != null'>
+                  AND A.RGS_DT BETWEEN #{rgs_sta_dt} AND #{rgs_end_dt}
+              </if>
+              <if test='ttmn_sta_dt != ""  and ttmn_end_dt != null and ttmn_sta_dt != ""  and ttmn_end_dt != null'>
+                  AND A.TTMN_DT BETWEEN #{ttmn_sta_dt} AND #{ttmn_end_dt}
+              </if>
+              ) A
+         WHERE 1 = 1
         <if test='cctn_nm != "" and cctn_nm != null'>
             AND A.CCTN_NM LIKE CONCAT(CONCAT('%',#{cctn_nm}),'%')
         </if>
