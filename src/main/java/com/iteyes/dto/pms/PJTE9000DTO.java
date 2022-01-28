@@ -2,6 +2,8 @@ package com.iteyes.dto.pms;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class PJTE9000DTO {
 
@@ -56,6 +58,8 @@ public class PJTE9000DTO {
     private String etc_txt6;           // 기타내용6
     private String etc_txt7;           // 기타내용7
     private String etc_txt8;           // 기타내용8
+    private String etc_txt9;           // 기타내용9
+    private String etc_txt10;          // 기타내용10
     private String dtl_txt1;           // 상세내용1
     private String dtl_txt2;           // 상세내용2
     private String dtl_txt3;           // 상세내용3
@@ -72,6 +76,7 @@ public class PJTE9000DTO {
     private String empno;              // 직원번호
     private String empnm;              // 직원명
     private String email_addr;         // 이메일주소
+    private String rank_nm;            // 직급명
     private String cpno;               // 휴대전화번호
     private String lgn_pwd;            // 로그인비밀번호
     private String bzcd;               // 업무구분코드
@@ -82,5 +87,20 @@ public class PJTE9000DTO {
     private String plan_thw_endt;      // 계획투입종료일자
     private String real_thw_stdt;      // 실제투입시작일자
     private String real_thw_endt;      // 실제투입종료일자
+
+    private String login_emp_no;        // opr_no
+
+    // PMS 휴일관리 (holiday_mng)
+    private String date;                // 일자
+    private String new_yyyy;            // 신규생성년도
+    private String sel_yyyymmdd;        // 조회년원일
+    private String date_cd;             // 요일구분
+    private String holiday_cd;          // 휴일구분
+
+
+    private List<PJTE9000DTO> updatedRows;
+    private List<PJTE9000DTO> createdRows;
+    private List<PJTE9000DTO> deletedRows;
+    private List<PJTE9000DTO> rowDatas;
 };
 ;
