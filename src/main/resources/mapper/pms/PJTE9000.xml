@@ -3,81 +3,392 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9000Mapper">
-    <select id="select_9000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
-        SELECT BKUP_ID
-             , PRJT_ID
-             , ATFL_MNG_ID
-             , FILE_RGS_DSCD
-             , SQNO
-             , FILE_PATH
-             , FILE_NM
-             , RMRMK
-             , OPR_NO
-             , DB_CHG_TS
-        FROM pms_atfl_mng
-        WHERE 1 = 1
-    </select>
-    <select id="select_9000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
-        SELECT BKUP_ID
-             , PRJT_ID
-             , GRP_TYCD
-             , GRP_TYMM
-             , GRID_COLM_NM1
-             , GRID_COLM_NM2
-             , GRID_COLM_NM3
-             , GRID_COLM_NM4
-             , GRID_COLM_NM5
-             , GRID_COLM_NM6
-             , GRID_COLM_NM7
-             , GRID_COLM_NM8
-             , GRID_COLM_NM9
-             , GRID_COLM_NM10
-             , GRID_COLM_NM11
-             , GRID_COLM_NM12
-             , GRID_COLM_NM13
-             , GRID_COLM_NM14
-             , GRID_COLM_NM15
-             , GRID_COLM_NM16
-             , GRID_COLM_NM17
-             , GRID_COLM_NM18
-             , GRID_COLM_NM19
-             , GRID_COLM_NM20
-             , SORT_SEQ
-             , USG_YN
-             , OPR_NO
-             , DB_CHG_NO
-        FROM pms_cd_mng
-        WHERE 1 = 1
-    </select>
-	<select id="select_9000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
-        SELECT BKUP_ID
-             , PRJT_ID
-             , GRP_TYCD
-             , DTLS_TYCD
-             , DTLS_TYNM
-             , ETC_TXT1
-             , ETC_TXT2
-             , ETC_TXT3
-             , ETC_TXT4
-             , ETC_TXT5
-             , ETC_TXT6
-             , ETC_TXT7
-             , ETC_TXT8
-             , DTL_TXT1
-             , DTL_TXT2
-             , DTL_TXT3
-             , DTL_TXT4
-             , DTL_TXT5
-             , DTL_TXT6
-             , DTL_TXT7
-             , DTL_TXT8
-             , DTL_TXT9
-             , DTL_TXT10
-             , SORT_SEQ
-             , USE_YN
-             , OPR_NO
-             , DB_CHG_TS
-        FROM pms_cd_del_mng
-        WHERE 1 = 1
-	</select>
+     <select id="select_9000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
+          SELECT PRJT_ID
+               ,BKUP_ID
+               ,BZCD
+               ,EMPNO
+               ,EMPNM
+               ,RANK_NM
+               ,CATN_DCD
+               ,EMAIL_ADDR
+               ,CPNO
+               ,LGN_PWD
+               ,AUT_CD
+               ,IP_ADDR
+               , NVL2(PLAN_THW_STDT,STR_TO_DATE(PLAN_THW_STDT , '%Y%m%d'),'') AS PLAN_THW_STDT
+               , NVL2(PLAN_THW_ENDT,STR_TO_DATE(PLAN_THW_ENDT , '%Y%m%d'),'') AS PLAN_THW_ENDT
+               , NVL2(PLAN_THW_ENDT,STR_TO_DATE(PLAN_THW_ENDT , '%Y%m%d'),'') AS PLAN_THW_ENDT
+               , NVL2(REAL_THW_ENDT,STR_TO_DATE(REAL_THW_ENDT , '%Y%m%d'),'') AS REAL_THW_ENDT
+          FROM   pms_emp_info
+          WHERE  1 = 1
+            AND    BKUP_ID = #{bkup_id}
+            AND    PRJT_ID = #{prjt_id}
+          ORDER BY EMPNO
+     </select>
+     <select id="select_9000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
+          SELECT PRJT_ID
+               ,BKUP_ID
+               ,GRP_TYCD
+               ,GRP_TYMM
+               ,GRID_COLM_NM1
+               ,GRID_COLM_NM2
+               ,GRID_COLM_NM3
+               ,GRID_COLM_NM4
+               ,GRID_COLM_NM5
+               ,GRID_COLM_NM6
+               ,GRID_COLM_NM7
+               ,GRID_COLM_NM8
+               ,GRID_COLM_NM9
+               ,GRID_COLM_NM10
+               ,GRID_COLM_NM11
+               ,GRID_COLM_NM12
+               ,GRID_COLM_NM13
+               ,GRID_COLM_NM14
+               ,GRID_COLM_NM15
+               ,GRID_COLM_NM16
+               ,GRID_COLM_NM17
+               ,GRID_COLM_NM18
+               ,GRID_COLM_NM19
+               ,GRID_COLM_NM20
+               ,SORT_SEQ
+               ,USG_YN
+          FROM   pms_cd_mng
+          WHERE  1 = 1
+            AND    BKUP_ID = #{bkup_id}
+            AND    PRJT_ID = #{prjt_id}
+          ORDER BY SORT_SEQ
+     </select>
+     <select id="select_9000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
+
+          SELECT PRJT_ID
+               ,BKUP_ID
+               ,GRP_TYCD
+               ,DTLS_TYCD
+               ,DTLS_TYNM
+               ,ETC_TXT1
+               ,ETC_TXT2
+               ,ETC_TXT3
+               ,ETC_TXT4
+               ,ETC_TXT5
+               ,ETC_TXT6
+               ,ETC_TXT7
+               ,ETC_TXT8
+               ,ETC_TXT9
+               ,ETC_TXT10
+               ,DTL_TXT1
+               ,DTL_TXT2
+               ,DTL_TXT3
+               ,DTL_TXT4
+               ,DTL_TXT5
+               ,DTL_TXT6
+               ,DTL_TXT7
+               ,DTL_TXT8
+               ,DTL_TXT9
+               ,DTL_TXT10
+               ,SORT_SEQ
+               ,USE_YN
+          FROM   pms_cd_del_mng
+          WHERE  1 = 1
+            AND    BKUP_ID  = #{bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+            AND    GRP_TYCD = #{grp_tycd}
+          ORDER BY SORT_SEQ
+     </select>
+
+     <update id="update_9000_01" parameterType="Map" >
+          UPDATE pms_emp_info
+          SET    EMPNM         = #{empnm}
+            ,EMAIL_ADDR    = #{email_addr}
+            ,RANK_NM       = #{rank_nm}
+            ,CPNO          = #{cpno}
+            ,LGN_PWD       = #{lgn_pwd}
+            ,BZCD          = #{bzcd}
+            ,CATN_DCD      = #{catn_dcd}
+            ,AUT_CD        = #{aut_cd}
+            ,IP_ADDR       = #{ip_addr}
+            ,PLAN_THW_STDT = DATE_FORMAT(#{plan_thw_stdt}, '%Y%m%d')
+            ,PLAN_THW_ENDT = DATE_FORMAT(#{plan_thw_endt}, '%Y%m%d')
+            ,REAL_THW_STDT = DATE_FORMAT(#{real_thw_stdt}, '%Y%m%d')
+            ,REAL_THW_ENDT = DATE_FORMAT(#{real_thw_endt}, '%Y%m%d')
+            ,OPR_NO        = #{login_emp_no}
+            ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+          WHERE  1 = 1
+            AND    EMPNO	       = #{empno}
+            AND    PRJT_ID       = #{prjt_id}
+            AND    BKUP_ID	     = #{bkup_id}
+     </update>
+
+     <insert id="insert_9000_01" parameterType="Map">
+          INSERT INTO pms_emp_info
+          (
+               BKUP_ID
+          ,PRJT_ID
+          ,EMPNO
+          ,EMPNM
+          ,EMAIL_ADDR
+          ,RANK_NM
+          ,CPNO
+          ,LGN_PWD
+          ,BZCD
+          ,CATN_DCD
+          ,AUT_CD
+          ,IP_ADDR
+          ,PLAN_THW_STDT
+          ,PLAN_THW_ENDT
+          ,REAL_THW_STDT
+          ,REAL_THW_ENDT
+          ,OPR_NO
+          ,DB_CHG_TS
+          )
+          VALUES
+               (
+                    '0000000000'
+               , #{prjt_id}
+               , #{empno}
+               , #{empnm}
+               , #{email_addr}
+               , #{rank_nm}
+               , #{cpno}
+               , #{lgn_pwd}
+               , #{bzcd}
+               , #{catn_dcd}
+               , #{aut_cd}
+               , #{ip_addr}
+               , DATE_FORMAT(#{plan_thw_stdt}, '%Y%m%d')
+               , DATE_FORMAT(#{plan_thw_endt}, '%Y%m%d')
+               , DATE_FORMAT(#{real_thw_stdt}, '%Y%m%d')
+               , DATE_FORMAT(#{real_thw_endt}, '%Y%m%d')
+               , #{login_emp_no}       /*조작자번호*/
+               , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               )
+     </insert>
+
+     <update id="update_9000_02" parameterType="Map">
+          UPDATE pms_cd_mng
+          SET    GRP_TYMM       = #{grp_tymm}
+            ,GRID_COLM_NM1  = #{grid_colm_nm1}
+            ,GRID_COLM_NM2  = #{grid_colm_nm2}
+            ,GRID_COLM_NM3  = #{grid_colm_nm3}
+            ,GRID_COLM_NM4  = #{grid_colm_nm4}
+            ,GRID_COLM_NM5  = #{grid_colm_nm5}
+            ,GRID_COLM_NM6  = #{grid_colm_nm6}
+            ,GRID_COLM_NM7  = #{grid_colm_nm7}
+            ,GRID_COLM_NM8  = #{grid_colm_nm8}
+            ,GRID_COLM_NM9  = #{grid_colm_nm9}
+            ,GRID_COLM_NM10 = #{grid_colm_nm10}
+            ,GRID_COLM_NM11 = #{grid_colm_nm11}
+            ,GRID_COLM_NM12 = #{grid_colm_nm12}
+            ,GRID_COLM_NM13 = #{grid_colm_nm13}
+            ,GRID_COLM_NM14 = #{grid_colm_nm14}
+            ,GRID_COLM_NM15 = #{grid_colm_nm15}
+            ,GRID_COLM_NM16 = #{grid_colm_nm16}
+            ,GRID_COLM_NM17 = #{grid_colm_nm17}
+            ,GRID_COLM_NM18 = #{grid_colm_nm18}
+            ,GRID_COLM_NM19 = #{grid_colm_nm19}
+            ,GRID_COLM_NM20 = #{grid_colm_nm20}
+            ,SORT_SEQ       = #{sort_seq}
+            ,USG_YN         = #{usg_yn}
+            ,OPR_NO         = #{login_emp_no}
+            ,DB_CHG_NO      = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+          WHERE  1 = 1
+            AND    GRP_TYCD	      = #{grp_tycd}
+            AND    PRJT_ID        = #{prjt_id}
+            AND    BKUP_ID	      = #{bkup_id}
+     </update>
+
+     <insert id="insert_9000_03" parameterType="Map">
+          INSERT INTO pms_cd_mng
+          (
+               BKUP_ID
+          ,PRJT_ID
+          ,GRP_TYCD
+          ,GRP_TYMM
+          ,GRID_COLM_NM1
+          ,GRID_COLM_NM2
+          ,GRID_COLM_NM3
+          ,GRID_COLM_NM4
+          ,GRID_COLM_NM5
+          ,GRID_COLM_NM6
+          ,GRID_COLM_NM7
+          ,GRID_COLM_NM8
+          ,GRID_COLM_NM9
+          ,GRID_COLM_NM10
+          ,GRID_COLM_NM11
+          ,GRID_COLM_NM12
+          ,GRID_COLM_NM13
+          ,GRID_COLM_NM14
+          ,GRID_COLM_NM15
+          ,GRID_COLM_NM16
+          ,GRID_COLM_NM17
+          ,GRID_COLM_NM18
+          ,GRID_COLM_NM19
+          ,GRID_COLM_NM20
+          ,SORT_SEQ
+          ,USG_YN
+          ,OPR_NO
+          ,DB_CHG_NO
+          )
+          VALUES
+               (
+                    '0000000000'
+               , #{prjt_id}     /*프로젝트ID*/
+               , #{grp_tycd}
+               , #{grp_tymm}
+               , #{grid_colm_nm1}
+               , #{grid_colm_nm2}
+               , #{grid_colm_nm3}
+               , #{grid_colm_nm4}
+               , #{grid_colm_nm5}
+               , #{grid_colm_nm6}
+               , #{grid_colm_nm7}
+               , #{grid_colm_nm8}
+               , #{grid_colm_nm9}
+               , #{grid_colm_nm10}
+               , #{grid_colm_nm11}
+               , #{grid_colm_nm12}
+               , #{grid_colm_nm13}
+               , #{grid_colm_nm14}
+               , #{grid_colm_nm15}
+               , #{grid_colm_nm16}
+               , #{grid_colm_nm17}
+               , #{grid_colm_nm18}
+               , #{grid_colm_nm19}
+               , #{grid_colm_nm20}
+               , #{sort_seq}
+               , #{use_yn}
+               , #{login_emp_no}       /*조작자번호*/
+               , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               )
+     </insert>
+
+     <delete id="delete_9000_01" parameterType="Map">
+          DELETE
+          FROM   pms_cd_del_mng
+          WHERE  1 = 1
+            AND    GRP_TYCD      = #{grp_tycd}
+            AND    PRJT_ID       = #{prjt_id}
+            AND    BKUP_ID	     = #{bkup_id}
+     </delete>
+
+     <insert id="insert_9000_02" parameterType="Map">
+          INSERT INTO pms_cd_del_mng
+          (
+               BKUP_ID
+          ,PRJT_ID
+          ,GRP_TYCD
+          ,DTLS_TYCD
+          ,DTLS_TYNM
+          ,ETC_TXT1
+          ,ETC_TXT2
+          ,ETC_TXT3
+          ,ETC_TXT4
+          ,ETC_TXT5
+          ,ETC_TXT6
+          ,ETC_TXT7
+          ,ETC_TXT8
+          ,ETC_TXT9
+          ,ETC_TXT10
+          ,DTL_TXT1
+          ,DTL_TXT2
+          ,DTL_TXT3
+          ,DTL_TXT4
+          ,DTL_TXT5
+          ,DTL_TXT6
+          ,DTL_TXT7
+          ,DTL_TXT8
+          ,DTL_TXT9
+          ,DTL_TXT10
+          ,SORT_SEQ
+          ,USE_YN
+          ,OPR_NO
+          ,DB_CHG_TS
+          )
+          VALUES
+               (
+                    '0000000000'
+               , #{prjt_id}     /*프로젝트ID*/
+               , #{grp_tycd}
+               , #{dtls_tycd}
+               , #{dtls_tynm}
+               , #{etc_txt1}
+               , #{etc_txt2}
+               , #{etc_txt3}
+               , #{etc_txt4}
+               , #{etc_txt5}
+               , #{etc_txt6}
+               , #{etc_txt7}
+               , #{etc_txt8}
+               , #{etc_txt9}
+               , #{etc_txt10}
+               , #{dtl_txt1}
+               , #{dtl_txt2}
+               , #{dtl_txt3}
+               , #{dtl_txt4}
+               , #{dtl_txt5}
+               , #{dtl_txt6}
+               , #{dtl_txt7}
+               , #{dtl_txt8}
+               , #{dtl_txt9}
+               , #{dtl_txt10}
+               , #{sort_seq}
+               , #{use_yn}
+               , #{login_emp_no}       /*조작자번호*/
+               , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               )
+     </insert>
+
+     <select id="select_9000_50" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
+          SELECT PRJT_ID
+               ,NVL2(DATE,STR_TO_DATE(DATE , '%Y%m%d'),'') AS DATE
+               ,DATE_CD
+               ,HOLIDAY_CD
+          FROM   pms_holiday_mng
+          WHERE  DATE    LIKE CONCAT(#{sel_yyyymmdd},'%')
+            AND    PRJT_ID =    #{prjt_id}
+     </select>
+
+     <delete id="delete_9000_50" parameterType="Map">
+          DELETE
+          FROM   pms_holiday_mng
+          WHERE  1 = 1
+            AND    DATE     LIKE CONCAT(#{new_yyyy},'%')
+            AND    PRJT_ID  =    #{prjt_id}
+     </delete>
+
+     <insert id="insert_9000_50" parameterType="Map">
+          INSERT INTO pms_holiday_mng
+          SELECT PRJT_ID
+               ,CONCAT(#{new_yyyy},SUBSTRING(DATE,5,4)) AS DATE
+          ,DATE_CD
+          ,HOLIDAY_CD
+          FROM   pms_holiday_mng
+          WHERE  DATE    LIKE CONCAT(CAST(#{new_yyyy} AS INT)-1,'%')
+            AND    PRJT_ID =    #{prjt_id}
+     </insert>
+
+     <delete id="delete_9000_51" parameterType="Map">
+          DELETE
+          FROM   pms_holiday_mng
+          WHERE  1 = 1
+            AND    DATE     LIKE CONCAT(#{sel_yyyymmdd},'%')
+            AND    PRJT_ID  =    #{prjt_id}
+     </delete>
+
+     <insert id="insert_9000_51" parameterType="Map">
+          INSERT INTO pms_holiday_mng
+          (
+               PRJT_ID
+          ,DATE
+          ,DATE_CD
+          ,HOLIDAY_CD
+          )
+          VALUES
+               (
+                    #{prjt_id}
+               ,DATE_FORMAT(#{date}, '%Y%m%d')
+               ,#{date_cd}
+               ,#{holiday_cd}
+               )
+     </insert>
 </mapper>
