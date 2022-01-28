@@ -74,7 +74,7 @@ public class PJTE9002Controller {
 
 		ObjectMapper objectMapper = new ObjectMapper()
 				.registerModule(new SimpleModule());
-		List<FileData> testHelloList = objectMapper.readValue(jsonList, new TypeReference<>() {});
+		List<FileData> testHelloList = objectMapper.readValue(jsonList, new TypeReference<List<FileData>>() {});
 		log.debug("testHello text = {}", testHelloList);
 		if(files != null){
 			for(MultipartFile mf : files){
