@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.iteyes.dto.pms.PJTE2100DTO;
 import com.iteyes.dto.pms.PJTE5000DTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.service.PJTE5000Service;
@@ -20,17 +19,35 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
-@RequestMapping(value = "/PJTE5000", method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping(value = "/PJTE5000")
 public class PJTE5000Controller {
 
 	@Autowired
 	private PJTE5000Service pjte5000Service;
 
-	@PostMapping(value = "/select")
+	@GetMapping(value = "/select")
     public @ResponseBody String select(HttpServletRequest request) throws Exception{
 
 		ObjectMapper mapper = new ObjectMapper();
-    	List<PJTE5000DTO> list = pjte5000Service.select_5000_01();
+
+		/* 빈 dto 생성 */
+		PJTE5000DTO PJTE5000 = new PJTE5000DTO();
+
+		/* dto 값 셋팅*/
+		PJTE5000.setBkup_id(request.getParameter("bkup_id_selected"));
+		PJTE5000.setPrjt_id(request.getParameter("prjt_nm_selected"));
+		PJTE5000.setBzcd(request.getParameter("bzcd_selected"));
+		PJTE5000.setMng_cd(request.getParameter("wbs_mng_cd_selected"));
+		PJTE5000.setWbs_prc_sts_cd(request.getParameter("wbs_prc_sts_cd_selected"));
+
+		PJTE5000.setTask_nm(request.getParameter("task_nm"));
+		PJTE5000.setCrpe_nm(request.getParameter("crpe_nm"));
+		PJTE5000.setAcl_sta_dt(request.getParameter("acl_sta_dt"));
+		PJTE5000.setAcl_end_dt(request.getParameter("acl_end_dt"));
+		PJTE5000.setPln_sta_dt(request.getParameter("pln_sta_dt"));
+		PJTE5000.setPln_end_dt(request.getParameter("pln_end_dt"));
+
+    	List<PJTE5000DTO> list = pjte5000Service.select_5000_01(PJTE5000);
 
     	HashMap<String, Object> hm = new HashMap();
     	HashMap<String, Object> hm1 = new HashMap();
@@ -45,6 +62,58 @@ public class PJTE5000Controller {
     	String jsonStr = mapper.writeValueAsString(hm);
 
     	return jsonStr;
-
     }
+	@DeleteMapping(value = "/delete")
+	public @ResponseBody boolean delete(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
+		boolean result = true;
+
+		if(PJTE5000dto.getRowData().size() != 0) {
+			PJTE5000DTO PJTE5000D = new PJTE5000DTO();
+
+			/* dto 값 셋팅*/
+			PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
+			PJTE5000D.setPrjt_id(PJTE5000dto.getPrjt_id());
+			PJTE5000D.setBzcd(PJTE5000dto.getBzcd());
+			PJTE5000D.setMng_cd(PJTE5000dto.getMng_cd());
+
+			pjte5000Service.delete_5000_01(PJTE5000D);
+		}
+		return result;
+	}
+	@PostMapping(value = "/insert")
+	    public @ResponseBody boolean insert(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception{
+
+		boolean result = true;
+
+		if(PJTE5000dto.getRowData().size() != 0) {
+
+			PJTE5000DTO PJTE5000 = new PJTE5000DTO();
+
+			for (int i = 0; i < PJTE5000dto.getRowData().size(); i++) {
+				PJTE5000.setPrjt_id(PJTE5000dto.getRowData().get(i).getPrjt_id());
+				PJTE5000.setMng_cd(PJTE5000dto.getRowData().get(i).getMng_cd());
+				PJTE5000.setMng_id(PJTE5000dto.getRowData().get(i).getMng_id());
+				PJTE5000.setBzcd(PJTE5000dto.getRowData().get(i).getBzcd());
+				PJTE5000.setHgrn_mng_id(PJTE5000dto.getRowData().get(i).getHgrn_mng_id());
+				PJTE5000.setStep_cd(PJTE5000dto.getRowData().get(i).getStep_cd());
+				PJTE5000.setAcvt_nm(PJTE5000dto.getRowData().get(i).getAcvt_nm());
+				PJTE5000.setTask_nm(PJTE5000dto.getRowData().get(i).getTask_nm());
+				PJTE5000.setCrpe_nm(PJTE5000dto.getRowData().get(i).getCrpe_nm());
+				PJTE5000.setPln_sta_dt(PJTE5000dto.getRowData().get(i).getPln_sta_dt());
+				PJTE5000.setPln_sta_tim(PJTE5000dto.getRowData().get(i).getPln_sta_tim());
+				PJTE5000.setPln_end_dt(PJTE5000dto.getRowData().get(i).getPln_end_dt());
+				PJTE5000.setPln_end_tim(PJTE5000dto.getRowData().get(i).getPln_end_tim());
+				PJTE5000.setWgt_rt(PJTE5000dto.getRowData().get(i).getWgt_rt());
+				PJTE5000.setPrg_rt(PJTE5000dto.getRowData().get(i).getPrg_rt());
+				PJTE5000.setRmrk(PJTE5000dto.getRowData().get(i).getRmrk());
+				PJTE5000.setSort(PJTE5000dto.getRowData().get(i).getSort());
+				PJTE5000.setAtfl_mng_id(PJTE5000dto.getRowData().get(i).getAtfl_mng_id());
+				PJTE5000.setLogin_emp_no(PJTE5000dto.getRowData().get(i).getLogin_emp_no());
+
+				result = pjte5000Service.insert_5000_01(PJTE5000);
+			}
+		}
+
+		return result;
+	}
 }
