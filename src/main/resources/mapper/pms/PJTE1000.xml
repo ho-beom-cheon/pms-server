@@ -59,7 +59,7 @@
         SELECT ROW_NUMBER()   OVER(PARTITION BY A.TODO_CD ORDER BY B.ETC_TXT1) AS SQNO
          , A.TODO_CD
              , B.DTLS_TYNM AS TODO_NM
-             , A.PROC_CNT
+             , CONCAT(CAST(A.PROC_CNT AS CHAR(100)),'건') AS PROC_CNT
         FROM (SELECT '10'     AS TODO_CD
                    , COUNT(*) AS PROC_CNT
               FROM pms_pgm_mng A
@@ -308,8 +308,8 @@
       <![CDATA[
         SELECT DISTINCT A.BZCD
                       , A.TODO_TXT
-                      , A.PLN_STA_DT
-                      , A.PLN_END_DT
+                      , NVL2(A.PLN_STA_DT,STR_TO_DATE(A.PLN_STA_DT , '%Y%m%d'),'') AS PLN_STA_DT
+                      , NVL2(A.PLN_END_DT,STR_TO_DATE(A.PLN_END_DT , '%Y%m%d'),'') AS PLN_END_DT
                       , A.RMRK
                       , A.SORT
         FROM (SELECT A.BZCD
@@ -733,24 +733,38 @@
   </select>
   <select id="select_1000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE1000DTO">
    <![CDATA[
-        SELECT ROW_NUMBER() OVER(PARTITION BY MNG_ID ORDER BY RGS_DT DESC) AS SQNO
-			      ,BKUP_ID
-             ,PRJT_ID
-             ,MNG_ID
-             ,NTAR_BZCD
-             ,RGS_DT
-             ,TITL_TXT
-             ,ANCPT
-             ,RGS_NO
-             ,DEL_YN
-             ,ATFL_MNG_ID
-        FROM   pms_ntar_mng
-        WHERE  PRJT_ID = #{prjt_id}
-          AND    BKUP_ID = #{bkup_id}
-        ORDER BY RGS_DT DESC
+        SELECT ROW_NUMBER() OVER(PARTITION BY A.MNG_ID ORDER BY A.RGS_DT DESC) AS SQNO
+             ,A.BKUP_ID
+             ,A.PRJT_ID
+             ,A.MNG_ID
+             ,A.NTAR_BZCD
+             ,NVL2(A.RGS_DT,STR_TO_DATE(A.RGS_DT , '%Y%m%d'),'') AS RGS_DT
+             ,A.TITL_TXT
+             ,A.ANCPT
+             ,A.RGS_NO
+             ,B.EMPNM AS RGS_NM
+             ,A.DEL_YN
+             ,A.ATFL_MNG_ID
+             ,A.DB_CHG_TS
+             ,C.ORG_FILE_NM AS ORG_FILE_NM
+        FROM   pms_ntar_mng A
+        LEFT OUTER JOIN pms_emp_info B
+          ON B.EMPNO = A.RGS_NO
+         AND B.PRJT_ID = A.PRJT_ID
+         AND B.BKUP_ID = A.BKUP_ID
+        LEFT OUTER JOIN pms_atfl_mng C
+          ON C.FILE_RGS_DSCD = '600'
+         AND C.PRJT_ID = A.PRJT_ID
+         AND C.BKUP_ID = A.BKUP_ID
+         AND C.ATFL_MNG_ID = A.ATFL_MNG_ID
+        WHERE 1=1
+         AND A.PRJT_ID = #{prjt_id}
+         AND A.BKUP_ID = #{bkup_id}
+         AND A.DEL_YN  = 'N'
+        ORDER BY RGS_DT DESC, DB_CHG_TS DESC
         ]]>
   </select>
-  <update id="delete_1000_01" parameterType="Map">
+  <update id="update_1000_01" parameterType="Map">
       UPDATE pms_ntar_mng
       SET    NTAR_BZCD     = #{ntar_bzcd}
             ,TITL_TXT      = #{titl_txt}
@@ -793,7 +807,7 @@
       , #{prjt_id}     /*프로젝트ID*/
       , #{mng_id}
       , #{ntar_bzcd}
-      , #{rgs_dt}
+      , REPLACE(#{rgs_dt}, '-', '')
       , #{titl_txt}
       , #{ancpt}
       , #{rgs_no}

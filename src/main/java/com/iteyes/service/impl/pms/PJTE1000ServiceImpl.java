@@ -49,9 +49,15 @@ public class PJTE1000ServiceImpl implements PJTE1000Service {
 
     /* update, delete */
     @Override
-    public boolean delete_1000_01(PJTE1000DTO PJTE1000) throws Exception {
+    public boolean update_1000_01(PJTE1000DTO PJTE1000) throws Exception {
 
-        return pjte1000Mapper.delete_1000_01(PJTE1000);
+        if(PJTE1000.getDel_yn().equals("true")) {
+            PJTE1000.setDel_yn("Y");
+        } else {
+            PJTE1000.setDel_yn("N");
+        }
+
+        return pjte1000Mapper.update_1000_01(PJTE1000);
     }
 
     /* insert */
