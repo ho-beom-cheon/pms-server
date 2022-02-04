@@ -5,6 +5,7 @@ import com.iteyes.dto.pms.PJTE9000DTO;
 import com.iteyes.mapper.pms.PJTE9000Mapper;
 import com.iteyes.service.PJTE9000Service;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -335,6 +336,103 @@ public class PJTE9000Controller {
 			result = pjte9000Service.insert_9000_51(PJTE9000C);
 		}
 
+		return result;
+	}
+
+	@GetMapping(value = "/backup_select")
+	public @ResponseBody String backup_select(HttpServletRequest request) throws Exception{
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		PJTE9000DTO PJTE9000 = new PJTE9000DTO();
+
+
+		List list =  pjte9000Service.select_9000_10(PJTE9000);
+
+		HashMap<String, Object> hm = new HashMap();
+		HashMap<String, Object> hm1 = new HashMap();
+		HashMap<String, Object> hm1_pagination = new HashMap();
+		hm.put("result", true);
+		hm1.put("contents", list);
+		hm1_pagination.put("page", 1);
+		hm1_pagination.put("totalCount", 100);
+		hm1.put("pagination", hm1_pagination);
+		hm.put("data", hm1);
+
+		String jsonStr = mapper.writeValueAsString(hm);
+
+		return jsonStr;
+
+	}
+
+	@PostMapping("/backup_update")
+	public @ResponseBody boolean backup_update(HttpServletRequest request, @RequestBody PJTE9000DTO PJTE9000) throws Exception{
+		boolean result = false;
+
+		PJTE9000DTO PJTE9000C = new PJTE9000DTO();
+		PJTE9000DTO PJTE9000D = new PJTE9000DTO();
+
+
+		PJTE9000D.setNew_bkup_id(PJTE9000.getNew_bkup_id());
+		PJTE9000D.setPrjt_id(PJTE9000.getPrjt_id());
+
+		result = pjte9000Service.delete_9000_10(PJTE9000D);
+
+		PJTE9000C.setNew_bkup_id(PJTE9000.getNew_bkup_id());
+		PJTE9000C.setNew_bkup_nm(PJTE9000.getNew_bkup_nm());
+		PJTE9000C.setPrjt_id(PJTE9000.getPrjt_id());
+		PJTE9000C.setLogin_emp_no(PJTE9000.getLogin_emp_no());
+
+		result = pjte9000Service.insert_9000_10(PJTE9000C);
+
+		result = pjte9000Service.delete_9000_20(PJTE9000D);
+		result = pjte9000Service.delete_9000_21(PJTE9000D);
+		result = pjte9000Service.delete_9000_22(PJTE9000D);
+		result = pjte9000Service.delete_9000_23(PJTE9000D);
+		result = pjte9000Service.delete_9000_24(PJTE9000D);
+		result = pjte9000Service.delete_9000_25(PJTE9000D);
+		result = pjte9000Service.delete_9000_26(PJTE9000D);
+		result = pjte9000Service.delete_9000_27(PJTE9000D);
+		result = pjte9000Service.delete_9000_28(PJTE9000D);
+		result = pjte9000Service.delete_9000_29(PJTE9000D);
+		result = pjte9000Service.delete_9000_30(PJTE9000D);
+		result = pjte9000Service.delete_9000_31(PJTE9000D);
+		result = pjte9000Service.delete_9000_32(PJTE9000D);
+		result = pjte9000Service.delete_9000_33(PJTE9000D);
+		result = pjte9000Service.delete_9000_34(PJTE9000D);
+		result = pjte9000Service.delete_9000_35(PJTE9000D);
+
+		result = pjte9000Service.insert_9000_20(PJTE9000C);
+		result = pjte9000Service.insert_9000_21(PJTE9000C);
+		result = pjte9000Service.insert_9000_22(PJTE9000C);
+		result = pjte9000Service.insert_9000_23(PJTE9000C);
+		result = pjte9000Service.insert_9000_24(PJTE9000C);
+		result = pjte9000Service.insert_9000_25(PJTE9000C);
+		result = pjte9000Service.insert_9000_26(PJTE9000C);
+		result = pjte9000Service.insert_9000_27(PJTE9000C);
+		result = pjte9000Service.insert_9000_28(PJTE9000C);
+		result = pjte9000Service.insert_9000_29(PJTE9000C);
+		result = pjte9000Service.insert_9000_30(PJTE9000C);
+		result = pjte9000Service.insert_9000_31(PJTE9000C);
+		result = pjte9000Service.insert_9000_32(PJTE9000C);
+		result = pjte9000Service.insert_9000_33(PJTE9000C);
+		result = pjte9000Service.insert_9000_34(PJTE9000C);
+		result = pjte9000Service.insert_9000_35(PJTE9000C);
+		return result;
+	}
+
+	@PostMapping("/create_new_project_data")
+	public @ResponseBody boolean create_new_project_data(HttpServletRequest request, @RequestBody PJTE9000DTO PJTE9000) throws Exception{
+		boolean result = false;
+
+		PJTE9000DTO PJTE9000C = new PJTE9000DTO();
+
+
+		PJTE9000C.setNew_prjt_id(PJTE9000.getNew_prjt_id());
+		PJTE9000C.setLogin_emp_no(PJTE9000.getLogin_emp_no());
+
+		result = pjte9000Service.insert_9000_90(PJTE9000C);
+		result = pjte9000Service.insert_9000_91(PJTE9000C);
 		return result;
 	}
 }
