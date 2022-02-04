@@ -17,7 +17,7 @@ public interface PJTE1000Mapper {
     List<PJTE1000DTO> select_1000_04(PJTE1000DTO PJTE1000) throws Exception;
 
     /* update, delete */
-    boolean delete_1000_01(PJTE1000DTO PJTE1000) throws Exception;
+    boolean update_1000_01(PJTE1000DTO PJTE1000) throws Exception;
 
     /* insert */
     boolean insert_1000_01(PJTE1000DTO PJTE1000) throws Exception;

@@ -69,7 +69,7 @@ public class PJTE1000Controller {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        result = PJTE1000Service.delete_1000_01(PJTE1000);
+        result = PJTE1000Service.update_1000_01(PJTE1000);
 
         return result;
 
