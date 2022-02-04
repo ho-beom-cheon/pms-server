@@ -102,5 +102,9 @@ public class PJTE9000DTO {
     private List<PJTE9000DTO> createdRows;
     private List<PJTE9000DTO> deletedRows;
     private List<PJTE9000DTO> rowDatas;
+
+    private String new_bkup_id;
+    private String new_bkup_nm;
+    private String new_prjt_id;
 };
 ;

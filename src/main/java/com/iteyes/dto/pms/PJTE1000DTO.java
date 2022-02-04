@@ -33,7 +33,6 @@ public class PJTE1000DTO {
     private String rgs_no;              /*등록자번호*/
     private String rgs_nm;              /*등록자명*/
     private String del_yn;              /*삭제여부*/
-    private String check_yn;              /*삭제여부*/
     private String atfl_mng_id;         /*첨부파일관리ID*/
     private String org_file_nm;         /*원파일명*/
     private String ancpt;               /*공지내역*/

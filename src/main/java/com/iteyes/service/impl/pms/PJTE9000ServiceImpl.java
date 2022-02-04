@@ -77,6 +77,20 @@ public class PJTE9000ServiceImpl implements PJTE9000Service {
     }
 
     @Override
+    public boolean insert_9000_90(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_90(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_91(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_91(PJTE9000);
+
+    }
+
+    @Override
     public List<PJTE9000DTO> select_9000_50(PJTE9000DTO PJTE9000) throws Exception {
 
         return pjte9000Mapper.select_9000_50(PJTE9000);
@@ -108,6 +122,251 @@ public class PJTE9000ServiceImpl implements PJTE9000Service {
     public boolean insert_9000_51(PJTE9000DTO PJTE9000) throws Exception {
 
         return pjte9000Mapper.insert_9000_51(PJTE9000);
+
+    }
+
+    @Override
+    public List<PJTE9000DTO> select_9000_10(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.select_9000_10(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_10(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_10(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_10(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_10(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_20(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_20(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_21(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_21(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_22(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_22(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_23(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_23(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_24(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_24(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_25(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_25(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_26(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_26(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_27(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_27(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_28(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_28(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_29(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_29(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_30(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_30(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_31(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_31(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_32(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_32(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_33(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_33(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_34(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_34(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_35(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_35(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_20(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_20(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_21(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_21(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_22(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_22(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_23(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_23(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_24(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_24(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_25(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_25(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_26(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_26(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_27(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_27(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_28(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_28(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_29(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_29(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_30(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_30(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_31(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_31(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_32(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_32(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_33(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_33(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_34(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_34(PJTE9000);
+
+    }
+
+    @Override
+    public boolean insert_9000_35(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.insert_9000_35(PJTE9000);
 
     }
 }
