@@ -11,7 +11,7 @@
                    ELSE C.TST_CASE_NM END   AS CCTN_NM
              , D.EMPNM                      AS RGPE_NM
              , A.RGPE_NO
-             , A.RGS_DT
+             , NVL2(A.RGS_DT,STR_TO_DATE(A.RGS_DT , '%Y%m%d'),'') AS RGS_DT
              , A.MNG_ID
              , A.ERR_TYCD
              , A.RGS_DSCD
@@ -20,12 +20,12 @@
              , A.RGS_ATFL_MNG_ID
              , A.BZCD
              , A.ERR_PRC_STEP_CD
-             , A.TTMN_SCD_DT
+             , NVL2(A.TTMN_SCD_DT,STR_TO_DATE(A.TTMN_SCD_DT , '%Y%m%d'),'') AS TTMN_SCD_DT
              , E.EMPNM                      AS DVLPE_NM
              , A.DVLPE_NO
              , F.EMPNM                      AS PL_NM
              , A.PL_NO
-             , A.TTMN_DT
+             , NVL2(A.TTMN_DT,STR_TO_DATE(A.TTMN_DT , '%Y%m%d'),'') AS TTMN_DT
              , A.TTMN_TXT
              , H.ORG_FILE_NM                AS TTMN_ATFL_NM
              , A.TTMN_ATFL_MNG_ID
@@ -89,11 +89,11 @@
           , ERR_TXT         = #{err_txt}
           , DVLPE_NO        = #{dvlpe_no}
           , PL_NO           = #{pl_no}
-          , TTMN_SCD_DT     = #{ttmn_scd_dt}
+          , TTMN_SCD_DT     = REPLACE(#{ttmn_scd_dt}, '-', '')
           , TTMN_DT         = CASE
                                   WHEN #{err_prc_step_cd} = '600' THEN DATE_FORMAT(NOW(), '%Y%m%d')
                                   WHEN #{err_prc_step_cd} = '300' THEN ''
-                                  ELSE TTMN_DT END
+                                  ELSE REPLACE(#{ttmn_dt}, '-', '') END
           , TTMN_TXT        = #{ttmn_txt}
           , ERR_PRC_STEP_CD = #{err_prc_step_cd}
           , BFJR_BZCD       = CASE WHEN #{bfjr_bzcd} != #{bzcd} THEN #{bzcd} ELSE BFJR_BZCD END
@@ -153,7 +153,7 @@
         , #{dvlpe_no}
         , #{pl_no}
         , ''
-        , #{ttmn_dt}
+        , REPLACE(#{ttmn_dt}, '-', '')
         , #{ttmn_txt}
         , #{err_prc_step_cd}
         , ''
