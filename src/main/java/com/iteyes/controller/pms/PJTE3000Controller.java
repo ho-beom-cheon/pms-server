@@ -31,7 +31,7 @@ public class PJTE3000Controller {
         PJTE3000.setPrjt_id(request.getParameter("prjt_id_selected"));
         PJTE3000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE3000.setBzcd(request.getParameter("bzcd_selected"));
-        PJTE3000.setRgs_dscd(request.getParameter("rgs_dscd_selected"));
+        PJTE3000.setRgs_dscd(request.getParameter("err_rgs_dscd_selected"));
         PJTE3000.setErr_tycd(request.getParameter("err_tycd_selected"));
         PJTE3000.setErr_prc_step_cd(request.getParameter("err_prc_step_cd_selected"));
         PJTE3000.setRgpe_no(request.getParameter("rgpe_no"));
