@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PJTE2210DTO {
 
-    private String bkup_id;            // 백업 ID
+    private String bkup_id;            // 백업 ID!
     private String prjt_id;            // 프로젝트 ID
 
     /* grid1 */

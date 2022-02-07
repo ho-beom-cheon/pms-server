@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.iteyes.mapper.pms.PJTE2210Mapper">
     <select id="select_2210_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
         <![CDATA[
-        /* 업무별 통합테스트현황 */
+        /* 업무별 통합테스트현황 !*/
         SELECT A.BZCD          AS BZCD
              , A.BZNM          AS BZNM
              , A.SQN_CD        AS SQN_CD
