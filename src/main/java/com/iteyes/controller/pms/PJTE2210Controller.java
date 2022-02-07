@@ -19,6 +19,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping(value = "/PJTE2210", method = {RequestMethod.GET, RequestMethod.POST})
 public class PJTE2210Controller {
+	//
 	@Autowired
 	private PJTE2210Service pjte2210Service;
 
