@@ -19,7 +19,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping(value = "/PJTE2210", method = {RequestMethod.GET, RequestMethod.POST})
 public class PJTE2210Controller {
-	//
 	@Autowired
 	private PJTE2210Service pjte2210Service;
 
@@ -36,13 +35,14 @@ public class PJTE2210Controller {
 
 		PJTE2210DTO PJTE2210 = new PJTE2210DTO();
 
-		PJTE2210.setPrjt_nm(request.getParameter("prjt_nm_selected"));
+		PJTE2210.setPrjt_id(request.getParameter("prjt_nm_selected"));
+		PJTE2210.setBkup_id(request.getParameter("bkup_id_selected"));
 		PJTE2210.setBzcd(request.getParameter("bzcd_selected"));
 		PJTE2210.setSqn_cd(request.getParameter("sqn_cd_selected"));
-		PJTE2210.setSta_dt(request.getParameter("sta_dt"));
+		PJTE2210.setInp_date(request.getParameter("inq_date"));
 		PJTE2210.setCrpe_eno(request.getParameter("crpe_eno"));
 
-		List<PJTE2210DTO> list = pjte2210Service.select_2210_01(PJTE2210);
+		List<PJTE2210DTO> list = pjte2210Service.select_2210(PJTE2210);
 
 		HashMap<String, Object> hm = new HashMap();
 		HashMap<String, Object> hm1 = new HashMap();

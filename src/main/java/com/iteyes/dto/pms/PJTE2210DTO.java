@@ -7,6 +7,8 @@ public class PJTE2210DTO {
 
     private String bkup_id;            // 백업 ID!
     private String prjt_id;            // 프로젝트 ID
+    private String inp_date;           //
+    private String proc_days;           //
 
     /* grid1 */
     private String bzcd;               //업무코드
@@ -50,18 +52,14 @@ public class PJTE2210DTO {
     private String crpe_yn;              // 담당자완료여부
     private String nprrn;                // 미진사유
     private String sqn_cd;              //차수구분코드
-    private String tst_case_id;         //테스트케이스ID
-    private String tst_case_nm;         //테스트케이스명
     private String scnr_id;             //시나리오ID
     private String scnr_nm;             //시나리오명
     private String frcs_sta_dt;         //예상시작일자
-    private String frcs_end_dt;         //예상종료일자
     private String sta_dt;              //실제시작일자
     private String end_dt;              //실제종료일자
     private String dvlpe_eno;           //개발자사번
     private String pl_eno;              //담당자PL사번
     private String crpe_eno;            //담당자사번
-    private String dvlpe_cnf_dt;        //개발자확인일자
     private String pl_cnf_dt;           //PL확인일자
     private String itg_tst_prc_cd;      //통합테스트처리코드
     private String prr_cnd;             //사전조건
