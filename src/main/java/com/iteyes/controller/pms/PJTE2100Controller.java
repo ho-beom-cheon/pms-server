@@ -124,6 +124,7 @@ public class PJTE2100Controller {
             PJTE2100C.setPgm_id(PJTE2100.getCreatedRows().get(i).getPgm_id());
             PJTE2100C.setBzcd(PJTE2100.getCreatedRows().get(i).getBzcd());
             PJTE2100C.setPrjt_id(PJTE2100.getCreatedRows().get(i).getPrjt_id());
+
             PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
             PJTE2100C.setLogin_emp_no(PJTE2100.getLogin_emp_no());
             PJTE2100C.setLogin_bzcd(PJTE2100.getLogin_bzcd());
@@ -165,6 +166,7 @@ public class PJTE2100Controller {
             PJTE2100U.setBzcd(PJTE2100.getUpdatedRows().get(i).getBzcd());
             PJTE2100U.setPrjt_id(PJTE2100.getUpdatedRows().get(i).getPrjt_id());
             PJTE2100U.setBkup_id(PJTE2100.getUpdatedRows().get(i).getBkup_id());
+
             PJTE2100U.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
             PJTE2100U.setLogin_emp_no(PJTE2100.getLogin_emp_no());
             PJTE2100U.setLogin_bzcd(PJTE2100.getLogin_bzcd());
@@ -172,7 +174,6 @@ public class PJTE2100Controller {
 
             result = pjte2100Service.update_2100_01(PJTE2100U);
         }
-
         return result;
     }
 

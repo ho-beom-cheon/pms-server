@@ -1,64 +1,85 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.4'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'maven-publish'
 }
 
 group = 'com.iteyes'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = 1.8
 
 configurations {
-  	implementation.exclude module: 'spring-boot-starter-logging'
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    implementation.exclude module: 'spring-boot-starter-logging'
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    [apiElements, runtimeElements].each {
+        it.outgoing.artifacts.removeIf { it.buildDependencies.getDependencies(null).contains(jar) }
+        it.outgoing.artifact(bootJar)
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = 'https://nexus3.iteyes-lab.gurmwi.io/repository/maven-snapshots/'
+            credentials {
+                username System.getenv("REPO_USER")
+                password System.getenv("REPO_PASS")
+            }
+        }
+    }
+
 }
 
 repositories {
-	mavenCentral()
+    maven {
+        url "https://nexus3.iteyes-lab.gurmwi.io/repository/maven-public/"
+    }
 }
 
 dependencies {
-	/* 스프링부트  */
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-web-services'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	/* mybatis */
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-	/* DB관련 */
-	implementation 'org.mariadb.jdbc:mariadb-java-client:2.0.3'
-	/* 로그인 관련*/
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-	implementation 'javax.xml.bind:jaxb-api:2.3.1'
-	
-	/* UI관련 */
+    /* 스프링부트  */
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    /* mybatis */
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    /* DB관련 */
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.0.3'
+    /* 로그인 관련*/
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    /* UI관련 */
 //	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 //	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.3'
-	implementation 'org.webjars.npm:vue:3.2.10'
-	implementation 'org.webjars:bootstrap:5.1.0'
-	implementation 'org.webjars.bower:jquery:3.6.0'
-	implementation 'org.webjars.npm:axios:0.21.4'
-	/* 로그관련 */
-	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
-	/* 보안관련 */
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
-	/* 파일 업로드 */
-	implementation 'commons-io:commons-io:2.11.0'
-	/* 엑셀 업로드 및 다운로드*/
-	implementation 'org.webjars.npm:xlsx:0.17.0'
-	implementation 'org.webjars.bower:filesaver:2.0.4'
-	/* 기타 로직관련 */
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'		
-	/* 테스트관련 */
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.webjars.npm:vue:3.2.10'
+    implementation 'org.webjars:bootstrap:5.1.0'
+    implementation 'org.webjars.bower:jquery:3.6.0'
+    implementation 'org.webjars.npm:axios:0.21.4'
+    /* 로그관련 */
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+    /* 보안관련 */
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    /* 파일 업로드 */
+    implementation 'commons-io:commons-io:2.11.0'
+    /* 엑셀 업로드 및 다운로드*/
+    implementation 'org.webjars.npm:xlsx:0.17.0'
+    implementation 'org.webjars.bower:filesaver:2.0.4'
+    /* 기타 로직관련 */
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    /* 테스트관련 */
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
-test {
-	useJUnitPlatform()
-}

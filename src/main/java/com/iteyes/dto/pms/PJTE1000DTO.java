@@ -36,4 +36,10 @@ public class PJTE1000DTO {
     private String atfl_mng_id;         /*첨부파일관리ID*/
     private String org_file_nm;         /*원파일명*/
     private String ancpt;               /*공지내역*/
+    private String gubun;               /*그리드구분자*/
+    private String rowNum;              /*TO-DO현황 rowNum*/
+    private String pln_sta_dt;          /*시작일자*/
+    private String pln_end_dt;          /*종료일자*/
+    private String rmrk;                /*결함내용*/
+    private String sort;
 }

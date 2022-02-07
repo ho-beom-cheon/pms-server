@@ -17,38 +17,75 @@ import java.util.Map;
 @CrossOrigin("*")
 @RequestMapping(value = "/PJTE1000")
 public class PJTE1000Controller {
-	@Autowired
-	private PJTE1000Service PJTE1000Service;
+    @Autowired
+    private PJTE1000Service PJTE1000Service;
 
-	@GetMapping(value = "/select")
-	public @ResponseBody
-	String select(HttpServletRequest request) throws Exception{
+    @GetMapping(value = "/select")
+    public @ResponseBody
+    String select(HttpServletRequest request) throws Exception {
 
-		ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
+//1111
+        PJTE1000DTO PJTE1000 = new PJTE1000DTO();
 
-		PJTE1000DTO PJTE1000 = new PJTE1000DTO();
+        PJTE1000.setPrjt_id(request.getParameter("prjt_id_selected"));
+        PJTE1000.setBkup_id(request.getParameter("bkup_id_selected"));
+        PJTE1000.setLogin_emp_no(request.getParameter("login_emp_no"));
+        PJTE1000.setLogin_bzcd(request.getParameter("login_bzcd"));
+        PJTE1000.setLogin_aut_cd(request.getParameter("login_aut_cd"));
+        PJTE1000.setGubun(request.getParameter("gubun"));
+        PJTE1000.setRowNum(request.getParameter("rowNum"));
 
-		PJTE1000.setPrjt_id(request.getParameter("prjt_id_selected"));
-		PJTE1000.setBkup_id(request.getParameter("bkup_id_selected"));
-		PJTE1000.setLogin_emp_no(request.getParameter("login_emp_no"));
-		PJTE1000.setLogin_bzcd(request.getParameter("login_bzcd"));
-		PJTE1000.setLogin_aut_cd(request.getParameter("login_aut_cd"));
+        List<PJTE1000DTO> list01 = PJTE1000Service.select_1000_01(PJTE1000);
 
-		List<PJTE1000DTO> list = PJTE1000Service.select_1000_01(PJTE1000);
+        PJTE1000.setS_day(list01.get(0).getS_day());
+        PJTE1000.setProc_dt(list01.get(0).getProc_dt());
+        PJTE1000.setErr_proc_dt(list01.get(0).getErr_proc_dt());
+        PJTE1000.setProc_days(list01.get(0).getProc_days());
+        PJTE1000.setErr_proc_days(list01.get(0).getErr_proc_days());
 
-		Map<String, Object> hm = new HashMap();
-		Map<String, Object> hm1 = new HashMap();
-		Map<String, Object> hm1_pagination = new HashMap();
-		hm.put("result", true);
-		hm1.put("contents", list);
-		hm1_pagination.put("page", 1);
-		hm1_pagination.put("totalCount", 100);
-		hm1.put("pagination", hm1_pagination);
-		hm.put("data", hm1);
+        List<PJTE1000DTO> list = PJTE1000Service.select_1000(PJTE1000);
 
-		String jsonStr = mapper.writeValueAsString(hm);
+        Map<String, Object> hm = new HashMap();
+        Map<String, Object> hm1 = new HashMap();
+        Map<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
 
-		return jsonStr;
-	}
+        String jsonStr = mapper.writeValueAsString(hm);
 
+        return jsonStr;
+    }
+
+    @PutMapping(value = "/update")
+    public @ResponseBody
+    boolean update(@RequestBody PJTE1000DTO PJTE1000) throws Exception {
+
+        boolean result = false;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        result = PJTE1000Service.update_1000_01(PJTE1000);
+
+        return result;
+
+    }
+
+    @PostMapping(value = "/insert")
+    public @ResponseBody
+    boolean insert(@RequestBody PJTE1000DTO PJTE1000C) throws Exception {
+
+        boolean result = false;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        result = PJTE1000Service.insert_1000_01(PJTE1000C);
+
+        return result;
+
+    }
 }

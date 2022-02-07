@@ -35,13 +35,6 @@
     </delete>
 
     <insert id="insert_9002_01" parameterType="Map">
-        <selectKey resultType = "string" keyProperty="atfl_mng_id" order="BEFORE">
-            SELECT CONCAT(#{file_rgs_dscd},TRIM(LPAD(CONCAT(NVL(MAX(SUBSTR(ATFL_MNG_ID,4,7))+1,1)),7,'0'))) AS ATFL_MNG_ID
-            FROM pms_atfl_mng
-            WHERE BKUP_ID       = #{bkup_id}
-            AND    PRJT_ID       = #{prjt_id}
-            AND    FILE_RGS_DSCD = #{file_rgs_dscd}
-        </selectKey>
 
         INSERT INTO pms_atfl_mng
         (
@@ -150,5 +143,93 @@
           AND    BKUP_ID	     = #{bkup_id}
     </update>
 
+    <select id="select_9002_10" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9002DTO">
+        SELECT CONCAT(CONCAT(#{login_emp_no},#{file_rgs_dscd}),TRIM(LPAD(NVL(MAX(DTLS_TYNM)+1,1),7,'0'))) AS ATFL_MNG_ID
+             ,TRIM(LPAD(NVL(MAX(DTLS_TYNM)+1,1),7,'0')) AS DTLS_TYNM
+        FROM pms_cd_del_mng
+        WHERE DTLS_TYCD     = CONCAT(#{login_emp_no},#{file_rgs_dscd})
+          AND   GRP_TYCD      = '1000000037'
+          AND   BKUP_ID       = #{bkup_id}
+          AND   PRJT_ID       = #{prjt_id}
+    </select>
+
+    <update id="update_9002_10" parameterType="Map">
+        UPDATE pms_cd_del_mng
+        SET    DTLS_TYNM = #{dtls_tynm}
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE DTLS_TYCD     = CONCAT(#{login_emp_no},#{file_rgs_dscd})
+          AND   GRP_TYCD      = '1000000037'
+          AND   BKUP_ID       = #{bkup_id}
+          AND   PRJT_ID       = #{prjt_id}
+    </update>
+
+    <insert id="insert_9002_10" parameterType="Map">
+        INSERT INTO pms_cd_del_mng
+        (
+            BKUP_ID
+        ,PRJT_ID
+        ,GRP_TYCD
+        ,DTLS_TYCD
+        ,DTLS_TYNM
+        ,ETC_TXT1
+        ,ETC_TXT2
+        ,ETC_TXT3
+        ,ETC_TXT4
+        ,ETC_TXT5
+        ,ETC_TXT6
+        ,ETC_TXT7
+        ,ETC_TXT8
+        ,ETC_TXT9
+        ,ETC_TXT10
+        ,DTL_TXT1
+        ,DTL_TXT2
+        ,DTL_TXT3
+        ,DTL_TXT4
+        ,DTL_TXT5
+        ,DTL_TXT6
+        ,DTL_TXT7
+        ,DTL_TXT8
+        ,DTL_TXT9
+        ,DTL_TXT10
+        ,SORT_SEQ
+        ,USE_YN
+        ,OPR_NO
+        ,DB_CHG_TS
+
+        )
+        VALUES
+            (
+                #{bkup_id}
+            ,#{prjt_id}
+            ,'1000000037'
+            ,CONCAT(#{login_emp_no},#{file_rgs_dscd})
+            ,#{dtls_tynm}
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,''
+            ,1
+            ,'Y'
+            , #{login_emp_no}       /*조작자번호*/
+            , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+            )
+    </insert>
 
 </mapper>

@@ -6,20 +6,64 @@ import com.iteyes.service.PJTE1000Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class PJTE1000ServiceImpl implements PJTE1000Service {
     @Autowired
-    private PJTE1000Mapper PJTE1000Mapper;
+    private PJTE1000Mapper pjte1000Mapper;
 
     @Override
     public List<PJTE1000DTO> select_1000_01(PJTE1000DTO PJTE1000) throws Exception {
+        List<PJTE1000DTO> list01 = new ArrayList<>();
 
-        List<PJTE1000DTO> list = PJTE1000Mapper.select_1000_01(PJTE1000);
+        list01 = pjte1000Mapper.select_1000_01(PJTE1000);
+
+        return list01;
+    }
+
+    @Override
+    public List<PJTE1000DTO> select_1000(PJTE1000DTO PJTE1000) throws Exception {
+
+        List<PJTE1000DTO> list = new ArrayList<>();
+
+        if(PJTE1000.getGubun().equals("1")) {
+            list = pjte1000Mapper.select_1000_02(PJTE1000);
+        }
+        if(PJTE1000.getGubun().equals("2")) {
+            List<PJTE1000DTO> list02 = new ArrayList<>();
+            list02 = pjte1000Mapper.select_1000_02(PJTE1000);
+
+            PJTE1000.setTodo_cd(list02.get(Integer.parseInt(PJTE1000.getRowNum())).getTodo_cd());
+
+            list = pjte1000Mapper.select_1000_03(PJTE1000);
+        }
+        if(PJTE1000.getGubun().equals("3")) {
+            list = pjte1000Mapper.select_1000_04(PJTE1000);
+        }
 
         return list;
+
+    }
+
+    /* update, delete */
+    @Override
+    public boolean update_1000_01(PJTE1000DTO PJTE1000) throws Exception {
+
+        if(PJTE1000.getDel_yn().equals("true")) {
+            PJTE1000.setDel_yn("Y");
+        } else {
+            PJTE1000.setDel_yn("N");
+        }
+
+        return pjte1000Mapper.update_1000_01(PJTE1000);
+    }
+
+    /* insert */
+    @Override
+    public boolean insert_1000_01(PJTE1000DTO PJTE1000) throws Exception {
+
+        return pjte1000Mapper.insert_1000_01(PJTE1000);
     }
 }

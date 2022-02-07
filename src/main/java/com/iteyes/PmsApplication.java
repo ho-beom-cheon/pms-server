@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
-public class PmsApplication implements WebMvcConfigurer{
+public class  PmsApplication implements WebMvcConfigurer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(PmsApplication.class, args);

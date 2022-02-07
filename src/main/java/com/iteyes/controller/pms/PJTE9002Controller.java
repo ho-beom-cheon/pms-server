@@ -9,6 +9,7 @@ import com.iteyes.service.PJTE9002Service;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -74,7 +75,7 @@ public class PJTE9002Controller {
 
 		ObjectMapper objectMapper = new ObjectMapper()
 				.registerModule(new SimpleModule());
-		List<FileData> testHelloList = objectMapper.readValue(jsonList, new TypeReference<>() {});
+		List<FileData> testHelloList = objectMapper.readValue(jsonList, new TypeReference<List<FileData>>() {});
 		log.debug("testHello text = {}", testHelloList);
 		if(files != null){
 			for(MultipartFile mf : files){
@@ -103,23 +104,50 @@ public class PJTE9002Controller {
 
 		PJTE9002DTO PJTE9002 = new PJTE9002DTO();
 
+
+		String atfl_mng_id = request.getParameter("atfl_mng_id");
 		PJTE9002.setBkup_id(request.getParameter("bkup_id"));
 		PJTE9002.setPrjt_id(request.getParameter("prjt_id"));
-		PJTE9002.setAtfl_mng_id(request.getParameter("atfl_mng_id"));
 		PJTE9002.setFile_rgs_dscd(request.getParameter("file_rgs_dscd"));
+		PJTE9002.setLogin_emp_no(request.getParameter("login_emp_no"));
 
 		PJTE9002.setMng_id(request.getParameter("mng_id"));
 		PJTE9002.setSqn_cd(request.getParameter("sqn_cd"));
 		PJTE9002.setTst_case_id(request.getParameter("tst_case_id"));
 		PJTE9002.setPgm_id(request.getParameter("pgm_id"));
 		PJTE9002.setBzcd(request.getParameter("bzcd"));
-		PJTE9002.setLogin_emp_no(request.getParameter("login_emp_no"));
+
 		String file_rgs_dscd = request.getParameter("file_rgs_dscd");
+
+
+
+		// 첨부파일관리ID 존재여부에 따라 다른 로직
+		List<PJTE9002DTO> list = pjte9002Service.select_9002_10(PJTE9002);
+		PJTE9002.setDtls_tynm(list.get(0).getDtls_tynm());
+		if(request.getParameter("atfl_mng_id") == null || request.getParameter("atfl_mng_id").isEmpty()){
+
+			log.debug("atfl_mng_id isn't exist :: "+list.get(0).getAtfl_mng_id());
+			PJTE9002.setAtfl_mng_id(list.get(0).getAtfl_mng_id());
+			atfl_mng_id = list.get(0).getAtfl_mng_id();
+
+			// 상세코드 테이블에 채번ID update/insert
+			if(list.get(0).getDtls_tynm().equals("0000001")){
+				result = pjte9002Service.insert_9002_10(PJTE9002);
+			}else{
+				result = pjte9002Service.update_9002_10(PJTE9002);
+			}
+
+		}else{
+			PJTE9002.setAtfl_mng_id(request.getParameter("atfl_mng_id"));
+			log.debug("atfl_mng_id is exist"+request.getParameter("atfl_mng_id"));
+
+		}
 
 		// 첨부파일 데이터 전체삭제 후 insert 위한 delete 쿼리
 		pjte9002Service.delete_9002_01(PJTE9002);
 
 		for(int i=0; i<testHelloList.size(); i++){
+
 			String file_path = testHelloList.get(i).getFile_path();
 			String path = "C:\\file_ex\\";
 
@@ -150,11 +178,11 @@ public class PJTE9002Controller {
 			}else if(file_rgs_dscd.equals("700")){
 				result = pjte9002Service.update_9002_06(PJTE9002);
 			}
+
 		}
 
 
-
-		return new ResponseEntity<>("success",HttpStatus.OK);
+		return new ResponseEntity<>("success/"+atfl_mng_id,HttpStatus.OK);
 
 	}
 
