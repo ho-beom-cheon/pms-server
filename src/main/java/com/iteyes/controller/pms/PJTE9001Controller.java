@@ -19,6 +19,35 @@ public class PJTE9001Controller {
     @Autowired
     private PJTE9001Service pjte9001service;
 
+    @GetMapping(value = "/combo")
+    public @ResponseBody
+    String combo(HttpServletRequest request) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+        /* 빈 dto 생성 */
+        PJTE9001DTO PJTE9001 = new PJTE9001DTO();
+
+        /* 서비스 요청 */
+        List<PJTE9001DTO> list = pjte9001service.select_0000(PJTE9001);
+
+        /* map 형태로 저장 */
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        /* json 형태로 반환 */
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+
+    }
+
     @GetMapping(value = "/select")
     public @ResponseBody
     String select(HttpServletRequest request) throws Exception {
