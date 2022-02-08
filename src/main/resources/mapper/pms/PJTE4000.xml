@@ -48,10 +48,10 @@
           AND A.TTMN_CRPE_NM LIKE CONCAT(CONCAT('%',#{ttmn_crpe_nm}),'%')
             </if>
             <if test='rgs_sta_dt != ""  and rgs_sta_dt != null and rgs_end_dt != ""  and rgs_end_dt != null'>
-          AND A.RGS_DT BETWEEN #{rgs_sta_dt} AND #{rgs_end_dt}
+          AND A.RGS_DT BETWEEN REPLACE(#{rgs_sta_dt},'-','') AND REPLACE(#{rgs_end_dt},'-','')
             </if>
             <if test='ttmn_sta_dt != ""  and ttmn_sta_dt != null and ttmn_end_dt != ""  and ttmn_end_dt != null'>
-          AND A.TTMN_DT BETWEEN #{ttmn_sta_dt} AND #{ttmn_end_dt}
+          AND A.TTMN_DT BETWEEN REPLACE(#{ttmn_sta_dt},'-','') AND REPLACE(#{ttmn_end_dt},'-','')
             </if>
             <if test='titl_nm != "" and titl_nm != null'>
           AND A.TITL_NM LIKE CONCAT(CONCAT('%',#{titl_nm}),'%')
