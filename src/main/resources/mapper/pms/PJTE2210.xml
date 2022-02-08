@@ -1,154 +1,626 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.iteyes.mapper.pms.PJTE2210Mapper">
     <select id="select_2210_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
-        SELECT BKUP_ID/*백업ID 확인 */
-             , PRJT_ID/*프로젝트ID  */
-             , PGM_ID/*프로그램ID  */
-             , BZCD/*업무구분 */
-             , SQN_CD/*차수 */
-             , SCNR_ID/*시나리오ID*/
-             , SCNR_NM/*시나리오명*/
-             , TST_CASE_ID
-             , TST_CASE_NM
-             , FRCS_STA_DT
-             , FRCS_END_DT
-             , DVLPE_CNF_DT
-             , PL_CNF_DT
-             , DVLPE_ENO
-             , PL_ENO
-             , CRPE_ENO
-             , ITG_TST_PRC_CD
-             , PRR_CND
-             , INP_VAL
-             , TST_DES
-             , OUP_VAL
-             , TP
-             , OUP_MENS
-             , PGM_ID
-             , SCRN_ID
-             , TRN_CD
-             , RQU_SBH_ID
-             , TST_RST
-             , TST_ACHI_RST
-             , RMRK
-             , ATFL_MNG_ID
-             , OPR_NO
-             , DB_CHG_TS
-        FROM pms_itg_tst_mng
-        WHERE 1 = 1
-    </select>
+        <![CDATA[
+        /* 업무별 통합테스트현황 !*/
+        SELECT A.BZCD          AS BZCD
+             , A.BZNM          AS BZNM
+             , A.SQN_CD        AS SQN_CD
+             , A.SQN_NM        AS SQN_NM
+             , B.TOT_CNT       AS TOT_CNT
+             , B.AF_TOT_CNT    AS AF_TOT_CNT
+             , B.CMPL_CNT      AS CMPL_CNT
+             , B.AF_CMPL_CNT   AS AF_CMPL_CNT
+             , B.NCMPL_CNT     AS NCMPL_CNT
+             , B.PRNR_RT       AS PRNR_RT
+             , C.TOT_CNT       AS TOT_CNT1
+             , C.CMPL_CNT      AS CMPL_CNT1
+             , C.NCMPL_CNT     AS NCMPL_CNT1
+             , C.PRNR_RT       AS PRNR_RT1
+             , D.TOT_CNT       AS PL_TOT_CNT
+             , D.CMPL_CNT      AS PL_CMPL_CNT
+             , D.NCMPL_CNT     AS PL_NCMPL_CNT
+             , D.PRNR_RT       AS PL_PRNR_RT
+             , F.TOT_CNT       AS TOT_CNT2
+             , F.CMPL_CNT      AS CMPL_CNT2
+          FROM (SELECT A.DTLS_TYCD         AS BZCD
+                     , A.DTLS_TYNM         AS BZNM
+                     , B.SQN_CD            AS SQN_CD
+                     , NVL(C.SQN_NM,'1차수') AS SQN_NM
+                  FROM pms_cd_del_mng A
+                         LEFT OUTER JOIN
+                              (SELECT BZCD
+                                     ,SQN_CD
+                               FROM   pms_itg_tst_mng
+                               WHERE  SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+                               AND    PRJT_ID  = #{prjt_id}
+                               AND    BKUP_ID  = #{bkup_id}
+                               GROUP BY BZCD, SQN_CD) B
+                        ON B.BZCD   = A.DTLS_TYCD
+                        LEFT OUTER JOIN
+                             (SELECT DTLS_TYCD    AS SQN_CD
+                                    ,DTLS_TYNM    AS SQN_NM
+                              FROM   pms_cd_del_mng
+                              WHERE  GRP_TYCD = '1000000006'
+                                          AND    PRJT_ID  = #{prjt_id}
+                                          AND    BKUP_ID  = #{bkup_id}) C
+                              ON B.SQN_CD   = C.SQN_CD
+                  WHERE  GRP_TYCD = '1000000001'
+                  AND    PRJT_ID  = #{prjt_id}
+                  AND    BKUP_ID  = #{bkup_id})   A
+          LEFT OUTER JOIN
+               (SELECT AA.BZCD
+                     , AA.SQN_CD
+                     , AA.TOT_CNT
+                     , AA.AF_TOT_CNT
+                     , AA.CMPL_CNT
+                     , AA.AF_CMPL_CNT
+                     , AA.NCMPL_CNT
+                     , NVL2(AA.TOT_CNT,ROUND((((AA.CMPL_CNT + AA.AF_CMPL_CNT)/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                  FROM (SELECT A.BZCD
+                             , A.SQN_CD
+                             , COUNT(*) AS TOT_CNT
+                             , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date}
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS AF_TOT_CNT
+                             , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date} AND A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS CMPL_CNT
+                             , SUM(CASE WHEN A.FRCS_END_DT >  #{inp_date} AND A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS AF_CMPL_CNT
+                             , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date} AND A.ITG_TST_PRC_CD IN ('000', '100')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS NCMPL_CNT
+                          FROM pms_itg_tst_mng A
+                         WHERE 1=1
+                           AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN A.SQN_CD ELSE #{sqn_cd} END
+                           AND A.PRJT_ID	   = #{prjt_id}
+                           AND A.BKUP_ID	   = #{bkup_id}
+                         GROUP BY A.BZCD, A.SQN_CD
+                       ) AA
+               )   B
+            ON  B.BZCD   = A.BZCD
+            AND B.SQN_CD = A.SQN_CD
+          LEFT OUTER JOIN
+               (SELECT BB.BZCD
+                     , BB.SQN_CD
+                     , BB.TOT_CNT
+                     , BB.CMPL_CNT
+                     , BB.NCMPL_CNT
+                     , NVL2(BB.TOT_CNT, ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                  FROM (SELECT A.BZCD
+                             , A.SQN_CD
+                             , COUNT(*) AS TOT_CNT
+                             , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS CMPL_CNT
+                             , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('000', '100')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS NCMPL_CNT
+                          FROM pms_itg_tst_mng A
+                         WHERE 1=1
+                           AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                           AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN A.SQN_CD ELSE #{sqn_cd} END
+                           AND A.PRJT_ID	   = #{prjt_id}
+                           AND A.BKUP_ID	   = #{bkup_id}
+                         GROUP BY A.BZCD, A.SQN_CD
+                       ) BB
+               )   C
+            ON  C.BZCD   = A.BZCD
+            AND C.SQN_CD = A.SQN_CD
+          LEFT OUTER JOIN
+               (SELECT CC.BZCD
+                     , CC.SQN_CD
+                     , CC.TOT_CNT
+                     , CC.CMPL_CNT
+                     , CC.NCMPL_CNT
+                     , NVL2(CC.TOT_CNT,ROUND(((CC.CMPL_CNT/CC.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                  FROM (SELECT A.BZCD
+                             , A.SQN_CD
+                             , COUNT(*) AS TOT_CNT
+                             , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('300', '400','500','600')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS CMPL_CNT
+                             , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('000', '100','200')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS NCMPL_CNT
+                          FROM pms_itg_tst_mng A
+                         WHERE 1=1
+                           AND DATE_FORMAT(DATE_ADD(A.DVLPE_CNF_DT,INTERVAL CAST(#{proc_days} AS INT) DAY),'%Y%m%d')
+                       BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                           AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN A.SQN_CD ELSE #{sqn_cd} END
+                           AND A.PRJT_ID	   = #{prjt_id}
+                           AND A.BKUP_ID	   = #{bkup_id}
+                         GROUP BY A.BZCD, A.SQN_CD
+                       ) CC
+               )   D
+            ON  D.BZCD   = A.BZCD
+            AND D.SQN_CD = A.SQN_CD
+          LEFT OUTER JOIN
+               (SELECT DD.BZCD
+                     , DD.SQN_CD
+                     , DD.TOT_CNT
+                     , DD.CMPL_CNT
+                  FROM (SELECT A.BZCD
+                             , A.SQN_CD
+                             , COUNT(*) AS TOT_CNT
+                             , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('200','300', '400','500','600')
+                                        THEN 1
+                                        ELSE 0
+                                         END
+                                  )     AS CMPL_CNT
+                          FROM pms_itg_tst_mng A
+                         WHERE 1=1
+                           AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL 1 DAY),'%Y%m%d')
+                                                 AND DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL 7 DAY),'%Y%m%d')
+                           AND A.PRJT_ID	   = #{prjt_id}
+                           AND A.BKUP_ID	   = #{bkup_id}
+                         GROUP BY A.BZCD, A.SQN_CD
+                       ) DD
+               )   F
+            ON  F.BZCD   = A.BZCD
+            AND F.SQN_CD = A.SQN_CD
+       ]]>
+        <!-- 업무구분 -->
+        <if test='bzcd != "TTT"'>
+         WHERE 1=1
+           AND A.BZCD = #{bzcd}
+         ORDER BY A.BZCD, A.SQN_CD
+        </if>
+      </select>
     <select id="select_2210_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
-        SELECT BKUP_ID/*백업ID 확인 */
-             , PRJT_ID/*프로젝트ID  */
-             , PGM_ID/*프로그램ID  */
-             , BZCD/*업무구분 */
-             , SQN_CD/*차수 */
-             , SCNR_ID/*시나리오ID*/
-             , SCNR_NM/*시나리오명*/
-             , TST_CASE_ID
-             , TST_CASE_NM
-             , FRCS_STA_DT
-             , FRCS_END_DT
-             , DVLPE_CNF_DT
-             , PL_CNF_DT
-             , DVLPE_ENO
-             , PL_ENO
-             , CRPE_ENO
-             , ITG_TST_PRC_CD
-             , PRR_CND
-             , INP_VAL
-             , TST_DES
-             , OUP_VAL
-             , TP
-             , OUP_MENS
-             , PGM_ID
-             , SCRN_ID
-             , TRN_CD
-             , RQU_SBH_ID
-             , TST_RST
-             , TST_ACHI_RST
-             , RMRK
-             , ATFL_MNG_ID
-             , OPR_NO
-             , DB_CHG_TS
-        FROM pms_itg_tst_mng
-        WHERE 1 = 1
+     <![CDATA[
+        /* 담당자별 통합테스트현황 */
+         SELECT A.BZCD          AS BZCD
+              , A.BZNM          AS BZNM
+              , A.SQN_CD        AS SQN_CD
+              , A.SQN_NM        AS SQN_NM
+              , CASE WHEN B.EMPNM IS NULL
+                     THEN '미배정'
+                     ELSE B.EMPNM
+                      END       AS EMP_NM
+              , A.TOT_CNT       AS TOT_CNT
+              , A.CMPL_CNT      AS CMPL_CNT
+              , A.NCMPL_CNT     AS NCMPL_CNT
+              , A.PRNR_RT       AS PRNR_RT
+              , A.TOT_CNT1      AS TOT_CNT1
+              , A.CMPL_CNT1     AS CMPL_CNT1
+              , A.NCMPL_CNT1    AS NCMPL_CNT1
+              , A.PRNR_RT1      AS PRNR_RT1
+              , A.TOT_CNT2      AS TOT_CNT2
+              , A.CMPL_CNT2     AS CMPL_CNT2
+           FROM (SELECT A.BZCD          AS BZCD
+                      , A.BZNM          AS BZNM
+                      , A.SQN_CD        AS SQN_CD
+                      , A.SQN_NM        AS SQN_NM
+                      , A.DVLPE_ENO     AS DVLPE_ENO
+                      , A.PRJT_ID       AS PRJT_ID
+                      , A.BKUP_ID       AS BKUP_ID
+                      , B.TOT_CNT       AS TOT_CNT
+                      , B.CMPL_CNT      AS CMPL_CNT
+                      , B.NCMPL_CNT     AS NCMPL_CNT
+                      , B.PRNR_RT       AS PRNR_RT
+                      , C.TOT_CNT       AS TOT_CNT1
+                      , C.CMPL_CNT      AS CMPL_CNT1
+                      , C.NCMPL_CNT     AS NCMPL_CNT1
+                      , C.PRNR_RT       AS PRNR_RT1
+                      , D.TOT_CNT       AS TOT_CNT2
+                      , D.CMPL_CNT      AS CMPL_CNT2
+                   FROM (SELECT A.DTLS_TYCD  AS BZCD
+                              , A.DTLS_TYNM  AS BZNM
+                              , A.PRJT_ID    AS PRJT_ID
+                              , A.BKUP_ID    AS BKUP_ID
+                              , B.DVLPE_ENO  AS DVLPE_ENO
+                              , B.SQN_CD     AS SQN_CD
+                              , NVL(C.SQN_NM,'1차수') AS SQN_NM
+                           FROM pms_cd_del_mng A
+                           LEFT OUTER JOIN
+                                       (SELECT BZCD
+                                              ,DVLPE_ENO
+                                              ,SQN_CD
+                                        FROM   pms_itg_tst_mng
+                                        WHERE  SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+                                        AND    PRJT_ID  = #{prjt_id}
+                                        AND    BKUP_ID  = #{bkup_id}
+                                        GROUP BY BZCD, DVLPE_ENO, SQN_CD) B
+                                 ON B.BZCD   = A.DTLS_TYCD
+                                 LEFT OUTER JOIN
+                                      (SELECT DTLS_TYCD    AS SQN_CD
+                                             ,DTLS_TYNM    AS SQN_NM
+                                       FROM   pms_cd_del_mng
+                                       WHERE  GRP_TYCD = '1000000006'
+                                                   AND    PRJT_ID  = #{prjt_id}
+                                                   AND    BKUP_ID  = #{bkup_id}) C
+                                       ON B.SQN_CD   = C.SQN_CD
+                           WHERE  GRP_TYCD = '1000000001'
+                           AND    PRJT_ID  = #{prjt_id}
+                           AND    BKUP_ID  = #{bkup_id}
+                     ORDER BY A.DTLS_TYCD , A.DTLS_TYNM , B.SQN_CD, B.DVLPE_ENO
+                   )   A
+                   LEFT OUTER JOIN
+                        (SELECT AA.BZCD
+                              , AA.DVLPE_ENO
+                              , AA.SQN_CD
+                              , AA.TOT_CNT
+                              , AA.CMPL_CNT
+                              , AA.NCMPL_CNT
+                              , NVL2(AA.TOT_CNT,ROUND(((AA.CMPL_CNT/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                           FROM (SELECT A.BZCD
+                                      , A.SQN_CD
+                                      , A.DVLPE_ENO
+                                      , COUNT(*) AS TOT_CNT
+                                      , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('200','300', '400','500','600')
+                                                 THEN 1
+                                                 ELSE 0
+                                                  END
+                                           )     AS CMPL_CNT
+                                      , SUM(CASE WHEN A.FRCS_END_DT < #{inp_date} AND A.ITG_TST_PRC_CD IN ('000', '100')
+                                                 THEN 1
+                                                 ELSE 0
+                                                  END
+                                           )     AS NCMPL_CNT
+                                   FROM pms_itg_tst_mng A
+                                  WHERE 1=1
+                                    AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+                                    AND A.PRJT_ID	   = #{prjt_id}
+                                    AND A.BKUP_ID	   = #{bkup_id}
+                                  GROUP BY A.BZCD, A.SQN_CD, A.DVLPE_ENO
+                               ) AA
+                        )   B
+                     ON B.BZCD      = A.BZCD
+                    AND B.SQN_CD    = A.SQN_CD
+                    AND B.DVLPE_ENO = A.DVLPE_ENO
+                   LEFT OUTER JOIN
+                        (SELECT BB.BZCD
+                              , BB.DVLPE_ENO
+                              , BB.SQN_CD
+                              , BB.TOT_CNT
+                              , BB.CMPL_CNT
+                              , BB.NCMPL_CNT
+                              , NVL2(BB.TOT_CNT,ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                           FROM (SELECT A.BZCD
+                                      , A.SQN_CD
+                                      , A.DVLPE_ENO
+                                      , COUNT(*) AS TOT_CNT
+                                      , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('200','300', '400','500','600')
+                                                 THEN 1
+                                                 ELSE 0
+                                                  END
+                                           )     AS CMPL_CNT
+                                      , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('000', '100')
+                                                 THEN 1
+                                                 ELSE 0
+                                                  END
+                                           )     AS NCMPL_CNT
+                                   FROM pms_itg_tst_mng A
+                                  WHERE 1=1
+                                    AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+                                    AND A.PRJT_ID	   = #{prjt_id}
+                                    AND A.BKUP_ID	   = #{bkup_id}
+                                    AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                                  GROUP BY A.BZCD, A.SQN_CD, A.DVLPE_ENO
+                               ) BB
+                        )   C
+                     ON C.BZCD      = A.BZCD
+                    AND C.SQN_CD    = A.SQN_CD
+                    AND C.DVLPE_ENO = A.DVLPE_ENO
+                   LEFT OUTER JOIN
+                        (SELECT CC.BZCD
+                              , CC.SQN_CD
+                              , CC.DVLPE_ENO
+                              , CC.TOT_CNT
+                              , CC.CMPL_CNT
+                           FROM (SELECT A.BZCD
+                                      , A.SQN_CD
+                                      , A.DVLPE_ENO
+                                      , COUNT(*) AS TOT_CNT
+                                      , SUM(CASE WHEN A.ITG_TST_PRC_CD IN ('200','300', '400','500','600')
+                                                 THEN 1
+                                                 ELSE 0
+                                                  END
+                                           )     AS CMPL_CNT
+                                   FROM pms_itg_tst_mng A
+                                  WHERE 1=1
+                                    AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+                                    AND A.PRJT_ID	   = #{prjt_id}
+                                    AND A.BKUP_ID	   = #{bkup_id}
+                                    AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL 1 DAY),'%Y%m%d')
+                                                          AND DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL 7 DAY),'%Y%m%d')
+                                  GROUP BY A.BZCD, A.SQN_CD, A.DVLPE_ENO
+                               ) CC
+                        )   D
+                     ON D.BZCD      = A.BZCD
+                    AND D.SQN_CD    = A.SQN_CD
+                    AND D.DVLPE_ENO = A.DVLPE_ENO
+                 WHERE 1=1
+        ]]>
+             <!-- 업무구분 -->
+            <if test='bzcd != "TTT"'>
+               AND A.BZCD = #{bzcd} ) A
+            </if>
+            <if test='bzcd == "TTT"'>
+               )                      A
+            </if>
+           LEFT OUTER JOIN pms_emp_info  B
+             ON  B.EMPNO   = A.DVLPE_ENO
+             AND B.PRJT_ID = A.PRJT_ID
+             AND B.BKUP_ID = A.BKUP_ID
+          ORDER BY A.BZCD, A.SQN_CD, B.EMPNM
     </select>
-	<select id="select_2210_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
-		SELECT BKUP_ID/*백업ID 확인 */
-			 , PRJT_ID/*프로젝트ID  */
-			 , PGM_ID/*프로그램ID  */
-			 , BZCD/*업무구분 */
-			 , SQN_CD/*차수 */
-			 , SCNR_ID/*시나리오ID*/
-			 , SCNR_NM/*시나리오명*/
-			 , TST_CASE_ID
-			 , TST_CASE_NM
-			 , FRCS_STA_DT
-			 , FRCS_END_DT
-			 , DVLPE_CNF_DT
-			 , PL_CNF_DT
-			 , DVLPE_ENO
-			 , PL_ENO
-			 , CRPE_ENO
-			 , ITG_TST_PRC_CD
-			 , PRR_CND
-			 , INP_VAL
-			 , TST_DES
-			 , OUP_VAL
-			 , TP
-			 , OUP_MENS
-			 , PGM_ID
-			 , SCRN_ID
-			 , TRN_CD
-			 , RQU_SBH_ID
-			 , TST_RST
-			 , TST_ACHI_RST
-			 , RMRK
-			 , ATFL_MNG_ID
-			 , OPR_NO
-			 , DB_CHG_TS
-		FROM pms_itg_tst_mng
-		WHERE 1 = 1
-	</select>
-	<select id="select_2210_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
-		SELECT BKUP_ID/*백업ID 확인 */
-			 , PRJT_ID/*프로젝트ID  */
-			 , PGM_ID/*프로그램ID  */
-			 , BZCD/*업무구분 */
-			 , SQN_CD/*차수 */
-			 , SCNR_ID/*시나리오ID*/
-			 , SCNR_NM/*시나리오명*/
-			 , TST_CASE_ID
-			 , TST_CASE_NM
-			 , FRCS_STA_DT
-			 , FRCS_END_DT
-			 , DVLPE_CNF_DT
-			 , PL_CNF_DT
-			 , DVLPE_ENO
-			 , PL_ENO
-			 , CRPE_ENO
-			 , ITG_TST_PRC_CD
-			 , PRR_CND
-			 , INP_VAL
-			 , TST_DES
-			 , OUP_VAL
-			 , TP
-			 , OUP_MENS
-			 , PGM_ID
-			 , SCRN_ID
-			 , TRN_CD
-			 , RQU_SBH_ID
-			 , TST_RST
-			 , TST_ACHI_RST
-			 , RMRK
-			 , ATFL_MNG_ID
-			 , OPR_NO
-			 , DB_CHG_TS
-		FROM pms_itg_tst_mng
-		WHERE 1 = 1
-	</select>
+    <select id="select_2210_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
+        /* 결함현황 */
+        SELECT A.BZCD          AS BZCD
+             , A.BZNM          AS BZNM
+             , A.SQN_CD        AS SQN_CD
+             , A.SQN_NM        AS SQN_NM
+             , A.PRJT_ID            AS PRJT_ID
+	         , A.BKUP_ID            AS BKUP_ID
+             , CASE WHEN COUNT(*) = 1
+                    THEN 0
+                    ELSE COUNT(*)
+                     END       AS TOT_ERR_CNT
+
+             , SUM(CASE WHEN B.ERR_TYCD = '100'
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS ERR_CNT
+             , SUM(CASE WHEN B.ERR_TYCD = '200'
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS IMPT_CNT
+             , SUM(CASE WHEN B.ERR_TYCD = '900'
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS ETC_ERR_CNT
+             , SUM(CASE WHEN B.ERR_TYCD = '300'
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS NERR_CNT
+             , SUM(CASE WHEN B.ERR_TYCD = '300' OR B.ERR_PRC_STEP_CD IN (SELECT DTLS_TYCD
+    														                                    FROM   pms_cd_del_mng
+    														                                    WHERE  BKUP_ID  = A.BKUP_ID
+    														                                    AND    PRJT_ID  = A.PRJT_ID
+    														                                    AND    GRP_TYCD = '1000000034'
+    														                                    AND    USE_YN   = 'Y')
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS CMPL_CNT
+             , SUM(CASE WHEN B.ERR_TYCD != '300' AND B.ERR_PRC_STEP_CD NOT IN (SELECT DTLS_TYCD
+    														                                          FROM   pms_cd_del_mng
+    														                                          WHERE  BKUP_ID  = A.BKUP_ID
+    														                                          AND    PRJT_ID  = A.PRJT_ID
+    														                                          AND    GRP_TYCD = '1000000034'
+    														                                          AND    USE_YN   = 'Y')
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS NCMPL_CNT
+             , SUM(CASE WHEN B.ERR_PRC_STEP_CD = '500'
+                        THEN 1
+                        ELSE 0
+                         END
+                  )            AS SPND_CNT
+          FROM (SELECT A.DTLS_TYCD         AS BZCD
+    					        ,A.DTLS_TYNM         AS BZNM
+    					        ,B.SQN_CD            AS SQN_CD
+    					        ,IFNULL(C.SQN_NM,'1차수') AS SQN_NM
+                                ,B.PRJT_ID            AS PRJT_ID
+                                ,B.BKUP_ID            AS BKUP_ID
+    					  FROM   pms_cd_del_mng A
+    					         LEFT OUTER JOIN
+    					              (SELECT BZCD
+    					                    , SQN_CD
+                                            , PRJT_ID
+                                            , BKUP_ID
+    					               FROM   pms_itg_tst_mng
+    					               WHERE  SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+    					               AND    PRJT_ID  = #{prjt_id}
+    					               AND    BKUP_ID  = #{bkup_id}
+    					               GROUP BY BZCD, SQN_CD) B
+    					        ON B.BZCD   = A.DTLS_TYCD
+    					        LEFT OUTER JOIN
+    					             (SELECT DTLS_TYCD    AS SQN_CD
+    					                    ,DTLS_TYNM    AS SQN_NM
+    					              FROM   pms_cd_del_mng
+    					              WHERE  GRP_TYCD = '1000000006'
+    											  AND    PRJT_ID  = #{prjt_id}
+    											  AND    BKUP_ID  = #{bkup_id}) C
+    								  ON B.SQN_CD   = C.SQN_CD
+    					  WHERE  A.GRP_TYCD = '1000000001'
+    					  AND    A.PRJT_ID  = #{prjt_id}
+    					  AND    A.BKUP_ID  = #{bkup_id}
+               )            A
+          LEFT OUTER JOIN
+               pms_err_mng  B
+            ON B.RGS_DSCD  LIKE '2%'
+           AND B.BZCD        = A.BZCD
+           AND B.CCTN_SQN_CD = A.SQN_CD
+           AND B.PRJT_ID	   = #{prjt_id}
+           AND B.BKUP_ID	   = #{bkup_id}
+         WHERE 1=1
+           AND B.PRJT_ID     = #{prjt_id}
+    	   AND B.BKUP_ID     = #{bkup_id}
+    	   AND B.CCTN_SQN_CD = CASE WHEN #{sqn_cd} = 'TTT' THEN CCTN_SQN_CD ELSE #{sqn_cd} END
+           <!-- 업무구분 -->
+           <if test='bzcd != "TTT"'>
+           AND A.BZCD = #{bzcd}
+           </if>
+         GROUP BY A.BZCD, A.SQN_CD, A.SQN_NM, A.BZNM
+         ORDER BY A.BZCD, A.SQN_CD
+      </select>
+
+    <select id="select_2210_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
+        /*통합테스트 및 결함 미진내역 */
+        <![CDATA[
+            SELECT A.BZNM
+                 , A.BZCD
+                 , D.SQN_CD
+                 , E.SQN_NM
+                 , D.NPRRN_KBN
+                 , D.TST_CASE_ID
+                 , D.TST_CASE_NM
+                 , D.FRCS_END_DT
+                 , D.DVLPE_CNF_DT
+                 , B.EMPNM      AS DVLPE_NM
+                 , C.EMPNM      AS PL_NM
+                 , D.CRPE_YN    AS CRPE_YN
+                 , D.PL_ENO      AS PL_ENO
+                 , D.NPRRN
+              FROM (SELECT *
+                      FROM (SELECT A.BZCD
+                                 , A.SQN_CD       AS SQN_CD
+                                 , '통합테스트'       AS NPRRN_KBN
+                                 , A.TST_CASE_ID  AS TST_CASE_ID
+                                 , A.TST_CASE_NM  AS TST_CASE_NM
+                                 , A.FRCS_END_DT  AS FRCS_END_DT
+                                 , A.DVLPE_CNF_DT AS DVLPE_CNF_DT
+                                 , A.DVLPE_ENO    AS DVLPE_ENO
+                                 , A.PL_ENO       AS PL_ENO
+                                 , A.PRJT_ID
+                                 , A.BKUP_ID
+                                 , CASE WHEN A.ITG_TST_PRC_CD IN ('000', '100')
+                                        THEN '부'
+                                        ELSE '여'
+                                         END    AS CRPE_YN
+                                 , CASE WHEN A.DVLPE_CNF_DT <= DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND A.ITG_TST_PRC_CD = '200'
+                                        THEN '부'
+                                        ELSE ''
+                                         END    AS PL_YN
+                                 , RMRK         AS NPRRN
+                              FROM pms_itg_tst_mng A
+                             WHERE 1=1
+                               AND A.SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+                               AND A.ITG_TST_PRC_CD IN ('000', '100', '200')
+                               AND A.PRJT_ID	   = #{prjt_id}
+                               AND A.BKUP_ID	   = #{bkup_id}
+                               AND (A.FRCS_END_DT <= #{inp_date} OR A.DVLPE_CNF_DT IS NOT NULL)
+                           )  A
+                     WHERE 1=1
+                       AND (A.CRPE_YN = '부' OR A.PL_YN = '부')
+                     UNION ALL
+                    SELECT *
+                      FROM (SELECT A.BZCD
+                                 , A.CCTN_SQN_CD    AS SQN_CD
+                                 , CASE WHEN A.ERR_TYCD = '100'
+                                        THEN '결함'
+                                        WHEN A.ERR_TYCD = '200'
+                                        THEN '개선'
+                                        ELSE '기타결함'
+                                         END     AS NPRRN_KBN
+                                 , B.TST_CASE_ID      AS TST_CASE_ID
+                                 , B.TST_CASE_NM      AS TST_CASE_NM
+                                 , A.TTMN_SCD_DT AS FRCS_END_DT
+                                 , A.TTMN_DT     AS DVLPE_CNF_DT
+                                 , A.DVLPE_NO   AS DVLPE_NO
+                                 , A.PL_NO      AS PL_NO
+                                 , A.PRJT_ID
+                                 , A.BKUP_ID
+                                 , CASE WHEN A.ERR_PRC_STEP_CD IN (SELECT DTLS_TYCD
+        											                                     FROM   pms_cd_del_mng
+        											                                     WHERE  BKUP_ID  = A.BKUP_ID
+        											                                     AND    PRJT_ID  = A.PRJT_ID
+        											                                     AND    GRP_TYCD = '1000000034'
+        											                                     AND    USE_YN   = 'Y')
+                                        THEN '여'
+                                        ELSE '부'
+                                         END     AS CRPE_YN
+                                 , CASE WHEN A.TTMN_DT <= DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -1 DAY),'%Y%m%d') AND A.ERR_PRC_STEP_CD = '600'
+                                        THEN '부'
+                                        ELSE ''
+                                         END     AS PL_YN
+                                 , A.TTMN_TXT    AS NPRRN
+                              FROM pms_err_mng  A
+                              LEFT OUTER JOIN
+                                   (SELECT BKUP_ID
+                                         , PRJT_ID
+                                         , BZCD
+                                         , SQN_CD
+                                         , TST_CASE_ID
+                                         , TST_CASE_NM
+                                      FROM pms_itg_tst_mng
+                                     WHERE 1=1
+                                       AND SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
+        								               AND PRJT_ID  = #{prjt_id}
+        					                     AND BKUP_ID  = #{bkup_id}) B
+                                ON A.CCTN_SQN_CD = B.SQN_CD
+                               AND A.CCTN_BZCD	 = B.BZCD
+                               AND A.CCTN_ID     = B.TST_CASE_ID
+                               AND A.PRJT_ID     = B.PRJT_ID
+                               AND A.BKUP_ID     = B.BKUP_ID
+                             WHERE 1=1
+                               AND A.ERR_TYCD  IN ('100', '200', '900')
+                               AND A.ERR_PRC_STEP_CD IN ('100', '200', '300', '400', '600')
+                               AND A.CCTN_SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN CCTN_SQN_CD ELSE #{sqn_cd} END
+                               AND A.PRJT_ID  = #{prjt_id}
+        					             AND A.BKUP_ID  = #{bkup_id}
+                               AND A.RGS_DSCD LIKE '2%'
+                           )  A
+                     WHERE 1=1
+                       AND (A.CRPE_YN = '부' OR A.PL_YN = '부')
+                   )  D
+              LEFT OUTER JOIN
+                   (SELECT DTLS_TYCD AS BZCD
+        					        ,DTLS_TYNM AS BZNM
+        					  FROM   pms_cd_del_mng
+        					  WHERE  GRP_TYCD = '1000000001'
+        					  AND    PRJT_ID  = #{prjt_id}
+        					  AND    BKUP_ID  = #{bkup_id}
+                   )  A
+                ON A.BZCD    = D.BZCD
+               LEFT OUTER JOIN
+                    pms_emp_info  B
+                ON  B.EMPNO   = D.DVLPE_ENO
+                AND B.PRJT_ID = D.PRJT_ID
+                AND B.BKUP_ID = D.BKUP_ID
+               LEFT OUTER JOIN
+                    pms_emp_info  C
+                ON C.EMPNO   = D.PL_ENO
+               AND C.PRJT_ID = D.PRJT_ID
+               AND C.BKUP_ID = D.BKUP_ID
+              LEFT OUTER JOIN
+                   (SELECT DTLS_TYCD AS SQN_CD
+        					        ,DTLS_TYNM AS SQN_NM
+        					  FROM   pms_cd_del_mng
+        					  WHERE  GRP_TYCD = '1000000006'
+        					  AND    PRJT_ID  = #{prjt_id}
+        					  AND    BKUP_ID  = #{bkup_id}
+                   )  E
+                ON E.SQN_CD    = D.SQN_CD
+           ]]>
+             WHERE 1=1
+               <!-- 업무구분 -->
+               <if test='bzcd != "TTT"'>
+               AND A.BZCD = #{bzcd}
+               </if>
+             ORDER BY A.BZCD
+                    , D.SQN_CD
+                    , D.NPRRN_KBN
+                    , B.EMPNM
+                    , D.DVLPE_CNF_DT
+                    , D.TST_CASE_ID
+    </select>
 </mapper>

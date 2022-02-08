@@ -5,30 +5,34 @@
 <mapper namespace="com.iteyes.mapper.pms.PJTE2110Mapper">
     <select id="select_2110_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
          <![CDATA[
-         SELECT A.BZCD          AS BZCD
-              , A.BZNM          AS BZNM
-              , B.TOT_CNT       AS TOT_CNT
-              , B.AF_TOT_CNT    AS AF_TOT_CNT
-              , B.CMPL_CNT      AS CMPL_CNT
-              , B.AF_CMPL_CNT   AS AF_CMPL_CNT
-              , B.NCMPL_CNT     AS NCMPL_CNT
-              , B.PRNR_RT       AS PRNR_RT
-              , C.TOT_CNT       AS TOT_CNT1
-              , C.CMPL_CNT      AS CMPL_CNT1
-              , C.NCMPL_CNT     AS NCMPL_CNT1
-              , C.PRNR_RT       AS PRNR_RT1
-              , D.TOT_CNT       AS PL_TOT_CNT
-              , D.CMPL_CNT      AS PL_CMPL_CNT
-              , D.NCMPL_CNT     AS PL_NCMPL_CNT
-              , D.PRNR_RT       AS PL_PRNR_RT
-              , F.TOT_CNT       AS TOT_CNT2
-              , F.CMPL_CNT      AS CMPL_CNT2
+         SELECT A.BZCD                    AS BZCD
+              , A.BZNM                    AS BZNM
+              , NVL(B.TOT_CNT,0)       AS TOT_CNT
+              , NVL(B.AF_TOT_CNT,0)    AS AF_TOT_CNT
+              , NVL(B.CMPL_CNT,0)      AS CMPL_CNT
+              , NVL(B.AF_CMPL_CNT,0)   AS AF_CMPL_CNT
+              , NVL(B.NCMPL_CNT,0)     AS NCMPL_CNT
+              , NVL(B.PRNR_RT,0)       AS PRNR_RT
+              , NVL(C.TOT_CNT,0)       AS TOT_CNT1
+              , NVL(C.CMPL_CNT,0)      AS CMPL_CNT1
+              , NVL(C.NCMPL_CNT,0)     AS NCMPL_CNT1
+              , NVL(C.PRNR_RT,0)       AS PRNR_RT1
+              , NVL(D.TOT_CNT,0)       AS PL_TOT_CNT
+              , NVL(D.CMPL_CNT,0)      AS PL_CMPL_CNT
+              , NVL(D.NCMPL_CNT,0)     AS PL_NCMPL_CNT
+              , NVL(D.PRNR_RT,0)       AS PL_PRNR_RT
+              , NVL(F.TOT_CNT,0)       AS TOT_CNT2
+              , NVL
+
+
+
+                  (F.CMPL_CNT,0)      AS CMPL_CNT2
            FROM (SELECT DTLS_TYCD AS BZCD
-                                 ,DTLS_TYNM AS BZNM
-                           FROM   pms_cd_del_mng
-                           WHERE  GRP_TYCD = '1000000001'
-                           AND    PRJT_ID  = #{prjt_id}
-                           AND    BKUP_ID  = #{bkup_id}) A
+                      , DTLS_TYNM AS BZNM
+                   FROM pms_cd_del_mng
+                  WHERE GRP_TYCD = '1000000001'
+                    AND PRJT_ID  = #{prjt_id}
+                    AND BKUP_ID  = #{bkup_id}) A
            LEFT OUTER JOIN
                 (SELECT AA.BZCD
                       , AA.TOT_CNT
@@ -435,8 +439,8 @@
               , D.NPRRN_KBN
               , D.PGM_ID
               , D.PGM_NM
-              , D.FRCS_END_DT
-              , D.DVLPE_CNF_DT
+              , NVL2(D.FRCS_END_DT,STR_TO_DATE(D.FRCS_END_DT , '%Y%m%d'),'') AS FRCS_END_DT
+              , NVL2(D.DVLPE_CNF_DT,STR_TO_DATE(D.DVLPE_CNF_DT , '%Y%m%d'),'') AS DVLPE_CNF_DT
               , B.EMPNM      AS DVLPE_NM
               , C.EMPNM      AS PL_NM
               , D.CRPE_YN    AS CRPE_YN

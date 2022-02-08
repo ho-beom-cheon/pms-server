@@ -25,10 +25,10 @@ public class PJTE1000Controller {
     String select(HttpServletRequest request) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-
+//1111
         PJTE1000DTO PJTE1000 = new PJTE1000DTO();
 
-        PJTE1000.setPrjt_id(request.getParameter("prjt_id_selected"));
+        PJTE1000.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE1000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE1000.setLogin_emp_no(request.getParameter("login_emp_no"));
         PJTE1000.setLogin_bzcd(request.getParameter("login_bzcd"));
@@ -69,7 +69,7 @@ public class PJTE1000Controller {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        result = PJTE1000Service.delete_1000_01(PJTE1000);
+        result = PJTE1000Service.update_1000_01(PJTE1000);
 
         return result;
 

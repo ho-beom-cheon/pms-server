@@ -10,11 +10,12 @@ import java.util.List;
 
 @Service
 public class PJTE2210ServiceImpl implements PJTE2210Service {
+    //
     @Autowired
     private PJTE2210Mapper pjte2210Mapper;
 
     @Override
-    public List<PJTE2210DTO> select_2210_01(PJTE2210DTO PJTE2210) throws Exception {
+    public List<PJTE2210DTO> select_2210(PJTE2210DTO PJTE2210) throws Exception {
 
         return pjte2210Mapper.select_2210_01(PJTE2210);
 

@@ -20,10 +20,10 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-            Object handler)
+                             Object handler)
             throws Exception {
         System.out.println(request.getMethod() + " :" + request.getServletPath());
-        
+
         // option 요청은 바로 통과시켜주자.
         if (request.getMethod().equals("OPTIONS")) {
             return true;
@@ -34,7 +34,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             if (token != null && token.length() > 0) {
                 // 유효한 토큰이면 진행, 그렇지 않으면 예외를 발생시킨다.
                 jwtService.checkValid(token);
-                log.trace("토큰 사용 가능: {}", token);
+                if (log.isTraceEnabled()) {
+                    log.trace("토큰 사용 가능: {}", token);
+                }
                 return true;
             } else {
                 throw new RuntimeException("인증 토큰이 없습니다.");
