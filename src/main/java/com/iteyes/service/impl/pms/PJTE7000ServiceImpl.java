@@ -19,4 +19,46 @@ public class PJTE7000ServiceImpl implements PJTE7000Service {
         return pjte7000Mapper.select_7000_01(PJTE7000);
 
     }
+
+    @Override
+    public List<PJTE7000DTO> select_7000_02(PJTE7000DTO PJTE7000) throws Exception {
+
+        return pjte7000Mapper.select_7000_02(PJTE7000);
+
+    }
+
+    @Override
+    public List<PJTE7000DTO> select_7000_03(PJTE7000DTO PJTE7000) throws Exception {
+
+        return pjte7000Mapper.select_7000_03(PJTE7000);
+
+    }
+
+    @Override
+    public boolean insert_7000_01(PJTE7000DTO PJTE7000) throws Exception {
+
+        return pjte7000Mapper.insert_7000_01(PJTE7000);
+
+    }
+
+    @Override
+    public boolean delete_7000_01(PJTE7000DTO PJTE7000) throws Exception {
+
+        return pjte7000Mapper.delete_7000_01(PJTE7000);
+
+    }
+
+    @Override
+    public List<PJTE7000DTO> select_7000_04(PJTE7000DTO PJTE7000) throws Exception {
+
+        return pjte7000Mapper.select_7000_04(PJTE7000);
+
+    }
+
+    @Override
+    public List<PJTE7000DTO> select_7000_05(PJTE7000DTO PJTE7000) throws Exception {
+
+        return pjte7000Mapper.select_7000_05(PJTE7000);
+
+    }
 }
