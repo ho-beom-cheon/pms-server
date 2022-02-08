@@ -3,208 +3,1616 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE7000Mapper">
-    <select id="select_7000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
-        SELECT BKUP_ID
-             , BZCD
-             , FILE_CD
-             , SQNO
-             , COLM01
-             , COLM02
-             , COLM03
-             , COLM04
-             , COLM05
-             , COLM06
-             , COLM07
-             , COLM08
-             , COLM09
-             , COLM10
-             , COLM11
-             , COLM12
-             , COLM13
-             , COLM14
-             , COLM15
-             , COLM16
-             , COLM17
-             , COLM18
-             , COLM19
-             , COLM20
-             , COLM21
-             , COLM22
-             , COLM23
-             , COLM24
-             , COLM25
-             , COLM26
-             , COLM27
-             , COLM28
-             , COLM29
-             , COLM30
-             , COLM31
-             , COLM32
-             , COLM33
-             , COLM34
-             , COLM35
-             , COLM36
-             , COLM37
-             , COLM38
-             , COLM39
-             , COLM40
-             , COLM41
-             , COLM42
-             , COLM43
+    <delete id="delete_7000_01" parameterType="Map">
+        DELETE
         FROM pms_chck
-        WHERE 1 = 1
+        WHERE FILE_CD = #{file_cd}
+          AND BZCD    = #{bzcd}
+          AND PRJT_ID = #{prjt_id}
+          AND BKUP_ID = #{bkup_id}
+    </delete>
+
+    <insert id="insert_7000_01" parameterType="Map">
+        INSERT INTO pms_chck
+        ( BKUP_ID
+        , PRJT_ID
+        , BZCD
+        , FILE_CD
+        , SQNO
+        , COLM01
+        , COLM02
+        , COLM03
+        , COLM04
+        , COLM05
+        , COLM06
+        , COLM07
+        , COLM08
+        , COLM09
+        , COLM10
+        , COLM11
+        , COLM12
+        , COLM13
+        , COLM14
+        , COLM15
+        , COLM16
+        , COLM17
+        )
+            VALUE
+            ( #{bkup_id}
+            , #{prjt_id}
+            , #{bzcd}
+            , #{file_cd}
+            , #{sqno}
+            , #{colm01}
+            , #{colm02}
+            , #{colm03}
+            , #{colm04}
+            , #{colm05}
+            , #{colm06}
+            , #{colm07}
+            , #{colm08}
+            , #{colm09}
+            , #{colm10}
+            , #{colm11}
+            , #{colm12}
+            , #{colm13}
+            , #{colm14}
+            , #{colm15}
+            , #{colm16}
+            , #{colm17}
+            )
+    </insert>
+
+     <select id="select_7000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
+          SELECT FILE_CD
+          , SQNO
+          , REPLACE(COLM01, CHR(10),',') AS COLM01
+          , REPLACE(COLM02, CHR(10),',') AS COLM02
+          , REPLACE(COLM03, CHR(10),',') AS COLM03
+          , REPLACE(COLM04, CHR(10),',') AS COLM04
+          , REPLACE(COLM05, CHR(10),',') AS COLM05
+          , REPLACE(COLM06, CHR(10),',') AS COLM06
+          , REPLACE(COLM07, CHR(10),',') AS COLM07
+          , REPLACE(COLM08, CHR(10),',') AS COLM08
+          , REPLACE(COLM09, CHR(10),',') AS COLM09
+          , REPLACE(COLM10, CHR(10),',') AS COLM10
+          , REPLACE(COLM11, CHR(10),',') AS COLM11
+          , REPLACE(COLM12, CHR(10),',') AS COLM12
+          , REPLACE(COLM13, CHR(10),',') AS COLM13
+          , REPLACE(COLM14, CHR(10),',') AS COLM14
+          , REPLACE(COLM15, CHR(10),',') AS COLM15
+          , REPLACE(COLM16, CHR(10),',') AS COLM16
+          , REPLACE(COLM17, CHR(10),',') AS COLM17
+          FROM pms_chck
+          WHERE BKUP_ID = #{bkup_id}
+          AND   PRJT_ID = #{prjt_id}
+          AND   BZCD    = #{bzcd}
+          <if test='file_cd != "TTT"'>
+               AND FILE_CD = #{file_cd}
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "01"'>
+               AND COLM01 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "02"'>
+               AND COLM02 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "03"'>
+               AND COLM03 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "04"'>
+               AND COLM04 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "05"'>
+               AND COLM05 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "06"'>
+               AND COLM06 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "07"'>
+               AND COLM07 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "08"'>
+               AND COLM08 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "09"'>
+               AND COLM09 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "10"'>
+               AND COLM10 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "11"'>
+               AND COLM11 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "12"'>
+               AND COLM12 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "13"'>
+               AND COLM13 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "14"'>
+               AND COLM14 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "15"'>
+               AND COLM15 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "16"'>
+               AND COLM16 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          <if test='srh_cd != "TTT" and srh_cd == "17"'>
+               AND COLM17 LIKE CONCAT(CONCAT('%',#{srh_nm}),'%')
+          </if>
+          ORDER BY FILE_CD, SQNO
+     </select>
+     <select id="select_7000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
+          SELECT A.COLM01 AS FILE_CD
+               , CASE WHEN A.SAVE_YN = 0 THEN '미등록' ELSE '등록' END AS SAVE_YN
+               , CASE WHEN A.VLTN_CNT1 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT1 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN01
+               , CASE WHEN A.VLTN_CNT2 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT2 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN02
+               , CASE WHEN A.VLTN_CNT3 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT3 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN03
+               , CASE WHEN A.VLTN_CNT4 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT4 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN04
+               , CASE WHEN A.VLTN_CNT5 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT5 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN05
+               , CASE WHEN A.VLTN_CNT6 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT6 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN06
+               , CASE WHEN A.VLTN_CNT7 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT7 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN07
+               , CASE WHEN A.VLTN_CNT8 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT8 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN08
+               , CASE WHEN A.VLTN_CNT9 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT9 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN09
+               , CASE WHEN A.VLTN_CNT10 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT10 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN10
+               , CASE WHEN A.VLTN_CNT11 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT11 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN11
+          FROM (SELECT '050'                 AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                    END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '100'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM03 LIKE CONCAT(CONCAT('%',A.COLM03),'%')
+               )),0)                 AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM03 LIKE CONCAT(CONCAT('%',A.COLM03),'%')
+               )),0)                 AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '050'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '100'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '200'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT3
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '300'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT4
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '400'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT5
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '500'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '700'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT8
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '800'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
+                )),0)                 AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '100'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '200'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '700'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
+                )),0)                 AS VLTN_CNT8
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '800'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
+                )),0)                 AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
+                )),0)                 AS VLTN_CNT10
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '910'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
+                )),0)                 AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '200'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '300'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '700'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM09 LIKE CONCAT(CONCAT('%',A.COLM09),'%')
+                )),0)                     AS VLTN_CNT8
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '800'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM09 LIKE CONCAT(CONCAT('%',A.COLM09),'%')
+                )),0)                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM09 LIKE CONCAT(CONCAT('%',A.COLM09),'%')
+                )),0)              AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '300'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '400'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
+                )),0)                 AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '400'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '500'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM07 LIKE CONCAT(CONCAT('%',A.COLM07),'%')
+                )),0)                 AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '500'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '600'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM11 LIKE CONCAT(CONCAT('%',A.COLM11),'%')
+                )),0)                 AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '600'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '700'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , 9                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '700'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '800'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 1
+                                            ELSE 0
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND S.FILE_CD = '900'
+                                  AND S.BZCD    = A.BZCD
+                                  AND S.PRJT_ID = A.PRJT_ID
+                                  AND S.BKUP_ID = A.BKUP_ID
+                                  AND S.COLM15 LIKE CONCAT(CONCAT('%',A.COLM15),'%')
+                )),0)                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '800'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '900'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , 9                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '900'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '910'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , 9                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '910'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+               ) A
+     </select>
+
+     <select id="select_7000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
+          SELECT A.COLM01 AS FILE_CD
+               , CASE WHEN A.SAVE_YN = 0 THEN '미등록' ELSE '등록' END AS SAVE_YN
+               , CASE WHEN A.VLTN_CNT1 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT1 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN01
+               , CASE WHEN A.VLTN_CNT2 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT2 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN02
+               , CASE WHEN A.VLTN_CNT3 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT3 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN03
+               , CASE WHEN A.VLTN_CNT4 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT4 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN04
+               , CASE WHEN A.VLTN_CNT5 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT5 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN05
+               , CASE WHEN A.VLTN_CNT6 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT6 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN06
+               , CASE WHEN A.VLTN_CNT7 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT7 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN07
+               , CASE WHEN A.VLTN_CNT8 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT8 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN08
+               , CASE WHEN A.VLTN_CNT9 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT9 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN09
+               , CASE WHEN A.VLTN_CNT10 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT10 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN10
+               , CASE WHEN A.VLTN_CNT11 = 9 OR A.SAVE_YN = 0 THEN ''
+                      WHEN A.VLTN_CNT11 = 0 THEN '정상' ELSE '비정상' END AS COLM_YN11
+          FROM (SELECT '050'                 AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                    END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM03) != ''
+                           AND S.FILE_CD = '100'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '050'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM03  = S.COLM03)
+                      )),0)              AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM03) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '050'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM03  = S.COLM03)
+                      )),0)              AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '050'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '100'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '200'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)              AS VLTN_CNT3
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '300'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)                 AS VLTN_CNT4
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '400'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)              AS VLTN_CNT5
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '500'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)                AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '700'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)                AS VLTN_CNT8
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '800'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)                 AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM01) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '100'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM01  = S.COLM01)
+                      )),0)                 AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '100'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '200'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM05) != ''
+                           AND S.FILE_CD = '700'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '200'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM05  = S.COLM05)
+                      )),0)                 AS VLTN_CNT8
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM05) != ''
+                           AND S.FILE_CD = '800'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '200'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM05  = S.COLM05)
+                      )),0)                 AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                          LEFT JOIN pms_pgm_mng A
+                                                    ON A.PGM_DIS_CD = '100'
+                                                         AND A.PGM_ID    = S.COLM05
+                                                         AND A.BZCD      = S.BZCD
+                                                         AND A.PRJT_ID   = S.PRJT_ID
+                                                         AND A.BKUP_ID   = S.BKUP_ID
+                                WHERE 1=1
+                                  AND TRIM(S.COLM05) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '200'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM05  = S.COLM05)
+                      )),0)                 AS VLTN_CNT10
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM05) != ''
+                           AND S.FILE_CD = '910'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '200'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM05  = S.COLM05)
+                      )),0)                 AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '200'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '300'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM09) != ''
+                           AND S.FILE_CD = '700'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '300'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM09  = S.COLM09)
+                      )),0)                     AS VLTN_CNT8
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM09) != ''
+                           AND S.FILE_CD = '800'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '300'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM09  = S.COLM09)
+                      )),0)                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM09) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '300'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM09  = S.COLM09)
+                      )),0)              AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '300'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '400'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                          LEFT JOIN pms_pgm_mng A
+                                                    ON A.PGM_DIS_CD = '300'
+                                                         AND A.PGM_ID    = S.COLM05
+                                                         AND A.BZCD      = S.BZCD
+                                                         AND A.PRJT_ID   = S.PRJT_ID
+                                                         AND A.BKUP_ID   = S.BKUP_ID
+                                WHERE 1=1
+                                  AND TRIM(S.COLM05) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '400'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM05  = S.COLM05)
+                      )),0)              AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '400'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '500'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM07) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '500'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM07  = S.COLM07)
+                      )),0)              AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '500'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '600'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                 THEN 0
+                                            ELSE 1
+                                            END AS VLTN_CNT
+                                FROM pms_chck S
+                                WHERE 1=1
+                                  AND TRIM(S.COLM11) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '600'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM11  = S.COLM11)
+                      )),0)              AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '600'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '700'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , 9                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '700'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '800'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     ,  NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                                                  THEN 0
+                                             ELSE 1
+                                             END AS VLTN_CNT
+                                 FROM pms_chck S
+                                 WHERE 1=1
+                                   AND TRIM(S.COLM15) != ''
+                           AND S.FILE_CD = '900'
+                           AND S.BZCD    = A.BZCD
+                           AND S.PRJT_ID = A.PRJT_ID
+                           AND S.BKUP_ID = A.BKUP_ID
+                           AND NOT EXISTS (SELECT 'x'
+                                           FROM   pms_chck T
+                                           WHERE  T.FILE_CD   = '800'
+                                           AND    T.BZCD    = S.BZCD
+								                           AND    T.PRJT_ID = S.PRJT_ID
+								                           AND    T.BKUP_ID = S.BKUP_ID
+								                           AND    T.COLM15  = S.COLM15)
+                      )),0)                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '800'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '900'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , 9                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '900'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+                UNION
+                SELECT '910'                  AS COLM01
+                     , CASE WHEN COUNT(*) = 0
+                                 THEN 0
+                            ELSE 1
+                     END   AS SAVE_YN
+                     , 9                     AS VLTN_CNT1
+                     , 9                     AS VLTN_CNT2
+                     , 9                     AS VLTN_CNT3
+                     , 9                     AS VLTN_CNT4
+                     , 9                     AS VLTN_CNT5
+                     , 9                     AS VLTN_CNT6
+                     , 9                     AS VLTN_CNT7
+                     , 9                     AS VLTN_CNT8
+                     , 9                     AS VLTN_CNT9
+                     , 9                     AS VLTN_CNT10
+                     , 9                     AS VLTN_CNT11
+                FROM pms_chck A
+                WHERE A.FILE_CD = '910'
+                  AND A.BZCD    = #{bzcd}
+                  AND A.PRJT_ID = #{prjt_id}
+                  AND A.BKUP_ID = #{bkup_id}
+               ) A
+     </select>
+
+    <select id="select_7000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
+        SELECT DISTINCT
+        NVL(CASE WHEN #{file_cd1} = '050'
+        THEN A.COLM03
+        WHEN #{file_cd1} = '100'
+        THEN A.COLM01
+        WHEN #{file_cd1} = '200'
+        THEN A.COLM05
+        WHEN #{file_cd1} = '300'
+        THEN A.COLM09
+        WHEN #{file_cd1} = '400'
+        THEN A.COLM05
+        WHEN #{file_cd1} = '500'
+        THEN A.COLM07
+        WHEN #{file_cd1} = '600'
+        THEN A.COLM11
+        WHEN #{file_cd1} = '700'
+        THEN A.COLM13
+        WHEN #{file_cd1} = '800'
+        THEN A.COLM15
+        WHEN #{file_cd1} = '900'
+        THEN A.COLM01
+        WHEN #{file_cd1} = '910'
+        THEN ''
+        ELSE  ''
+        END ,'')   AS ITEM_CD
+        , NVL(CASE WHEN #{file_cd1} = '050'
+        THEN A.COLM04
+        WHEN #{file_cd1} = '100'
+        THEN A.COLM02
+        WHEN #{file_cd1} = '200'
+        THEN A.COLM06
+        WHEN #{file_cd1} = '300'
+        THEN A.COLM10
+        WHEN #{file_cd1} = '400'
+        THEN A.COLM06
+        WHEN #{file_cd1} = '500'
+        THEN A.COLM08
+        WHEN #{file_cd1} = '600'
+        THEN A.COLM12
+        WHEN #{file_cd1} = '700'
+        THEN A.COLM14
+        WHEN #{file_cd1} = '800'
+        THEN A.COLM16
+        WHEN #{file_cd1} = '900'
+        THEN A.COLM02
+        WHEN #{file_cd1} = '910'
+        THEN A.COLM17
+        ELSE  ''
+        END, '')   AS ITEM_NM
+        , '' AS MAP_ID
+        , '' AS MAP_NM
+        FROM (SELECT BZCD
+        , FILE_CD
+        , COLM01
+        , COLM02
+        , COLM03
+        , COLM04
+        , COLM05
+        , COLM06
+        , COLM07
+        , COLM08
+        , COLM09
+        , COLM10
+        , COLM11
+        , COLM12
+        , COLM13
+        , COLM14
+        , COLM15
+        , COLM16
+        , COLM17
+        FROM pms_chck
+        WHERE BZCD    = #{bzcd}
+        AND PRJT_ID = #{prjt_id}
+        AND BKUP_ID = #{bkup_id}
+        AND FILE_CD = #{file_cd1}
+        )  A
+        WHERE 1=1
+        AND NOT EXISTS (SELECT 'x'
+        FROM (SELECT BZCD
+        , FILE_CD
+        , COLM01
+        , COLM02
+        , COLM03
+        , COLM04
+        , COLM05
+        , COLM06
+        , COLM07
+        , COLM08
+        , COLM09
+        , COLM10
+        , COLM11
+        , COLM12
+        , COLM13
+        , COLM14
+        , COLM15
+        , COLM16
+        , COLM17
+        FROM pms_chck
+        WHERE BZCD    = #{bzcd}
+        AND PRJT_ID = #{prjt_id}
+        AND BKUP_ID = #{bkup_id}
+        AND FILE_CD = #{file_cd2}
+        )  S
+        WHERE 1=1
+        <if test='file_cd1 == "050"'>
+            AND S.COLM03 = A.COLM03
+        </if>
+        <if test='file_cd1 == "100"'>
+            AND S.COLM01 = A.COLM01
+        </if>
+        <if test='file_cd1 == "200"'>
+            AND S.COLM05 = A.COLM05
+        </if>
+        <if test='file_cd1 == "300"'>
+            AND S.COLM09 = A.COLM09
+        </if>
+        <if test='file_cd1 == "400"'>
+            AND S.COLM05 = A.COLM05
+        </if>
+        <if test='file_cd1 == "500"'>
+            AND S.COLM07 = A.COLM07
+        </if>
+        <if test='file_cd1 == "600"'>
+            AND S.COLM11 = A.COLM11
+        </if>
+        <if test='file_cd1 == "800"'>
+            AND S.COLM15 = A.COLM15
+        </if>
+        <if test='file_cd1 == "900"'>
+            AND S.COLM01 = A.COLM01
+        </if>
+
+        )
+        ORDER BY 1
     </select>
-    <select id="select_7000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
-        SELECT BKUP_ID
-             , BZCD
-             , FILE_CD
-             , SQNO
-             , COLM01
-             , COLM02
-             , COLM03
-             , COLM04
-             , COLM05
-             , COLM06
-             , COLM07
-             , COLM08
-             , COLM09
-             , COLM10
-             , COLM11
-             , COLM12
-             , COLM13
-             , COLM14
-             , COLM15
-             , COLM16
-             , COLM17
-             , COLM18
-             , COLM19
-             , COLM20
-             , COLM21
-             , COLM22
-             , COLM23
-             , COLM24
-             , COLM25
-             , COLM26
-             , COLM27
-             , COLM28
-             , COLM29
-             , COLM30
-             , COLM31
-             , COLM32
-             , COLM33
-             , COLM34
-             , COLM35
-             , COLM36
-             , COLM37
-             , COLM38
-             , COLM39
-             , COLM40
-             , COLM41
-             , COLM42
-             , COLM43
+
+    <select id="select_7000_05" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
+        SELECT DISTINCT
+        NVL(CASE WHEN #{file_cd1} = '050'
+        THEN A.COLM03
+        WHEN #{file_cd1} = '100'
+        THEN A.COLM01
+        WHEN #{file_cd1} = '200'
+        THEN A.COLM05
+        WHEN #{file_cd1} = '300'
+        THEN A.COLM09
+        WHEN #{file_cd1} = '400'
+        THEN A.COLM05
+        WHEN #{file_cd1} = '500'
+        THEN A.COLM07
+        WHEN #{file_cd1} = '600'
+        THEN A.COLM11
+        WHEN #{file_cd1} = '700'
+        THEN A.COLM13
+        WHEN #{file_cd1} = '800'
+        THEN A.COLM15
+        WHEN #{file_cd1} = '900'
+        THEN A.COLM01
+        WHEN #{file_cd1} = '910'
+        THEN ''
+        ELSE  ''
+        END ,'')   AS ITEM_CD
+        , NVL(CASE WHEN #{file_cd1} = '050'
+        THEN A.COLM04
+        WHEN #{file_cd1} = '100'
+        THEN A.COLM02
+        WHEN #{file_cd1} = '200'
+        THEN A.COLM06
+        WHEN #{file_cd1} = '300'
+        THEN A.COLM10
+        WHEN #{file_cd1} = '400'
+        THEN A.COLM06
+        WHEN #{file_cd1} = '500'
+        THEN A.COLM08
+        WHEN #{file_cd1} = '600'
+        THEN A.COLM12
+        WHEN #{file_cd1} = '700'
+        THEN A.COLM14
+        WHEN #{file_cd1} = '800'
+        THEN A.COLM16
+        WHEN #{file_cd1} = '900'
+        THEN A.COLM02
+        WHEN #{file_cd1} = '910'
+        THEN A.COLM17
+        ELSE  ''
+        END, '')   AS ITEM_NM
+        , NVL(CASE WHEN #{file_cd2} = '050'
+        THEN A.COLM03
+        WHEN #{file_cd2} = '100'
+        THEN A.COLM01
+        WHEN #{file_cd2} = '200'
+        THEN A.COLM05
+        WHEN #{file_cd2} = '300'
+        THEN A.COLM09
+        WHEN #{file_cd2} = '400'
+        THEN A.COLM05
+        WHEN #{file_cd2} = '500'
+        THEN A.COLM07
+        WHEN #{file_cd2} = '600'
+        THEN A.COLM11
+        WHEN #{file_cd2} = '700'
+        THEN A.COLM13
+        WHEN #{file_cd2} = '800'
+        THEN A.COLM15
+        WHEN #{file_cd2} = '900'
+        THEN A.COLM01
+        WHEN #{file_cd2} = '910'
+        THEN ''
+        ELSE  ''
+        END ,'')  AS MAP_ID
+        , NVL(CASE WHEN #{file_cd2} = '050'
+        THEN A.COLM04
+        WHEN #{file_cd2} = '100'
+        THEN A.COLM02
+        WHEN #{file_cd2} = '200'
+        THEN A.COLM06
+        WHEN #{file_cd2} = '300'
+        THEN A.COLM10
+        WHEN #{file_cd2} = '400'
+        THEN A.COLM06
+        WHEN #{file_cd1} = '500'
+        THEN A.COLM08
+        WHEN #{file_cd2} = '600'
+        THEN A.COLM12
+        WHEN #{file_cd2} = '700'
+        THEN A.COLM14
+        WHEN #{file_cd2} = '800'
+        THEN A.COLM16
+        WHEN #{file_cd2} = '900'
+        THEN A.COLM02
+        WHEN #{file_cd2} = '910'
+        THEN A.COLM17
+        ELSE  ''
+        END, '')  AS MAP_NM
+        FROM (SELECT BZCD
+        , FILE_CD
+        , COLM01
+        , COLM02
+        , COLM03
+        , COLM04
+        , COLM05
+        , COLM06
+        , COLM07
+        , COLM08
+        , COLM09
+        , COLM10
+        , COLM11
+        , COLM12
+        , COLM13
+        , COLM14
+        , COLM15
+        , COLM16
+        , COLM17
         FROM pms_chck
-        WHERE 1 = 1
+        WHERE BZCD    = #{bzcd}
+        AND PRJT_ID = #{prjt_id}
+        AND BKUP_ID = #{bkup_id}
+        AND FILE_CD = #{file_cd2}
+        <if test='file_cd1 == "050"'>
+            AND TRIM(COLM03) != ''
+        </if>
+        <if test='file_cd1 == "100"'>
+            AND TRIM(COLM01) != ''
+        </if>
+        <if test='file_cd1 == "200"'>
+            AND TRIM(COLM05) != ''
+        </if>
+        <if test='file_cd1 == "300"'>
+            AND TRIM(COLM09) != ''
+        </if>
+        <if test='file_cd1 == "400"'>
+            AND TRIM(COLM05) != ''
+        </if>
+        <if test='file_cd1 == "500"'>
+            AND TRIM(COLM07) != ''
+        </if>
+        <if test='file_cd1 == "600"'>
+            AND TRIM(COLM11) != ''
+        </if>
+        <if test='file_cd1 == "800"'>
+            AND TRIM(COLM15) != ''
+        </if>
+        )  A
+        WHERE 1=1
+        AND NOT EXISTS (SELECT 'x'
+        FROM (SELECT BZCD
+        , FILE_CD
+        , COLM01
+        , COLM02
+        , COLM03
+        , COLM04
+        , COLM05
+        , COLM06
+        , COLM07
+        , COLM08
+        , COLM09
+        , COLM10
+        , COLM11
+        , COLM12
+        , COLM13
+        , COLM14
+        , COLM15
+        , COLM16
+        , COLM17
+        FROM pms_chck
+        WHERE BZCD    = #{bzcd}
+        AND PRJT_ID = #{prjt_id}
+        AND BKUP_ID = #{bkup_id}
+        AND FILE_CD = #{file_cd1}
+        )  S
+        WHERE 1=1
+        <if test='file_cd1 == "050"'>
+            AND S.COLM01 = A.COLM01
+        </if>
+        <if test='file_cd1 == "100"'>
+            AND S.COLM01 = A.COLM01
+        </if>
+        <if test='file_cd1 == "200"'>
+            AND S.COLM05 = A.COLM05
+        </if>
+        <if test='file_cd1 == "300"'>
+            AND S.COLM09 = A.COLM09
+        </if>
+        <if test='file_cd1 == "400"'>
+            AND S.COLM05 = A.COLM05
+        </if>
+        <if test='file_cd1 == "500"'>
+            AND S.COLM07 = A.COLM07
+        </if>
+        <if test='file_cd1 == "600"'>
+            AND S.COLM11 = A.COLM11
+        </if>
+        <if test='file_cd1 == "800"'>
+            AND S.COLM15 = A.COLM15
+        </if>
+        <if test='file_cd1 == "900"'>
+            AND S.COLM01 = A.COLM01
+        </if>
+        )
+        ORDER BY 1
     </select>
-	<select id="select_7000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
-        SELECT BKUP_ID
-             , BZCD
-             , FILE_CD
-             , SQNO
-             , COLM01
-             , COLM02
-             , COLM03
-             , COLM04
-             , COLM05
-             , COLM06
-             , COLM07
-             , COLM08
-             , COLM09
-             , COLM10
-             , COLM11
-             , COLM12
-             , COLM13
-             , COLM14
-             , COLM15
-             , COLM16
-             , COLM17
-             , COLM18
-             , COLM19
-             , COLM20
-             , COLM21
-             , COLM22
-             , COLM23
-             , COLM24
-             , COLM25
-             , COLM26
-             , COLM27
-             , COLM28
-             , COLM29
-             , COLM30
-             , COLM31
-             , COLM32
-             , COLM33
-             , COLM34
-             , COLM35
-             , COLM36
-             , COLM37
-             , COLM38
-             , COLM39
-             , COLM40
-             , COLM41
-             , COLM42
-             , COLM43
-        FROM pms_chck
-        WHERE 1 = 1
-	</select>
-	<select id="select_7000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
-        SELECT BKUP_ID
-             , BZCD
-             , FILE_CD
-             , SQNO
-             , COLM01
-             , COLM02
-             , COLM03
-             , COLM04
-             , COLM05
-             , COLM06
-             , COLM07
-             , COLM08
-             , COLM09
-             , COLM10
-             , COLM11
-             , COLM12
-             , COLM13
-             , COLM14
-             , COLM15
-             , COLM16
-             , COLM17
-             , COLM18
-             , COLM19
-             , COLM20
-             , COLM21
-             , COLM22
-             , COLM23
-             , COLM24
-             , COLM25
-             , COLM26
-             , COLM27
-             , COLM28
-             , COLM29
-             , COLM30
-             , COLM31
-             , COLM32
-             , COLM33
-             , COLM34
-             , COLM35
-             , COLM36
-             , COLM37
-             , COLM38
-             , COLM39
-             , COLM40
-             , COLM41
-             , COLM42
-             , COLM43
-        FROM pms_chck
-        WHERE 1 = 1
-	</select>
 </mapper>
