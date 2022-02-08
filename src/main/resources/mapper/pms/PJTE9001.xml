@@ -3,6 +3,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9001Mapper">
+    <select id="select_0000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9001DTO">
+        SELECT GRP_TYCD
+             , DTLS_TYCD
+             , DTLS_TYNM
+             , SORT_SEQ
+        FROM pms_cd_del_mng
+        WHERE USE_YN   = 'Y'
+          AND GRP_TYCD = '0000000000'
+          AND PRJT_ID  = '0000000000'
+          AND BKUP_ID  = '0000000000'
+    </select>
+    <select id="select_0000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9001DTO">
+        SELECT GRP_TYCD
+             , DTLS_TYCD
+             , DTLS_TYNM
+             , SORT_SEQ
+        FROM pms_cd_del_mng
+        WHERE USE_YN   = 'Y'
+          AND GRP_TYCD = '1000000001'
+          AND PRJT_ID  = '0000000000'
+          AND BKUP_ID  = '0000000000'
+    </select>
     <select id="select_9001_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9001DTO">
      <![CDATA[
       SELECT PRJT_ID                 /*프로젝트*/
@@ -24,11 +46,11 @@
       ]]>
         WHERE 1=1
         /*프로젝트구분*/
-        <if test='prjt_id != "" and prjt_id != null and prjt_id != "999"'>
+        <if test='prjt_id != "" and prjt_id != null and prjt_id != "TTT"'>
             AND PRJT_ID = #{prjt_id}
         </if>
         /*업무구분*/
-        <if test='bzcd != "" and bzcd != null and bzcd != "999"'>
+        <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
             AND BZCD = #{bzcd}
         </if>
         /*직원번호*/

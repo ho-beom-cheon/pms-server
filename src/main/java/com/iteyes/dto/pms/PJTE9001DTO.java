@@ -33,4 +33,10 @@ public class PJTE9001DTO {
     private String login_aut_cd;   /*권한ID*/
 
     private String array_length;
+
+    /*콤보박스 세팅*/
+    private String grp_tycd;   /*그룹유형코드*/
+    private String dtls_tycd;   /*세부유형코드*/
+    private String dtls_tynm;   /*세부유형명*/
+    private String sort_seq;   /*정렬순서*/
 }
