@@ -2,14 +2,16 @@ package com.iteyes.dto.pms;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class PJTE7000DTO {
     private String bkup_id;      // 백업ID
     private String bzcd;         // 업무구분코드
     private String file_cd;      // 산출물구분코드
-    private String check_cd;     // 검증구분
-    private String search_cd;    // 검색항목구분
-    private String searchbox_cd; // 검색입력
+    private String chk_cd;       // 검증구분
+    private String srh_cd;       // 검색항목구분
+    private String srh_nm;       // 검색입력
     private String sqno;         // 순번
     private String colm01;       // 컬럼01
     private String colm02;       // 컬럼02
@@ -28,31 +30,32 @@ public class PJTE7000DTO {
     private String colm15;       // 컬럼15
     private String colm16;       // 컬럼16
     private String colm17;       // 컬럼17
-    private String colm18;       // 컬럼18
-    private String colm19;       // 컬럼19
-    private String colm20;       // 컬럼20
-    private String colm21;       // 컬럼21
-    private String colm22;       // 컬럼22
-    private String colm23;       // 컬럼23
-    private String colm24;       // 컬럼24
-    private String colm25;       // 컬럼25
-    private String colm26;       // 컬럼26
-    private String colm27;       // 컬럼27
-    private String colm28;       // 컬럼28
-    private String colm29;       // 컬럼29
-    private String colm30;       // 컬럼30
-    private String colm31;       // 컬럼31
-    private String colm32;       // 컬럼32
-    private String colm33;       // 컬럼33
-    private String colm34;       // 컬럼34
-    private String colm35;       // 컬럼35
-    private String colm36;       // 컬럼36
-    private String colm37;       // 컬럼37
-    private String colm38;       // 컬럼38
-    private String colm39;       // 컬럼39
-    private String colm40;       // 컬럼40
-    private String colm41;       // 컬럼41
-    private String colm42;       // 컬럼42
-    private String colm43;       // 컬럼43
+
+    private String save_yn;      // 등록여부
+    private String colm_yn01;    // 업무기능분할도
+    private String colm_yn02;    // 요구사항정의서
+    private String colm_yn03;    // 화면
+    private String colm_yn04;    // 보고서
+    private String colm_yn05;    // 인터페이스
+    private String colm_yn06;    // 프로그램
+    private String colm_yn07;    // 테이블
+    private String colm_yn08;    // 단위테스트
+    private String colm_yn09;    // 통합테스트
+    private String colm_yn10;    // 요구사항추적표
+    private String colm_yn11;    // 메뉴구조도
+
+
+    private String prjt_id;      // 프로젝트 ID
+    private String file_cd1;     // 산출물구분1
+    private String file_cd2;     // 산출물구분2
+    private String item_cd;      // 항목ID
+    private String item_nm;      // 항목명
+    private String map_id;       // 매핑ID
+    private String map_nm;       // 매핑명
+    private String cate;         // 그리드2 구분
+
+    private List<PJTE7000DTO> rowDatas;
+
+
 }
 
