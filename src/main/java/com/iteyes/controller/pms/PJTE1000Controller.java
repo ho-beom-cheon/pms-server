@@ -28,7 +28,7 @@ public class PJTE1000Controller {
 //1111
         PJTE1000DTO PJTE1000 = new PJTE1000DTO();
 
-        PJTE1000.setPrjt_id(request.getParameter("prjt_id_selected"));
+        PJTE1000.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE1000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE1000.setLogin_emp_no(request.getParameter("login_emp_no"));
         PJTE1000.setLogin_bzcd(request.getParameter("login_bzcd"));

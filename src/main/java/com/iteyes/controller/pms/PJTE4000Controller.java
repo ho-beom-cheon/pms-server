@@ -30,7 +30,7 @@ public class PJTE4000Controller {
         PJTE4000.setLogin_emp_no(request.getParameter("login_emp_no"));
         PJTE4000.setLogin_bzcd(request.getParameter("login_bzcd"));
         PJTE4000.setLogin_aut_cd(request.getParameter("login_aut_cd"));
-        PJTE4000.setPrjt_id(request.getParameter("prjt_id_selected"));
+        PJTE4000.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE4000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE4000.setRgs_dis_cd(request.getParameter("rgs_dis_cd_selected"));
         PJTE4000.setReq_dis_cd(request.getParameter("req_dis_cd_selected"));

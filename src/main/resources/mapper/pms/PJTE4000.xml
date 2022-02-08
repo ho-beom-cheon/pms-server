@@ -14,8 +14,12 @@
               ,A.PRC_STEP_CD
               ,A.TGT_BIZ_NM
               ,A.TTMN_CRPE_NM
-              ,NVL2(A.TTMN_SCD_DT,STR_TO_DATE(A.TTMN_SCD_DT , '%Y%m%d'),'') AS TTMN_SCD_DT
-              ,NVL2(A.TTMN_DT,STR_TO_DATE(A.TTMN_DT , '%Y%m%d'),'') AS TTMN_DT
+              ,CASE WHEN A.TTMN_SCD_DT IS NOT NULL AND A.TTMN_SCD_DT != ''
+                    THEN STR_TO_DATE(A.TTMN_SCD_DT, '%Y%m%d') ELSE A.TTMN_SCD_DT
+                END AS TTMN_SCD_DT
+              ,CASE WHEN A.TTMN_DT IS NOT NULL AND A.TTMN_DT != ''
+                    THEN STR_TO_DATE(A.TTMN_DT, '%Y%m%d') ELSE A.TTMN_DT
+                END AS TTMN_DT
               ,A.SLV_MPLN_TXT
               ,A.TTMN_TXT
               ,A.IFNC_CD
@@ -48,10 +52,10 @@
           AND A.TTMN_CRPE_NM LIKE CONCAT(CONCAT('%',#{ttmn_crpe_nm}),'%')
             </if>
             <if test='rgs_sta_dt != ""  and rgs_sta_dt != null and rgs_end_dt != ""  and rgs_end_dt != null'>
-          AND A.RGS_DT BETWEEN REPLACE(#{rgs_sta_dt},'-','') AND REPLACE(#{rgs_end_dt},'-','')
+          AND A.RGS_DT BETWEEN REPLACE(#{rgs_sta_dt}, '-', '') AND REPLACE(#{rgs_end_dt}, '-', '')
             </if>
             <if test='ttmn_sta_dt != ""  and ttmn_sta_dt != null and ttmn_end_dt != ""  and ttmn_end_dt != null'>
-          AND A.TTMN_DT BETWEEN REPLACE(#{ttmn_sta_dt},'-','') AND REPLACE(#{ttmn_end_dt},'-','')
+          AND A.TTMN_DT BETWEEN REPLACE(#{ttmn_sta_dt}, '-', '') AND REPLACE(#{ttmn_end_dt}, '-', '')
             </if>
             <if test='titl_nm != "" and titl_nm != null'>
           AND A.TITL_NM LIKE CONCAT(CONCAT('%',#{titl_nm}),'%')

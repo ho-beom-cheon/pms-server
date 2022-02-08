@@ -28,7 +28,7 @@ public class PJTE3000Controller {
 
         PJTE3000DTO PJTE3000 = new PJTE3000DTO();
 
-        PJTE3000.setPrjt_id(request.getParameter("prjt_id_selected"));
+        PJTE3000.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE3000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE3000.setBzcd(request.getParameter("bzcd_selected"));
         PJTE3000.setRgs_dscd(request.getParameter("err_rgs_dscd_selected"));
