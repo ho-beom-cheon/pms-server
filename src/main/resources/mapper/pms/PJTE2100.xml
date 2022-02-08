@@ -248,6 +248,8 @@
 		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
 		, RMRK         = #{rmrk}         /*비고*/
 		, OPR_NO       = #{login_emp_no}        /*조작자번호*/
+		, ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
+		, PAL_ATFL_MNG_ID = #{pal_atfl_mng_id}  /*설계서 첨부파일관리ID*/
 		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
 	  WHERE PGM_ID      = #{pgm_id}
 		AND BZCD        = #{bzcd}
