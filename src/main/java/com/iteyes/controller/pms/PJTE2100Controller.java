@@ -78,6 +78,19 @@ public class PJTE2100Controller {
         /* 서비스 요청 */
         List<PJTE2100DTO> list = pjte2100Service.select_2100_01(PJTE2100);
 
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getAtfl_mng_id() != null && !list.get(i).getAtfl_mng_id().isEmpty()) {
+                list.get(i).setAtfl_mng_id_yn("첨부");
+            } else {
+                list.get(i).setAtfl_mng_id_yn("미첨부");
+            }
+            if(list.get(i).getPal_atfl_mng_id() != null && !list.get(i).getPal_atfl_mng_id().isEmpty()) {
+                list.get(i).setPal_atfl_mng_id_yn("첨부");
+            } else {
+                list.get(i).setPal_atfl_mng_id_yn("미첨부");
+            }
+        }
+
         /* map 형태로 저장 */
         Map<String, Object> hm = new HashMap();
         Map<String, Object> hm1 = new HashMap();
@@ -161,6 +174,7 @@ public class PJTE2100Controller {
             PJTE2100U.setCrpe_no(PJTE2100.getUpdatedRows().get(i).getCrpe_no());
             PJTE2100U.setRmrk(PJTE2100.getUpdatedRows().get(i).getRmrk());
             PJTE2100U.setAtfl_mng_id(PJTE2100.getUpdatedRows().get(i).getAtfl_mng_id());
+            PJTE2100U.setPal_atfl_mng_id(PJTE2100.getUpdatedRows().get(i).getPal_atfl_mng_id());
             PJTE2100U.setEmpno(PJTE2100.getUpdatedRows().get(i).getEmpno());
             PJTE2100U.setPgm_id(PJTE2100.getUpdatedRows().get(i).getPgm_id());
             PJTE2100U.setBzcd(PJTE2100.getUpdatedRows().get(i).getBzcd());
