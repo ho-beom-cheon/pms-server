@@ -7,5 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface PJTE9001Mapper {
+	List<PJTE9001DTO> select_0000_01(PJTE9001DTO PJTE9001) throws Exception;
+
+	List<PJTE9001DTO> select_0000_02(PJTE9001DTO PJTE9001) throws Exception;
+
 	List<PJTE9001DTO> select_9001_01(PJTE9001DTO PJTE9001) throws Exception;
 }
