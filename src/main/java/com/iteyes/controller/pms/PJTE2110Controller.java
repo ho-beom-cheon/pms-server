@@ -32,6 +32,8 @@ public class PJTE2110Controller {
 		PJTE2110.setInp_date(request.getParameter("inq_date"));
 		PJTE2110.setEmp_nm(request.getParameter("emp_nm"));
 		PJTE2110.setGubun(request.getParameter("gubun"));
+		PJTE2110.setProc_days(request.getParameter("proc_days"));
+
 
 		List<PJTE2110DTO> list = pjte2110Service.select_2110(PJTE2110);
 
