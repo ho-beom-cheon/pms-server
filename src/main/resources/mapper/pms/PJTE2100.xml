@@ -44,8 +44,8 @@
 		   , A.DVLP_DIS_CD        /* 개발구분 */
 		   , A.PGM_DIS_CD         /* 프로그램구분 */
 		   , A.ENLPE_NM           /* 프로그램세부구분코드 */
-	       , NVL2(A.FRCS_STA_DT,STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d'),'') AS FRCS_STA_DT        /* 예상시작일자 */
-		   , NVL2(A.FRCS_END_DT,STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d'),'') AS FRCS_END_DT        /* 예상종료일자 */
+	       , CASE WHEN A.FRCS_STA_DT IS NOT NULL AND A.FRCS_STA_DT != '' THEN STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d') ELSE '' END AS FRCS_STA_DT /* 예상시작일자 */
+           , CASE WHEN A.FRCS_END_DT IS NOT NULL AND A.FRCS_END_DT != '' THEN STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d') ELSE '' END AS FRCS_END_DT /* 예상종료일자 */
 	  	   , CASE WHEN A.STA_DT IS NOT NULL AND A.STA_DT != ''
 	  	          THEN STR_TO_DATE(A.STA_DT, '%Y%m%d') ELSE A.STA_DT
 	  	      END AS STA_DT /* 실제시작일자 */
@@ -89,8 +89,8 @@
 				 AND PRJT_ID   = A.PRJT_ID
 				 AND BKUP_ID   = A.BKUP_ID
 		     ) AS ERR_NCMPL_CNT /* 결함진행 건수 */
-		   , A.ATFL_MNG_ID      /* 단위테스트결과서 첨부파일관리ID*/
-		   , A.PAL_ATFL_MNG_ID  /* 설계서 첨부파일관리ID*/
+		   , trim(A.ATFL_MNG_ID) AS ATFL_MNG_ID      /* 단위테스트결과서 첨부파일관리ID*/
+		   , trim(A.PAL_ATFL_MNG_ID) AS PAL_ATFL_MNG_ID  /* 설계서 첨부파일관리ID*/
 		   , A.RMRK             /* 비고 */
 		   , A.DVLPE_NO         /* 개발자번호 */
 		   , A.PL_NO            /* PL번호 */

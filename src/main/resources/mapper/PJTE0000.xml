@@ -18,10 +18,11 @@
 	<select id="select_0000_01" parameterType="Map" resultType="Map">
 		<![CDATA[
 		SELECT DTLS_TYCD      /*세부유형코드*/
-			 , DTLS_TYNM      /*세부유형명*/
-		FROM pms_cd_del_mng
-		WHERE GRP_TYCD = '0000000000'
-        AND   BKUP_ID = '0000000000'
+		     , DTLS_TYNM      /*세부유형명*/
+		 FROM pms_cd_del_mng
+		WHERE USE_YN   = 'Y'
+		  AND GRP_TYCD = '0000000000'
+		  AND BKUP_ID  = '0000000000'
 		]]>
     </select>
 
