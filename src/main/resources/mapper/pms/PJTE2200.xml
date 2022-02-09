@@ -67,7 +67,7 @@
              ,A.OUP_MENS
              ,A.TST_RST
              ,A.TST_ACHI_RST
-             ,A.ATFL_MNG_ID
+             , TRIM(A.ATFL_MNG_ID) AS ATFL_MNG_ID
              ,A.BKUP_ID
              ,A.PRJT_ID
         FROM pms_itg_tst_mng A

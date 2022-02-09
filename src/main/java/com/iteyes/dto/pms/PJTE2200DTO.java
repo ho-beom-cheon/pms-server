@@ -50,6 +50,7 @@ public class PJTE2200DTO {
     private String tst_rst;             //테스트결과
     private String tst_achi_rst;        //테스트수행결과
     private String atfl_mng_id;         //첨부파일관리ID
+    private String atfl_mng_id_yn;         //첨부파일관리ID
     private String dvlpe_sta_dt;        //개발시작일자
     private String dvlpe_end_dt;        //개발종료일자
 
