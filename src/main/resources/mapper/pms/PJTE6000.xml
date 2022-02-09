@@ -10,7 +10,10 @@
 		,NVL(str_to_date(A.REQ_DT, '%Y%m%d'), '') AS REQ_DT
 		,B.EMPNM AS REQPE_NM
 		,A.REQ_TXT
-		,NVL(str_to_date(A.PRC_DT, '%Y%m%d'), '') AS PRC_DT
+		,(CASE
+		    WHEN NVL(str_to_date(A.PRC_DT, '%Y%m%d'), '') = '0000-00-00' THEN ''
+		    ELSE NVL(str_to_date(A.PRC_DT, '%Y%m%d'), '')
+		  END) AS PRC_DT
 		,C.EMPNM AS PRCPE_NM
 		,A.PRC_TXT
 		,A.REQ_PRC_STEP_CD

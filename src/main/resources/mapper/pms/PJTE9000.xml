@@ -763,12 +763,13 @@
                ,PLAN_THW_ENDT
                ,REAL_THW_STDT
                ,REAL_THW_ENDT
+               ,REAL_PRJT_ID
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-		FROM   pms_emp_info
-		WHERE  BKUP_ID = '0000000000'
-		AND    PRJT_ID = #{prjt_id}
-  </insert>
+          FROM   pms_emp_info
+          WHERE  BKUP_ID = '0000000000'
+            AND    PRJT_ID = #{prjt_id}
+     </insert>
 
      <insert id="insert_9000_26" parameterType="Map">
           INSERT INTO pms_err_mng
