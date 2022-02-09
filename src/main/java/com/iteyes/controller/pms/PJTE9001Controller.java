@@ -27,8 +27,11 @@ public class PJTE9001Controller {
         /* 빈 dto 생성 */
         PJTE9001DTO PJTE9001 = new PJTE9001DTO();
 
+        PJTE9001.setPrjt_id(request.getParameter("prjt_id"));
+
         /* 서비스 요청 */
-        List<PJTE9001DTO> list = pjte9001service.select_0000(PJTE9001);
+        List<PJTE9001DTO> list = pjte9001service.select_0000_01(PJTE9001);
+        List<PJTE9001DTO> list1 = pjte9001service.select_0000_02(PJTE9001);
 
         /* map 형태로 저장 */
         HashMap<String, Object> hm = new HashMap();
@@ -36,6 +39,7 @@ public class PJTE9001Controller {
         HashMap<String, Object> hm1_pagination = new HashMap();
         hm.put("result", true);
         hm1.put("contents", list);
+        hm1.put("contents1", list1);
         hm1_pagination.put("page", 1);
         hm1_pagination.put("totalCount", 100);
         hm1.put("pagination", hm1_pagination);
