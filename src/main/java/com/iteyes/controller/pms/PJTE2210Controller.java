@@ -41,6 +41,7 @@ public class PJTE2210Controller {
 		PJTE2210.setSqn_cd(request.getParameter("sqn_cd_selected"));
 		PJTE2210.setInp_date(request.getParameter("inq_date"));
 		PJTE2210.setCrpe_eno(request.getParameter("crpe_eno"));
+		PJTE2210.setProc_days(request.getParameter("proc_days"));
 
 		List<PJTE2210DTO> list = pjte2210Service.select_2210(PJTE2210);
 
