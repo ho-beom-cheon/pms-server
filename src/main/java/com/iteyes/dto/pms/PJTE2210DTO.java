@@ -10,6 +10,8 @@ public class PJTE2210DTO {
     private String inp_date;           //
     private String proc_days;           //
 
+    private String gubun;
+
     /* grid1 */
     private String bzcd;               //업무코드
     private String bznm;               //업무명
