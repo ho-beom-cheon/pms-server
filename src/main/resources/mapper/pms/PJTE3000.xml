@@ -12,13 +12,19 @@
                           THEN B.PGM_NM ELSE C.TST_CASE_NM END AS CCTN_NM
                     ,A.ERR_TYCD
                     ,A.ERR_PRC_STEP_CD
-                    ,NVL2(A.RGS_DT,STR_TO_DATE(A.RGS_DT , '%Y%m%d'),'') AS RGS_DT
+                    ,CASE WHEN A.RGS_DT IS NOT NULL AND A.RGS_DT != ''
+                          THEN STR_TO_DATE(A.RGS_DT, '%Y%m%d') ELSE A.RGS_DT
+                      END AS RGS_DT
                     ,D.EMPNM AS RGPE_NM
                     ,D.EMPNO AS RGPE_NO
                     ,A.ERR_TXT
                     ,A.TTMN_TXT
-                    ,NVL2(A.TTMN_SCD_DT,STR_TO_DATE(A.TTMN_SCD_DT , '%Y%m%d'),'') AS TTMN_SCD_DT
-                    ,NVL2(A.TTMN_DT,STR_TO_DATE(A.TTMN_DT , '%Y%m%d'),'') AS TTMN_DT
+                    ,CASE WHEN A.TTMN_SCD_DT IS NOT NULL AND A.TTMN_SCD_DT != ''
+                          THEN STR_TO_DATE(A.TTMN_SCD_DT, '%Y%m%d') ELSE A.TTMN_SCD_DT
+                      END AS TTMN_SCD_DT
+                    ,CASE WHEN A.TTMN_DT IS NOT NULL AND A.TTMN_DT != ''
+                          THEN STR_TO_DATE(A.TTMN_DT, '%Y%m%d') ELSE A.TTMN_DT
+                      END AS TTMN_DT
                     ,E.EMPNM AS DVLPE_NM
                     ,E.EMPNO AS DVLPE_NO
                     ,F.EMPNM AS PL_NM
@@ -88,10 +94,10 @@
                   AND A.ERR_TXT LIKE CONCAT(CONCAT('%',#{err_txt}),'%')
               </if>
               <if test='rgs_sta_dt != ""  and rgs_sta_dt != null and rgs_end_dt != ""  and rgs_end_dt != null'>
-                  AND A.RGS_DT BETWEEN #{rgs_sta_dt} AND #{rgs_end_dt}
+                  AND A.RGS_DT BETWEEN REPLACE(#{rgs_sta_dt}, '-', '') AND REPLACE(#{rgs_end_dt}, '-', '')
               </if>
-              <if test='ttmn_sta_dt != ""  and ttmn_end_dt != null and ttmn_sta_dt != ""  and ttmn_end_dt != null'>
-                  AND A.TTMN_DT BETWEEN #{ttmn_sta_dt} AND #{ttmn_end_dt}
+              <if test='ttmn_sta_dt != ""  and ttmn_sta_dt != null and ttmn_end_dt != ""  and ttmn_end_dt != null'>
+                  AND A.TTMN_DT BETWEEN REPLACE(#{ttmn_sta_dt}, '-', '') AND REPLACE(#{ttmn_end_dt}, '-', '')
               </if>
               ) A
          WHERE 1 = 1

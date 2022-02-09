@@ -22,7 +22,7 @@
         FROM pms_cd_del_mng
         WHERE USE_YN   = 'Y'
           AND GRP_TYCD = '1000000001'
-          AND PRJT_ID  = '0000000000'
+          AND PRJT_ID  = #{prjt_id}
           AND BKUP_ID  = '0000000000'
     </select>
     <select id="select_9001_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9001DTO">
