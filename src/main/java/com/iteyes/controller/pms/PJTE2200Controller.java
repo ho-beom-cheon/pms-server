@@ -45,9 +45,16 @@ public class PJTE2200Controller {
         PJTE2200.setDvlpe_end_dt(request.getParameter("dvlpe_end_dt"));
         PJTE2200.setTst_case_id(request.getParameter("tst_case_id"));
 
-
         /* 서비스 요청 */
         List<PJTE2200DTO> list = pjte2200service.select_2200_01(PJTE2200);
+
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getAtfl_mng_id() != null && !list.get(i).getAtfl_mng_id().isEmpty()) {
+                list.get(i).setAtfl_mng_id_yn("첨부");
+            } else {
+                list.get(i).setAtfl_mng_id_yn("미첨부");
+            }
+        }
 
         /* map 형태로 저장 */
         HashMap<String, Object> hm = new HashMap();
