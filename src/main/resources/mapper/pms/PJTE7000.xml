@@ -1586,7 +1586,7 @@
         )  S
         WHERE 1=1
         <if test='file_cd1 == "050"'>
-            AND S.COLM01 = A.COLM01
+            AND S.COLM03 = A.COLM03
         </if>
         <if test='file_cd1 == "100"'>
             AND S.COLM01 = A.COLM01
