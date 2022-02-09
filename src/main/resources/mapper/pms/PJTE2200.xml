@@ -11,12 +11,20 @@
              , A.TST_CASE_ID
              , A.TST_CASE_NM
              , A.ITG_TST_PRC_CD
-             , NVL2(A.FRCS_STA_DT,STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d'),'') AS FRCS_STA_DT
-             , NVL2(A.FRCS_END_DT,STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d'),'') AS FRCS_END_DT
-             , NVL2(A.STA_DT,STR_TO_DATE(A.STA_DT , '%Y%m%d'),'') AS STA_DT
-             , NVL2(A.END_DT,STR_TO_DATE(A.END_DT , '%Y%m%d'),'') AS END_DT
-             , NVL2(A.DVLPE_CNF_DT,STR_TO_DATE(A.DVLPE_CNF_DT , '%Y%m%d'),'') AS DVLPE_CNF_DT
-             , NVL2(A.PL_CNF_DT,STR_TO_DATE(A.PL_CNF_DT , '%Y%m%d'),'') AS PL_CNF_DT
+             , CASE WHEN A.FRCS_STA_DT IS NOT NULL AND A.FRCS_STA_DT != '' THEN STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d') ELSE '' END AS FRCS_STA_DT /* 예상시작일자 */
+             , CASE WHEN A.FRCS_END_DT IS NOT NULL AND A.FRCS_END_DT != '' THEN STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d') ELSE '' END AS FRCS_END_DT /* 예상종료일자 */
+	  	     , CASE WHEN A.STA_DT IS NOT NULL AND A.STA_DT != ''
+	  	            THEN STR_TO_DATE(A.STA_DT, '%Y%m%d') ELSE A.STA_DT
+	  	        END AS STA_DT /* 실제시작일자 */
+		     , CASE WHEN A.END_DT IS NOT NULL AND A.END_DT != ''
+		            THEN STR_TO_DATE(A.END_DT, '%Y%m%d') ELSE A.END_DT
+		        END AS END_DT /* 실제종료일자 */
+		     , CASE WHEN A.DVLPE_CNF_DT IS NOT NULL AND A.DVLPE_CNF_DT != ''
+			        THEN STR_TO_DATE(A.DVLPE_CNF_DT, '%Y%m%d') ELSE A.DVLPE_CNF_DT
+			    END AS DVLPE_CNF_DT /* 개발자확인일자 */
+		     , CASE WHEN A.PL_CNF_DT IS NOT NULL AND A.PL_CNF_DT != ''
+		            THEN STR_TO_DATE(A.PL_CNF_DT, '%Y%m%d') ELSE A.PL_CNF_DT
+		        END AS PL_CNF_DT /* PL확인일자 */
              , B.EMPNM      AS DVLPE_ENM
              , A.DVLPE_ENO
              , C.EMPNM      AS PL_ENM
