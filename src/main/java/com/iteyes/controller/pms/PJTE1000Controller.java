@@ -64,12 +64,21 @@ public class PJTE1000Controller {
 
         List<PJTE1000DTO> list01 = PJTE1000Service.select_1000_01(PJTE1000);
 
-        PJTE1000.setS_day(list01.get(0).getS_day());
-        PJTE1000.setProc_dt(list01.get(0).getProc_dt());
-        PJTE1000.setErr_proc_dt(list01.get(0).getErr_proc_dt());
-        PJTE1000.setProc_days(list01.get(0).getProc_days());
-        PJTE1000.setErr_proc_days(list01.get(0).getErr_proc_days());
-
+        if(list01.get(0).getS_day() != null && !list01.get(0).getS_day().isEmpty() && !list01.get(0).getS_day().equals("undefined")) {
+            PJTE1000.setS_day(list01.get(0).getS_day());
+        }
+        if(list01.get(0).getProc_dt() != null && !list01.get(0).getProc_dt().isEmpty() && !list01.get(0).getProc_dt().equals("undefined")){
+            PJTE1000.setProc_dt(list01.get(0).getProc_dt());
+        }
+        if(list01.get(0).getErr_proc_dt() != null && !list01.get(0).getErr_proc_dt().isEmpty() && !list01.get(0).getErr_proc_dt().equals("undefined")){
+            PJTE1000.setErr_proc_dt(list01.get(0).getErr_proc_dt());
+        }
+        if(list01.get(0).getProc_days() != null && !list01.get(0).getProc_days().isEmpty() && !list01.get(0).getProc_days().equals("undefined")){
+            PJTE1000.setProc_days(list01.get(0).getProc_days());
+        }
+        if(list01.get(0).getErr_proc_days() != null && !list01.get(0).getErr_proc_days().isEmpty() && !list01.get(0).getErr_proc_days().equals("undefined")){
+            PJTE1000.setErr_proc_days(list01.get(0).getErr_proc_days());
+        }
 
         List<PJTE1000DTO> list = PJTE1000Service.select_1000(PJTE1000);
 
