@@ -61,6 +61,7 @@ public class PJTE9001Controller {
         PJTE9001DTO PJTE9001 = new PJTE9001DTO();
 
         PJTE9001.setPrjt_id(request.getParameter("prjt_id_selected"));
+        PJTE9001.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE9001.setBzcd(request.getParameter("bzcd_selected"));
         PJTE9001.setEmpno(request.getParameter("empno"));
         PJTE9001.setEmpnm(request.getParameter("empnm"));
