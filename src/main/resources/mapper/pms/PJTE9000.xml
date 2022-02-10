@@ -16,10 +16,11 @@
                ,LGN_PWD
                ,AUT_CD
                ,IP_ADDR
-               , NVL2(PLAN_THW_STDT,STR_TO_DATE(PLAN_THW_STDT , '%Y%m%d'),'') AS PLAN_THW_STDT
-               , NVL2(PLAN_THW_ENDT,STR_TO_DATE(PLAN_THW_ENDT , '%Y%m%d'),'') AS PLAN_THW_ENDT
-               , NVL2(PLAN_THW_ENDT,STR_TO_DATE(PLAN_THW_ENDT , '%Y%m%d'),'') AS PLAN_THW_ENDT
-               , NVL2(REAL_THW_ENDT,STR_TO_DATE(REAL_THW_ENDT , '%Y%m%d'),'') AS REAL_THW_ENDT
+               ,REAL_PRJT_ID
+               ,(CASE WHEN NVL(str_to_date(PLAN_THW_STDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(PLAN_THW_STDT, '%Y%m%d'), '') END) AS PLAN_THW_STDT
+               ,(CASE WHEN NVL(str_to_date(PLAN_THW_ENDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(PLAN_THW_ENDT, '%Y%m%d'), '') END) AS PLAN_THW_ENDT
+               ,(CASE WHEN NVL(str_to_date(REAL_THW_STDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(REAL_THW_STDT, '%Y%m%d'), '') END) AS REAL_THW_STDT
+               ,(CASE WHEN NVL(str_to_date(REAL_THW_ENDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(REAL_THW_ENDT, '%Y%m%d'), '') END) AS REAL_THW_ENDT
           FROM   pms_emp_info
           WHERE  1 = 1
             AND    BKUP_ID = #{bkup_id}
