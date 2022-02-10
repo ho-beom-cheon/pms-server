@@ -22,11 +22,7 @@
               , NVL(D.NCMPL_CNT,0)     AS PL_NCMPL_CNT
               , NVL(D.PRNR_RT,0)       AS PL_PRNR_RT
               , NVL(F.TOT_CNT,0)       AS TOT_CNT2
-              , NVL
-
-
-
-                  (F.CMPL_CNT,0)      AS CMPL_CNT2
+              , NVL(F.CMPL_CNT,0)      AS CMPL_CNT2
            FROM (SELECT DTLS_TYCD AS BZCD
                       , DTLS_TYNM AS BZNM
                    FROM pms_cd_del_mng
@@ -69,7 +65,7 @@
                                                           FROM   pms_cd_del_mng
                                                           WHERE  BKUP_ID  = A.BKUP_ID
                                                           AND    PRJT_ID  = A.PRJT_ID
-                                                          AND    GRP_TYCD = '1000000030'
+                                                          AND    GRP_TYCD = '1000000031'
                                                           AND    USE_YN   = 'Y')
                             AND A.PRJT_ID	   = #{prjt_id}
                             AND A.BKUP_ID	   = #{bkup_id}
@@ -101,7 +97,7 @@
                                                           FROM   pms_cd_del_mng
                                                           WHERE  BKUP_ID  = A.BKUP_ID
                                                           AND    PRJT_ID  = A.PRJT_ID
-                                                          AND    GRP_TYCD = '1000000030'
+                                                          AND    GRP_TYCD = '1000000031'
                                                           AND    USE_YN   = 'Y')
                             AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
                             AND A.PRJT_ID	   = #{prjt_id}
@@ -134,7 +130,7 @@
                                                           FROM   pms_cd_del_mng
                                                           WHERE  BKUP_ID  = A.BKUP_ID
                                                           AND    PRJT_ID  = A.PRJT_ID
-                                                          AND    GRP_TYCD = '1000000030'
+                                                          AND    GRP_TYCD = '1000000031'
                                                           AND    USE_YN   = 'Y')
                             AND DATE_FORMAT(DATE_ADD(A.DVLPE_CNF_DT,INTERVAL CAST(#{proc_days} AS INT) DAY),'%Y%m%d')
                         BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
@@ -161,7 +157,7 @@
                                                           FROM   pms_cd_del_mng
                                                           WHERE  BKUP_ID  = A.BKUP_ID
                                                           AND    PRJT_ID  = A.PRJT_ID
-                                                          AND    GRP_TYCD = '1000000030'
+                                                          AND    GRP_TYCD = '1000000031'
                                                           AND    USE_YN   = 'Y')
                             AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL 1 DAY),'%Y%m%d')
                                                   AND DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL 7 DAY),'%Y%m%d')
@@ -236,7 +232,7 @@
 				                                     FROM pms_cd_del_mng
 				                                    WHERE BKUP_ID  = A.BKUP_ID
 				                                      AND PRJT_ID  = A.PRJT_ID
-				                                      AND GRP_TYCD = '1000000030'
+				                                      AND GRP_TYCD = '1000000031'
 				                                      AND USE_YN   = 'Y')
                              AND A.PRJT_ID = #{prjt_id}
                              AND A.BKUP_ID = #{bkup_id}
@@ -265,7 +261,7 @@
 								                            FROM pms_cd_del_mng
 								                           WHERE BKUP_ID  = A.BKUP_ID
 								                             AND PRJT_ID  = A.PRJT_ID
-								                             AND GRP_TYCD = '1000000030'
+								                             AND GRP_TYCD = '1000000031'
 								                             AND USE_YN   = 'Y')
                                     AND A.PRJT_ID	   = #{prjt_id}
                                     AND A.BKUP_ID	   = #{bkup_id}
@@ -300,7 +296,7 @@
 								                                     FROM   pms_cd_del_mng
 								                                     WHERE  BKUP_ID  = A.BKUP_ID
 								                                     AND    PRJT_ID  = A.PRJT_ID
-								                                     AND    GRP_TYCD = '1000000030'
+								                                     AND    GRP_TYCD = '1000000031'
 								                                     AND    USE_YN   = 'Y')
                                AND A.PRJT_ID	   = #{prjt_id}
                                AND A.BKUP_ID	   = #{bkup_id}
@@ -329,7 +325,7 @@
 								                                     FROM   pms_cd_del_mng
 								                                     WHERE  BKUP_ID  = A.BKUP_ID
 								                                     AND    PRJT_ID  = A.PRJT_ID
-								                                     AND    GRP_TYCD = '1000000030'
+								                                     AND    GRP_TYCD = '1000000031'
 								                                     AND    USE_YN   = 'Y')
                                AND A.PRJT_ID	   = #{prjt_id}
                                AND A.BKUP_ID	   = #{bkup_id}
@@ -440,8 +436,8 @@
               , D.NPRRN_KBN
               , D.PGM_ID
               , D.PGM_NM
-              , NVL2(D.FRCS_END_DT,STR_TO_DATE(D.FRCS_END_DT , '%Y%m%d'),'') AS FRCS_END_DT
-		      , NVL2(D.DVLPE_CNF_DT,STR_TO_DATE(D.DVLPE_CNF_DT, '%Y%m%d'),'') AS DVLPE_CNF_DT
+              , CASE WHEN D.FRCS_END_DT IS NOT NULL AND D.FRCS_END_DT != '' THEN STR_TO_DATE(D.FRCS_END_DT , '%Y%m%d') ELSE '' END AS FRCS_END_DT
+              , CASE WHEN D.DVLPE_CNF_DT IS NOT NULL AND D.DVLPE_CNF_DT != '' THEN STR_TO_DATE(D.DVLPE_CNF_DT , '%Y%m%d') ELSE '' END AS DVLPE_CNF_DT
               , B.EMPNM      AS DVLPE_NM
               , C.EMPNM      AS PL_NM
               , D.CRPE_YN    AS CRPE_YN
@@ -474,7 +470,7 @@
                                   FROM pms_cd_del_mng
                                  WHERE BKUP_ID  = A.BKUP_ID
                                    AND PRJT_ID  = A.PRJT_ID
-                                   AND GRP_TYCD = '1000000030'
+                                   AND GRP_TYCD = '1000000031'
                                    AND USE_YN   = 'Y'
                                 )
                             AND A.PRC_STEP_CD IN ('000', '100', '200')
@@ -529,7 +525,7 @@
                                      FROM pms_cd_del_mng
                                     WHERE  BKUP_ID  = #{bkup_id}
                                       AND    PRJT_ID  = #{prjt_id}
-                                      AND    GRP_TYCD = '1000000030'
+                                      AND    GRP_TYCD = '1000000031'
                                       AND    USE_YN   = 'Y')
                        AND PRJT_ID  = #{prjt_id}
                        AND BKUP_ID  = #{bkup_id}
