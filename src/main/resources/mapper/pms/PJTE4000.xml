@@ -9,7 +9,9 @@
               ,A.TITL_NM
               ,A.REQ_DIS_TXT
               ,A.REQ_DIS_CD
-              ,NVL2(A.RGS_DT,STR_TO_DATE(A.RGS_DT , '%Y%m%d'),'') AS RGS_DT
+              , CASE WHEN A.RGS_DT IS NOT NULL AND A.RGS_DT != ''
+                     THEN STR_TO_DATE(A.RGS_DT, '%Y%m%d') ELSE A.RGS_DT
+                 END AS RGS_DT
               ,A.ACHI_NM
               ,A.PRC_STEP_CD
               ,A.TGT_BIZ_NM
