@@ -26,7 +26,7 @@ public class PJTE5000Controller {
 	private PJTE5000Service pjte5000Service;
 
 	@GetMapping(value = "/select")
-    public @ResponseBody String select(HttpServletRequest request) throws Exception{
+	public @ResponseBody String select(HttpServletRequest request) throws Exception{
 
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -47,22 +47,30 @@ public class PJTE5000Controller {
 		PJTE5000.setPln_sta_dt(request.getParameter("pln_sta_dt"));
 		PJTE5000.setPln_end_dt(request.getParameter("pln_end_dt"));
 
-    	List<PJTE5000DTO> list = pjte5000Service.select_5000_01(PJTE5000);
+		List<PJTE5000DTO> list = pjte5000Service.select_5000_01(PJTE5000);
 
-    	HashMap<String, Object> hm = new HashMap();
-    	HashMap<String, Object> hm1 = new HashMap();
-    	HashMap<String, Object> hm1_pagination = new HashMap();
-    	hm.put("result", true);
-    	hm1.put("contents", list);
-    	hm1_pagination.put("page", 1);
-    	hm1_pagination.put("totalCount", 100);
-    	hm1.put("pagination", hm1_pagination);
-    	hm.put("data", hm1);
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).getAtfl_mng_id() != null && !list.get(i).getAtfl_mng_id().isEmpty() && !list.get(i).getAtfl_mng_id().equals("undefined")) {
+				list.get(i).setAtfl_mng_id_yn("첨부");
+			} else {
+				list.get(i).setAtfl_mng_id_yn("미첨부");
+			}
+		}
 
-    	String jsonStr = mapper.writeValueAsString(hm);
+		HashMap<String, Object> hm = new HashMap();
+		HashMap<String, Object> hm1 = new HashMap();
+		HashMap<String, Object> hm1_pagination = new HashMap();
+		hm.put("result", true);
+		hm1.put("contents", list);
+		hm1_pagination.put("page", 1);
+		hm1_pagination.put("totalCount", 100);
+		hm1.put("pagination", hm1_pagination);
+		hm.put("data", hm1);
 
-    	return jsonStr;
-    }
+		String jsonStr = mapper.writeValueAsString(hm);
+
+		return jsonStr;
+	}
 	@DeleteMapping(value = "/delete")
 	public @ResponseBody boolean delete(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
 		boolean result = true;
@@ -81,7 +89,7 @@ public class PJTE5000Controller {
 		return result;
 	}
 	@PostMapping(value = "/insert")
-	    public @ResponseBody boolean insert(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception{
+	public @ResponseBody boolean insert(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception{
 
 		boolean result = true;
 
