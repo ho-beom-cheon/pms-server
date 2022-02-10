@@ -68,7 +68,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND A.FRCS_END_DT <= #{proc_dt}
                 AND A.FRCS_END_DT >= #{s_day}
@@ -84,7 +84,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_NO = CASE
@@ -102,7 +102,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_NO = CASE
@@ -120,7 +120,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND A.FRCS_END_DT < #{s_day}
                 AND A.BZCD = CASE
@@ -324,7 +324,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND A.FRCS_END_DT <= #{proc_dt}
                 AND A.FRCS_END_DT >= #{s_day}
@@ -345,7 +345,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_NO = CASE
@@ -368,7 +368,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_NO = CASE
@@ -391,7 +391,7 @@
                                       FROM pms_cd_del_mng
                                       WHERE BKUP_ID = A.BKUP_ID
                                         AND PRJT_ID = A.PRJT_ID
-                                        AND GRP_TYCD = '1000000030'
+                                        AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
                 AND A.FRCS_END_DT < #{s_day}
                 AND A.BZCD = CASE
