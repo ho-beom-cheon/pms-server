@@ -2,6 +2,7 @@ package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE3001DTO;
+import com.iteyes.dto.pms.PJTE3001DTO;
 import com.iteyes.service.PJTE3001Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,40 @@ public class PJTE3001Controller {
     @Autowired
     private PJTE3001Service pjte3001Service;
 
+    @GetMapping(value = "/combo")
+    public @ResponseBody
+    String combo(HttpServletRequest request) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        PJTE3001DTO PJTE3001 = new PJTE3001DTO();
+
+        PJTE3001.setPrjt_id(request.getParameter("prjt_id"));
+
+        List<PJTE3001DTO> list = pjte3001Service.select_0000_01(PJTE3001);
+        List<PJTE3001DTO> list1 = pjte3001Service.select_0000_02(PJTE3001);
+        List<PJTE3001DTO> list2 = pjte3001Service.select_0000_03(PJTE3001);
+        List<PJTE3001DTO> list3 = pjte3001Service.select_0000_04(PJTE3001);
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list);
+        hm1.put("contents1", list1);
+        hm1.put("contents2", list2);
+        hm1.put("contents3", list3);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+
+    }
+    
     @GetMapping(value = "/select")
     public @ResponseBody
     String select(HttpServletRequest request) throws Exception {

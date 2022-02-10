@@ -3,6 +3,50 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE3001Mapper">
+    <select id="select_0000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
+        SELECT GRP_TYCD
+             , DTLS_TYCD
+             , DTLS_TYNM
+             , SORT_SEQ
+        FROM pms_cd_del_mng
+        WHERE USE_YN   = 'Y'
+          AND GRP_TYCD = '1000000001'
+          AND PRJT_ID  = #{prjt_id}
+          AND BKUP_ID  = '0000000000'
+    </select>
+    <select id="select_0000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
+        SELECT GRP_TYCD
+             , DTLS_TYCD
+             , DTLS_TYNM
+             , SORT_SEQ
+        FROM pms_cd_del_mng
+        WHERE USE_YN   = 'Y'
+          AND GRP_TYCD = '1000000009'
+          AND PRJT_ID  = #{prjt_id}
+          AND BKUP_ID  = '0000000000'
+    </select>
+    <select id="select_0000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
+        SELECT GRP_TYCD
+             , DTLS_TYCD
+             , DTLS_TYNM
+             , SORT_SEQ
+        FROM pms_cd_del_mng
+        WHERE USE_YN   = 'Y'
+          AND GRP_TYCD = '1000000007'
+          AND PRJT_ID  = #{prjt_id}
+          AND BKUP_ID  = '0000000000'
+    </select>
+    <select id="select_0000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
+        SELECT GRP_TYCD
+             , DTLS_TYCD
+             , DTLS_TYNM
+             , SORT_SEQ
+        FROM pms_cd_del_mng
+        WHERE USE_YN   = 'Y'
+          AND GRP_TYCD = '1000000008'
+          AND PRJT_ID  = #{prjt_id}
+          AND BKUP_ID  = '0000000000'
+    </select>
     <select id="select_3001_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
         SELECT A.CCTN_ID
              , CASE
@@ -11,7 +55,9 @@
                    ELSE C.TST_CASE_NM END   AS CCTN_NM
              , D.EMPNM                      AS RGPE_NM
              , A.RGPE_NO
-             , NVL2(A.RGS_DT,STR_TO_DATE(A.RGS_DT , '%Y%m%d'),'') AS RGS_DT
+             , CASE WHEN A.RGS_DT IS NOT NULL AND A.RGS_DT != ''
+	  	            THEN STR_TO_DATE(A.RGS_DT, '%Y%m%d') ELSE A.RGS_DT
+                END AS RGS_DT
              , A.MNG_ID
              , A.ERR_TYCD
              , A.RGS_DSCD
@@ -20,12 +66,16 @@
              , A.RGS_ATFL_MNG_ID
              , A.BZCD
              , A.ERR_PRC_STEP_CD
-             , NVL2(A.TTMN_SCD_DT,STR_TO_DATE(A.TTMN_SCD_DT , '%Y%m%d'),'') AS TTMN_SCD_DT
+             , CASE WHEN A.TTMN_SCD_DT IS NOT NULL AND A.TTMN_SCD_DT != ''
+	  	            THEN STR_TO_DATE(A.TTMN_SCD_DT, '%Y%m%d') ELSE A.TTMN_SCD_DT
+                END AS TTMN_SCD_DT
              , E.EMPNM                      AS DVLPE_NM
              , A.DVLPE_NO
              , F.EMPNM                      AS PL_NM
              , A.PL_NO
-             , NVL2(A.TTMN_DT,STR_TO_DATE(A.TTMN_DT , '%Y%m%d'),'') AS TTMN_DT
+             , CASE WHEN A.TTMN_DT IS NOT NULL AND A.TTMN_DT != ''
+	  	            THEN STR_TO_DATE(A.TTMN_DT, '%Y%m%d') ELSE A.TTMN_DT
+                END AS TTMN_DT
              , A.TTMN_TXT
              , H.ORG_FILE_NM                AS TTMN_ATFL_NM
              , A.TTMN_ATFL_MNG_ID
