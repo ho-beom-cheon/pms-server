@@ -1,10 +1,17 @@
 package com.iteyes.service;
 
 import com.iteyes.dto.pms.PJTE3001DTO;
+import com.iteyes.dto.pms.PJTE9001DTO;
 
 import java.util.List;
 
 public interface PJTE3001Service {
+    /* combo */
+    List<PJTE3001DTO> select_0000_01(PJTE3001DTO PJTE3001) throws Exception ;
+    List<PJTE3001DTO> select_0000_02(PJTE3001DTO PJTE3001) throws Exception ;
+    List<PJTE3001DTO> select_0000_03(PJTE3001DTO PJTE3001) throws Exception ;
+    List<PJTE3001DTO> select_0000_04(PJTE3001DTO PJTE3001) throws Exception ;
+
     /* select */
     List<PJTE3001DTO> select_3001_01(PJTE3001DTO PJTE3001) throws Exception ;
 
