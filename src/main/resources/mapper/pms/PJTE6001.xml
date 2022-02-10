@@ -12,6 +12,7 @@
 			 ,A.REQ_TXT
 			 ,A.PRC_DT
 			 ,C.EMPNM AS PRCPE_NM
+		     ,C.EMPNO AS PRCPE_NO
 			 ,A.PRC_TXT
 			 ,A.REQ_PRC_STEP_CD
 			 ,A.ATFL_MNG_ID
