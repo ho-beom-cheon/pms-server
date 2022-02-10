@@ -48,13 +48,15 @@ public class PJTE2100DTO {
 	private String dvlpe_sta_dt;            // 개발시작일자
 	private String dvlpe_end_dt;            // 개발종료일자
 
-	private String atfl_mng_id_yn;            // 개발종료일자
-	private String pal_atfl_mng_id_yn;            // 개발종료일자
+	private String atfl_mng_id_yn;          //
+	private String pal_atfl_mng_id_yn;      //
+	private String excelUplod;              //
 
 
 	private List<PJTE2100DTO> updatedRows;
 	private List<PJTE2100DTO> createdRows;
 	private List<PJTE2100DTO> deletedRows;
+	private List<PJTE2100DTO> gridData;
 
 	private String mng_id;                  // 관리ID
 
