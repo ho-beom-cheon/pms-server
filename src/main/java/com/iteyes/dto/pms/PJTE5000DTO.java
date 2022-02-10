@@ -35,6 +35,7 @@ public class PJTE5000DTO {
 	private String rmrk;                      //비고
 	private String sort;                      //정렬
 	private String atfl_mng_id;               //첨부파일관리ID
+	private String atfl_mng_id_yn;               //첨부파일관리ID
 	private String wbs_cnt;                   //하위건수
 
 	private String frcs_sta_dt;             // 예상시작일자

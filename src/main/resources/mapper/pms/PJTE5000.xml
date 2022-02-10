@@ -23,7 +23,7 @@
            , DATE_FORMAT(A.ACL_END_DT,'%Y%-%m-%d') AS ACL_END_DT
            , A.ACL_END_TIM
            , A.WGT_RT
-           , CAST(A.PRG_RT AS signed integer) AS PRG_RT
+           , A.PRG_RT
            , A.RMRK
            , A.SORT
            , A.ATFL_MNG_ID
@@ -43,7 +43,7 @@
   		<if test='bzcd != "TTT"'>
   		  AND A.BZCD  = #{bzcd}
   		</if>
-  		<if test='mng_cd != "TTT"'>
+	   <if test='mng_cd != "TTT"'>
   		  AND A.MNG_CD  = #{mng_cd}
   		</if>
   		<if test='wbs_prc_sts_cd != "TTT"'>
