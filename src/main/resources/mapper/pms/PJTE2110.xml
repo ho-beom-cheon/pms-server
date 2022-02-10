@@ -228,7 +228,7 @@
 									    AND BKUP_ID  = #{bkup_id}
                                     ) B
                               ON B.BZCD = A.BZCD
-                             AND A.DVLP_DIS_CD IN (SELECT DTLS_TYCD
+                           WHERE A.DVLP_DIS_CD IN (SELECT DTLS_TYCD
 				                                     FROM pms_cd_del_mng
 				                                    WHERE BKUP_ID  = A.BKUP_ID
 				                                      AND PRJT_ID  = A.PRJT_ID
