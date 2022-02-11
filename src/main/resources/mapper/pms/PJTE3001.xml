@@ -183,15 +183,15 @@
                  LEFT OUTER JOIN
              pms_emp_info C
              ON C.EMPNO = A.PL_ENO
-                 AND C.PRJT_ID = A.PRJT_ID\
+                 AND C.PRJT_ID = A.PRJT_ID
                  AND C.BKUP_ID = A.BKUP_ID
         WHERE 1 = 1
-          AND A.SQN_CD = #{cctn_sqn_cd}
-          AND A.BZCD = #{cctn_bzcd}
+          AND A.SQN_CD      = #{cctn_sqn_cd}
+          AND A.BZCD        = #{cctn_bzcd}
           AND A.TST_CASE_ID = #{cctn_id}
-          AND A.BKUP_ID = #{bkup_id}
-          AND A.PRJT_ID = #{prjt_id}
-          AND '1100' != #{rgs_dscd}
+          AND A.BKUP_ID     = #{bkup_id}
+          AND A.PRJT_ID     = #{prjt_id}
+          AND '1100'       != #{rgs_dscd}
     </select>
     <update id="update_3001_01" parameterType="Map">
         UPDATE pms_err_mng
