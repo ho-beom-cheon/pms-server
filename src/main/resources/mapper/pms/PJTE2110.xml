@@ -39,22 +39,22 @@
                       , NVL2(AA.TOT_CNT,ROUND((((AA.CMPL_CNT + AA.AF_CMPL_CNT)/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
                    FROM (SELECT A.BZCD
                               , COUNT(*) AS TOT_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date}
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS AF_TOT_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date} AND A.PRC_STEP_CD IN ('200', '300', '400','500','600')
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d')AND A.PRC_STEP_CD IN ('200', '300', '400','500','600')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT >  #{inp_date} AND A.PRC_STEP_CD IN ('200', '300', '400','500','600')
+                              , SUM(CASE WHEN A.FRCS_END_DT >  DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('200', '300', '400','500','600')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS AF_CMPL_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date} AND A.PRC_STEP_CD IN ('000', '100')
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -252,7 +252,7 @@
                                       , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
                                                  THEN 1 ELSE 0
                                              END) AS CMPL_CNT
-                                      , SUM(CASE WHEN A.FRCS_END_DT < #{inp_date} AND A.PRC_STEP_CD IN ('000', '100')
+                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100')
                                                  THEN 1 ELSE 0
                                              END) AS NCMPL_CNT
                                    FROM pms_pgm_mng A
@@ -476,7 +476,7 @@
                             AND A.PRC_STEP_CD IN ('000', '100', '200')
                             AND A.PRJT_ID	   = #{prjt_id}
                             AND A.BKUP_ID	   = #{bkup_id}
-                            AND (A.FRCS_END_DT <= #{inp_date} OR A.DVLPE_CNF_DT IS NOT NULL)
+                            AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT IS NOT NULL)
                   )  A
            WHERE 1=1
              AND (A.CRPE_YN = '부' OR A.PL_YN = '부')
