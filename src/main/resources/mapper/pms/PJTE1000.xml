@@ -733,7 +733,7 @@
   </select>
   <select id="select_1000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE1000DTO">
    <![CDATA[
-        SELECT ROW_NUMBER() OVER(PARTITION BY A.MNG_ID ORDER BY A.RGS_DT DESC) AS SQNO
+        SELECT DISTINCT ROW_NUMBER() OVER(PARTITION BY A.MNG_ID ORDER BY A.RGS_DT DESC) AS SQNO
              ,A.BKUP_ID
              ,A.PRJT_ID
              ,A.MNG_ID
@@ -761,6 +761,7 @@
          AND A.PRJT_ID = #{prjt_id}
          AND A.BKUP_ID = #{bkup_id}
          AND A.DEL_YN  = 'N'
+        GROUP BY A.MNG_ID
         ORDER BY RGS_DT DESC, DB_CHG_TS DESC
         ]]>
   </select>

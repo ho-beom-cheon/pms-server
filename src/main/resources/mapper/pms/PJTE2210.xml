@@ -62,22 +62,22 @@
                   FROM (SELECT A.BZCD
                              , A.SQN_CD
                              , COUNT(*) AS TOT_CNT
-                             , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date}
+                             , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d')
                                         THEN 1
                                         ELSE 0
                                          END
                                   )     AS AF_TOT_CNT
-                             , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date} AND A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
+                             , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
                                         THEN 1
                                         ELSE 0
                                          END
                                   )     AS CMPL_CNT
-                             , SUM(CASE WHEN A.FRCS_END_DT >  #{inp_date} AND A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
+                             , SUM(CASE WHEN A.FRCS_END_DT > DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.ITG_TST_PRC_CD IN ('200', '300', '400','500','600')
                                         THEN 1
                                         ELSE 0
                                          END
                                   )     AS AF_CMPL_CNT
-                             , SUM(CASE WHEN A.FRCS_END_DT <= #{inp_date} AND A.ITG_TST_PRC_CD IN ('000', '100')
+                             , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.ITG_TST_PRC_CD IN ('000', '100')
                                         THEN 1
                                         ELSE 0
                                          END
@@ -273,7 +273,7 @@
                                                  ELSE 0
                                                   END
                                            )     AS CMPL_CNT
-                                      , SUM(CASE WHEN A.FRCS_END_DT < #{inp_date} AND A.ITG_TST_PRC_CD IN ('000', '100')
+                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.ITG_TST_PRC_CD IN ('000', '100')
                                                  THEN 1
                                                  ELSE 0
                                                   END
@@ -296,7 +296,7 @@
                               , BB.TOT_CNT
                               , BB.CMPL_CNT
                               , BB.NCMPL_CNT
-                              , NVL2(BB.TOT_CNT,ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                              , ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2) AS PRNR_RT
                            FROM (SELECT A.BZCD
                                       , A.SQN_CD
                                       , A.DVLPE_ENO
@@ -517,7 +517,7 @@
                                AND A.ITG_TST_PRC_CD IN ('000', '100', '200')
                                AND A.PRJT_ID	   = #{prjt_id}
                                AND A.BKUP_ID	   = #{bkup_id}
-                               AND (A.FRCS_END_DT <= #{inp_date} OR A.DVLPE_CNF_DT IS NOT NULL)
+                               AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT IS NOT NULL)
                            )  A
                      WHERE 1=1
                        AND (A.CRPE_YN = '부' OR A.PL_YN = '부')

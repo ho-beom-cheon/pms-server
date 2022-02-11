@@ -49,6 +49,10 @@
         <if test='prjt_id != "" and prjt_id != null and prjt_id != "TTT"'>
             AND PRJT_ID = #{prjt_id}
         </if>
+        /*백업ID*/
+        <if test='bkup_id != "" and bkup_id != null and bkup_id != "TTT"'>
+            AND BKUP_ID = #{bkup_id}
+        </if>
         /*업무구분*/
         <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
             AND BZCD = #{bzcd}

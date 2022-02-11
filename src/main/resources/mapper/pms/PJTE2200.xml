@@ -181,13 +181,13 @@
                , #{scnr_nm}
                , DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%')
                , DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%')
-               , DATE_FORMAT(#{sta_dt},'%Y%m%d%')
-               , DATE_FORMAT(#{end_dt},'%Y%m%d%')
+               , NULL
+               , NULL
                , #{dvlpe_eno}
                , #{pl_eno}
                , #{crpe_eno}
-               , DATE_FORMAT(#{dvlpe_cnf_dt},'%Y%m%d%')
-               , DATE_FORMAT(#{pl_cnf_dt},'%Y%m%d%')
+               , NULL
+               , NULL
                , #{itg_tst_prc_cd}
                , #{prr_cnd}
                , #{inp_val}
