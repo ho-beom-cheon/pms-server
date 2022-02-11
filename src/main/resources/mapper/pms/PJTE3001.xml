@@ -9,10 +9,10 @@
              , DTLS_TYNM
              , SORT_SEQ
         FROM pms_cd_del_mng
-        WHERE USE_YN   = 'Y'
+        WHERE USE_YN = 'Y'
           AND GRP_TYCD = '1000000001'
-          AND PRJT_ID  = #{prjt_id}
-          AND BKUP_ID  = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND BKUP_ID = '0000000000'
     </select>
     <select id="select_0000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
         SELECT GRP_TYCD
@@ -20,10 +20,10 @@
              , DTLS_TYNM
              , SORT_SEQ
         FROM pms_cd_del_mng
-        WHERE USE_YN   = 'Y'
+        WHERE USE_YN = 'Y'
           AND GRP_TYCD = '1000000009'
-          AND PRJT_ID  = #{prjt_id}
-          AND BKUP_ID  = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND BKUP_ID = '0000000000'
     </select>
     <select id="select_0000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
         SELECT GRP_TYCD
@@ -31,10 +31,10 @@
              , DTLS_TYNM
              , SORT_SEQ
         FROM pms_cd_del_mng
-        WHERE USE_YN   = 'Y'
+        WHERE USE_YN = 'Y'
           AND GRP_TYCD = '1000000007'
-          AND PRJT_ID  = #{prjt_id}
-          AND BKUP_ID  = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND BKUP_ID = '0000000000'
     </select>
     <select id="select_0000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
         SELECT GRP_TYCD
@@ -42,42 +42,48 @@
              , DTLS_TYNM
              , SORT_SEQ
         FROM pms_cd_del_mng
-        WHERE USE_YN   = 'Y'
+        WHERE USE_YN = 'Y'
           AND GRP_TYCD = '1000000008'
-          AND PRJT_ID  = #{prjt_id}
-          AND BKUP_ID  = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND BKUP_ID = '0000000000'
     </select>
     <select id="select_3001_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
         SELECT A.CCTN_ID
              , CASE
                    WHEN B.PGM_NM IS NOT NULL
                        THEN B.PGM_NM
-                   ELSE C.TST_CASE_NM END   AS CCTN_NM
-             , D.EMPNM                      AS RGPE_NM
+                   ELSE C.TST_CASE_NM END                                           AS CCTN_NM
+             , D.EMPNM                                                              AS RGPE_NM
              , A.RGPE_NO
-             , CASE WHEN A.RGS_DT IS NOT NULL AND A.RGS_DT != ''
-	  	            THEN STR_TO_DATE(A.RGS_DT, '%Y%m%d') ELSE A.RGS_DT
-                END AS RGS_DT
+             , CASE
+                   WHEN A.RGS_DT IS NOT NULL AND A.RGS_DT != ''
+	  	            THEN STR_TO_DATE(A.RGS_DT, '%Y%m%d')
+                   ELSE A.RGS_DT
+            END                                                                     AS RGS_DT
              , A.MNG_ID
              , A.ERR_TYCD
              , A.RGS_DSCD
              , A.ERR_TXT
-             , G.ORG_FILE_NM                AS RGS_ATFL_NM
+             , G.ORG_FILE_NM                                                        AS RGS_ATFL_NM
              , A.RGS_ATFL_MNG_ID
              , A.BZCD
              , A.ERR_PRC_STEP_CD
-             , CASE WHEN A.TTMN_SCD_DT IS NOT NULL AND A.TTMN_SCD_DT != ''
-	  	            THEN STR_TO_DATE(A.TTMN_SCD_DT, '%Y%m%d') ELSE A.TTMN_SCD_DT
-                END AS TTMN_SCD_DT
-             , E.EMPNM                      AS DVLPE_NM
+             , CASE
+                   WHEN A.TTMN_SCD_DT IS NOT NULL AND A.TTMN_SCD_DT != ''
+	  	            THEN STR_TO_DATE(A.TTMN_SCD_DT, '%Y%m%d')
+                   ELSE A.TTMN_SCD_DT
+            END                                                                     AS TTMN_SCD_DT
+             , E.EMPNM                                                              AS DVLPE_NM
              , A.DVLPE_NO
-             , F.EMPNM                      AS PL_NM
+             , F.EMPNM                                                              AS PL_NM
              , A.PL_NO
-             , CASE WHEN A.TTMN_DT IS NOT NULL AND A.TTMN_DT != ''
-	  	            THEN STR_TO_DATE(A.TTMN_DT, '%Y%m%d') ELSE A.TTMN_DT
-                END AS TTMN_DT
+             , CASE
+                   WHEN A.TTMN_DT IS NOT NULL AND A.TTMN_DT != ''
+	  	            THEN STR_TO_DATE(A.TTMN_DT, '%Y%m%d')
+                   ELSE A.TTMN_DT
+            END                                                                     AS TTMN_DT
              , A.TTMN_TXT
-             , H.ORG_FILE_NM                AS TTMN_ATFL_NM
+             , H.ORG_FILE_NM                                                        AS TTMN_ATFL_NM
              , A.TTMN_ATFL_MNG_ID
              , CASE WHEN A.ERR_PRC_STEP_CD = '400' THEN A.BFJR_BZCD ELSE A.BZCD END AS BFJR_BZCD
              , A.CCTN_BZCD
@@ -131,26 +137,82 @@
           AND A.BKUP_ID = #{bkup_id}
           AND A.PRJT_ID = #{prjt_id}
     </select>
+    <select id="select_3001_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
+        SELECT A.PGM_ID    AS CCTN_ID
+             , A.PGM_NM    AS CCTN_NM
+             , #{rgs_dscd} AS RGS_DSCD
+             , A.BZCD
+             , '100'       AS ERR_PRC_STEP_CD
+             , B.EMPNM     AS DVLPE_NM
+             , A.DVLPE_NO
+             , C.EMPNM     AS PL_NM
+             , A.PL_NO
+        FROM pms_pgm_mng A
+                 LEFT OUTER JOIN
+             pms_emp_info B
+             ON B.EMPNO = A.DVLPE_NO
+                 AND B.PRJT_ID = A.PRJT_ID
+                 AND B.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             pms_emp_info C
+             ON C.EMPNO = A.PL_NO
+                 AND C.PRJT_ID = A.PRJT_ID
+                 AND C.BKUP_ID = A.BKUP_ID
+        WHERE 1 = 1
+          AND A.BZCD = #{cctn_bzcd}
+          AND A.PGM_ID = #{cctn_id}
+          AND A.BKUP_ID = #{bkup_id}
+          AND A.PRJT_ID = #{prjt_id}
+          AND '1100' = #{rgs_dscd}
+        UNION ALL
+        SELECT A.TST_CASE_ID AS CCTN_ID
+             , A.TST_CASE_NM AS CCTN_NM
+             , #{rgs_dscd}   AS RGS_DSCD
+             , A.BZCD
+             , '100'         AS ERR_PRC_STEP_CD
+             , B.EMPNM       AS DVLPE_NM
+             , A.DVLPE_ENO
+             , C.EMPNM       AS PL_NM
+             , A.PL_ENO
+        FROM pms_itg_tst_mng A
+                 LEFT OUTER JOIN
+             pms_emp_info B
+             ON B.EMPNO = A.DVLPE_ENO
+                 AND B.PRJT_ID = A.PRJT_ID
+                 AND B.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             pms_emp_info C
+             ON C.EMPNO = A.PL_ENO
+                 AND C.PRJT_ID = A.PRJT_ID\
+                 AND C.BKUP_ID = A.BKUP_ID
+        WHERE 1 = 1
+          AND A.SQN_CD = #{cctn_sqn_cd}
+          AND A.BZCD = #{cctn_bzcd}
+          AND A.TST_CASE_ID = #{cctn_id}
+          AND A.BKUP_ID = #{bkup_id}
+          AND A.PRJT_ID = #{prjt_id}
+          AND '1100' != #{rgs_dscd}
+    </select>
     <update id="update_3001_01" parameterType="Map">
         UPDATE pms_err_mng
-        SET BZCD            = #{bzcd}
-          , RGS_DSCD        = #{rgs_dscd}
-          , ERR_TYCD        = #{err_tycd}
-          , ERR_TXT         = #{err_txt}
-          , DVLPE_NO        = #{dvlpe_no}
-          , PL_NO           = #{pl_no}
-          , TTMN_SCD_DT     = REPLACE(#{ttmn_scd_dt}, '-', '')
-          , TTMN_DT         = CASE
-                                  WHEN #{err_prc_step_cd} = '600' THEN DATE_FORMAT(NOW(), '%Y%m%d')
-                                  WHEN #{err_prc_step_cd} = '300' THEN ''
-                                  ELSE REPLACE(#{ttmn_dt}, '-', '') END
-          , TTMN_TXT        = #{ttmn_txt}
-          , ERR_PRC_STEP_CD = #{err_prc_step_cd}
-          , BFJR_BZCD       = CASE WHEN #{bfjr_bzcd} != #{bzcd} THEN #{bzcd} ELSE BFJR_BZCD END
-          , RGS_ATFL_MNG_ID = #{rgs_atfl_mng_id}
+        SET BZCD             = #{bzcd}
+          , RGS_DSCD         = #{rgs_dscd}
+          , ERR_TYCD         = #{err_tycd}
+          , ERR_TXT          = #{err_txt}
+          , DVLPE_NO         = #{dvlpe_no}
+          , PL_NO            = #{pl_no}
+          , TTMN_SCD_DT      = REPLACE(#{ttmn_scd_dt}, '-', '')
+          , TTMN_DT          = CASE
+                                   WHEN #{err_prc_step_cd} = '600' THEN DATE_FORMAT(NOW(), '%Y%m%d')
+                                   WHEN #{err_prc_step_cd} = '300' THEN ''
+                                   ELSE REPLACE(#{ttmn_dt}, '-', '') END
+          , TTMN_TXT         = #{ttmn_txt}
+          , ERR_PRC_STEP_CD  = #{err_prc_step_cd}
+          , BFJR_BZCD        = CASE WHEN #{bfjr_bzcd} != #{bzcd} THEN #{bzcd} ELSE BFJR_BZCD END
+          , RGS_ATFL_MNG_ID  = #{rgs_atfl_mng_id}
           , TTMN_ATFL_MNG_ID = #{ttmn_atfl_mng_id}
-          , OPR_NO          = #{login_emp_no}
-          , DB_CHG_TS       = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+          , OPR_NO           = #{login_emp_no}
+          , DB_CHG_TS        = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
         WHERE 1 = 1
           AND BKUP_ID = #{bkup_id}
           AND PRJT_ID = #{prjt_id}
@@ -158,7 +220,8 @@
     </update>
     <insert id="insert_3001_01" parameterType="Map">
         <selectKey resultType="string" keyProperty="mng_id" order="BEFORE">
-            SELECT CONCAT(CONCAT('E',#{err_tycd}),LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,5,6) AS INT))+1,0),6,'0')) AS MNG_ID
+            SELECT CONCAT(CONCAT('E',#{err_tycd}),LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,5,6) AS INT))+1,0),6,'0')) AS
+            MNG_ID
             FROM pms_err_mng
             WHERE ERR_TYCD = #{err_tycd}
             AND PRJT_ID = #{prjt_id}
