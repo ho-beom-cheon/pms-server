@@ -430,9 +430,17 @@ public class PJTE9000Controller {
 
 		PJTE9000C.setNew_prjt_id(PJTE9000.getNew_prjt_id());
 		PJTE9000C.setLogin_emp_no(PJTE9000.getLogin_emp_no());
+		PJTE9000C.setPrjt_id(PJTE9000.getPrjt_id());
+
+		result = pjte9000Service.delete_9000_90(PJTE9000C);
+		result = pjte9000Service.delete_9000_91(PJTE9000C);
+		result = pjte9000Service.delete_9000_92(PJTE9000C);
+		result = pjte9000Service.delete_9000_93(PJTE9000C);
 
 		result = pjte9000Service.insert_9000_90(PJTE9000C);
 		result = pjte9000Service.insert_9000_91(PJTE9000C);
+		result = pjte9000Service.insert_9000_92(PJTE9000C);
+		result = pjte9000Service.insert_9000_93(PJTE9000C);
 		return result;
 	}
 }
