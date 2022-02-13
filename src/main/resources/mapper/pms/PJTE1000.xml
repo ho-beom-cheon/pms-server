@@ -308,8 +308,12 @@
       <![CDATA[
         SELECT DISTINCT A.BZCD
                       , A.TODO_TXT
-                      , NVL2(A.PLN_STA_DT,STR_TO_DATE(A.PLN_STA_DT , '%Y%m%d'),'') AS PLN_STA_DT
-                      , NVL2(A.PLN_END_DT,STR_TO_DATE(A.PLN_END_DT , '%Y%m%d'),'') AS PLN_END_DT
+                      ,CASE WHEN A.PLN_STA_DT IS NOT NULL AND A.PLN_STA_DT != ''
+                            THEN STR_TO_DATE(A.PLN_STA_DT, '%Y%m%d') ELSE A.PLN_STA_DT
+                        END AS PLN_STA_DT
+                      ,CASE WHEN A.PLN_END_DT IS NOT NULL AND A.PLN_END_DT != ''
+                            THEN STR_TO_DATE(A.PLN_END_DT, '%Y%m%d') ELSE A.PLN_END_DT
+                        END AS PLN_END_DT
                       , A.RMRK
                       , A.SORT
         FROM (SELECT A.BZCD
@@ -738,7 +742,9 @@
              ,A.PRJT_ID
              ,A.MNG_ID
              ,A.NTAR_BZCD
-             ,NVL2(A.RGS_DT,STR_TO_DATE(A.RGS_DT , '%Y%m%d'),'') AS RGS_DT
+             ,CASE WHEN A.RGS_DT IS NOT NULL AND A.RGS_DT != ''
+                   THEN STR_TO_DATE(A.RGS_DT, '%Y%m%d') ELSE A.RGS_DT
+               END AS RGS_DT
              ,A.TITL_TXT
              ,A.ANCPT
              ,A.RGS_NO
