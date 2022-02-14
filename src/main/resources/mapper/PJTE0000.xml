@@ -35,6 +35,7 @@
 			 , A.BZCD
 			 , A.AUT_CD
 			 , A.LGN_PWD
+		     , A.REAL_PRJT_ID
 			 , CASE WHEN A.LGN_PWD != #{lgn_pwd}
 						THEN 'N'
 					WHEN A.LGN_PWD = #{empno} '211111'
