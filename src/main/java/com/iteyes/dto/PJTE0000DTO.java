@@ -22,6 +22,7 @@ public class PJTE0000DTO {
 	private String opr_no;				// 조작자번호
 	private String db_chg_ts;			// DB변경일시
 	private String login_yn;			// login 구분
+	private String real_prjt_id;        // 투입프로젝트 id
 
 	private String btn_gubun;           // 버튼 클릭 이벤트 구분
 }
