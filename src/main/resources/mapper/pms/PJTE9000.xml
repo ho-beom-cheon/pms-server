@@ -1123,7 +1123,7 @@
           FROM   pms_emp_info
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = '0000000000'
-            AND    EMPNO   = '100'
+            AND    EMPNO   = 'Admin'
      </insert>
 
      <insert id="insert_9000_93" parameterType="Map">
