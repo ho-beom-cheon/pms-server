@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE8000Mapper">
+    <select id="select_8000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
+        SELECT '00000000' AS BAUP_ID
+             , '00000000' AS PRJT_ID
+             , '00000000' AS REAL_PRJT_ID
+             , '20220101' AS WEEK_YYMM
+             , '1' AS WEEK_SQN_CD
+        FROM DUAL
+    </select>
+</mapper>

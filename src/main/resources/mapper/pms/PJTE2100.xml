@@ -9,6 +9,7 @@
 			, DTLS_TYNM
 			, SORT_SEQ
 		 FROM pms_cd_del_mng
+		     _mng
 		WHERE USE_YN   = 'Y'
 		  AND GRP_TYCD = '0000000000'
 		  AND PRJT_ID  = '0000000000'
@@ -59,7 +60,9 @@
 		          THEN STR_TO_DATE(A.PL_CNF_DT, '%Y%m%d') ELSE A.PL_CNF_DT
 		      END AS PL_CNF_DT /* PL확인일자 */
 		   , A.PRC_STEP_CD        /* 처리단계 */
-		   , A.PRG_TXT            /* 진행현황 */
+		   , A.PRG_TXT            /* 진행
+
+		                             현황 */
 		   , B.EMPNM  AS DVLPE_NM /* 개발명 */
 		   , C.EMPNM  AS PL_NM    /* PL명 */
 		   , D.EMPNM  AS CRPE_NM  /* 담당자명 */
