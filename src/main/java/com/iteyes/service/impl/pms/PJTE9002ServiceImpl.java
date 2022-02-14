@@ -76,6 +76,13 @@ public class PJTE9002ServiceImpl implements PJTE9002Service {
     }
 
     @Override
+    public boolean update_9002_07(PJTE9002DTO PJTE9002) throws Exception {
+
+        return pjte9002Mapper.update_9002_07(PJTE9002);
+
+    }
+
+    @Override
     public List<PJTE9002DTO> select_9002_10(PJTE9002DTO PJTE9002) throws Exception {
 
         return pjte9002Mapper.select_9002_10(PJTE9002);

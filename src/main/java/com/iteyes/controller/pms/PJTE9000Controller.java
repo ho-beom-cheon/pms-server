@@ -401,6 +401,7 @@ public class PJTE9000Controller {
 		result = pjte9000Service.delete_9000_33(PJTE9000D);
 		result = pjte9000Service.delete_9000_34(PJTE9000D);
 		result = pjte9000Service.delete_9000_35(PJTE9000D);
+		result = pjte9000Service.delete_9000_36(PJTE9000D);
 
 		result = pjte9000Service.insert_9000_20(PJTE9000C);
 		result = pjte9000Service.insert_9000_21(PJTE9000C);
@@ -418,6 +419,7 @@ public class PJTE9000Controller {
 		result = pjte9000Service.insert_9000_33(PJTE9000C);
 		result = pjte9000Service.insert_9000_34(PJTE9000C);
 		result = pjte9000Service.insert_9000_35(PJTE9000C);
+		result = pjte9000Service.insert_9000_36(PJTE9000C);
 		return result;
 	}
 

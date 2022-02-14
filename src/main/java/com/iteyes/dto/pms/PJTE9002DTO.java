@@ -96,5 +96,10 @@ public class PJTE9002DTO {
     private String sqn_cd;             // 차수구분코드
     private String tst_case_id;        // 테스트 케이스 ID
 
+    /*PMS 주간보고 관리*/
+    private String week_sqn_cd;        // 주간년월차수구분코드
+    private String week_yymm;          // 주간년월
+    private String real_prjt_id;       // 투입프로젝트ID
+
 };
 ;
