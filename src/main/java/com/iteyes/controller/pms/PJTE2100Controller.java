@@ -137,7 +137,7 @@ public class PJTE2100Controller {
                 PJTE2100C.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
                 PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
                 PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
-                PJTE2100C.setPrjt_id(PJTE2100.getGridData().get(i).getPrjt_id());
+                PJTE2100C.setPrjt_id(PJTE2100.getPrjt_id());
 
                 PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
                 PJTE2100C.setLogin_emp_no(PJTE2100.getLogin_emp_no());

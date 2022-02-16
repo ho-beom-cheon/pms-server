@@ -58,4 +58,6 @@ public class PJTE2200DTO {
     private List<PJTE2200DTO> updatedRows;
     private List<PJTE2200DTO> createdRows;
     private List<PJTE2200DTO> deletedRows;
+    private List<PJTE2200DTO> gridData;
+    private String excelUplod;
 }
