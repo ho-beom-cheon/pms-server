@@ -48,4 +48,7 @@ public class PJTE5000DTO {
 	private List<PJTE5000DTO> deletedRows;
 	private List<PJTE5000DTO> rowData;
 
+	private List<PJTE5000DTO> gridData;
+	private String excelUplod;
+
 }
