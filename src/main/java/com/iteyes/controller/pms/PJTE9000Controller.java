@@ -88,6 +88,7 @@ public class PJTE9000Controller {
 			PJTE9000C.setReal_thw_stdt(PJTE9000.getCreatedRows().get(i).getReal_thw_stdt());
 			PJTE9000C.setReal_thw_endt(PJTE9000.getCreatedRows().get(i).getReal_thw_endt());
 			PJTE9000C.setLogin_emp_no(PJTE9000.getCreatedRows().get(i).getLogin_emp_no());
+			PJTE9000C.setReal_prjt_id(PJTE9000.getCreatedRows().get(i).getReal_prjt_id());
 
 
 			result = pjte9000Service.insert_9000_01(PJTE9000C);
@@ -119,6 +120,7 @@ public class PJTE9000Controller {
 			PJTE9000U.setReal_thw_stdt(PJTE9000.getUpdatedRows().get(i).getReal_thw_stdt());
 			PJTE9000U.setReal_thw_endt(PJTE9000.getUpdatedRows().get(i).getReal_thw_endt());
 			PJTE9000U.setLogin_emp_no(PJTE9000.getUpdatedRows().get(i).getLogin_emp_no());
+			PJTE9000U.setReal_prjt_id(PJTE9000.getUpdatedRows().get(i).getReal_prjt_id());
 
 			result = pjte9000Service.update_9000_01(PJTE9000U);
 		}
@@ -308,7 +310,15 @@ public class PJTE9000Controller {
 
 		result = pjte9000Service.delete_9000_50(PJTE9000);
 
-		result = pjte9000Service.insert_9000_50(PJTE9000);
+		for(int i=0; i<PJTE9000.getRowDatas().size(); i++){
+			PJTE9000.setPrjt_id(PJTE9000.getRowDatas().get(i).getPrjt_id());
+			PJTE9000.setDate(PJTE9000.getRowDatas().get(i).getDate());
+			PJTE9000.setDate_cd(PJTE9000.getRowDatas().get(i).getDate_cd());
+			PJTE9000.setHoliday_cd(PJTE9000.getRowDatas().get(i).getHoliday_cd());
+
+			result = pjte9000Service.insert_9000_50(PJTE9000);
+
+		}
 
 		return result;
 	}
@@ -316,24 +326,18 @@ public class PJTE9000Controller {
 	@PostMapping("update4")
 	public @ResponseBody boolean update4(HttpServletRequest request, @RequestBody PJTE9000DTO PJTE9000) throws Exception{
 		boolean result = false;
-		PJTE9000DTO PJTE9000C = new PJTE9000DTO();
-		PJTE9000DTO PJTE9000D = new PJTE9000DTO();
+		PJTE9000DTO PJTE9000U = new PJTE9000DTO();
 
 
-		PJTE9000D.setPrjt_id(PJTE9000.getRowDatas().get(0).getPrjt_id());
-		PJTE9000D.setSel_yyyymmdd(PJTE9000.getSel_yyyymmdd());
 
-		result = pjte9000Service.delete_9000_51(PJTE9000D);
-
-
-		for(int i=0; i<PJTE9000.getRowDatas().size(); i++) {
-			PJTE9000C.setPrjt_id(PJTE9000.getRowDatas().get(i).getPrjt_id());
-			PJTE9000C.setDate(PJTE9000.getRowDatas().get(i).getDate());
-			PJTE9000C.setDate_cd(PJTE9000.getRowDatas().get(i).getDate_cd());
-			PJTE9000C.setHoliday_cd(PJTE9000.getRowDatas().get(i).getHoliday_cd());
+		for(int i=0; i<PJTE9000.getUpdatedRows().size(); i++) {
+			PJTE9000U.setPrjt_id(PJTE9000.getUpdatedRows().get(i).getPrjt_id());
+			PJTE9000U.setDate(PJTE9000.getUpdatedRows().get(i).getDate());
+			PJTE9000U.setDate_cd(PJTE9000.getUpdatedRows().get(i).getDate_cd());
+			PJTE9000U.setHoliday_cd(PJTE9000.getUpdatedRows().get(i).getHoliday_cd());
 
 
-			result = pjte9000Service.insert_9000_51(PJTE9000C);
+			result = pjte9000Service.update_9000_50(PJTE9000U);
 		}
 
 		return result;
@@ -443,6 +447,43 @@ public class PJTE9000Controller {
 		result = pjte9000Service.insert_9000_91(PJTE9000C);
 		result = pjte9000Service.insert_9000_92(PJTE9000C);
 		result = pjte9000Service.insert_9000_93(PJTE9000C);
+		return result;
+	}
+
+	@PostMapping("/excel_upload")
+	public @ResponseBody boolean excel_upload(@RequestBody PJTE9000DTO PJTE9000) throws Exception{
+		boolean result = false;
+
+		PJTE9000DTO PJTE9000C = new PJTE9000DTO();
+
+		// 기존 delete 쿼리문 쓰기 위해 new_prjt_id 변수에 prjt_id 값 지정
+		PJTE9000C.setNew_prjt_id(PJTE9000.getPrjt_id());
+		result = pjte9000Service.delete_9000_92(PJTE9000C);
+
+
+		// 기존 insert 쿼리 사용
+		for(int i=0; i<PJTE9000.getRowDatas().size(); i++) {
+			PJTE9000C.setPrjt_id(PJTE9000.getRowDatas().get(i).getPrjt_id());
+			PJTE9000C.setEmpno(PJTE9000.getRowDatas().get(i).getEmpno());
+			PJTE9000C.setEmpnm(PJTE9000.getRowDatas().get(i).getEmpnm());
+			PJTE9000C.setEmail_addr(PJTE9000.getRowDatas().get(i).getEmail_addr());
+			PJTE9000C.setRank_nm(PJTE9000.getRowDatas().get(i).getRank_nm());
+			PJTE9000C.setCpno(PJTE9000.getRowDatas().get(i).getCpno());
+			PJTE9000C.setLgn_pwd(PJTE9000.getRowDatas().get(i).getLgn_pwd());
+			PJTE9000C.setBzcd(PJTE9000.getRowDatas().get(i).getBzcd());
+			PJTE9000C.setCatn_dcd(PJTE9000.getRowDatas().get(i).getCatn_dcd());
+			PJTE9000C.setAut_cd(PJTE9000.getRowDatas().get(i).getAut_cd());
+			PJTE9000C.setIp_addr(PJTE9000.getRowDatas().get(i).getIp_addr());
+			PJTE9000C.setPlan_thw_stdt(PJTE9000.getRowDatas().get(i).getPlan_thw_stdt());
+			PJTE9000C.setPlan_thw_endt(PJTE9000.getRowDatas().get(i).getPlan_thw_endt());
+			PJTE9000C.setReal_thw_stdt(PJTE9000.getRowDatas().get(i).getReal_thw_stdt());
+			PJTE9000C.setReal_thw_endt(PJTE9000.getRowDatas().get(i).getReal_thw_endt());
+			PJTE9000C.setLogin_emp_no(PJTE9000.getRowDatas().get(i).getLogin_emp_no());
+			PJTE9000C.setReal_prjt_id(PJTE9000.getRowDatas().get(i).getReal_prjt_id());
+
+
+			result = pjte9000Service.insert_9000_01(PJTE9000C);
+		}
 		return result;
 	}
 }
