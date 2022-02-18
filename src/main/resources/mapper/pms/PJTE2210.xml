@@ -25,9 +25,9 @@
              , D.PRNR_RT       AS PL_PRNR_RT
              , F.TOT_CNT       AS TOT_CNT2
              , F.CMPL_CNT      AS CMPL_CNT2
-          FROM (SELECT A.DTLS_TYCD         AS BZCD
-                     , A.DTLS_TYNM         AS BZNM
-                     , B.SQN_CD            AS SQN_CD
+          FROM (SELECT A.DTLS_TYCD          AS BZCD
+                     , A.DTLS_TYNM          AS BZNM
+                     , NVL(B.SQN_CD,'100')  AS SQN_CD
                      , NVL(C.SQN_NM,'1차수') AS SQN_NM
                   FROM pms_cd_del_mng A
                          LEFT OUTER JOIN
@@ -114,7 +114,7 @@
                                   )     AS NCMPL_CNT
                           FROM pms_itg_tst_mng A
                          WHERE 1=1
-                           AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                           AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND DATE_FORMAT(#{inp_date},'%Y%m%d')
                            AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN A.SQN_CD ELSE #{sqn_cd} END
                            AND A.PRJT_ID	   = #{prjt_id}
                            AND A.BKUP_ID	   = #{bkup_id}
@@ -146,7 +146,7 @@
                           FROM pms_itg_tst_mng A
                          WHERE 1=1
                            AND DATE_FORMAT(DATE_ADD(A.DVLPE_CNF_DT,INTERVAL CAST(#{proc_days} AS INT) DAY),'%Y%m%d')
-                       BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                       BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND DATE_FORMAT(#{inp_date},'%Y%m%d')
                            AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN A.SQN_CD ELSE #{sqn_cd} END
                            AND A.PRJT_ID	   = #{prjt_id}
                            AND A.BKUP_ID	   = #{bkup_id}
@@ -230,7 +230,7 @@
                               , A.PRJT_ID    AS PRJT_ID
                               , A.BKUP_ID    AS BKUP_ID
                               , B.DVLPE_ENO  AS DVLPE_ENO
-                              , B.SQN_CD     AS SQN_CD
+                              , NVL(B.SQN_CD,'100')   AS SQN_CD
                               , NVL(C.SQN_NM,'1차수') AS SQN_NM
                            FROM pms_cd_del_mng A
                            LEFT OUTER JOIN
@@ -316,7 +316,7 @@
                                     AND A.SQN_CD      = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
                                     AND A.PRJT_ID	   = #{prjt_id}
                                     AND A.BKUP_ID	   = #{bkup_id}
-                                    AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                                    AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND DATE_FORMAT(#{inp_date},'%Y%m%d')
                                   GROUP BY A.BZCD, A.SQN_CD, A.DVLPE_ENO
                                ) BB
                         )   C
@@ -426,8 +426,8 @@
                   )            AS SPND_CNT
           FROM (SELECT A.DTLS_TYCD         AS BZCD
     					        ,A.DTLS_TYNM         AS BZNM
-    					        ,B.SQN_CD            AS SQN_CD
-    					        ,IFNULL(C.SQN_NM,'1차수') AS SQN_NM
+    					        ,NVL(B.SQN_CD,'100')   AS SQN_CD
+    					        ,NVL(C.SQN_NM,'1차수') AS SQN_NM
                                 ,B.PRJT_ID            AS PRJT_ID
                                 ,B.BKUP_ID            AS BKUP_ID
     					  FROM   pms_cd_del_mng A
