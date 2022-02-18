@@ -147,6 +147,13 @@ public class PJTE9000ServiceImpl implements PJTE9000Service {
     }
 
     @Override
+    public boolean update_9000_50(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.update_9000_50(PJTE9000);
+
+    }
+
+    @Override
     public boolean insert_9000_50(PJTE9000DTO PJTE9000) throws Exception {
 
         return pjte9000Mapper.insert_9000_50(PJTE9000);
