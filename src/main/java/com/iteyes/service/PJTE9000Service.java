@@ -38,7 +38,9 @@ public interface PJTE9000Service {
 	// 그리드 4 신규생선년도 delete, insert
 	boolean delete_9000_50(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_50(PJTE9000DTO PJTE9000) throws Exception;
-	// 그리드 4 저장부분 delete, insert
+	// 그리드 4 저장부분 update
+	boolean update_9000_50(PJTE9000DTO PJTE9000) throws Exception;
+
 	boolean delete_9000_51(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_51(PJTE9000DTO PJTE9000) throws Exception;
 
