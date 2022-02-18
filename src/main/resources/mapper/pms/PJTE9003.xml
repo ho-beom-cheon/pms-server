@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9003Mapper">
+	<select id="select_9003_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9003DTO">
+		SELECT A.SQNO
+		     , CASE WHEN A.BZCD = '999' THEN '프로젝트관리' ELSE B.BZNM END AS BZNM
+		     , A.FILE_RGS_DSCD
+		     , A.SAH_FILE_NM
+		     , A.FILE_NM
+             , A.ORG_FILE_NM
+             , A.SAM_FILE_NM
+             , A.FILE_PATH
+		  FROM (
+			    SELECT A.SQNO
+			         , B.BZCD
+			         , A.FILE_RGS_DSCD
+			         , CONCAT(B.PGM_ID,':',B.PGM_NM) AS SAH_FILE_NM
+			         , A.FILE_NM
+                     , A.ORG_FILE_NM
+                     , CONCAT(A.PRJT_ID,'_',B.BZCD,'_구현_단위테스트케이스(',B.PGM_ID,')_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1) ) AS SAM_FILE_NM
+                     , A.FILE_PATH
+		          FROM pms_atfl_mng A
+		          LEFT OUTER JOIN pms_pgm_mng B
+		            ON B.ATFL_MNG_ID = A.ATFL_MNG_ID
+		           AND B.PRJT_ID     = A.PRJT_ID
+		           AND B.BKUP_ID     = A.BKUP_ID
+		           AND B.BZCD        = CASE WHEN #{bzcd} = 'TTT' THEN B.BZCD ELSE #{bzcd} END
+		         WHERE 1 = 1
+		           AND A.BKUP_ID     = #{bkup_id}
+                   AND A.PRJT_ID     = #{prjt_id}
+                   AND A.FILE_RGS_DSCD  = '100'
+                   AND #{file_rgs_dscd} IN ('TTT','100')
+                 UNION ALL
+                SELECT A.SQNO
+			         , B.BZCD
+			         , A.FILE_RGS_DSCD
+			         , CONCAT(B.PGM_ID,':',B.PGM_NM) AS SAH_FILE_NM
+			         , A.FILE_NM
+                     , A.ORG_FILE_NM
+                     , CASE WHEN B.PGM_DIS_CD = '100' THEN CONCAT(A.PRJT_ID,'_',B.BZCD,'_설계_화면설계서(',B.PGM_ID,')_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1) )
+                            WHEN B.PGM_DIS_CD = '200' THEN CONCAT(A.PRJT_ID,'_',B.BZCD,'_설계_프로그램설계서(',B.PGM_ID,')_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1) )
+                            WHEN B.PGM_DIS_CD = '300' THEN CONCAT(A.PRJT_ID,'_',B.BZCD,'_설계_보고서설계서(',B.PGM_ID,')_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1) )
+                            WHEN B.PGM_DIS_CD = '400' THEN CONCAT(A.PRJT_ID,'_',B.BZCD,'_설계_배치프로그램설계서(',B.PGM_ID,')_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1) )
+                            ELSE ''
+                        END AS SAM_FILE_NM
+                     , A.FILE_PATH
+		          FROM pms_atfl_mng A
+		          LEFT OUTER JOIN pms_pgm_mng B
+		            ON B.PAL_ATFL_MNG_ID = A.ATFL_MNG_ID
+		           AND B.PRJT_ID         = A.PRJT_ID
+		           AND B.BKUP_ID         = A.BKUP_ID
+		           AND B.BZCD            = CASE WHEN #{bzcd} = 'TTT' THEN B.BZCD ELSE #{bzcd} END
+		         WHERE 1 = 1
+		           AND A.BKUP_ID         = #{bkup_id}
+                   AND A.PRJT_ID         = #{prjt_id}
+                   AND A.FILE_RGS_DSCD   = '110'
+                   AND #{file_rgs_dscd} IN ('TTT','110')
+                 UNION ALL
+                SELECT A.SQNO
+                     , B.BZCD
+                     , A.FILE_RGS_DSCD
+                     , CONCAT(B.PGM_ID,':',B.PGM_ID) AS SAH_FILE_NM
+                     , A.FILE_NM
+                     , A.ORG_FILE_NM
+                     , CONCAT(A.PRJT_ID,'_',B.BZCD,'_테스트_통합테스트_케이스(결과)_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1)) AS SAM_FILE_NM
+                     , A.FILE_PATH
+		          FROM pms_atfl_mng A
+		          LEFT OUTER JOIN pms_itg_tst_mng B
+		            ON B.ATFL_MNG_ID = A.ATFL_MNG_ID
+		           AND B.PRJT_ID     = A.PRJT_ID
+		           AND B.BKUP_ID     = A.BKUP_ID
+		           AND B.BZCD        = CASE WHEN #{bzcd} = 'TTT' THEN B.BZCD ELSE #{bzcd} END
+		         WHERE 1 = 1
+		           AND A.BKUP_ID        = #{bkup_id}
+                   AND A.PRJT_ID        = #{prjt_id}
+                   AND A.FILE_RGS_DSCD  = '200'
+                   AND #{file_rgs_dscd} IN ('TTT','200')
+                 UNION ALL
+			    SELECT A.SQNO
+			         , '999' AS BZCD
+			         , A.FILE_RGS_DSCD
+			         , '프로젝트관리' AS SAH_FILE_NM
+			         , A.FILE_NM
+                     , A.ORG_FILE_NM
+                     , '' AS SAM_FILE_NM
+                     , A.FILE_PATH
+		          FROM pms_atfl_mng A
+		         WHERE 1 = 1
+		           AND A.BKUP_ID        = #{bkup_id}
+                   AND A.PRJT_ID        = #{prjt_id}
+                   AND A.FILE_RGS_DSCD  = CASE WHEN #{file_rgs_dscd} = 'TTT' THEN A.FILE_RGS_DSCD ELSE #{file_rgs_dscd} END
+                   AND #{file_rgs_dscd} IN ('TTT','900','901','902')
+               ) A
+        LEFT OUTER JOIN
+         (
+          SELECT DTLS_TYCD AS BZCD
+			   , DTLS_TYNM AS BZNM
+			FROM pms_cd_del_mng
+		   WHERE GRP_TYCD = '1000000001'
+		     AND PRJT_ID  = #{prjt_id}
+			 AND BKUP_ID  = #{bkup_id}
+          ) B
+         ON B.BZCD = A.BZCD
+      WHERE 1 = 1
+        <if test='sah_file_nm != "" and sah_file_nm != null'>
+		AND A.SAH_FILE_NM LIKE CONCAT('%', #{sah_file_nm}, '%')
+		</if>
+	  ORDER BY A.FILE_RGS_DSCD, A.SAH_FILE_NM, SQNO
+  </select>
+</mapper>
