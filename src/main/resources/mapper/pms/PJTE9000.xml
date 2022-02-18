@@ -108,10 +108,10 @@
             ,CATN_DCD      = #{catn_dcd}
             ,AUT_CD        = #{aut_cd}
             ,IP_ADDR       = #{ip_addr}
-            ,PLAN_THW_STDT = DATE_FORMAT(#{plan_thw_stdt}, '%Y%m%d')
-            ,PLAN_THW_ENDT = DATE_FORMAT(#{plan_thw_endt}, '%Y%m%d')
-            ,REAL_THW_STDT = DATE_FORMAT(#{real_thw_stdt}, '%Y%m%d')
-            ,REAL_THW_ENDT = DATE_FORMAT(#{real_thw_endt}, '%Y%m%d')
+            ,PLAN_THW_STDT = REPLACE(#{plan_thw_stdt}, '-', '')
+            ,PLAN_THW_ENDT = REPLACE(#{plan_thw_endt}, '-', '')
+            ,REAL_THW_STDT = REPLACE(#{real_thw_stdt}, '-', '')
+            ,REAL_THW_ENDT = REPLACE(#{real_thw_endt}, '-', '')
             ,OPR_NO        = #{login_emp_no}
             ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
           WHERE  1 = 1
@@ -156,10 +156,10 @@
                , #{catn_dcd}
                , #{aut_cd}
                , #{ip_addr}
-               , DATE_FORMAT(#{plan_thw_stdt}, '%Y%m%d')
-               , DATE_FORMAT(#{plan_thw_endt}, '%Y%m%d')
-               , DATE_FORMAT(#{real_thw_stdt}, '%Y%m%d')
-               , DATE_FORMAT(#{real_thw_endt}, '%Y%m%d')
+               , REPLACE(#{plan_thw_stdt}, '-', '')
+               , REPLACE(#{plan_thw_endt}, '-', '')
+               , REPLACE(#{real_thw_stdt}, '-', '')
+               , REPLACE(#{real_thw_endt}, '-', '')
                , #{login_emp_no}       /*조작자번호*/
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
                )
@@ -359,14 +359,30 @@
 
      <insert id="insert_9000_50" parameterType="Map">
           INSERT INTO pms_holiday_mng
-          SELECT PRJT_ID
-               ,CONCAT(#{new_yyyy},SUBSTRING(DATE,5,4)) AS DATE
-          ,DATE_CD
-          ,HOLIDAY_CD
-          FROM   pms_holiday_mng
-          WHERE  DATE    LIKE CONCAT(CAST(#{new_yyyy} AS INT)-1,'%')
-            AND    PRJT_ID =    #{prjt_id}
+               (
+                    PRJT_ID
+                    , DATE
+                    , DATE_CD
+                    , HOLIDAY_CD
+               ) VALUES
+	            (
+                #{prjt_id}
+               ,REPLACE(#{date}, '-', '')
+               ,#{date_cd}
+               ,#{holiday_cd}
+               )
      </insert>
+
+     <update id="update_9000_50" parameterType="Map" >
+          UPDATE pms_holiday_mng
+          SET    PRJT_ID   = #{prjt_id}
+            ,DATE          = REPLACE(#{date}, '-', '')
+            ,DATE_CD       = #{date_cd}
+            ,HOLIDAY_CD    = #{holiday_cd}
+          WHERE  1 = 1
+            AND    DATE	         = REPLACE(#{date}, '-', '')
+            AND    PRJT_ID       = #{prjt_id}
+     </update>
 
      <delete id="delete_9000_51" parameterType="Map">
           DELETE
