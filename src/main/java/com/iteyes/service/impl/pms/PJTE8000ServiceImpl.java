@@ -20,4 +20,10 @@ public class PJTE8000ServiceImpl implements PJTE8000Service{
         return pjte8000Mapper.select_8000_01(PJTE8000);
     }
 
+    @Override
+    public List<PJTE8000DTO> select_8000_02(PJTE8000DTO PJTE8000) throws Exception {
+
+        return pjte8000Mapper.select_8000_02(PJTE8000);
+    }
+
 }

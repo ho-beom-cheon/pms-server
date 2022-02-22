@@ -22,7 +22,7 @@ public class PJTE8000Controller {
 
     @GetMapping(value = "/select01")
     public @ResponseBody
-    String select(HttpServletRequest request) throws Exception {
+    String select01(HttpServletRequest request) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -47,6 +47,36 @@ public class PJTE8000Controller {
         HashMap<String, Object> hm1_pagination = new HashMap();
         hm.put("result", true);
         hm1.put("contents", list);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+    }
+
+    @GetMapping(value = "/select02")
+    public @ResponseBody
+    String select02(HttpServletRequest request) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        PJTE8000DTO PJTE8000 = new PJTE8000DTO();
+
+        PJTE8000.setWeek_yymm(request.getParameter("week_yymm"));
+        PJTE8000.setWeek_sqn_cd(request.getParameter("week_sqn_cd_selected"));
+        PJTE8000.setReal_prjt_id(request.getParameter("real_prjt_id_selected"));
+        PJTE8000.setDept_cd(request.getParameter("dept_cd_selected"));
+
+        List<PJTE8000DTO> list2 = pjte8000Service.select_8000_02(PJTE8000);
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list2);
         hm1_pagination.put("page", 1);
         hm1_pagination.put("totalCount", 100);
         hm1.put("pagination", hm1_pagination);
