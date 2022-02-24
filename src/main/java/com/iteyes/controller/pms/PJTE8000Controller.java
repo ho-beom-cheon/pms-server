@@ -1,9 +1,12 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.dto.pms.PJTE4000DTO;
 import com.iteyes.dto.pms.PJTE8000DTO;
 import com.iteyes.service.PJTE8000Service;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -85,5 +88,28 @@ public class PJTE8000Controller {
         String jsonStr = mapper.writeValueAsString(hm);
 
         return jsonStr;
+    }
+
+    @PostMapping(value = "/insert")
+    public @ResponseBody
+    boolean insert(@RequestBody PJTE8000DTO PJTE8000) throws Exception {
+
+        Logger logger = LogManager.getLogger(this.getClass());
+
+        boolean result = false;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<PJTE8000DTO> list1 = pjte8000Service.select_8000_01(PJTE8000);
+
+        logger.debug("list1.size() =" + list1.size());
+        if(list1.size() == 0){
+             result = pjte8000Service.insert_8000_01(PJTE8000);
+        }else{
+            result = pjte8000Service.update_8000_01(PJTE8000);
+        }
+
+        return result;
+
     }
 }
