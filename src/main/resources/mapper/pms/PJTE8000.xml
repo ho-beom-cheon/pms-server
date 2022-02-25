@@ -6,12 +6,15 @@
     <select id="select_8000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
         SELECT A.REAL_PRJT_ID
              , A.BKUP_ID AS BKUP_ID
+             , B.ETC_TXT1 AS START_PRJT_DATE
+             , B.ETC_TXT2 AS END_PRJT_DATE
              , B.DTLS_TYNM AS REAL_PRJT_NM
              , C.EMPNM AS PM_NM
              , A.PM_NO
              , A.WEEK_YYMM
              , A.WEEK_SQN_CD
              , A.DEPT_CD
+             , F.DTLS_TYNM AS DEPT_NM
              , D.DTLS_TYNM AS WEEK_SQN_NM
              , A.ALL_REAL_PRG
              , A.ALL_PRED_PRG
@@ -94,10 +97,10 @@
                 AND D.BKUP_ID    = A.BKUP_ID
                 LEFT OUTER JOIN
                 pms_cd_del_mng   F
-                ON  B.DTLS_TYCD  = A.DEPT_CD
-                AND B.GRP_TYCD   = '1000000040'
-                AND B.PRJT_ID    = A.PRJT_ID
-                AND B.BKUP_ID    = A.BKUP_ID
+                ON  F.DTLS_TYCD  = A.DEPT_CD
+                AND F.GRP_TYCD   = '1000000040'
+                AND F.PRJT_ID    = A.PRJT_ID
+                AND F.BKUP_ID    = A.BKUP_ID
                 LEFT OUTER JOIN
                 pms_atfl_mng   F1
                 ON  F1.SQNO          = 1
@@ -149,6 +152,7 @@
              , E.ISS_TXT	    AS BEF_ISS_TXT
              , E.REQ_TXT	    AS BEF_REQ_TXT
              , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
+             , I.ORG_FILE_NM    AS BEF_ORG_FILE_NM
           FROM   pms_week_rpt_mng   E
                  LEFT OUTER JOIN
                       pms_emp_info  G
@@ -161,6 +165,13 @@
                     AND H.GRP_TYCD   = '1000000039'
                     AND H.PRJT_ID    = E.PRJT_ID
                     AND H.BKUP_ID    = E.BKUP_ID
+                 LEFT OUTER JOIN
+                 pms_atfl_mng   I
+                     ON  I.SQNO          = 1
+                     AND I.FILE_RGS_DSCD = '800'
+                     AND I.ATFL_MNG_ID  = E.ATFL_MNG_ID
+                     AND I.PRJT_ID      = E.PRJT_ID
+                     AND I.BKUP_ID      = E.BKUP_ID
          WHERE  E.WEEK_SQN_CD  = (SELECT SUBSTR(MAX(CONCAT(A.WEEK_YYMM,A.WEEK_SQN_CD)),7,3)
                                     FROM   pms_week_rpt_mng A
                                    WHERE  <![CDATA[ CONCAT(A.WEEK_YYMM,A.WEEK_SQN_CD) < CONCAT(#{week_yymm},#{week_sqn_cd}) ]]>
@@ -174,7 +185,6 @@
                                        AND    A.PRJT_ID      = E.PRJT_ID
                                        AND    A.BKUP_ID      = E.BKUP_ID)
            AND    E.REAL_PRJT_ID = #{real_prjt_id}
-           AND    E.DEPT_CD      = #{dept_cd}
            AND    E.BKUP_ID      = '0000000000'
     </select>
     <insert id="insert_8000_01" parameterType="Map" >
