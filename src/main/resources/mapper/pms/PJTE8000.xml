@@ -6,6 +6,8 @@
     <select id="select_8000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
         SELECT A.REAL_PRJT_ID
              , A.BKUP_ID AS BKUP_ID
+             , B.ETC_TXT1 AS START_PRJT_DATE
+             , B.ETC_TXT2 AS END_PRJT_DATE
              , B.DTLS_TYNM AS REAL_PRJT_NM
              , C.EMPNM AS PM_NM
              , A.PM_NO
@@ -183,7 +185,6 @@
                                        AND    A.PRJT_ID      = E.PRJT_ID
                                        AND    A.BKUP_ID      = E.BKUP_ID)
            AND    E.REAL_PRJT_ID = #{real_prjt_id}
-           AND    E.DEPT_CD      = #{dept_cd}
            AND    E.BKUP_ID      = '0000000000'
     </select>
     <insert id="insert_8000_01" parameterType="Map" >
