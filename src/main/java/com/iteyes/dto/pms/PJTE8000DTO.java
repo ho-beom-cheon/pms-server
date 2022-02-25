@@ -14,8 +14,10 @@ public class PJTE8000DTO {
     private String prjt_id;             /*프로젝트id*/
     private String real_prjt_id;        /*실제프로젝트id*/
     private String real_prjt_nm;        /*실제프로젝트명*/
-    private String dept_cd;             /*부문명*/
+    private String dept_cd;             /*부문코드*/
     private String dept_nm;             /*부문명*/
+    private String start_prjt_date;             /*부문명*/
+    private String end_prjt_date;             /*부문명*/
     private String week_yymm;           /*주간년월*/
     private String week_sqn_cd;         /*주간년월 차수*/
     private String week_sqn_nm;         /*주간년월 차수*/
