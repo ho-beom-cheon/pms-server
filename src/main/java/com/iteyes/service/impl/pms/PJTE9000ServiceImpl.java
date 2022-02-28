@@ -49,6 +49,13 @@ public class PJTE9000ServiceImpl implements PJTE9000Service {
     }
 
     @Override
+    public boolean delete_9000_41(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_41(PJTE9000);
+
+    }
+
+    @Override
     public boolean insert_9000_03(PJTE9000DTO PJTE9000) throws Exception {
 
         return pjte9000Mapper.insert_9000_03(PJTE9000);
@@ -59,6 +66,13 @@ public class PJTE9000ServiceImpl implements PJTE9000Service {
     public boolean update_9000_02(PJTE9000DTO PJTE9000) throws Exception {
 
         return pjte9000Mapper.update_9000_02(PJTE9000);
+
+    }
+
+    @Override
+    public boolean delete_9000_42(PJTE9000DTO PJTE9000) throws Exception {
+
+        return pjte9000Mapper.delete_9000_42(PJTE9000);
 
     }
 
