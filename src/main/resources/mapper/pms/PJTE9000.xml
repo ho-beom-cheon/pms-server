@@ -97,6 +97,15 @@
           ORDER BY SORT_SEQ
      </select>
 
+     <delete id="delete_9000_41" parameterType="Map">
+          DELETE
+          FROM   pms_emp_info
+          WHERE  1 = 1
+            AND    EMPNO	     = #{empno}
+            AND    PRJT_ID       = #{prjt_id}
+            AND    BKUP_ID	     = #{bkup_id}
+     </delete>
+
      <update id="update_9000_01" parameterType="Map" >
           UPDATE pms_emp_info
           SET    EMPNM         = #{empnm}
@@ -164,6 +173,15 @@
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
                )
      </insert>
+
+     <delete id="delete_9000_42" parameterType="Map">
+          DELETE
+          FROM   pms_cd_mng
+          WHERE  1 = 1
+            AND    GRP_TYCD	      = #{grp_tycd}
+            AND    PRJT_ID        = #{prjt_id}
+            AND    BKUP_ID	      = #{bkup_id}
+     </delete>
 
      <update id="update_9000_02" parameterType="Map">
           UPDATE pms_cd_mng

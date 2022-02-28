@@ -128,6 +128,23 @@ public class PJTE9000Controller {
 		return result;
 	}
 
+	@PutMapping("/delete1")
+	public @ResponseBody boolean delete1(HttpServletRequest request, @RequestBody PJTE9000DTO PJTE9000) throws Exception{
+		boolean result = false;
+
+		PJTE9000DTO PJTE9000D = new PJTE9000DTO();
+
+		for(int i=0; i<PJTE9000.getDeletedRows().size(); i++) {
+			PJTE9000D.setBkup_id(PJTE9000.getDeletedRows().get(i).getBkup_id());
+			PJTE9000D.setPrjt_id(PJTE9000.getDeletedRows().get(i).getPrjt_id());
+			PJTE9000D.setEmpno(PJTE9000.getDeletedRows().get(i).getEmpno());
+
+			result = pjte9000Service.delete_9000_41(PJTE9000D);
+		}
+
+		return result;
+	}
+
 	@PostMapping("/create2")
 	public @ResponseBody boolean create2(@RequestBody PJTE9000DTO PJTE9000) throws Exception{
 		boolean result = false;
@@ -206,6 +223,23 @@ public class PJTE9000Controller {
 			PJTE9000U.setLogin_emp_no(PJTE9000.getUpdatedRows().get(i).getLogin_emp_no());
 
 			result = pjte9000Service.update_9000_02(PJTE9000U);
+		}
+
+		return result;
+	}
+
+	@PutMapping("/delete2")
+	public @ResponseBody boolean delete2(HttpServletRequest request, @RequestBody PJTE9000DTO PJTE9000) throws Exception{
+		boolean result = false;
+
+		PJTE9000DTO PJTE9000D = new PJTE9000DTO();
+
+		for(int i=0; i<PJTE9000.getDeletedRows().size(); i++) {
+			PJTE9000D.setBkup_id(PJTE9000.getDeletedRows().get(i).getBkup_id());
+			PJTE9000D.setPrjt_id(PJTE9000.getDeletedRows().get(i).getPrjt_id());
+			PJTE9000D.setGrp_tycd(PJTE9000.getDeletedRows().get(i).getGrp_tycd());
+
+			result = pjte9000Service.delete_9000_42(PJTE9000D);
 		}
 
 		return result;

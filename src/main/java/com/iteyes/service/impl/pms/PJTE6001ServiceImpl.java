@@ -30,4 +30,10 @@ public class PJTE6001ServiceImpl implements PJTE6001Service {
 
 		return PJTE6001Mapper.update_6001_01(PJTE6001);
 	}
+
+	@Override
+	public List<PJTE6001DTO> select_6001_02(PJTE6001DTO PJTE6001) throws Exception {
+
+		return PJTE6001Mapper.select_6001_02(PJTE6001);
+	}
 }
