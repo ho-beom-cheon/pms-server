@@ -2,7 +2,6 @@ package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE6001DTO;
-import com.iteyes.mapper.pms.PJTE6001Mapper;
 import com.iteyes.service.PJTE6001Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ public class PJTE6001Controller {
 
 	@PostMapping(value = "/insert")
 	public @ResponseBody
-	boolean insert(@RequestBody PJTE6001DTO PJTE6001C) throws Exception {
+	String insert(@RequestBody PJTE6001DTO PJTE6001C) throws Exception {
 
 		boolean result = false;
 
@@ -68,7 +67,19 @@ public class PJTE6001Controller {
 
 		result = PJTE6001Service.insert_6001_01(PJTE6001C);
 
-		return result;
+		String mng_id = null;
+		if(result == true){
+			List<PJTE6001DTO> list = PJTE6001Service.select_6001_02(PJTE6001C);
+			mng_id = list.get(0).getMng_id();
+		}
+
+		HashMap<String, Object> hm = new HashMap();
+		hm.put("result", result);
+		hm.put("mng_id", mng_id);
+
+		String jsonStr = mapper.writeValueAsString(hm);
+
+		return jsonStr;
 
 	}
 
