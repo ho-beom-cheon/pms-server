@@ -79,6 +79,15 @@ public class PJTE9002Controller {
 		log.debug("testHello text = {}", testHelloList);
 		if(files != null){
 			for(MultipartFile mf : files){
+				// 파일업로드 디렉토리 만들기
+				File folder = new File("/home/admin/fileUpload/"+request.getParameter("prjt_id"));
+				if (!folder.exists()) {
+					if (folder.mkdir()) {
+						log.debug("Directory is created!");
+					} else {
+						log.debug("Failed to create directory!");
+					}
+				}
 				log.debug(mf.getOriginalFilename());
 				String path = "C:\\file_ex\\";
 				String file_nm = null;
@@ -88,7 +97,7 @@ public class PJTE9002Controller {
 						break;
 					}
 				}
-				File multiFile = new File(path + file_nm);
+				File multiFile = new File(folder+ "/" + file_nm);
 
 				InputStream input = mf.getInputStream();
 				FileUtils.copyInputStreamToFile(input, multiFile);
@@ -149,12 +158,13 @@ public class PJTE9002Controller {
 		for(int i=0; i<testHelloList.size(); i++){
 
 			String file_path = testHelloList.get(i).getFile_path();
-			String path = "C:\\file_ex\\";
+//			String path = "C:\\file_ex\\";
+			String path = "/home/admin/fileUpload/"+request.getParameter("prjt_id");
 
-			if(file_path != null){
-				PJTE9002.setFile_path(testHelloList.get(i).getFile_path());
-			}else{
+			if(file_path == null || file_path.isEmpty()){
 				PJTE9002.setFile_path(path);
+			}else{
+				PJTE9002.setFile_path(testHelloList.get(i).getFile_path());
 			}
 			PJTE9002.setSqno(testHelloList.get(i).getSqno());
 			PJTE9002.setFile_nm(testHelloList.get(i).getFile_nm());
