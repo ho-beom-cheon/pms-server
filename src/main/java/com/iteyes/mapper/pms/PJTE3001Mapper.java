@@ -24,4 +24,7 @@ public interface PJTE3001Mapper {
 
     /* insert */
     boolean  insert_3001_01(PJTE3001DTO PJTE3001) throws Exception;
+
+    /* 신규 결함 등록 후 저장 시 mng_id 조회 */
+    List<PJTE3001DTO> select_3001_03(PJTE3001DTO PJTE3001) throws Exception;
 }

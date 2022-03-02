@@ -37,6 +37,7 @@ public class PJTE3001DTO {
     private String bfjr_bzcd;         /*이관전업무*/
     private String cctn_bzcd;         /*연결업무구분코드*/
     private String cctn_sqn_cd;       /*연결차수구분코드*/
+    private String opr_no;            /*조작자번호*/
 
     /*콤보박스 세팅*/
     private String grp_tycd;          /*그룹유형코드*/

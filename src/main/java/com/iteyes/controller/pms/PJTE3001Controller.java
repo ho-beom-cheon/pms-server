@@ -54,7 +54,7 @@ public class PJTE3001Controller {
         return jsonStr;
 
     }
-    
+
     @GetMapping(value = "/select")
     public @ResponseBody
     String select(HttpServletRequest request) throws Exception {
@@ -134,15 +134,31 @@ public class PJTE3001Controller {
 
     @PostMapping(value = "/insert")
     public @ResponseBody
-    boolean insert(@RequestBody PJTE3001DTO PJTE3001C) throws Exception {
+    String insert(@RequestBody PJTE3001DTO PJTE3001C) throws Exception {
 
         boolean result = false;
 
         ObjectMapper mapper = new ObjectMapper();
 
+        PJTE3001C.setPrjt_id(PJTE3001C.getPrjt_id());
+        PJTE3001C.setOpr_no(PJTE3001C.getLogin_emp_no());
+
+
         result = pjte3001Service.insert_3001_01(PJTE3001C);
 
-        return result;
+        String mng_id = null;
+        if(result == true){
+            List<PJTE3001DTO> list = pjte3001Service.select_3001_03(PJTE3001C);
+            mng_id = list.get(0).getMng_id();
+        }
+
+        HashMap<String, Object> hm = new HashMap();
+        hm.put("result", result);
+        hm.put("mng_id", mng_id);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
 
     }
 }

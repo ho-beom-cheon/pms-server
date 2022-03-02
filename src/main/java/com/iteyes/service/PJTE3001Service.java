@@ -1,6 +1,7 @@
 package com.iteyes.service;
 
 import com.iteyes.dto.pms.PJTE3001DTO;
+import com.iteyes.dto.pms.PJTE6001DTO;
 import com.iteyes.dto.pms.PJTE9001DTO;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface PJTE3001Service {
 
     /* insert */
     boolean insert_3001_01(PJTE3001DTO PJTE3001) throws Exception;
+
+    /* 신규 결함 등록 후 저장 시 mng_id 조회 */
+    List<PJTE3001DTO> select_3001_03(PJTE3001DTO PJTE3001) throws Exception;
 }
