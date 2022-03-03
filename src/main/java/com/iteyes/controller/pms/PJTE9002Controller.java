@@ -77,17 +77,29 @@ public class PJTE9002Controller {
 				.registerModule(new SimpleModule());
 		List<FileData> testHelloList = objectMapper.readValue(jsonList, new TypeReference<List<FileData>>() {});
 		log.debug("testHello text = {}", testHelloList);
+
 		if(files != null){
-			for(MultipartFile mf : files){
-				// 파일업로드 디렉토리 만들기
-				File folder = new File("/home/admin/fileUpload/"+request.getParameter("prjt_id"));
-				if (!folder.exists()) {
-					if (folder.mkdir()) {
-						log.debug("Directory is created!");
-					} else {
-						log.debug("Failed to create directory!");
-					}
+			// 파일업로드 디렉토리 만들기
+			// 파일등록구분코드가 900,901 때는 uploadForm
+			File folder = null;
+
+			if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
+				folder = new File("/home/admin/fileUpload/uploadForm/"+request.getParameter("file_rgs_dscd"));
+
+			}else{
+				folder = new File("/home/admin/fileUpload/"+request.getParameter("prjt_id"));
+
+			}
+			if (!folder.exists()) {
+				if (folder.mkdir()) {
+					log.debug("Directory is created!");
+				} else {
+					log.debug("Failed to create directory!");
 				}
+			}
+
+			for(MultipartFile mf : files){
+
 				log.debug(mf.getOriginalFilename());
 				String path = "C:\\file_ex\\";
 				String file_nm = null;
@@ -155,11 +167,20 @@ public class PJTE9002Controller {
 		// 첨부파일 데이터 전체삭제 후 insert 위한 delete 쿼리
 		pjte9002Service.delete_9002_01(PJTE9002);
 
+		String path = null;
+		// 파일등록구분코드에 따른 path 설정
+		if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
+			path = "/home/admin/fileUpload/uploadForm/" + request.getParameter("file_rgs_dscd");
+		}else{
+			path = "/home/admin/fileUpload/"+request.getParameter("prjt_id");
+
+		}
+
 		for(int i=0; i<testHelloList.size(); i++){
 
 			String file_path = testHelloList.get(i).getFile_path();
 //			String path = "C:\\file_ex\\";
-			String path = "/home/admin/fileUpload/"+request.getParameter("prjt_id");
+
 
 			if(file_path == null || file_path.isEmpty()){
 				PJTE9002.setFile_path(path);
