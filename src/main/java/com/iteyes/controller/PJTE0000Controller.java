@@ -33,7 +33,8 @@ public class PJTE0000Controller {
     private PJTE0000ServiceImpl userService;
 
     @GetMapping(value = "/pjtInfo")
-    public @ResponseBody String projectInfo(HttpServletRequest request) throws Exception {
+    public @ResponseBody
+    String projectInfo(HttpServletRequest request) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
         List<String> list = userService.select_0000();
@@ -45,8 +46,10 @@ public class PJTE0000Controller {
 
         return jsonStr;
     }
+
     @PutMapping(value = "/pwChange")
-    public @ResponseBody boolean pwChange(@RequestBody User user) throws Exception{
+    public @ResponseBody
+    boolean pwChange(@RequestBody User user) throws Exception {
         boolean result = false;
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
@@ -68,32 +71,32 @@ public class PJTE0000Controller {
 
     @PostMapping("/user/signin")
     public ResponseEntity<Map<String, Object>> signin(@RequestBody User user,
-            HttpServletResponse res) throws Exception {
+                                                      HttpServletResponse res) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         try {
-        	PJTE0000DTO PJTE0000Dto = new PJTE0000DTO();
-        	PJTE0000Dto.setEmpno(user.getUserId());
-        	PJTE0000Dto.setLgn_pwd(user.getPassword());
-        	PJTE0000Dto.setPrjt_id(user.getPjt_selected());
-        	PJTE0000Dto.setBtn_gubun(user.getBtn_gubun());
+            PJTE0000DTO PJTE0000Dto = new PJTE0000DTO();
+            PJTE0000Dto.setEmpno(user.getUserId());
+            PJTE0000Dto.setLgn_pwd(user.getPassword());
+            PJTE0000Dto.setPrjt_id(user.getPjt_selected());
+            PJTE0000Dto.setBtn_gubun(user.getBtn_gubun());
 
-        	List<PJTE0000DTO> list = userService.userInfo(PJTE0000Dto);
-        	
-        	if(list.size() == 0){
-        		User loginUser = userService.signin(null, null, null, null);
-        	} else if (list.size() != 0) {
-        		User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id(), list.get(0).getBtn_gubun());
-        		// 로그인 성공했다면 토큰을 생성한다.
+            List<PJTE0000DTO> list = userService.userInfo(PJTE0000Dto);
+
+            if (list.size() == 0) {
+                User loginUser = userService.signin(null, null, null, null);
+            } else if (list.size() != 0) {
+                User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id(), list.get(0).getBtn_gubun());
+                // 로그인 성공했다면 토큰을 생성한다.
                 String token = jwtService.create(loginUser);
                 // 토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자.
                 res.setHeader("jwt-auth-token", token);
-                
+
                 resultMap.put("auth_token", token);
                 resultMap.put("status", true);
                 resultMap.put("data", list);
-                status = HttpStatus.ACCEPTED;
-        	}
+                status = HttpStatus.OK;
+            }
         } catch (RuntimeException e) {
             log.error("로그인 실패", e);
             resultMap.put("message", e.getMessage());
@@ -104,7 +107,7 @@ public class PJTE0000Controller {
 
     @PostMapping("/info")
     public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest req,
-            @RequestBody User user) {
+                                                       @RequestBody User user) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         try {
@@ -116,7 +119,7 @@ public class PJTE0000Controller {
             resultMap.put("status", true);
             resultMap.put("info", info);
             resultMap.put("request_body", user);
-            status = HttpStatus.ACCEPTED;
+            status = HttpStatus.OK;
         } catch (RuntimeException e) {
             log.error("정보조회 실패", e);
             resultMap.put("message", e.getMessage());
