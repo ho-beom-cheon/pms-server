@@ -1202,6 +1202,26 @@
           WHERE  PRJT_ID = '0000000000'
      </insert>
 
+     <insert id="insert_9000_94" parameterType="Map">
+          INSERT INTO pms_atfl_mng
+          SELECT BKUP_ID
+                ,#{new_prjt_id} AS PRJT_ID
+                ,ATFL_MNG_ID
+                ,FILE_RGS_DSCD
+                ,SQNO
+                ,FILE_PATH
+                ,FILE_NM
+                ,ORG_FILE_NM
+                ,RMRMK
+                ,OPR_NO
+                ,DB_CHG_TS
+          FROM   pms_atfl_mng
+          WHERE  BKUP_ID = '0000000000'
+            AND  PRJT_ID = '0000000000'
+            AND  ATFL_MNG_ID   = '0000000000'
+            AND  (FILE_RGS_DSCD = '900' OR FILE_RGS_DSCD='901')
+     </insert>
+
      <delete id="delete_9000_90" parameterType="Map">
           DELETE
           FROM   pms_cd_mng
@@ -1227,5 +1247,14 @@
           DELETE
           FROM   pms_holiday_mng
           WHERE  PRJT_ID = #{new_prjt_id}
+     </delete>
+
+     <delete id="delete_9000_94" parameterType="Map">
+          DELETE
+          FROM   pms_atfl_mng
+          WHERE  BKUP_ID = '0000000000'
+            AND  PRJT_ID = #{new_prjt_id}
+            AND  ATFL_MNG_ID = '0000000000'
+            AND  (FILE_RGS_DSCD = '900' OR FILE_RGS_DSCD='901')
      </delete>
 </mapper>
