@@ -476,11 +476,13 @@ public class PJTE9000Controller {
 		result = pjte9000Service.delete_9000_91(PJTE9000C);
 		result = pjte9000Service.delete_9000_92(PJTE9000C);
 		result = pjte9000Service.delete_9000_93(PJTE9000C);
+		result = pjte9000Service.delete_9000_94(PJTE9000C);
 
 		result = pjte9000Service.insert_9000_90(PJTE9000C);
 		result = pjte9000Service.insert_9000_91(PJTE9000C);
 		result = pjte9000Service.insert_9000_92(PJTE9000C);
 		result = pjte9000Service.insert_9000_93(PJTE9000C);
+		result = pjte9000Service.insert_9000_94(PJTE9000C);
 		return result;
 	}
 
