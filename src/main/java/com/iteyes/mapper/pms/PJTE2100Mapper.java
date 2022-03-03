@@ -15,8 +15,7 @@ public interface PJTE2100Mapper {
 	/*등록*/
 	boolean insert_2100_01(PJTE2100DTO PJTE2100) throws Exception ;
 	/*수정*/
-
 	boolean update_2100_01(PJTE2100DTO PJTE2100) throws Exception ;
 	/*삭제*/
-	boolean update_2100_02(PJTE2100DTO PJTE2100) throws Exception ;
+	boolean delete_2100_01(PJTE2100DTO PJTE2100) throws Exception ;
 }

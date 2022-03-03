@@ -45,8 +45,8 @@ public class PJTE2100ServiceImpl implements PJTE2100Service {
 
 	/* delete */
 	@Override
-	public boolean update_2100_02(PJTE2100DTO PJTE2100) throws Exception {
+	public boolean delete_2100_01(PJTE2100DTO PJTE2100) throws Exception {
 
-		return pjte2100Mapper.update_2100_02(PJTE2100);
+		return pjte2100Mapper.delete_2100_01(PJTE2100);
 	}
 }
