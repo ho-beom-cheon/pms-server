@@ -116,6 +116,18 @@ public class PJTE2100Controller {
         PJTE2100DTO PJTE2100C = new PJTE2100DTO();
 
         if(PJTE2100.getExcelUplod().equals("Y")) {
+
+            PJTE2100DTO PJTE2100D = new PJTE2100DTO();
+
+            for(int i=0; i<PJTE2100.getGridData().size(); i++) {
+                PJTE2100D.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+                PJTE2100D.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
+                PJTE2100D.setPrjt_id(PJTE2100.getPrjt_id());
+                PJTE2100D.setBkup_id("0000000000");
+
+                pjte2100Service.delete_2100_01(PJTE2100D);
+            }
+
             for (int i = 0; i < PJTE2100.getGridData().size(); i++) {
                 PJTE2100C.setBz_dtls_txt(PJTE2100.getGridData().get(i).getBz_dtls_txt());
                 PJTE2100C.setPgm_nm(PJTE2100.getGridData().get(i).getPgm_nm());
@@ -138,6 +150,37 @@ public class PJTE2100Controller {
                 PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
                 PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
                 PJTE2100C.setPrjt_id(PJTE2100.getPrjt_id());
+
+                PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
+                PJTE2100C.setLogin_emp_no(PJTE2100.getLogin_emp_no());
+                PJTE2100C.setLogin_bzcd(PJTE2100.getLogin_bzcd());
+                PJTE2100C.setLogin_proj_id(PJTE2100.getLogin_proj_id());
+
+                result = pjte2100Service.insert_2100_01(PJTE2100C);
+            }
+        } else {
+            for(int i=0; i<PJTE2100.getCreatedRows().size(); i++) {
+                PJTE2100C.setBz_dtls_txt(PJTE2100.getCreatedRows().get(i).getBz_dtls_txt());
+                PJTE2100C.setPgm_nm(PJTE2100.getCreatedRows().get(i).getPgm_nm());
+                PJTE2100C.setDvlp_dis_cd(PJTE2100.getCreatedRows().get(i).getDvlp_dis_cd());
+                PJTE2100C.setPgm_dis_cd(PJTE2100.getCreatedRows().get(i).getPgm_dis_cd());
+                PJTE2100C.setEnlpe_nm(PJTE2100.getCreatedRows().get(i).getEnlpe_nm());
+                PJTE2100C.setAut_id(PJTE2100.getCreatedRows().get(i).getAut_id());
+                PJTE2100C.setFrcs_sta_dt(PJTE2100.getCreatedRows().get(i).getFrcs_sta_dt());
+                PJTE2100C.setFrcs_end_dt(PJTE2100.getCreatedRows().get(i).getFrcs_end_dt());
+                PJTE2100C.setPrc_step_cd(PJTE2100.getCreatedRows().get(i).getPrc_step_cd());
+                PJTE2100C.setPrg_txt(PJTE2100.getCreatedRows().get(i).getPrg_txt());
+                PJTE2100C.setDvlpe_no(PJTE2100.getCreatedRows().get(i).getDvlpe_no());
+                PJTE2100C.setDvlpe_cnf_dt(PJTE2100.getCreatedRows().get(i).getDvlpe_cnf_dt());
+                PJTE2100C.setPl_no(PJTE2100.getCreatedRows().get(i).getPl_no());
+                PJTE2100C.setCrpe_no(PJTE2100.getCreatedRows().get(i).getCrpe_no());
+                PJTE2100C.setPl_cnf_dt(PJTE2100.getCreatedRows().get(i).getPl_cnf_dt());
+                PJTE2100C.setRmrk(PJTE2100.getCreatedRows().get(i).getRmrk());
+                PJTE2100C.setAtfl_mng_id(PJTE2100.getCreatedRows().get(i).getAtfl_mng_id());
+                PJTE2100C.setEmpno(PJTE2100.getCreatedRows().get(i).getEmpno());
+                PJTE2100C.setPgm_id(PJTE2100.getCreatedRows().get(i).getPgm_id());
+                PJTE2100C.setBzcd(PJTE2100.getCreatedRows().get(i).getBzcd());
+                PJTE2100C.setPrjt_id(PJTE2100.getCreatedRows().get(i).getPrjt_id());
 
                 PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
                 PJTE2100C.setLogin_emp_no(PJTE2100.getLogin_emp_no());
@@ -190,26 +233,6 @@ public class PJTE2100Controller {
 
             result = pjte2100Service.update_2100_01(PJTE2100U);
         }
-        return result;
-    }
-
-    @PutMapping("/delete")
-    public @ResponseBody boolean delete(@RequestBody PJTE2100DTO PJTE2100) throws Exception{
-
-        boolean result = false;
-
-        PJTE2100DTO PJTE2100D = new PJTE2100DTO();
-        for(int i=0; i<PJTE2100.getDeletedRows().size(); i++) {
-            PJTE2100D.setAtfl_mng_id(PJTE2100.getDeletedRows().get(i).getAtfl_mng_id());
-            PJTE2100D.setEmpno(PJTE2100.getDeletedRows().get(i).getEmpno());
-            PJTE2100D.setPgm_id(PJTE2100.getDeletedRows().get(i).getPgm_id());
-            PJTE2100D.setBzcd(PJTE2100.getDeletedRows().get(i).getBzcd());
-            PJTE2100D.setPrjt_id(PJTE2100.getDeletedRows().get(i).getPrjt_id());
-            PJTE2100D.setBkup_id(PJTE2100.getDeletedRows().get(i).getBkup_id());
-        }
-
-        result = pjte2100Service.update_2100_02(PJTE2100);
-
         return result;
     }
 }
