@@ -108,7 +108,7 @@
 	<select id="select_6001_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE6001DTO">
 		SELECT *
 		FROM   pms_rq_mng
-		WHERE  PRJT_ID = '1000000002'
+		WHERE  PRJT_ID = #{prjt_id}
 		  AND    OPR_NO  = #{opr_no}
 		ORDER BY DB_CHG_TS DESC
 			LIMIT 1
