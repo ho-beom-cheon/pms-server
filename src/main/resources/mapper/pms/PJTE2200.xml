@@ -244,5 +244,12 @@
            AND BKUP_ID        = #{bkup_id}
         ]]>
   </update>
-
+    <delete id="delete_2200_01" parameterType="Map">
+        DELETE FROM pms_itg_tst_mng
+        WHERE TST_CASE_ID    = #{tst_case_id}
+          AND SQN_CD         = #{sqn_cd}
+          AND BZCD           = #{bzcd}
+          AND PRJT_ID        = #{prjt_id}
+          AND BKUP_ID        = #{bkup_id}
+    </delete>
 </mapper>

@@ -10,13 +10,15 @@ public interface PJTE9000Service {
 	List<PJTE9000DTO> select_9000_02(PJTE9000DTO PJTE9000) throws Exception ;
 	List<PJTE9000DTO> select_9000_03(PJTE9000DTO PJTE9000) throws Exception ;
 
-	// 그리드 1 insert, update
+	// 그리드 1 insert, update, delete
 	boolean insert_9000_01(PJTE9000DTO PJTE9000) throws Exception;
 	boolean update_9000_01(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_41(PJTE9000DTO PJTE9000) throws Exception;
 
-	// 그리드 2 insert, update
+	// 그리드 2 insert, update, delete
 	boolean insert_9000_03(PJTE9000DTO PJTE9000) throws Exception;
 	boolean update_9000_02(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_42(PJTE9000DTO PJTE9000) throws Exception;
 
 	// 그리드 3 delete, insert
 	boolean delete_9000_01(PJTE9000DTO PJTE9000) throws Exception;
@@ -27,11 +29,13 @@ public interface PJTE9000Service {
 	boolean delete_9000_91(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_92(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_93(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_94(PJTE9000DTO PJTE9000) throws Exception;
 
 	boolean insert_9000_90(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_91(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_92(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_93(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_94(PJTE9000DTO PJTE9000) throws Exception;
 
 	// 그리드 4 select
 	List<PJTE9000DTO> select_9000_50(PJTE9000DTO PJTE9000) throws Exception;
