@@ -77,7 +77,7 @@ public class PJTE2100Controller {
         PJTE2100.setDvlpe_sta_dt(request.getParameter("dvlpe_sta_dt"));
         PJTE2100.setDvlpe_end_dt(request.getParameter("dvlpe_end_dt"));
 
-        /* 서비스 요청 */
+        /* 서비스 요청**/
         List<PJTE2100DTO> list = pjte2100Service.select_2100_01(PJTE2100);
 
         for(int i=0; i<list.size(); i++){
