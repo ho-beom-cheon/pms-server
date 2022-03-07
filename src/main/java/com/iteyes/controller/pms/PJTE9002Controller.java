@@ -24,11 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
-import java.io.File;
 
 @Controller
 @Log4j2
@@ -221,10 +219,12 @@ public class PJTE9002Controller {
 
 	@GetMapping(value = "/fileDownload", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(String fileName) throws Exception{
-		String fileFoler = "C:\\file_ex\\";
+	public ResponseEntity<Resource> downloadFile(String fileName, String filePath) throws Exception{
+//		String fileFoler = "C:\\file_ex\\";
 		log.debug("fileNm : ", fileName);
-		Resource resource = new FileSystemResource(fileFoler + fileName);
+		log.debug("filePath : ", filePath);
+
+		Resource resource = new FileSystemResource(filePath + "/" + fileName);
 		log.debug(resource);
 
 		String resourceName = resource.getFilename();
