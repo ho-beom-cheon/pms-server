@@ -237,6 +237,7 @@ public class PJTE9002Controller {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 }
