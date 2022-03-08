@@ -89,6 +89,7 @@ public class PJTE9000Controller {
 			PJTE9000C.setReal_thw_endt(PJTE9000.getCreatedRows().get(i).getReal_thw_endt());
 			PJTE9000C.setLogin_emp_no(PJTE9000.getCreatedRows().get(i).getLogin_emp_no());
 			PJTE9000C.setReal_prjt_id(PJTE9000.getCreatedRows().get(i).getReal_prjt_id());
+			PJTE9000C.setDept_cd(PJTE9000.getCreatedRows().get(i).getDept_cd());
 
 
 			result = pjte9000Service.insert_9000_01(PJTE9000C);
@@ -121,6 +122,7 @@ public class PJTE9000Controller {
 			PJTE9000U.setReal_thw_endt(PJTE9000.getUpdatedRows().get(i).getReal_thw_endt());
 			PJTE9000U.setLogin_emp_no(PJTE9000.getUpdatedRows().get(i).getLogin_emp_no());
 			PJTE9000U.setReal_prjt_id(PJTE9000.getUpdatedRows().get(i).getReal_prjt_id());
+			PJTE9000U.setDept_cd(PJTE9000.getUpdatedRows().get(i).getDept_cd());
 
 			result = pjte9000Service.update_9000_01(PJTE9000U);
 		}
@@ -516,6 +518,7 @@ public class PJTE9000Controller {
 			PJTE9000C.setReal_thw_endt(PJTE9000.getRowDatas().get(i).getReal_thw_endt());
 			PJTE9000C.setLogin_emp_no(PJTE9000.getRowDatas().get(i).getLogin_emp_no());
 			PJTE9000C.setReal_prjt_id(PJTE9000.getRowDatas().get(i).getReal_prjt_id());
+			PJTE9000C.setDept_cd(PJTE9000.getRowDatas().get(i).getDept_cd());
 
 
 			result = pjte9000Service.insert_9000_01(PJTE9000C);

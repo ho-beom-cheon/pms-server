@@ -107,6 +107,7 @@ public class PJTE9000DTO {
     private String new_bkup_nm;
     private String new_prjt_id;
     private String real_prjt_id;
+    private String dept_cd;
 
 };
 ;
