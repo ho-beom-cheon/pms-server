@@ -139,7 +139,14 @@
         AND F2.BKUP_ID       = E.BKUP_ID
         WHERE 1=1
         AND   B.DTLS_TYCD1 = CASE WHEN  #{real_prjt_id}  = 'TTT' THEN  B.DTLS_TYCD1  ELSE  #{real_prjt_id}  END
-        AND   B.DTLS_TYCD2 = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD2 ELSE #{week_sqn_cd} END
+        <choose>
+            <when test='week_seq_val == "Y" and week_sqn_cd =="TTT"'>
+                <![CDATA[  AND   B.DTLS_TYCD2 <= (WEEK(DATE_FORMAT(NOW(),"%Y%m%d"),5)-WEEK(DATE_SUB(DATE_FORMAT(NOW(),"%Y%m%d"),INTERVAL DAYOFMONTH(DATE_FORMAT(NOW(),"%Y%m%d"))-1 DAY),5)+1) *100 ]]>
+            </when>
+            <otherwise>
+                AND   B.DTLS_TYCD2 = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD2 ELSE #{week_sqn_cd} END
+            </otherwise>
+        </choose>
         <if test='dept_cd != "TTT"'>
             AND   A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
         </if>
