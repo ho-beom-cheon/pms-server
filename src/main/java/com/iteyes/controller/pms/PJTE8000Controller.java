@@ -1,7 +1,7 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.pms.PJTE4000DTO;
+
 import com.iteyes.dto.pms.PJTE8000DTO;
 import com.iteyes.service.PJTE8000Service;
 import lombok.extern.log4j.Log4j2;
@@ -42,6 +42,7 @@ public class PJTE8000Controller {
         PJTE8000.setReal_prjt_id(request.getParameter("real_prjt_id_selected"));
         PJTE8000.setWeek_sqn_cd(request.getParameter("week_sqn_cd_selected"));
         PJTE8000.setDept_cd(request.getParameter("dept_cd_selected"));
+        PJTE8000.setWeek_seq_val(request.getParameter("week_seq_val"));
 
         List<PJTE8000DTO> list = pjte8000Service.select_8000_01(PJTE8000);
 
