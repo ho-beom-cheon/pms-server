@@ -93,6 +93,16 @@ public class PJTE9900Controller {
 
         PJTE9900DTO PJTE9900C = new PJTE9900DTO();
 
+        for(int i=0; i<PJTE9900.getGridData().size(); i++) {
+            PJTE9900C.setDept_cd(PJTE9900.getGridData().get(i).getDept_cd());
+            PJTE9900C.setPrjt_id(PJTE9900.getPrjt_id());
+            PJTE9900C.setBkup_id("0000000000");
+
+            pjte9900Service.delete_9900_01(PJTE9900C);
+        }
+
+
+
             for (int i = 0; i < PJTE9900.getGridData().size(); i++) {
                  PJTE9900C.setPrjt_id(PJTE9900.getPrjt_id());
 

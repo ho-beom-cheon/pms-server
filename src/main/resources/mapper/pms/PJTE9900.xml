@@ -3,39 +3,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9900Mapper">
-	<select id="select_0000_01" parameterType="Map" resultType="Map">
-	   SELECT GRP_TYCD
-			, DTLS_TYCD
-			, DTLS_TYNM
-			, SORT_SEQ
-		 FROM pms_cd_del_mng
-		     _mng
-		WHERE USE_YN   = 'Y'
-		  AND GRP_TYCD = '0000000000'
-		  AND PRJT_ID  = '0000000000'
-		  AND BKUP_ID  = '0000000000'
-		UNION
-	   SELECT GRP_TYCD
-			, DTLS_TYCD
-			, DTLS_TYNM
-			, SORT_SEQ
-		 FROM pms_cd_del_mng
-		WHERE USE_YN    = 'Y'
-		  AND GRP_TYCD  != '1000000027'
-          AND PRJT_ID   = #{prjt_id}
-		  AND BKUP_ID   = '0000000000'
-		UNION
-	   SELECT GRP_TYCD
-			, DTLS_TYCD
-			, DTLS_TYNM
-			, CASE WHEN DTLS_TYCD = '0000000000' THEN -99999999999 ELSE 0 - SORT_SEQ END AS SORT_SEQ
-	 	 FROM pms_cd_del_mng
-		WHERE USE_YN   = 'Y'
-		  AND GRP_TYCD = '1000000027'
-		  AND PRJT_ID  = #{prjt_id}
-		  AND BKUP_ID  = '0000000000'
-		ORDER BY 1, 4
-		</select>
+
   <select id="select_9900_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
 	  SELECT A.BKUP_ID
 		   , A.PRJT_ID
@@ -67,8 +35,8 @@
 	  							   AND B.USE_YN   = 'Y'
 	  WHERE 1=1
 		AND A.BKUP_ID =#{bkup_id}
-		AND A.DEPT_CD = #{dept_cd}
-		AND SUBSTR(A.REG_DT,1,6) = REPLACE(#{week_yymm}, '-', '')
+		AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
+	 <![CDATA[	AND SUBSTR(A.REG_DT,1,6) <= REPLACE(#{week_yymm}, '-', '') ]]>
   </select>
 
 	<insert id="insert_9900_01" parameterType="Map">
@@ -178,9 +146,9 @@
 
 	<delete id="delete_9900_01" parameterType="Map">
    <![CDATA[
-		DELETE FROM pms_pgm_mng
-		 WHERE PGM_ID        = #{pgm_id}
-		   AND BZCD          = #{bzcd}
+		DELETE FROM pms_kanban_mng
+		 WHERE 1=1
+		   AND DEPT_CD       = #{dept_cd}
 		   AND PRJT_ID       = #{prjt_id}
 		   AND BKUP_ID       = #{bkup_id}
 		]]>
