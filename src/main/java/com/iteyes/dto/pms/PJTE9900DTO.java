@@ -6,6 +6,11 @@ import java.util.List;
 
 @Data
 public class PJTE9900DTO {
+    //조회조건
+    private String week_yymm;        //주간년월
+    private String dept_etc;         //부문명 이니셜
+    private String dept_nm;          //부문명
+    
     private String login_emp_no;            // 직원번호
     private String login_proj_id;           // 프로젝트 ID
     private String login_bzcd;              // 업무구분

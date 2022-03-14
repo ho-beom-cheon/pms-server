@@ -62,6 +62,9 @@ public class PJTE9900Controller {
         /* dto 값 셋팅*/
 //        PJTE9900.setBkup_id(request.getParameter("bkup_id_selected"));
 //        PJTE9900.setPrjt_id(request.getParameter("prjt_nm_selected"));
+        PJTE9900.setDept_cd(request.getParameter("dept_cd_selected"));
+        PJTE9900.setBkup_id(request.getParameter("bkup_id_selected"));
+        PJTE9900.setWeek_yymm(request.getParameter("week_yymm"));
 
         /* 서비스 요청**/
         List<PJTE9900DTO> list = pjte9900Service.select_9900_01(PJTE9900);
@@ -91,8 +94,7 @@ public class PJTE9900Controller {
         PJTE9900DTO PJTE9900C = new PJTE9900DTO();
 
             for (int i = 0; i < PJTE9900.getGridData().size(); i++) {
-                 PJTE9900C.setPrjt_id(PJTE9900.getPrjt_id());
-
+                 PJTE9900C.setPrjt_id(PJTE9900.getGridData().get(i).getPrjt_id());   //프로젝트 id
                  PJTE9900C.setLogin_aut_cd(PJTE9900.getLogin_aut_cd());
                  PJTE9900C.setLogin_emp_no(PJTE9900.getLogin_emp_no());
                  PJTE9900C.setLogin_bzcd(PJTE9900.getLogin_bzcd());
