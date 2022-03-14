@@ -37,10 +37,39 @@
 		ORDER BY 1, 4
 		</select>
   <select id="select_9900_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
-	  SELECT *
-	    FROM pms_kanban_mng
-       WHERE 1=1
-    </select>
+	  SELECT A.BKUP_ID
+		   , A.PRJT_ID
+		   , A.DEPT_CD
+		   , B.DTLS_TYNM AS DEPT_NM
+	       , B.ETC_TXT1  AS DEPT_ETC
+		   , A.MNG_ID
+		   , A.WORK_TASK
+		   , A.WORK_STEP_CD
+		   , A.REG_NM
+		   , A.REG_DT
+		   , A.COM_RGS_DT
+		   , A.CRPE_NM
+		   , A.PTCP_NM
+		   , A.COM_DUE_DT
+		   , A.STOP_DT
+		   , A.RE_STA_DT
+		   , A.COM_DT
+		   , A.BAK_WORK_ID
+		   , A.CON_WORK_ID
+		   , A.RMRK
+		   , A.MARK
+	  FROM pms_kanban_mng A
+			   LEFT OUTER JOIN pms_cd_del_mng B
+							   ON A.PRJT_ID=B.PRJT_ID
+								   AND A.DEPT_CD = B.DTLS_TYCD
+								   AND B.GRP_TYCD ='1000000040'
+								   AND B.PRJT_ID ='0000000003'
+	  							   AND B.USE_YN   = 'Y'
+	  WHERE 1=1
+		AND A.BKUP_ID =#{bkup_id}
+		AND A.DEPT_CD = #{dept_cd}
+		AND SUBSTR(A.REG_DT,1,6) = REPLACE(#{week_yymm}, '-', '')
+  </select>
 
 	<insert id="insert_9900_01" parameterType="Map">
    <![CDATA[
