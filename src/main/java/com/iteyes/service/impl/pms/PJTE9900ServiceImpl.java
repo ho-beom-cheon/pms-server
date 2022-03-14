@@ -6,6 +6,7 @@ import com.iteyes.service.PJTE9900Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,9 +22,18 @@ public class PJTE9900ServiceImpl implements PJTE9900Service {
 		return list;
 	}
 
+	/*select*/
 	@Override
-	public List<PJTE9900DTO> select_9900_01(PJTE9900DTO PJTE9900) throws Exception {
-		List<PJTE9900DTO> list = pjte9900Mapper.select_9900_01(PJTE9900);
+	public List<PJTE9900DTO> select_9900(PJTE9900DTO PJTE9900) throws Exception {
+		List<PJTE9900DTO> list = new ArrayList<>();
+
+		if(PJTE9900.getGubun().equals("1")) {
+			list = pjte9900Mapper.select_9900_01(PJTE9900);
+		}
+		/*연관작업조회*/
+		if(PJTE9900.getGubun().equals("2")) {
+			list = pjte9900Mapper.select_9900_02(PJTE9900);
+		}
 
 		return list;
 	}
