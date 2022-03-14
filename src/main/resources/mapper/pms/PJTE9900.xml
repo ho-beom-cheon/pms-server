@@ -1,156 +1,231 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9900Mapper">
 
-  <select id="select_9900_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
-	  SELECT A.BKUP_ID
-		   , A.PRJT_ID
-		   , A.DEPT_CD
-		   , B.DTLS_TYNM AS DEPT_NM
-	       , B.ETC_TXT1  AS DEPT_ETC
-		   , A.MNG_ID
-		   , A.WORK_TASK
-		   , A.WORK_STEP_CD
-		   , A.REG_NM
-		   , A.REG_DT
-		   , A.COM_RGS_DT
-		   , A.CRPE_NM
-		   , A.PTCP_NM
-		   , A.COM_DUE_DT
-		   , A.STOP_DT
-		   , A.RE_STA_DT
-		   , A.COM_DT
-		   , A.BAK_WORK_ID
-		   , A.CON_WORK_ID
-		   , A.RMRK
-		   , A.MARK
-	  FROM pms_kanban_mng A
-			   LEFT OUTER JOIN pms_cd_del_mng B
-							   ON A.PRJT_ID=B.PRJT_ID
-								   AND A.DEPT_CD = B.DTLS_TYCD
-								   AND B.GRP_TYCD ='1000000040'
-								   AND B.PRJT_ID ='0000000003'
-	  							   AND B.USE_YN   = 'Y'
-	  WHERE 1=1
-		AND A.BKUP_ID =#{bkup_id}
+	<select id="select_9900_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
+		SELECT A.BKUP_ID
+		, A.PRJT_ID
+		, A.DEPT_CD
+		, B.DTLS_TYNM AS DEPT_NM
+		, B.ETC_TXT1  AS DEPT_ETC
+		, A.MNG_ID
+		, A.WORK_TASK
+		, A.WORK_STEP_CD
+		, A.REG_NM
+		,CASE WHEN A.REG_DT IS NOT NULL AND A.REG_DT != ''
+		THEN STR_TO_DATE(A.REG_DT, '%Y%m%d') ELSE A.REG_DT
+		END AS REG_DT
+		,CASE WHEN A.COM_RGS_DT IS NOT NULL AND A.COM_RGS_DT != ''
+		THEN STR_TO_DATE(A.COM_RGS_DT, '%Y%m%d') ELSE A.COM_RGS_DT
+		END AS COM_RGS_DT
+		, A.CRPE_NM
+		, A.PTCP_NM
+		,CASE WHEN A.COM_DUE_DT IS NOT NULL AND A.COM_DUE_DT != ''
+		THEN STR_TO_DATE(A.COM_DUE_DT, '%Y%m%d') ELSE A.COM_DUE_DT
+		END AS COM_DUE_DT
+		,CASE WHEN A.STOP_DT IS NOT NULL AND A.STOP_DT != ''
+		THEN STR_TO_DATE(A.STOP_DT, '%Y%m%d') ELSE A.STOP_DT
+		END AS STOP_DT
+		,CASE WHEN A.RE_STA_DT IS NOT NULL AND A.RE_STA_DT != ''
+		THEN STR_TO_DATE(A.RE_STA_DT, '%Y%m%d') ELSE A.RE_STA_DT
+		END AS RE_STA_DT
+		,CASE WHEN A.COM_DT IS NOT NULL AND A.COM_DT != ''
+		THEN STR_TO_DATE(A.COM_DT, '%Y%m%d') ELSE A.COM_DT
+		END AS COM_DT
+		, A.BAK_WORK_ID
+		, A.CON_WORK_ID
+		, A.RMRK
+		, A.MARK
+		FROM pms_kanban_mng A
+		LEFT OUTER JOIN pms_cd_del_mng B
+		ON A.PRJT_ID = B.PRJT_ID
+		AND A.DEPT_CD = B.DTLS_TYCD
+		AND B.GRP_TYCD = '1000000040'
+		AND B.PRJT_ID = '0000000003'
+		AND B.USE_YN = 'Y'
+		WHERE 1 = 1
+		AND A.PRJT_ID = #{prjt_id}
+		AND A.BKUP_ID = #{bkup_id}
 		AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
-	 <![CDATA[	AND SUBSTR(A.REG_DT,1,6) <= REPLACE(#{week_yymm}, '-', '') ]]>
-  </select>
+		<if test='week_yymm != ""  and week_yymm != null'>
+			AND A.REG_DT BETWEEN CONCAT((REPLACE(#{week_yymm}, '-', '')),'01') AND CONCAT((REPLACE(#{week_yymm}, '-', '')),'31 ')
+		</if>
+	</select>
+	<select id="select_9900_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
+		SELECT A.BKUP_ID
+			 , A.PRJT_ID
+			 , A.DEPT_CD
+			 , B.DTLS_TYNM AS DEPT_NM
+			 , B.ETC_TXT1  AS DEPT_ETC
+			 , A.MNG_ID
+			 , A.WORK_TASK
+			 , A.WORK_STEP_CD
+			 , A.REG_NM
+			 ,CASE WHEN A.REG_DT IS NOT NULL AND A.REG_DT != ''
+                          THEN STR_TO_DATE(A.REG_DT, '%Y%m%d') ELSE A.REG_DT
+			END AS REG_DT
+			 ,CASE WHEN A.COM_RGS_DT IS NOT NULL AND A.COM_RGS_DT != ''
+                          THEN STR_TO_DATE(A.COM_RGS_DT, '%Y%m%d') ELSE A.COM_RGS_DT
+			END AS COM_RGS_DT
+			 , A.CRPE_NM
+			 , A.PTCP_NM
+			 ,CASE WHEN A.COM_DUE_DT IS NOT NULL AND A.COM_DUE_DT != ''
+                          THEN STR_TO_DATE(A.COM_DUE_DT, '%Y%m%d') ELSE A.COM_DUE_DT
+			END AS COM_DUE_DT
+			 ,CASE WHEN A.STOP_DT IS NOT NULL AND A.STOP_DT != ''
+                          THEN STR_TO_DATE(A.STOP_DT, '%Y%m%d') ELSE A.STOP_DT
+			END AS STOP_DT
+			 ,CASE WHEN A.RE_STA_DT IS NOT NULL AND A.RE_STA_DT != ''
+                          THEN STR_TO_DATE(A.RE_STA_DT, '%Y%m%d') ELSE A.RE_STA_DT
+			END AS RE_STA_DT
+			 ,CASE WHEN A.COM_DT IS NOT NULL AND A.COM_DT != ''
+                          THEN STR_TO_DATE(A.COM_DT, '%Y%m%d') ELSE A.COM_DT
+			END AS COM_DT
+			 , A.BAK_WORK_ID
+			 , A.CON_WORK_ID
+			 , A.RMRK
+			 , A.MARK
+		FROM pms_kanban_mng A
+				 LEFT OUTER JOIN pms_cd_del_mng B
+								 ON A.PRJT_ID = B.PRJT_ID
+									 AND A.DEPT_CD = B.DTLS_TYCD
+									 AND B.GRP_TYCD = '1000000040'
+									 AND B.PRJT_ID = '0000000003'
+									 AND B.USE_YN = 'Y'
+		WHERE 1 = 1
+		  AND A.PRJT_ID = #{prjt_id}
+		  AND A.BKUP_ID = #{bkup_id}
+		  AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
+		  AND A.CON_WORK_ID = #{con_work_id}
+	</select>
 
 	<insert id="insert_9900_01" parameterType="Map">
    <![CDATA[
 		INSERT INTO pms_pgm_mng
-		(
-			  BKUP_ID      /*백업ID*/
-			, PRJT_ID      /*프로젝트ID*/
-			, BZCD         /*업무구분코드*/
-			, PGM_ID       /*프로그램ID*/
-			, BZ_DTLS_TXT  /*업무세부내용*/
-			, PGM_NM       /*프로그램명*/
-			, DVLP_DIS_CD  /*개발구분코드*/
-			, PGM_DIS_CD   /*프로그램구분코드*/
-			, ENLPE_NM     /*프로그램세부구분코드*/
-			, FRCS_STA_DT  /*계획시작일자*/
-			, FRCS_END_DT  /*계획종료일자*/
-			, STA_DT       /*실제시작일자*/
-			, END_DT       /*실제종료일자*/
-			, PRC_STEP_CD  /*처리단계코드*/
-			, PRG_TXT      /*진행현황*/
-			, DVLPE_NO     /*개발자번호*/
-			, DVLPE_CNF_DT /*개발자확인일자*/
-			, PL_NO        /*PL번호*/
-			, PL_CNF_DT    /*PL확인일자*/
-			, CRPE_NO      /*담당자번호*/
-			, RMRK         /*비고*/
-			, ATFL_MNG_ID  /*첨부파일관리ID*/
-		    , PAL_ATFL_MNG_ID  /*설계서첨부파일관리ID*/
-			, OPR_NO       /*조작자번호 */
-			, DB_CHG_TS    /*DB변경일시*/
+		( BKUP_ID /*백업ID*/
+		, PRJT_ID /*프로젝트ID*/
+		, BZCD /*업무구분코드*/
+		, PGM_ID /*프로그램ID*/
+		, BZ_DTLS_TXT /*업무세부내용*/
+		, PGM_NM /*프로그램명*/
+		, DVLP_DIS_CD /*개발구분코드*/
+		, PGM_DIS_CD /*프로그램구분코드*/
+		, ENLPE_NM /*프로그램세부구분코드*/
+		, FRCS_STA_DT /*계획시작일자*/
+		, FRCS_END_DT /*계획종료일자*/
+		, STA_DT /*실제시작일자*/
+		, END_DT /*실제종료일자*/
+		, PRC_STEP_CD /*처리단계코드*/
+		, PRG_TXT /*진행현황*/
+		, DVLPE_NO /*개발자번호*/
+		, DVLPE_CNF_DT /*개발자확인일자*/
+		, PL_NO /*PL번호*/
+		, PL_CNF_DT /*PL확인일자*/
+		, CRPE_NO /*담당자번호*/
+		, RMRK /*비고*/
+		, ATFL_MNG_ID /*첨부파일관리ID*/
+		, PAL_ATFL_MNG_ID /*설계서첨부파일관리ID*/
+		, OPR_NO /*조작자번호 */
+		, DB_CHG_TS /*DB변경일시*/
 		)
-		VALUES
-			(
-				'0000000000'
-				, #{prjt_id}                          /*프로젝트ID*/
-				, #{bzcd}                             /*업무구분코드*/
-				, #{pgm_id}                           /*프로그램ID*/
-				, #{bz_dtls_txt}                      /*업무세부내용*/
-				, #{pgm_nm}                           /*프로그램명*/
-				, #{dvlp_dis_cd}                      /*개발구분코드*/
-				, #{pgm_dis_cd}                       /*프로그램구분코드*/
-				, #{enlpe_nm}                         /*프로그램세부구분코드*/
-				, REPLACE(#{frcs_sta_dt}, '-', '')    /*계획시작일자*/
-				, REPLACE(#{frcs_end_dt}, '-', '')    /*계획종료일자*/
-				, ''                                /*실제시작일자*/
-				, ''                                /*실제종료일자*/
-				, '000'                               /*처리단계코드*/
-				, #{prg_txt}                          /*진행현황*/
-				, #{dvlpe_no}                         /*개발자번호*/
-				, ''                                /*개발자확인일자*/
-				, #{pl_no}                            /*PL번호*/
-				, ''                                /*PL확인일자*/
-				, #{crpe_no}                          /*담당자번호*/
-				, #{rmrk}                             /*비고*/
-				, #{atfl_mng_id}                      /*첨부파일관리ID*/
-				, ''                                  /*설계서첨부파일관리ID*/
-				, #{login_emp_no}                     /*조작자번호*/
-				, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-			)
+		VALUES ( '0000000000'
+			   , #{prjt_id} /*프로젝트ID*/
+			   , #{bzcd} /*업무구분코드*/
+			   , #{pgm_id} /*프로그램ID*/
+			   , #{bz_dtls_txt} /*업무세부내용*/
+			   , #{pgm_nm} /*프로그램명*/
+			   , #{dvlp_dis_cd} /*개발구분코드*/
+			   , #{pgm_dis_cd} /*프로그램구분코드*/
+			   , #{enlpe_nm} /*프로그램세부구분코드*/
+			   , REPLACE(#{frcs_sta_dt}, '-', '') /*계획시작일자*/
+			   , REPLACE(#{frcs_end_dt}, '-', '') /*계획종료일자*/
+			   , '' /*실제시작일자*/
+			   , '' /*실제종료일자*/
+			   , '000' /*처리단계코드*/
+			   , #{prg_txt} /*진행현황*/
+			   , #{dvlpe_no} /*개발자번호*/
+			   , '' /*개발자확인일자*/
+			   , #{pl_no} /*PL번호*/
+			   , '' /*PL확인일자*/
+			   , #{crpe_no} /*담당자번호*/
+			   , #{rmrk} /*비고*/
+			   , #{atfl_mng_id} /*첨부파일관리ID*/
+			   , '' /*설계서첨부파일관리ID*/
+			   , #{login_emp_no} /*조작자번호*/
+			   , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
+			   )
 		]]>
   </insert>
-  <update id="update_9900_01" parameterType="Map">
+	<update id="update_9900_01" parameterType="Map">
    <![CDATA[
-	  UPDATE pms_pgm_mng
-	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
-		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
-		, PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
-		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
-		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
-		, FRCS_END_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END /*계획종료일자*/
-		, STA_DT       = CASE WHEN #{prc_step_cd} IN ('100','200') AND STA_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  REPLACE(#{sta_dt}, '-', '') END /*실제시작일자*/
-		, END_DT       = CASE WHEN #{prc_step_cd} = '400' AND #{end_dt} IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{end_dt}, '-', '') END  /*실제종료일자*/
-		, PRC_STEP_CD  = #{prc_step_cd}  /*처리단계코드*/
-		, PRG_TXT      = #{prg_txt}      /*진행현황*/
-		, DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
-		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND DVLPE_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{dvlpe_cnf_dt}, '-', '')  END /*개발자확인일자*/
-		, PL_NO        = #{pl_no}        /*PL번호*/
-		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND PL_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{pl_cnf_dt}, '-', '')  END    /*PL확인일자*/
-		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
-		, RMRK         = #{rmrk}         /*비고*/
-		, OPR_NO       = #{login_emp_no}        /*조작자번호*/
-		, ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
-		, PAL_ATFL_MNG_ID = #{pal_atfl_mng_id}  /*설계서 첨부파일관리ID*/
-		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-	  WHERE PGM_ID      = #{pgm_id}
-		AND BZCD        = #{bzcd}
-		AND PRJT_ID     = #{prjt_id}
-		AND BKUP_ID     = #{bkup_id}
-	  ]]>
+		UPDATE pms_pgm_mng
+		SET BZ_DTLS_TXT     = #{bz_dtls_txt} /*업무세부내용*/
+		  , PGM_NM          = #{pgm_nm} /*프로그램명*/
+		  , DVLP_DIS_CD     = CASE
+								  WHEN #{login_aut_cd} IN ('500', '600') THEN #{dvlp_dis_cd}
+								  ELSE DVLP_DIS_CD END /*개발구분코드*/
+		  , PGM_DIS_CD      = #{pgm_dis_cd} /*프로그램구분코드*/
+		  , ENLPE_NM        = #{enlpe_nm} /*프로그램세부구분코드*/
+		  , FRCS_STA_DT     = CASE
+								  WHEN #{login_aut_cd} IN ('500', '600') THEN REPLACE(#{frcs_sta_dt}, '-', '')
+								  ELSE FRCS_STA_DT END /*계획시작일자*/
+		  , FRCS_END_DT     = CASE
+								  WHEN #{login_aut_cd} IN ('500', '600') THEN REPLACE(#{frcs_end_dt}, '-', '')
+								  ELSE FRCS_END_DT END /*계획종료일자*/
+		  , STA_DT          = CASE
+								  WHEN #{prc_step_cd} IN ('100', '200') AND STA_DT IS NULL
+									  THEN DATE_FORMAT(NOW(), '%Y%m%d')
+								  ELSE REPLACE(#{sta_dt}, '-', '') END /*실제시작일자*/
+		  , END_DT          = CASE
+								  WHEN #{prc_step_cd} = '400' AND #{end_dt} IS NULL THEN DATE_FORMAT(NOW(), '%Y%m%d')
+								  ELSE REPLACE(#{end_dt}, '-', '') END /*실제종료일자*/
+		  , PRC_STEP_CD     = #{prc_step_cd} /*처리단계코드*/
+		  , PRG_TXT         = #{prg_txt} /*진행현황*/
+		  , DVLPE_NO        = #{dvlpe_no} /*개발자번호*/
+		  , DVLPE_CNF_DT    = CASE
+								  WHEN #{prc_step_cd} = '200' AND DVLPE_CNF_DT IS NULL THEN DATE_FORMAT(NOW(), '%Y%m%d')
+								  ELSE REPLACE(#{dvlpe_cnf_dt}, '-', '') END /*개발자확인일자*/
+		  , PL_NO           = #{pl_no} /*PL번호*/
+		  , PL_CNF_DT       = CASE
+								  WHEN #{prc_step_cd} = '300' AND PL_CNF_DT IS NULL THEN DATE_FORMAT(NOW(), '%Y%m%d')
+								  ELSE REPLACE(#{pl_cnf_dt}, '-', '') END /*PL확인일자*/
+		  , CRPE_NO         = #{crpe_no} /*담당자번호*/
+		  , RMRK            = #{rmrk} /*비고*/
+		  , OPR_NO          = #{login_emp_no} /*조작자번호*/
+		  , ATFL_MNG_ID     = #{atfl_mng_id} /*첨부파일관리ID*/
+		  , PAL_ATFL_MNG_ID = #{pal_atfl_mng_id} /*설계서 첨부파일관리ID*/
+		  , DB_CHG_TS       = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
+		WHERE PGM_ID = #{pgm_id}
+		  AND BZCD = #{bzcd}
+		  AND PRJT_ID = #{prjt_id}
+		  AND BKUP_ID = #{bkup_id}
+		]]>
   </update>
 
 	<update id="update_9900_02" parameterType="Map">
    <![CDATA[
 		UPDATE pms_pgm_mng
-		   SET ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
-		     , OPR_NO       = #{empno}
-		     , DVLP_DIS_CD  = '400'
-		     , DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d')
-		WHERE PGM_ID        = #{pgm_id}
-		   AND BZCD         = #{bzcd}
-		   AND PRJT_ID      = #{prjt_id}
-		   AND BKUP_ID      = #{bkup_id}
+		SET ATFL_MNG_ID = #{atfl_mng_id} /*첨부파일관리ID*/
+		  , OPR_NO      = #{empno}
+		  , DVLP_DIS_CD = '400'
+		  , DB_CHG_TS   = DATE_FORMAT(NOW(), '%Y%m%d')
+		WHERE PGM_ID = #{pgm_id}
+		  AND BZCD = #{bzcd}
+		  AND PRJT_ID = #{prjt_id}
+		  AND BKUP_ID = #{bkup_id}
 		]]>
   </update>
 
 	<delete id="delete_9900_01" parameterType="Map">
    <![CDATA[
-		DELETE FROM pms_kanban_mng
-		 WHERE 1=1
-		   AND DEPT_CD       = #{dept_cd}
-		   AND PRJT_ID       = #{prjt_id}
-		   AND BKUP_ID       = #{bkup_id}
+		DELETE
+		FROM pms_kanban_mng
+		WHERE 1 = 1
+		  AND DEPT_CD = #{dept_cd}
+		  AND PRJT_ID = #{prjt_id}
+		  AND BKUP_ID = #{bkup_id}
 		]]>
   </delete>
 </mapper>
