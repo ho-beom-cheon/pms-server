@@ -102,62 +102,55 @@
 	</select>
 
 	<insert id="insert_9900_01" parameterType="Map">
-   <![CDATA[
-		INSERT INTO pms_pgm_mng
-		( BKUP_ID /*백업ID*/
-		, PRJT_ID /*프로젝트ID*/
-		, BZCD /*업무구분코드*/
-		, PGM_ID /*프로그램ID*/
-		, BZ_DTLS_TXT /*업무세부내용*/
-		, PGM_NM /*프로그램명*/
-		, DVLP_DIS_CD /*개발구분코드*/
-		, PGM_DIS_CD /*프로그램구분코드*/
-		, ENLPE_NM /*프로그램세부구분코드*/
-		, FRCS_STA_DT /*계획시작일자*/
-		, FRCS_END_DT /*계획종료일자*/
-		, STA_DT /*실제시작일자*/
-		, END_DT /*실제종료일자*/
-		, PRC_STEP_CD /*처리단계코드*/
-		, PRG_TXT /*진행현황*/
-		, DVLPE_NO /*개발자번호*/
-		, DVLPE_CNF_DT /*개발자확인일자*/
-		, PL_NO /*PL번호*/
-		, PL_CNF_DT /*PL확인일자*/
-		, CRPE_NO /*담당자번호*/
-		, RMRK /*비고*/
-		, ATFL_MNG_ID /*첨부파일관리ID*/
-		, PAL_ATFL_MNG_ID /*설계서첨부파일관리ID*/
-		, OPR_NO /*조작자번호 */
-		, DB_CHG_TS /*DB변경일시*/
+		<selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
+			SELECT CONCAT(CONCAT(#{dept_etc},LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,2,5) AS INT))+1,1),5,'0'))) AS MNG_ID
+			FROM   pms_kanban_mng
+			WHERE 1=1
+			AND    PRJT_ID    = #{prjt_id}
+			AND    BKUP_ID    = #{bkup_id}
+			AND    DEPT_CD    = #{dept_cd}
+		</selectKey>
+		<![CDATA[
+		INSERT INTO pms_kanban_mng
+		(
+			   BKUP_ID		/*백업ID*/
+			  ,PRJT_ID		/*프로젝트ID*/
+			  ,DEPT_CD		/*부문코드*/
+			  ,MNG_ID		/*관리ID*/
+			  ,WORK_TASK	/*작업명*/
+			  ,WORK_STEP_CD /*작업상태*/
+			  ,REG_DT		/*등록일*/
+			  ,COM_RGS_DT	/*완료요청일*/
+			  ,REG_NM		/*등록자*/
+			  ,CRPE_NM		/*참여자*/
+			  ,PTCP_NM
+			  ,CON_WORK_ID	/*연관작업*/
+			  ,RMRK			/*비고*/
+			  ,MARK			/*마크*/
+			  ,OPR_NO
+			  ,DB_CHG_TS
 		)
-		VALUES ( '0000000000'
-			   , #{prjt_id} /*프로젝트ID*/
-			   , #{bzcd} /*업무구분코드*/
-			   , #{pgm_id} /*프로그램ID*/
-			   , #{bz_dtls_txt} /*업무세부내용*/
-			   , #{pgm_nm} /*프로그램명*/
-			   , #{dvlp_dis_cd} /*개발구분코드*/
-			   , #{pgm_dis_cd} /*프로그램구분코드*/
-			   , #{enlpe_nm} /*프로그램세부구분코드*/
-			   , REPLACE(#{frcs_sta_dt}, '-', '') /*계획시작일자*/
-			   , REPLACE(#{frcs_end_dt}, '-', '') /*계획종료일자*/
-			   , '' /*실제시작일자*/
-			   , '' /*실제종료일자*/
-			   , '000' /*처리단계코드*/
-			   , #{prg_txt} /*진행현황*/
-			   , #{dvlpe_no} /*개발자번호*/
-			   , '' /*개발자확인일자*/
-			   , #{pl_no} /*PL번호*/
-			   , '' /*PL확인일자*/
-			   , #{crpe_no} /*담당자번호*/
-			   , #{rmrk} /*비고*/
-			   , #{atfl_mng_id} /*첨부파일관리ID*/
-			   , '' /*설계서첨부파일관리ID*/
-			   , #{login_emp_no} /*조작자번호*/
-			   , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
-			   )
+		VALUES
+			(
+				'0000000000'
+				, #{prjt_id}                          /*프로젝트ID*/
+				, #{dept_cd}                          /*부문코드*/
+				, #{mng_id}   						  /*관리ID*/
+				, #{work_task}                    	  /*작업내용*/
+				, #{work_step_cd}                     /*작업상태코드*/
+		  		, REPLACE(#{reg_dt}, '-', '') 		  /*등록일자*/
+				, REPLACE(#{com_rgs_dt}, '-', '') 	  /*완료요청일자*/
+		  		, #{reg_nm}  		                  /*등록자*/
+		  		, #{crpe_nm}  		                  /*참여자*/
+		  		, #{ptcp_nm}
+				, #{mng_id}                    		  /*연관작업*/
+				, #{rmrk}                   	      /*비고*/
+				, #{mark}                 	    	  /*마크*/
+		  		, #{login_emp_no}  					  /*조작자번호*/
+				, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+			)
 		]]>
-  </insert>
+	</insert>
 	<update id="update_9900_01" parameterType="Map">
    <![CDATA[
 		UPDATE pms_pgm_mng

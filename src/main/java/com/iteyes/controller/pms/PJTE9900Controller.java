@@ -93,13 +93,38 @@ public class PJTE9900Controller {
         boolean result = false;
 
         PJTE9900DTO PJTE9900C = new PJTE9900DTO();
+        PJTE9900C.setLogin_emp_no(PJTE9900.getLogin_emp_no());
+        PJTE9900C.setPrjt_id(PJTE9900.getPrjt_id());   //프로젝트 id
+        PJTE9900C.setBkup_id(PJTE9900.getBkup_id());   //백업 id
+        PJTE9900C.setDept_cd(PJTE9900.getDept_cd());   //부문코드
+        if(PJTE9900C.getDept_cd().equals("TTT")){
+            PJTE9900C.setDept_cd("100");   //부문코드
+            PJTE9900C.setDept_etc("F");   //부문코드
+        }else if(PJTE9900C.getDept_cd().equals("100")){
+            PJTE9900C.setDept_etc("F");   //부문코드
+        }else if(PJTE9900C.getDept_cd().equals("110")){
+            PJTE9900C.setDept_etc("Y");   //부문코드
+        }else if(PJTE9900C.getDept_cd().equals("120")){
+            PJTE9900C.setDept_etc("B");   //부문코드
+        }else if(PJTE9900C.getDept_cd().equals("200")){
+            PJTE9900C.setDept_etc("D");   //부문코드
+        }else if(PJTE9900C.getDept_cd().equals("210")){
+            PJTE9900C.setDept_etc("P");   //부문코드
+        }else if(PJTE9900C.getDept_cd().equals("300")){
+            PJTE9900C.setDept_etc("T");   //부문코드
+        }
 
         for (int i = 0; i < PJTE9900.getGridData().size(); i++) {
-            PJTE9900C.setPrjt_id(PJTE9900.getGridData().get(i).getPrjt_id());   //프로젝트 id
-            PJTE9900C.setLogin_aut_cd(PJTE9900.getLogin_aut_cd());
-            PJTE9900C.setLogin_emp_no(PJTE9900.getLogin_emp_no());
-            PJTE9900C.setLogin_bzcd(PJTE9900.getLogin_bzcd());
-            PJTE9900C.setLogin_proj_id(PJTE9900.getLogin_proj_id());
+
+            PJTE9900C.setWork_task(PJTE9900.getGridData().get(i).getWork_task());
+            PJTE9900C.setWork_step_cd(PJTE9900.getGridData().get(i).getWork_step_cd());
+            PJTE9900C.setReg_dt(PJTE9900.getGridData().get(i).getReg_dt());
+            PJTE9900C.setCom_rgs_dt(PJTE9900.getGridData().get(i).getCom_rgs_dt());
+            PJTE9900C.setReg_nm(PJTE9900.getGridData().get(i).getReg_nm());
+            PJTE9900C.setCrpe_nm(PJTE9900.getGridData().get(i).getCrpe_nm());
+            PJTE9900C.setPtcp_nm(PJTE9900.getGridData().get(i).getPtcp_nm());
+            PJTE9900C.setRmrk(PJTE9900.getGridData().get(i).getRmrk());
+            PJTE9900C.setMark(PJTE9900.getGridData().get(i).getMark());
 
             result = pjte9900Service.insert_9900_01(PJTE9900C);
 
