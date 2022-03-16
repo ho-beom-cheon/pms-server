@@ -36,6 +36,7 @@ public class PJTE9900DTO {
     private String com_dt;
     private String bak_work_id;
     private String con_work_id;
+    private String current_mng_id;
     private String rmrk;
     private String mark;
     private String opr_no;

@@ -1,6 +1,7 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.dto.pms.PJTE5000DTO;
 import com.iteyes.dto.pms.PJTE9900DTO;
 import com.iteyes.service.PJTE9900Service;
 import lombok.extern.log4j.Log4j2;
@@ -65,6 +66,9 @@ public class PJTE9900Controller {
         PJTE9900.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE9900.setCon_work_id(request.getParameter("con_work_id"));
         PJTE9900.setWeek_yymm(request.getParameter("week_yymm"));
+        PJTE9900.setMng_id(request.getParameter("mng_id"));
+        PJTE9900.setWork_task(request.getParameter("work_task"));
+        PJTE9900.setCurrent_mng_id(request.getParameter("current_mng_id"));
         PJTE9900.setGubun(request.getParameter("gubun"));
 
         /* 서비스 요청**/
@@ -156,8 +160,10 @@ public class PJTE9900Controller {
                 }
             }else if(PJTE9900.getUpdatedRows().get(i).getStop_dt() != null && PJTE9900.getUpdatedRows().get(i).getStop_dt() != ""){
                 PJTE9900U.setWork_step_cd("300");
-            }else{
+            }else if(PJTE9900.getUpdatedRows().get(i).getCom_due_dt() != null && PJTE9900.getUpdatedRows().get(i).getCom_due_dt() != ""){
                 PJTE9900U.setWork_step_cd("200");
+            }else{
+                PJTE9900U.setWork_step_cd("100");
             }
 
             PJTE9900U.setPrjt_id(PJTE9900.getUpdatedRows().get(i).getPrjt_id());
@@ -179,6 +185,27 @@ public class PJTE9900Controller {
             PJTE9900U.setRmrk(PJTE9900.getUpdatedRows().get(i).getRmrk());
 
             result = pjte9900Service.update_9900_01(PJTE9900U);
+        }
+        return result;
+    }
+
+    @PutMapping("/delete")
+    boolean delete(HttpServletRequest request, @RequestBody PJTE9900DTO PJTE9900) throws Exception {
+        boolean result = true;
+
+        PJTE9900DTO PJTE9900D = new PJTE9900DTO();
+
+        if (PJTE9900.getDeletedRows().size() != 0) {
+            for (int i = 0; i < PJTE9900.getDeletedRows().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE9900D.setBkup_id(PJTE9900.getDeletedRows().get(i).getBkup_id());
+                PJTE9900D.setPrjt_id(PJTE9900.getDeletedRows().get(i).getPrjt_id());
+                PJTE9900D.setDept_cd(PJTE9900.getDeletedRows().get(i).getDept_cd());
+                PJTE9900D.setMng_id(PJTE9900.getDeletedRows().get(i).getMng_id());
+
+                result = pjte9900Service.delete_9900_01(PJTE9900D);
+            }
+
         }
         return result;
     }
