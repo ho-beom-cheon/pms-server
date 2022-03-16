@@ -1,6 +1,7 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.dto.pms.PJTE5000DTO;
 import com.iteyes.dto.pms.PJTE9900DTO;
 import com.iteyes.service.PJTE9900Service;
 import lombok.extern.log4j.Log4j2;
@@ -145,16 +146,66 @@ public class PJTE9900Controller {
 
         PJTE9900DTO PJTE9900U = new PJTE9900DTO();
 
+        PJTE9900U.setLogin_emp_no(PJTE9900.getLogin_emp_no());
+
+
         for(int i=0; i<PJTE9900.getUpdatedRows().size(); i++) {
+            if (PJTE9900.getUpdatedRows().get(i).getCom_dt() != null && PJTE9900.getUpdatedRows().get(i).getCom_dt() != "") {
+                PJTE9900U.setWork_step_cd("400");
+            }else if(PJTE9900.getUpdatedRows().get(i).getRe_sta_dt() != null && PJTE9900.getUpdatedRows().get(i).getRe_sta_dt() != ""){
+                if( Integer.parseInt(PJTE9900.getUpdatedRows().get(i).getRe_sta_dt().replace("-","")) > Integer.parseInt(PJTE9900.getUpdatedRows().get(i).getStop_dt().replace("-",""))){
+                    PJTE9900U.setWork_step_cd("200");
+                }else{
+                    PJTE9900U.setWork_step_cd("300");
+                }
+            }else if(PJTE9900.getUpdatedRows().get(i).getStop_dt() != null && PJTE9900.getUpdatedRows().get(i).getStop_dt() != ""){
+                PJTE9900U.setWork_step_cd("300");
+            }else if(PJTE9900.getUpdatedRows().get(i).getCom_due_dt() != null && PJTE9900.getUpdatedRows().get(i).getCom_due_dt() != ""){
+                PJTE9900U.setWork_step_cd("200");
+            }else{
+                PJTE9900U.setWork_step_cd("100");
+            }
+
             PJTE9900U.setPrjt_id(PJTE9900.getUpdatedRows().get(i).getPrjt_id());
             PJTE9900U.setBkup_id(PJTE9900.getUpdatedRows().get(i).getBkup_id());
+            PJTE9900U.setDept_cd(PJTE9900.getUpdatedRows().get(i).getDept_cd());
+            PJTE9900U.setMng_id(PJTE9900.getUpdatedRows().get(i).getMng_id());
 
-            PJTE9900U.setLogin_aut_cd(PJTE9900.getLogin_aut_cd());
-            PJTE9900U.setLogin_emp_no(PJTE9900.getLogin_emp_no());
-            PJTE9900U.setLogin_bzcd(PJTE9900.getLogin_bzcd());
-            PJTE9900U.setLogin_proj_id(PJTE9900.getLogin_proj_id());
+            PJTE9900U.setWork_task(PJTE9900.getUpdatedRows().get(i).getWork_task());
+            PJTE9900U.setCom_rgs_dt(PJTE9900.getUpdatedRows().get(i).getCom_rgs_dt());
+            PJTE9900U.setCrpe_nm(PJTE9900.getUpdatedRows().get(i).getCrpe_nm());
+            PJTE9900U.setPtcp_nm(PJTE9900.getUpdatedRows().get(i).getPtcp_nm());
+            PJTE9900U.setCom_due_dt(PJTE9900.getUpdatedRows().get(i).getCom_due_dt());
+            PJTE9900U.setStop_dt(PJTE9900.getUpdatedRows().get(i).getStop_dt());
+            PJTE9900U.setRe_sta_dt(PJTE9900.getUpdatedRows().get(i).getRe_sta_dt());
+            PJTE9900U.setCom_dt(PJTE9900.getUpdatedRows().get(i).getCom_dt());
+            PJTE9900U.setBak_work_id(PJTE9900.getUpdatedRows().get(i).getBak_work_id());
+            PJTE9900U.setCon_work_id(PJTE9900.getUpdatedRows().get(i).getCon_work_id());
+            PJTE9900U.setMark(PJTE9900.getUpdatedRows().get(i).getMark());
+            PJTE9900U.setRmrk(PJTE9900.getUpdatedRows().get(i).getRmrk());
 
             result = pjte9900Service.update_9900_01(PJTE9900U);
+        }
+        return result;
+    }
+
+    @PutMapping("/delete")
+    boolean delete(HttpServletRequest request, @RequestBody PJTE9900DTO PJTE9900) throws Exception {
+        boolean result = true;
+
+        PJTE9900DTO PJTE9900D = new PJTE9900DTO();
+
+        if (PJTE9900.getDeletedRows().size() != 0) {
+            for (int i = 0; i < PJTE9900.getDeletedRows().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE9900D.setBkup_id(PJTE9900.getDeletedRows().get(i).getBkup_id());
+                PJTE9900D.setPrjt_id(PJTE9900.getDeletedRows().get(i).getPrjt_id());
+                PJTE9900D.setDept_cd(PJTE9900.getDeletedRows().get(i).getDept_cd());
+                PJTE9900D.setMng_id(PJTE9900.getDeletedRows().get(i).getMng_id());
+
+                result = pjte9900Service.delete_9900_01(PJTE9900D);
+            }
+
         }
         return result;
     }
