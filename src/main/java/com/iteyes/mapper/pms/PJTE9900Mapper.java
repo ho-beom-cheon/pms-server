@@ -13,6 +13,7 @@ public interface PJTE9900Mapper {
 	List<PJTE9900DTO> select_9900_01(PJTE9900DTO PJTE9900) throws Exception;
 	/*연관작업조회*/
 	List<PJTE9900DTO> select_9900_02(PJTE9900DTO PJTE9900) throws Exception;
+	List<PJTE9900DTO> select_9900_03(PJTE9900DTO PJTE9900) throws Exception;
 	/*등록*/
 	boolean insert_9900_01(PJTE9900DTO PJTE9900) throws Exception ;
 	/*수정*/

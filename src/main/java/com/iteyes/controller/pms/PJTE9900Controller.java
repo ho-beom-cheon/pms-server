@@ -65,6 +65,9 @@ public class PJTE9900Controller {
         PJTE9900.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE9900.setCon_work_id(request.getParameter("con_work_id"));
         PJTE9900.setWeek_yymm(request.getParameter("week_yymm"));
+        PJTE9900.setMng_id(request.getParameter("mng_id"));
+        PJTE9900.setWork_task(request.getParameter("work_task"));
+        PJTE9900.setCurrent_mng_id(request.getParameter("current_mng_id"));
         PJTE9900.setGubun(request.getParameter("gubun"));
 
         /* 서비스 요청**/

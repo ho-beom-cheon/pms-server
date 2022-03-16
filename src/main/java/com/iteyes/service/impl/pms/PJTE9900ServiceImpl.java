@@ -34,6 +34,9 @@ public class PJTE9900ServiceImpl implements PJTE9900Service {
 		if(PJTE9900.getGubun().equals("2")) {
 			list = pjte9900Mapper.select_9900_02(PJTE9900);
 		}
+		if(PJTE9900.getGubun().equals("3")) {
+			list = pjte9900Mapper.select_9900_03(PJTE9900);
+		}
 
 		return list;
 	}
