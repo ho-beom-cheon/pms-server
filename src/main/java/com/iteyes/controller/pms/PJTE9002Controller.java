@@ -24,11 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
-import java.io.File;
 
 @Controller
 @Log4j2
@@ -77,8 +75,29 @@ public class PJTE9002Controller {
 				.registerModule(new SimpleModule());
 		List<FileData> testHelloList = objectMapper.readValue(jsonList, new TypeReference<List<FileData>>() {});
 		log.debug("testHello text = {}", testHelloList);
+
 		if(files != null){
+			// 파일업로드 디렉토리 만들기
+			// 파일등록구분코드가 900,901 때는 uploadForm
+			File folder = null;
+
+			if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
+				folder = new File("/home/admin/fileUpload/uploadForm/"+request.getParameter("file_rgs_dscd"));
+
+			}else{
+				folder = new File("/home/admin/fileUpload/"+request.getParameter("prjt_id"));
+
+			}
+			if (!folder.exists()) {
+				if (folder.mkdir()) {
+					log.debug("Directory is created!");
+				} else {
+					log.debug("Failed to create directory!");
+				}
+			}
+
 			for(MultipartFile mf : files){
+
 				log.debug(mf.getOriginalFilename());
 				String path = "C:\\file_ex\\";
 				String file_nm = null;
@@ -88,7 +107,7 @@ public class PJTE9002Controller {
 						break;
 					}
 				}
-				File multiFile = new File(path + file_nm);
+				File multiFile = new File(folder+ "/" + file_nm);
 
 				InputStream input = mf.getInputStream();
 				FileUtils.copyInputStreamToFile(input, multiFile);
@@ -146,15 +165,25 @@ public class PJTE9002Controller {
 		// 첨부파일 데이터 전체삭제 후 insert 위한 delete 쿼리
 		pjte9002Service.delete_9002_01(PJTE9002);
 
+		String path = null;
+		// 파일등록구분코드에 따른 path 설정
+		if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
+			path = "/home/admin/fileUpload/uploadForm/" + request.getParameter("file_rgs_dscd");
+		}else{
+			path = "/home/admin/fileUpload/"+request.getParameter("prjt_id");
+
+		}
+
 		for(int i=0; i<testHelloList.size(); i++){
 
 			String file_path = testHelloList.get(i).getFile_path();
-			String path = "C:\\file_ex\\";
+//			String path = "C:\\file_ex\\";
 
-			if(file_path != null){
-				PJTE9002.setFile_path(testHelloList.get(i).getFile_path());
-			}else{
+
+			if(file_path == null || file_path.isEmpty()){
 				PJTE9002.setFile_path(path);
+			}else{
+				PJTE9002.setFile_path(testHelloList.get(i).getFile_path());
 			}
 			PJTE9002.setSqno(testHelloList.get(i).getSqno());
 			PJTE9002.setFile_nm(testHelloList.get(i).getFile_nm());
@@ -190,10 +219,12 @@ public class PJTE9002Controller {
 
 	@GetMapping(value = "/fileDownload", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(String fileName) throws Exception{
-		String fileFoler = "C:\\file_ex\\";
+	public ResponseEntity<Resource> downloadFile(String fileName, String filePath) throws Exception{
+//		String fileFoler = "C:\\file_ex\\";
 		log.debug("fileNm : ", fileName);
-		Resource resource = new FileSystemResource(fileFoler + fileName);
+		log.debug("filePath : ", filePath);
+
+		Resource resource = new FileSystemResource(filePath + "/" + fileName);
 		log.debug(resource);
 
 		String resourceName = resource.getFilename();
@@ -206,6 +237,7 @@ public class PJTE9002Controller {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 }

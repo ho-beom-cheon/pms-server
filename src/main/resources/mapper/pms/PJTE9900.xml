@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9900Mapper">
+
+	<select id="select_9900_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
+		SELECT A.BKUP_ID
+		, A.PRJT_ID
+		, A.DEPT_CD
+		, B.DTLS_TYNM AS DEPT_NM
+		, B.ETC_TXT1  AS DEPT_ETC
+		, A.MNG_ID
+		, A.WORK_TASK
+		, A.WORK_STEP_CD
+		, A.REG_NM
+		,CASE WHEN A.REG_DT IS NOT NULL AND A.REG_DT != ''
+		THEN STR_TO_DATE(A.REG_DT, '%Y%m%d') ELSE A.REG_DT
+		END AS REG_DT
+		,CASE WHEN A.COM_RGS_DT IS NOT NULL AND A.COM_RGS_DT != ''
+		THEN STR_TO_DATE(A.COM_RGS_DT, '%Y%m%d') ELSE A.COM_RGS_DT
+		END AS COM_RGS_DT
+		, A.CRPE_NM
+		, A.PTCP_NM
+		,CASE WHEN A.COM_DUE_DT IS NOT NULL AND A.COM_DUE_DT != ''
+		THEN STR_TO_DATE(A.COM_DUE_DT, '%Y%m%d') ELSE A.COM_DUE_DT
+		END AS COM_DUE_DT
+		,CASE WHEN A.STOP_DT IS NOT NULL AND A.STOP_DT != ''
+		THEN STR_TO_DATE(A.STOP_DT, '%Y%m%d') ELSE A.STOP_DT
+		END AS STOP_DT
+		,CASE WHEN A.RE_STA_DT IS NOT NULL AND A.RE_STA_DT != ''
+		THEN STR_TO_DATE(A.RE_STA_DT, '%Y%m%d') ELSE A.RE_STA_DT
+		END AS RE_STA_DT
+		,CASE WHEN A.COM_DT IS NOT NULL AND A.COM_DT != ''
+		THEN STR_TO_DATE(A.COM_DT, '%Y%m%d') ELSE A.COM_DT
+		END AS COM_DT
+		, A.BAK_WORK_ID
+		, A.CON_WORK_ID
+		, A.RMRK
+		, A.MARK
+		FROM pms_kanban_mng A
+		LEFT OUTER JOIN pms_cd_del_mng B
+		ON A.PRJT_ID = B.PRJT_ID
+		AND A.DEPT_CD = B.DTLS_TYCD
+		AND B.GRP_TYCD = '1000000040'
+		AND B.PRJT_ID = '0000000003'
+		AND B.USE_YN = 'Y'
+		WHERE 1 = 1
+		AND A.PRJT_ID = #{prjt_id}
+		AND A.BKUP_ID = #{bkup_id}
+		AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
+		<if test='week_yymm != ""  and week_yymm != null'>
+			AND A.REG_DT BETWEEN CONCAT((REPLACE(#{week_yymm}, '-', '')),'01') AND CONCAT((REPLACE(#{week_yymm}, '-', '')),'31 ')
+		</if>
+	</select>
+	<select id="select_9900_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
+		SELECT A.BKUP_ID
+			 , A.PRJT_ID
+			 , A.DEPT_CD
+			 , B.DTLS_TYNM AS DEPT_NM
+			 , B.ETC_TXT1  AS DEPT_ETC
+			 , A.MNG_ID
+			 , A.WORK_TASK
+			 , A.WORK_STEP_CD
+			 , A.REG_NM
+			 ,CASE WHEN A.REG_DT IS NOT NULL AND A.REG_DT != ''
+                          THEN STR_TO_DATE(A.REG_DT, '%Y%m%d') ELSE A.REG_DT
+			END AS REG_DT
+			 ,CASE WHEN A.COM_RGS_DT IS NOT NULL AND A.COM_RGS_DT != ''
+                          THEN STR_TO_DATE(A.COM_RGS_DT, '%Y%m%d') ELSE A.COM_RGS_DT
+			END AS COM_RGS_DT
+			 , A.CRPE_NM
+			 , A.PTCP_NM
+			 ,CASE WHEN A.COM_DUE_DT IS NOT NULL AND A.COM_DUE_DT != ''
+                          THEN STR_TO_DATE(A.COM_DUE_DT, '%Y%m%d') ELSE A.COM_DUE_DT
+			END AS COM_DUE_DT
+			 ,CASE WHEN A.STOP_DT IS NOT NULL AND A.STOP_DT != ''
+                          THEN STR_TO_DATE(A.STOP_DT, '%Y%m%d') ELSE A.STOP_DT
+			END AS STOP_DT
+			 ,CASE WHEN A.RE_STA_DT IS NOT NULL AND A.RE_STA_DT != ''
+                          THEN STR_TO_DATE(A.RE_STA_DT, '%Y%m%d') ELSE A.RE_STA_DT
+			END AS RE_STA_DT
+			 ,CASE WHEN A.COM_DT IS NOT NULL AND A.COM_DT != ''
+                          THEN STR_TO_DATE(A.COM_DT, '%Y%m%d') ELSE A.COM_DT
+			END AS COM_DT
+			 , A.BAK_WORK_ID
+			 , A.CON_WORK_ID
+			 , A.RMRK
+			 , A.MARK
+		FROM pms_kanban_mng A
+				 LEFT OUTER JOIN pms_cd_del_mng B
+								 ON A.PRJT_ID = B.PRJT_ID
+									 AND A.DEPT_CD = B.DTLS_TYCD
+									 AND B.GRP_TYCD = '1000000040'
+									 AND B.PRJT_ID = '0000000003'
+									 AND B.USE_YN = 'Y'
+		WHERE 1 = 1
+		  AND A.PRJT_ID = #{prjt_id}
+		  AND A.BKUP_ID = #{bkup_id}
+		  AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
+		  AND A.CON_WORK_ID = #{con_work_id}
+	</select>
+	<select id="select_9900_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
+		SELECT A.BKUP_ID
+		, A.PRJT_ID
+		, A.MNG_ID
+		, A.WORK_TASK
+		, A.WORK_STEP_CD
+		, A.REG_NM
+		, A.CRPE_NM
+		, A.CON_WORK_ID
+		FROM pms_kanban_mng A
+		WHERE 1 = 1
+		AND A.PRJT_ID = #{prjt_id}
+		AND A.BKUP_ID = '0000000000'
+		AND A.MNG_ID != #{current_mng_id}
+		AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
+		<if test='work_task != "" and work_task != null'>
+			AND A.WORK_TASK LIKE CONCAT(CONCAT('%',#{work_task}),'%')
+		</if>
+		<if test='mng_id != "" and mng_id != null'>
+			AND A.MNG_ID LIKE CONCAT(CONCAT('%',#{mng_id}),'%')
+		</if>
+	</select>
+
+	<insert id="insert_9900_01" parameterType="Map">
+		<selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
+			SELECT CONCAT(CONCAT(#{dept_etc},LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,2,5) AS INT))+1,1),5,'0'))) AS MNG_ID
+			FROM   pms_kanban_mng
+			WHERE 1=1
+			AND    PRJT_ID    = #{prjt_id}
+			AND    BKUP_ID    = #{bkup_id}
+			AND    DEPT_CD    = #{dept_cd}
+		</selectKey>
+		<![CDATA[
+		INSERT INTO pms_kanban_mng
+		(
+			   BKUP_ID		/*백업ID*/
+			  ,PRJT_ID		/*프로젝트ID*/
+			  ,DEPT_CD		/*부문코드*/
+			  ,MNG_ID		/*관리ID*/
+			  ,WORK_TASK	/*작업명*/
+			  ,WORK_STEP_CD /*작업상태*/
+			  ,REG_DT		/*등록일*/
+			  ,COM_RGS_DT	/*완료요청일*/
+			  ,REG_NM		/*등록자*/
+			  ,CRPE_NM		/*참여자*/
+			  ,PTCP_NM
+			  ,CON_WORK_ID	/*연관작업*/
+			  ,RMRK			/*비고*/
+			  ,MARK			/*마크*/
+			  ,OPR_NO
+			  ,DB_CHG_TS
+		)
+		VALUES
+			(
+				'0000000000'
+				, #{prjt_id}                          /*프로젝트ID*/
+				, #{dept_cd}                          /*부문코드*/
+				, #{mng_id}   						  /*관리ID*/
+				, #{work_task}                    	  /*작업내용*/
+				, #{work_step_cd}                     /*작업상태코드*/
+		  		, REPLACE(#{reg_dt}, '-', '') 		  /*등록일자*/
+				, REPLACE(#{com_rgs_dt}, '-', '') 	  /*완료요청일자*/
+		  		, #{reg_nm}  		                  /*등록자*/
+		  		, #{crpe_nm}  		                  /*참여자*/
+		  		, #{ptcp_nm}
+				, #{mng_id}                    		  /*연관작업*/
+				, #{rmrk}                   	      /*비고*/
+				, #{mark}                 	    	  /*마크*/
+		  		, #{login_emp_no}  					  /*조작자번호*/
+				, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+			)
+		]]>
+	</insert>
+	<update id="update_9900_01" parameterType="Map">
+   <![CDATA[
+		UPDATE pms_kanban_mng
+		SET WORK_TASK     = #{work_task} 						/*작업목록*/
+		  , WORK_STEP_CD  = #{work_step_cd} 					/*작업상태*/
+		  , COM_RGS_DT    = REPLACE(#{com_rgs_dt}, '-', '')		/*완료요청일*/
+		  , CRPE_NM       = #{crpe_nm} 							/*등록자*/
+		  , PTCP_NM       = #{ptcp_nm} 							/*참여자*/
+		  , COM_DUE_DT    = REPLACE(#{com_due_dt}, '-', '')  	/*완료예정일*/
+		  , STOP_DT       = REPLACE(#{stop_dt}, '-', '')		/*중단일*/
+		  , RE_STA_DT     = REPLACE(#{re_sta_dt}, '-', '')		/*재시작일*/
+		  , COM_DT        = REPLACE(#{com_dt}, '-', '')			/*완료일*/
+		  , BAK_WORK_ID   = #{bak_work_id}						/*후속아이디*/
+		  , CON_WORK_ID   = #{con_work_id} 						/*연계아이디*/
+		  , MARK          = #{mark} 							/*마크*/
+		  , RMRK          = #{rmrk} 							/*비고*/
+		  , OPR_NO        = #{login_emp_no} 					/*조작자번호*/
+		  , DB_CHG_TS     = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') 	/*DB변경일시*/
+		WHERE 1=1
+		  AND PRJT_ID = #{prjt_id}
+		  AND BKUP_ID = #{bkup_id}
+		  AND MNG_ID = #{mng_id}
+		  AND DEPT_CD = #{dept_cd}
+		]]>
+  </update>
+
+
+	<delete id="delete_9900_01" parameterType="Map">
+   <![CDATA[
+		DELETE
+		FROM pms_kanban_mng
+		WHERE 1 = 1
+		  AND DEPT_CD = #{dept_cd}
+		  AND PRJT_ID = #{prjt_id}
+		  AND MNG_ID = #{mng_id}
+		  AND BKUP_ID = #{bkup_id}
+		]]>
+  </delete>
+</mapper>

@@ -213,14 +213,14 @@
 				, #{enlpe_nm}                         /*프로그램세부구분코드*/
 				, REPLACE(#{frcs_sta_dt}, '-', '')    /*계획시작일자*/
 				, REPLACE(#{frcs_end_dt}, '-', '')    /*계획종료일자*/
-				, NULL                                /*실제시작일자*/
-				, NULL                                /*실제종료일자*/
+				, ''                                /*실제시작일자*/
+				, ''                                /*실제종료일자*/
 				, '000'                               /*처리단계코드*/
 				, #{prg_txt}                          /*진행현황*/
 				, #{dvlpe_no}                         /*개발자번호*/
-				, NULL                                /*개발자확인일자*/
+				, ''                                /*개발자확인일자*/
 				, #{pl_no}                            /*PL번호*/
-				, NULL                                /*PL확인일자*/
+				, ''                                /*PL확인일자*/
 				, #{crpe_no}                          /*담당자번호*/
 				, #{rmrk}                             /*비고*/
 				, #{atfl_mng_id}                      /*첨부파일관리ID*/
@@ -274,4 +274,14 @@
 		   AND BKUP_ID      = #{bkup_id}
 		]]>
   </update>
+
+	<delete id="delete_2100_01" parameterType="Map">
+   <![CDATA[
+		DELETE FROM pms_pgm_mng
+		 WHERE PGM_ID        = #{pgm_id}
+		   AND BZCD          = #{bzcd}
+		   AND PRJT_ID       = #{prjt_id}
+		   AND BKUP_ID       = #{bkup_id}
+		]]>
+  </delete>
 </mapper>

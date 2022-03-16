@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
-public class  PmsApplication extends SpringBootServletInitializer implements WebMvcConfigurer{
+public class PmsApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
 
     public static void main(String[] args) {
         SpringApplication.run(PmsApplication.class, args);
@@ -24,6 +24,7 @@ public class  PmsApplication extends SpringBootServletInitializer implements Web
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(PmsApplication.class);
     }
+
     @Autowired
     private JwtInterceptor jwtInterceptor;
 
@@ -45,16 +46,11 @@ public class  PmsApplication extends SpringBootServletInitializer implements Web
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                //.allowedOrigins("http://localhost:8081")
-                .allowedMethods(
-                        HttpMethod.GET.name(),
-                        HttpMethod.HEAD.name(),
-                        HttpMethod.POST.name(),
-                        HttpMethod.PUT.name(),
-                        HttpMethod.DELETE.name()
-                )
+                .allowedOrigins("https://pms.gurmwi.io")
+                .allowedMethods("*")
                 .allowedHeaders("*")
+                .allowedOriginPatterns("*")
+                .allowCredentials(false)
                 .exposedHeaders("jwt-auth-token");
-
     }
 }

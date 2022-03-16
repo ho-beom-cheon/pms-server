@@ -77,6 +77,17 @@ public class PJTE2200Controller {
         boolean result = false;
 
         PJTE2200DTO PJTE2200C = new PJTE2200DTO();
+        PJTE2200DTO PJTE2200D = new PJTE2200DTO();
+
+        if(PJTE2200.getExcelUplod().equals("Y")) {
+//                PJTE2200D.setBzcd(PJTE2200.getGridData().get(i).getBzcd());
+                PJTE2200D.setPrjt_id(PJTE2200.getPrjt_id());
+//                PJTE2200D.setTst_case_id(PJTE2200.getGridData().get(i).getTst_case_id());
+//                PJTE2200D.setSqn_cd(PJTE2200.getGridData().get(i).getSqn_cd());
+//                PJTE2200D.setBkup_id("0000000000");
+
+                pjte2200service.delete_2200_01(PJTE2200D);
+        }
 
         if(PJTE2200.getExcelUplod().equals("Y")) {
             for (int i = 0; i < PJTE2200.getGridData().size(); i++) {

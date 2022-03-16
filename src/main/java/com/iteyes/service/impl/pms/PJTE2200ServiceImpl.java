@@ -31,4 +31,10 @@ public class PJTE2200ServiceImpl implements PJTE2200Service {
 
 		return PJTE2200Mapper.update_2200_01(PJTE2200);
 	}
+	/* delete */
+	@Override
+	public boolean delete_2200_01(PJTE2200DTO PJTE2200) throws Exception {
+
+		return PJTE2200Mapper.delete_2200_01(PJTE2200);
+	}
 }
