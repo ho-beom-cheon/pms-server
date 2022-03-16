@@ -185,6 +185,7 @@
 		WHERE 1 = 1
 		  AND DEPT_CD = #{dept_cd}
 		  AND PRJT_ID = #{prjt_id}
+		  AND MNG_ID = #{mng_id}
 		  AND BKUP_ID = #{bkup_id}
 		]]>
   </delete>
