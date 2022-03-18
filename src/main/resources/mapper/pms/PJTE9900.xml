@@ -49,9 +49,13 @@
 		AND A.PRJT_ID = #{prjt_id}
 		AND A.BKUP_ID = #{bkup_id}
 		AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
-		<if test='week_yymm != ""  and week_yymm != null'>
+		<if test='week_yymm != ""  and week_yymm != null and over_due_dt_yn == "false"'>
 			AND A.REG_DT BETWEEN CONCAT((REPLACE(#{week_yymm}, '-', '')),'01') AND CONCAT((REPLACE(#{week_yymm}, '-', '')),'31 ')
 		</if>
+		<if test='work_task != "400" and over_due_dt_yn == "true"'>
+			<![CDATA[AND A.COM_RGS_DT < CURDATE() ]]>
+		</if>
+		ORDER BY A.REG_DT DESC
 	</select>
 	<select id="select_9900_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
 		SELECT A.BKUP_ID
@@ -99,6 +103,7 @@
 		  AND A.BKUP_ID = #{bkup_id}
 		  AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
 		  AND A.CON_WORK_ID = #{con_work_id}
+		ORDER BY A.REG_DT DESC
 	</select>
 	<select id="select_9900_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
 		SELECT A.BKUP_ID
@@ -121,6 +126,7 @@
 		<if test='mng_id != "" and mng_id != null'>
 			AND A.MNG_ID LIKE CONCAT(CONCAT('%',#{mng_id}),'%')
 		</if>
+		ORDER BY A.REG_DT DESC
 	</select>
 
 	<insert id="insert_9900_01" parameterType="Map">
