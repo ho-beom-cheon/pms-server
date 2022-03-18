@@ -41,6 +41,7 @@ public class PJTE9900DTO {
     private String mark;
     private String opr_no;
     private String db_chg_ts;
+    private String over_due_dt_yn;
 
 
     private List<PJTE9900DTO> updatedRows;
@@ -54,5 +55,9 @@ public class PJTE9900DTO {
     private String aut_id;                  // 권한
     private String empno;
     private String array_length;
+
+    private String new_bkup_id;
+    private String new_bkup_nm;
+    private String sort_seq;
 
 }
