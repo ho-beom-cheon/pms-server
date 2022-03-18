@@ -3,6 +3,7 @@ package com.iteyes.controller.pms;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE5000DTO;
 import com.iteyes.dto.pms.PJTE9900DTO;
+import com.iteyes.dto.pms.PJTE9900DTO;
 import com.iteyes.service.PJTE9900Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,7 @@ public class PJTE9900Controller {
         PJTE9900.setWork_task(request.getParameter("work_task"));
         PJTE9900.setCurrent_mng_id(request.getParameter("current_mng_id"));
         PJTE9900.setGubun(request.getParameter("gubun"));
+        PJTE9900.setOver_due_dt_yn(request.getParameter("over_due_dt_yn"));
 
         /* 서비스 요청**/
         List<PJTE9900DTO> list = pjte9900Service.select_9900(PJTE9900);
@@ -207,6 +209,62 @@ public class PJTE9900Controller {
             }
 
         }
+        return result;
+    }
+
+    @GetMapping(value = "/backup_select")
+    public @ResponseBody String backup_select(HttpServletRequest request) throws Exception{
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        /* 빈 dto 생성 */
+        PJTE9900DTO PJTE9900 = new PJTE9900DTO();
+
+        /* 서비스 요청**/
+        List<PJTE9900DTO> list = pjte9900Service.select_9900_10(PJTE9900);
+
+        /* map 형태로 저장 */
+        Map<String, Object> hm = new HashMap();
+        Map<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        /* json 형태로 반환 */
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+
+    }
+
+    @PostMapping("/backup_update")
+    public @ResponseBody boolean backup_update(HttpServletRequest request, @RequestBody PJTE9900DTO PJTE9900) throws Exception{
+        boolean result = false;
+
+        PJTE9900DTO PJTE9900C = new PJTE9900DTO();
+        PJTE9900DTO PJTE9900D = new PJTE9900DTO();
+
+
+        PJTE9900D.setNew_bkup_id(PJTE9900.getNew_bkup_id());
+        PJTE9900D.setPrjt_id(PJTE9900.getPrjt_id());
+
+        result = pjte9900Service.delete_9900_10(PJTE9900D);
+
+        PJTE9900C.setNew_bkup_id(PJTE9900.getNew_bkup_id());
+        PJTE9900C.setNew_bkup_nm(PJTE9900.getNew_bkup_nm());
+        PJTE9900C.setPrjt_id(PJTE9900.getPrjt_id());
+        PJTE9900C.setLogin_emp_no(PJTE9900.getLogin_emp_no());
+
+        result = pjte9900Service.insert_9900_10(PJTE9900C);
+
+        result = pjte9900Service.delete_9900_20(PJTE9900D);
+
+        result = pjte9900Service.insert_9900_20(PJTE9900C);
+
         return result;
     }
 }

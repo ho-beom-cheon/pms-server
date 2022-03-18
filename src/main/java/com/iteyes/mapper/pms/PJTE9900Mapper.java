@@ -1,6 +1,7 @@
 package com.iteyes.mapper.pms;
 
 import com.iteyes.dto.pms.PJTE9900DTO;
+import com.iteyes.dto.pms.PJTE9900DTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,4 +21,12 @@ public interface PJTE9900Mapper {
 	boolean update_9900_01(PJTE9900DTO PJTE9900) throws Exception ;
 	/*삭제*/
 	boolean delete_9900_01(PJTE9900DTO PJTE9900) throws Exception ;
+
+	List<PJTE9900DTO> select_9900_10(PJTE9900DTO PJTE9900) throws Exception ;
+
+	boolean delete_9900_10(PJTE9900DTO PJTE9900) throws Exception;
+	boolean insert_9900_10(PJTE9900DTO PJTE9900) throws Exception;
+
+	boolean delete_9900_20(PJTE9900DTO PJTE9900) throws Exception;
+	boolean insert_9900_20(PJTE9900DTO PJTE9900) throws Exception;
 }
