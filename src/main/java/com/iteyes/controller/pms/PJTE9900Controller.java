@@ -155,7 +155,7 @@ public class PJTE9900Controller {
             if (PJTE9900.getUpdatedRows().get(i).getCom_dt() != null && PJTE9900.getUpdatedRows().get(i).getCom_dt() != "") {
                 PJTE9900U.setWork_step_cd("400");
             }else if(PJTE9900.getUpdatedRows().get(i).getRe_sta_dt() != null && PJTE9900.getUpdatedRows().get(i).getRe_sta_dt() != ""){
-                if( Integer.parseInt(PJTE9900.getUpdatedRows().get(i).getRe_sta_dt().replace("-","")) > Integer.parseInt(PJTE9900.getUpdatedRows().get(i).getStop_dt().replace("-",""))){
+                if( Integer.parseInt(PJTE9900.getUpdatedRows().get(i).getRe_sta_dt().replace("-","")) >= Integer.parseInt(PJTE9900.getUpdatedRows().get(i).getStop_dt().replace("-",""))){
                     PJTE9900U.setWork_step_cd("200");
                 }else{
                     PJTE9900U.setWork_step_cd("300");
