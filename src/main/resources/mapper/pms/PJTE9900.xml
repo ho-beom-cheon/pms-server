@@ -49,7 +49,7 @@
 		AND A.PRJT_ID = #{prjt_id}
 		AND A.BKUP_ID = #{bkup_id}
 		AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
-		<if test='week_yymm != ""  and week_yymm != null and over_due_dt_yn == "false"'>
+		<if test='week_yymm != ""  and week_yymm != null'>
 			AND A.REG_DT BETWEEN CONCAT((REPLACE(#{week_yymm}, '-', '')),'01') AND CONCAT((REPLACE(#{week_yymm}, '-', '')),'31 ')
 		</if>
 		<if test='over_due_dt_yn == "true"'>
