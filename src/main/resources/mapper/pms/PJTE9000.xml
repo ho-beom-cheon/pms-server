@@ -1191,6 +1191,7 @@
                ,REAL_THW_STDT
                ,REAL_THW_ENDT
                ,REAL_PRJT_ID
+               ,DEPT_CD
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
