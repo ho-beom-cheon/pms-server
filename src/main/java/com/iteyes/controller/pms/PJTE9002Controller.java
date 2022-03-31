@@ -88,7 +88,7 @@ public class PJTE9002Controller {
 
 			log.debug("upload_form_dir :: "+upload_form_dir);
 			log.debug("file_upload_dir :: "+file_upload_dir);
-			if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
+			if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901") || request.getParameter("file_rgs_dscd").equals("902")){
 //				folder = new File("/home/admin/fileUpload/uploadForm/"+request.getParameter("file_rgs_dscd"));
 				folder = new File(upload_form_dir+request.getParameter("file_rgs_dscd"));
 
