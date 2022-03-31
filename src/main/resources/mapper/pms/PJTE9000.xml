@@ -1181,7 +1181,7 @@
                ,EMAIL_ADDR
                ,RANK_NM
                ,CPNO
-               ,LGN_PWD
+               ,'Admin211111' AS LGN_PWD
                ,BZCD
                ,CATN_DCD
                ,AUT_CD
@@ -1213,21 +1213,21 @@
      <insert id="insert_9000_94" parameterType="Map">
           INSERT INTO pms_atfl_mng
           SELECT BKUP_ID
-                ,#{new_prjt_id} AS PRJT_ID
-                ,ATFL_MNG_ID
-                ,FILE_RGS_DSCD
-                ,SQNO
-                ,FILE_PATH
-                ,FILE_NM
-                ,ORG_FILE_NM
-                ,RMRMK
-                ,OPR_NO
-                ,DB_CHG_TS
+               ,#{new_prjt_id} AS PRJT_ID
+               ,ATFL_MNG_ID
+               ,FILE_RGS_DSCD
+               ,SQNO
+               ,FILE_PATH
+               ,FILE_NM
+               ,ORG_FILE_NM
+               ,RMRMK
+               ,OPR_NO
+               ,DB_CHG_TS
           FROM   pms_atfl_mng
           WHERE  BKUP_ID = '0000000000'
             AND  PRJT_ID = '0000000000'
             AND  ATFL_MNG_ID   = '0000000000'
-            AND  (FILE_RGS_DSCD = '900' OR FILE_RGS_DSCD='901')
+            AND  FILE_RGS_DSCD IN ('900','901','902')
      </insert>
 
      <delete id="delete_9000_90" parameterType="Map">
@@ -1263,6 +1263,6 @@
           WHERE  BKUP_ID = '0000000000'
             AND  PRJT_ID = #{new_prjt_id}
             AND  ATFL_MNG_ID = '0000000000'
-            AND  (FILE_RGS_DSCD = '900' OR FILE_RGS_DSCD='901')
+            AND  FILE_RGS_DSCD IN ('900','901','902')
      </delete>
 </mapper>
