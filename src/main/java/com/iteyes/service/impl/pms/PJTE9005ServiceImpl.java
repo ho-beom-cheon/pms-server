@@ -43,18 +43,32 @@ public class PJTE9005ServiceImpl implements PJTE9005Service {
 
 		return pjte9005Mapper.insert_9005_01(PJTE9005);
 	}
-
-	/* update */
 	@Override
-	public boolean update_9005_01(PJTE9005DTO PJTE9005) throws Exception {
+	public boolean insert_9005_02(PJTE9005DTO PJTE9005) throws Exception {
 
-		return pjte9005Mapper.update_9005_01(PJTE9005);
+		return pjte9005Mapper.insert_9005_02(PJTE9005);
 	}
+	@Override
+	public boolean insert_9005_03(PJTE9005DTO PJTE9005) throws Exception {
+
+		return pjte9005Mapper.insert_9005_03(PJTE9005);
+	}
+
 
 	/* delete */
 	@Override
 	public boolean delete_9005_01(PJTE9005DTO PJTE9005) throws Exception {
 
 		return pjte9005Mapper.delete_9005_01(PJTE9005);
+	}
+	@Override
+	public boolean delete_9005_02(PJTE9005DTO PJTE9005) throws Exception {
+
+		return pjte9005Mapper.delete_9005_02(PJTE9005);
+	}
+	@Override
+	public boolean delete_9005_03(PJTE9005DTO PJTE9005) throws Exception {
+
+		return pjte9005Mapper.delete_9005_03(PJTE9005);
 	}
 }

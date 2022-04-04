@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.iteyes.mapper.pms.PJTE5000Mapper">
-  <select id="select_5000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE5000DTO">
+    <select id="select_5000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE5000DTO">
      <![CDATA[
       SELECT A.MNG_CD
            , A.BZCD
            , A.STEP_CD
            , A.MNG_ID
            , A.HGRN_MNG_ID
-           , A.ACVT_NM
+           , CONCAT(B.ETC_TXT1, ' ', A.ACVT_NM) AS ACVT_NM
            , A.TASK_NM
            , A.CRPE_NM
            , A.WBS_PRC_STS_CD
@@ -35,97 +35,100 @@
                  AND B.BZCD        = A.BZCD
                  AND B.PRJT_ID     = A.PRJT_ID
                  AND B.BKUP_ID     = A.BKUP_ID) AS WBS_CNT
-  		 FROM pms_wbs_mng A
-  		WHERE 1 = 1
-  		  AND A.BKUP_ID = #{bkup_id}
-  		  AND A.PRJT_ID = #{prjt_id}
-       ]]>
-  		<if test='bzcd != "TTT"'>
-  		  AND A.BZCD  = #{bzcd}
-  		</if>
-	   <if test='mng_cd != "TTT"'>
-  		  AND A.MNG_CD  = #{mng_cd}
-  		</if>
-  		<if test='wbs_prc_sts_cd != "TTT"'>
-  		  AND A.WBS_PRC_STS_CD  = #{wbs_prc_sts_cd}
-  		</if>
-  		<if test='crpe_nm != "" and crpe_nm != null'>
-  		  AND A.CRPE_NM  LIKE CONCAT(CONCAT('%',#{crpe_nm}),'%')
-  		</if>
-  		<if test='pln_sta_dt != ""  and pln_sta_dt != null and pln_end_dt != ""  and pln_end_dt != null'>
-  		  AND A.PLN_END_DT  BETWEEN #{pln_sta_dt} AND #{pln_end_dt}
-  		</if>
-  	 	<if test='acl_sta_dt != ""  and acl_sta_dt != null and acl_end_dt != ""  and acl_end_dt != null'>
-  		  AND A.ACL_END_DT  BETWEEN #{acl_sta_dt} AND #{acl_end_dt}
-  		</if>
-  		ORDER BY A.SORT
+      FROM pms_wbs_mng A
+      LEFT OUTER JOIN
+        pms_cd_del_mng   B
+      ON  B.DTLS_TYCD = A.STEP_CD
+      AND B.GRP_TYCD  = '1000000020'
+      AND B.PRJT_ID   = A.PRJT_ID
+      AND B.BKUP_ID   = A.BKUP_ID
+      WHERE 1 = 1
+      AND A.BKUP_ID = #{bkup_id}
+      AND A.PRJT_ID = #{prjt_id}
+      ]]>
+      <if test='bzcd != "TTT"'>
+          AND A.BZCD = #{bzcd}
+      </if>
+      <if test='mng_cd != "TTT"'>
+          AND A.MNG_CD = #{mng_cd}
+      </if>
+      <if test='wbs_prc_sts_cd != "TTT"'>
+          AND A.WBS_PRC_STS_CD = #{wbs_prc_sts_cd}
+      </if>
+      <if test='crpe_nm != "" and crpe_nm != null'>
+          AND A.CRPE_NM LIKE CONCAT(CONCAT('%',#{crpe_nm}),'%')
+      </if>
+      <if test='pln_sta_dt != ""  and pln_sta_dt != null and pln_end_dt != ""  and pln_end_dt != null'>
+          AND A.PLN_END_DT BETWEEN #{pln_sta_dt} AND #{pln_end_dt}
+      </if>
+      <if test='acl_sta_dt != ""  and acl_sta_dt != null and acl_end_dt != ""  and acl_end_dt != null'>
+          AND A.ACL_END_DT BETWEEN #{acl_sta_dt} AND #{acl_end_dt}
+      </if>
+      ORDER BY A.SORT
     </select>
 
-	<insert id="insert_5000_01" parameterType="Map">
-	INSERT INTO pms_wbs_mng
-		(
-	          BKUP_ID
-	        , PRJT_ID
-	        , MNG_CD
-	        , MNG_ID
-	        , BZCD
-	        , HGRN_MNG_ID
-	        , STEP_CD
-	        , ACVT_NM
-	        , TASK_NM
-	        , CRPE_NM
-	        , PLN_STA_DT
-	        , PLN_STA_TIM
-	        , PLN_END_DT
-	        , PLN_END_TIM
-	        , ACL_STA_DT
-	        , ACL_STA_TIM
-	        , ACL_END_DT
-	        , ACL_END_TIM
-	        , WGT_RT
-	        , PRG_RT
-	        , WBS_PRC_STS_CD
-	        , RMRK
-	        , SORT
-	        , ATFL_MNG_ID
-	        , OPR_NO
-	        , DB_CHG_TS
-		) VALUES
-		    (
-			   '0000000000'
-		      , #{prjt_id}
-	          , #{mng_cd}
-	          , #{mng_id}
-	          , #{bzcd}
-	          , #{hgrn_mng_id}
-	          , #{step_cd}
-	          , #{acvt_nm}
-	          , #{task_nm}
-	          , #{crpe_nm}
-	          , REPLACE(#{pln_sta_dt}, '-', '')
-	          , #{pln_sta_tim}
-			  , REPLACE(#{pln_end_dt}, '-', '')
-	          , #{pln_end_tim}
-	          , ''
-	          , ''
-	          , ''
-	          , ''
-	          , #{wgt_rt}
-	          , #{prg_rt}
-	          , '100'
-	          , #{rmrk}
-	          , #{sort}
-	          , #{atfl_mng_id}
-			  , #{login_emp_no}
-			  , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
-			)
-	  </insert>
-	<delete id="delete_5000_01" parameterType="Map">
-		 DELETE FROM pms_wbs_mng
-		  WHERE 1 = 1
-			AND BKUP_ID  = #{bkup_id}
-	        AND PRJT_ID  = #{prjt_id}
-	        AND MNG_CD   = #{mng_cd}
-	        AND BZCD     = #{bzcd}
-	</delete>
+    <insert id="insert_5000_01" parameterType="Map">
+        INSERT INTO pms_wbs_mng
+        ( BKUP_ID
+        , PRJT_ID
+        , MNG_CD
+        , MNG_ID
+        , BZCD
+        , HGRN_MNG_ID
+        , STEP_CD
+        , ACVT_NM
+        , TASK_NM
+        , CRPE_NM
+        , PLN_STA_DT
+        , PLN_STA_TIM
+        , PLN_END_DT
+        , PLN_END_TIM
+        , ACL_STA_DT
+        , ACL_STA_TIM
+        , ACL_END_DT
+        , ACL_END_TIM
+        , WGT_RT
+        , PRG_RT
+        , WBS_PRC_STS_CD
+        , RMRK
+        , SORT
+        , ATFL_MNG_ID
+        , OPR_NO
+        , DB_CHG_TS)
+        VALUES ( '0000000000'
+               , #{prjt_id}
+               , #{mng_cd}
+               , #{mng_id}
+               , #{bzcd}
+               , #{hgrn_mng_id}
+               , #{step_cd}
+               , #{acvt_nm} => LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
+               , #{task_nm}
+               , #{crpe_nm}
+               , REPLACE(#{pln_sta_dt}, '-', '')
+               , #{pln_sta_tim}
+               , REPLACE(#{pln_end_dt}, '-', '')
+               , #{pln_end_tim}
+               , ''
+               , ''
+               , ''
+               , ''
+               , #{wgt_rt}
+               , #{prg_rt}
+               , '100'
+               , #{rmrk}
+               , #{sort}
+               , #{atfl_mng_id}
+               , #{login_emp_no}
+               , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'))
+    </insert>
+    <delete id="delete_5000_01" parameterType="Map">
+        DELETE
+        FROM pms_wbs_mng
+        WHERE 1 = 1
+          AND BKUP_ID = #{bkup_id}
+          AND PRJT_ID = #{prjt_id}
+          AND MNG_CD = #{mng_cd}
+          AND BZCD = #{bzcd}
+    </delete>
 </mapper>

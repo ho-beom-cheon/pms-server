@@ -1,307 +1,425 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9005Mapper">
-  <select id="select_9005_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
-	  SELECT A.MAN_NO
-	  ,B.EMPNM AS MAN_NM
-	  ,A.RANK_NM
-	  ,A.MAN_CD
-	  ,A.SKILL_GRD
-	  ,A.CAREER
-	  ,CONCAT(floor(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT,'01'),'%Y-%m-%d'),DATE_FORMAT(NOW(),'%Y-%m-%d')) / 12),' 년 ',
-	  MOD(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT,'01'),'%Y-%m-%d'),DATE_FORMAT(NOW(),'%Y-%m-%d')) , 12),'개월') AS NOW_CAREER
-	  ,A.MAIN_SKILL
-	  ,A.DUTY_TXT
-	  ,A.QLFKS_NM1
-	  ,A.GRD_CD
-	  FROM   pms_man_pfle_info A
-	  LEFT OUTER JOIN
-	  pms_emp_info   B
-	  ON  B.EMPNO      = A.MAN_NO
-	  AND B.PRJT_ID    = A.PRJT_ID
-	  AND B.BKUP_ID    = A.BKUP_ID
-	  LEFT OUTER JOIN
-	  (SELECT BKUP_ID, PRJT_ID, MAN_NO , MIN(STA_DT) AS STA_DT
-	  FROM   pms_career_lst
-	  GROUP BY BKUP_ID, PRJT_ID, MAN_NO) C
-	  ON  C.MAN_NO     = A.MAN_NO
-	  AND C.PRJT_ID    = A.PRJT_ID
-	  AND C.BKUP_ID    = A.BKUP_ID
-	  WHERE  A.BKUP_ID    = '0000000000'
-	  AND    A.PRJT_ID    = #{prjt_id}
-	  <if test='skill_grd != "" and skill_grd != null and skill_grd != "TTT"'>
-		  AND    A.SKILL_GRD  = #{skill_grd}
-	  </if>
-	  <if test='main_skill != "" and main_skill != null'>
-		  AND    A.MAIN_SKILL LIKE CONCAT('%', #{main_skill},'%')
-	  </if>
-	  <if test='duty_txt != "" and duty_txt != null'>
-		  AND    A.DUTY_TXT   LIKE CONCAT('%', #{duty_txt},'%')
-	  </if>
-	  <if test='man_no != "" and man_no != null'>
-		  AND    A.MAN_NO     =  #{man_no}
-	  </if>
-	  AND    EXISTS (SELECT 'x'
-	  FROM   pms_cpy_his_lst S
-	  WHERE  1 = 1
-	  <if test='company_nm != "" and company_nm != null'>
-		  AND    S.COMPANY_NM LIKE CONCAT('%', #{company_nm},'%')
-	  </if>
-	  AND    S.MAN_NO     = A.MAN_NO
-	  AND    A.PRJT_ID    = A.PRJT_ID
-	  AND    A.BKUP_ID    = A.BKUP_ID)
-	  AND    EXISTS (SELECT 'x'
-	  FROM   pms_career_lst S
-	  WHERE  1 = 1
-	  <if test='proj_nm != "" and proj_nm != null'>
-		  AND    S.PROJ_NM LIKE CONCAT('%', #{proj_nm},'%')
-	  </if>
-	  <if test='exe_cpy_nm != "" and exe_cpy_nm != null'>
-		  AND    S.EXE_CPY_NM LIKE CONCAT('%', #{exe_cpy_nm},'%')
-	  </if>
-	  AND    S.MAN_NO     = A.MAN_NO
-	  AND    A.PRJT_ID    = A.PRJT_ID
-	  AND    A.BKUP_ID    = A.BKUP_ID)
-	  ORDER BY B.EMPNM
-  </select>
-	<select id="select_9005_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
-		SELECT CONCAT('[최종변경일자 : ',DATE_FORMAT(A.DB_CHG_TS,'%Y-%m-%d'),']') AS LAST_CHG_DT
-			 ,A.MAN_NO
-			 ,B.EMPNM AS MAN_NM
-			 ,A.RANK_NM
-			 ,A.MAN_CD
-			 ,CASE WHEN A.BIRTHDAY IS NOT NULL AND A.BIRTHDAY != ''
-                    THEN STR_TO_DATE(A.BIRTHDAY, '%Y%m%d') ELSE A.BIRTHDAY
-			   END AS BIRTHDAY
-			 ,CONCAT('만 ',CASE WHEN DATE_FORMAT(NOW(),'%m%d') > SUBSTR(A.BIRTHDAY,5,4)
-								   THEN CAST(DATE_FORMAT(NOW(),'%Y') AS INT) - CAST(SUBSTR(A.BIRTHDAY,1,4) AS INT)
-							   ELSE CAST(DATE_FORMAT(NOW(),'%Y') AS INT) - CAST(SUBSTR(A.BIRTHDAY,1,4) AS INT) - 1 END, '세') AS AGE
-			 ,A.ADDRESS
-			 ,A.SKILL_GRD
-			 ,A.CAREER
-			 ,CONCAT(floor(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT,'01'),'%Y-%m-%d'),DATE_FORMAT(NOW(),'%Y-%m-%d')) / 12),' 년 ',
-					 MOD(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT,'01'),'%Y-%m-%d'),DATE_FORMAT(NOW(),'%Y-%m-%d')) , 12),'개월') AS NOW_CAREER
-			 ,CASE WHEN A.ENTER_YMD IS NOT NULL AND A.ENTER_YMD != ''
-                    THEN STR_TO_DATE(A.ENTER_YMD, '%Y%m%d') ELSE A.ENTER_YMD
-			   END AS ENTER_YMD
-			 ,A.SEX_NM
-			 ,A.MAIN_SKILL
-			 ,A.DUTY_TXT
-			 ,A.CPNO
-			 ,A.COMPANY_NM
-			 ,A.GRD_CD
-			 ,A.SCHOLL_NM1
-			 ,CASE WHEN A.GDT_YM1 IS NOT NULL AND A.GDT_YM1 != ''
-                   THEN SUBSTR(STR_TO_DATE(A.GDT_YM1, '%Y%m'),1,7) ELSE A.GDT_YM1
-			   END AS GDT_YM1
-			 ,A.STUDY1
-			 ,A.SCHOLL_NM2
-			 ,CASE WHEN A.GDT_YM2 IS NOT NULL AND A.GDT_YM2 != ''
-                   THEN SUBSTR(STR_TO_DATE(A.GDT_YM2, '%Y%m'),1,7) ELSE A.GDT_YM2
-			   END AS GDT_YM2
-			 ,A.STUDY2
-			 ,A.SCHOLL_NM3
-			 ,CASE WHEN A.GDT_YM3 IS NOT NULL AND A.GDT_YM3 != ''
-                   THEN SUBSTR(STR_TO_DATE(A.GDT_YM3, '%Y%m'),1,7) ELSE A.GDT_YM3
-			   END AS GDT_YM3
-			 ,A.STUDY3
-			 ,A.QLFKS_NM1
-			 ,CASE WHEN A.AQU_YMM1 IS NOT NULL AND A.AQU_YMM1 != ''
-                    THEN STR_TO_DATE(A.AQU_YMM1, '%Y%m%d') ELSE A.AQU_YMM1
-			   END AS AQU_YMM1
-			 ,A.QLFKS_NM2
-			 ,CASE WHEN A.AQU_YMM2 IS NOT NULL AND A.AQU_YMM2 != ''
-                    THEN STR_TO_DATE(A.AQU_YMM2, '%Y%m%d') ELSE A.AQU_YMM2
-			   END AS AQU_YMM2
-			 ,A.QLFKS_NM3
-			 ,CASE WHEN A.AQU_YMM3 IS NOT NULL AND A.AQU_YMM3 != ''
-                    THEN STR_TO_DATE(A.AQU_YMM3, '%Y%m%d') ELSE A.AQU_YMM3
-			   END AS AQU_YMM3
-			 ,A.QLFKS_NM4
-			 ,CASE WHEN A.AQU_YMM4 IS NOT NULL AND A.AQU_YMM4 != ''
-                    THEN STR_TO_DATE(A.AQU_YMM4, '%Y%m%d') ELSE A.AQU_YMM4
-			   END AS AQU_YMM4
-			 ,A.QLFKS_NM5
-			 ,CASE WHEN A.AQU_YMM5 IS NOT NULL AND A.AQU_YMM5 != ''
-                    THEN STR_TO_DATE(A.AQU_YMM5, '%Y%m%d') ELSE A.AQU_YMM5
-			   END AS AQU_YMM5
-			 ,A.ATFL_MNG_ID
-			 ,A.BKUP_ID
-			 ,A.PRJT_ID
-		FROM   pms_man_pfle_info A
-				   LEFT OUTER JOIN
-			   pms_emp_info   B
-			   ON  B.EMPNO      = A.MAN_NO
-				   AND B.PRJT_ID    = A.PRJT_ID
-				   AND B.BKUP_ID    = A.BKUP_ID
-				   LEFT OUTER JOIN
-			   (SELECT BKUP_ID, PRJT_ID, MAN_NO , MIN(STA_DT) AS STA_DT
-				FROM   pms_career_lst
-				GROUP BY BKUP_ID, PRJT_ID, MAN_NO) C
-			   ON  C.MAN_NO     = A.MAN_NO
-				   AND C.PRJT_ID    = A.PRJT_ID
-				   AND C.BKUP_ID    = A.BKUP_ID
-		WHERE  A.BKUP_ID    = '0000000000'
-		  AND    A.PRJT_ID    = #{prjt_id}
-		  AND    A.MAN_NO     = #{man_no}
-	</select>
-	<select id="select_9005_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
-		SELECT A.COMPANY_NM
-			 ,CASE WHEN A.ENTER_DT IS NOT NULL AND A.ENTER_DT != ''
-                   THEN SUBSTR(STR_TO_DATE(A.ENTER_DT, '%Y%m'),1,7) ELSE A.ENTER_DT
-			   END AS ENTER_DT
-			 ,CASE WHEN A.RSNT_DT IS NOT NULL AND A.RSNT_DT != ''
-                   THEN SUBSTR(STR_TO_DATE(A.RSNT_DT, '%Y%m'),1,7) ELSE A.RSNT_DT
-			   END AS RSNT_DT
-			 ,A.RSSB_BNS
-			 ,A.RMRK
-			 ,A.BKUP_ID
-			 ,A.PRJT_ID
-			 ,A.MAN_NO
-			 ,A.SQNO
-		FROM   pms_cpy_his_lst A
-		WHERE  A.BKUP_ID    = '0000000000'
-		  AND    A.PRJT_ID    = #{prjt_id}
-		  AND    A.MAN_NO     = #{man_no}
-		ORDER BY A.ENTER_DT DESC
-	</select>
-	<select id="select_9005_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
-		SELECT A.EXE_CPY_NM
-			 ,CASE WHEN A.STA_DT IS NOT NULL AND A.STA_DT != ''
-                   THEN SUBSTR(STR_TO_DATE(A.STA_DT, '%Y%m'),1,7) ELSE A.STA_DT
-			   END AS STA_DT
-			 ,CASE WHEN A.END_DT IS NOT NULL AND A.END_DT != ''
-                   THEN SUBSTR(STR_TO_DATE(A.END_DT, '%Y%m'),1,7) ELSE A.END_DT
-			   END AS END_DT
-			 ,A.PROJ_NM
-			 ,A.RSSB_BNS
-			 ,A.DUTY_TXT
-			 ,A.USE_OS
-			 ,A.RLT_SKILL
-			 ,A.BKUP_ID
-			 ,A.PRJT_ID
-			 ,A.MAN_NO
-			 ,A.SQNO
-		FROM   pms_career_lst A
-		WHERE  A.BKUP_ID    = '0000000000'
-		  AND    A.PRJT_ID    = #{prjt_id}
-		  AND    A.MAN_NO     = #{man_no}
-		ORDER BY A.END_DT DESC
-	</select>
-	<insert id="insert_9005_01" parameterType="Map">
-   <![CDATA[
-		INSERT INTO pms_pgm_mng
-		(
-			  BKUP_ID      /*백업ID*/
-			, PRJT_ID      /*프로젝트ID*/
-			, BZCD         /*업무구분코드*/
-			, PGM_ID       /*프로그램ID*/
-			, BZ_DTLS_TXT  /*업무세부내용*/
-			, PGM_NM       /*프로그램명*/
-			, DVLP_DIS_CD  /*개발구분코드*/
-			, PGM_DIS_CD   /*프로그램구분코드*/
-			, ENLPE_NM     /*프로그램세부구분코드*/
-			, FRCS_STA_DT  /*계획시작일자*/
-			, FRCS_END_DT  /*계획종료일자*/
-			, STA_DT       /*실제시작일자*/
-			, END_DT       /*실제종료일자*/
-			, PRC_STEP_CD  /*처리단계코드*/
-			, PRG_TXT      /*진행현황*/
-			, DVLPE_NO     /*개발자번호*/
-			, DVLPE_CNF_DT /*개발자확인일자*/
-			, PL_NO        /*PL번호*/
-			, PL_CNF_DT    /*PL확인일자*/
-			, CRPE_NO      /*담당자번호*/
-			, RMRK         /*비고*/
-			, ATFL_MNG_ID  /*첨부파일관리ID*/
-		    , PAL_ATFL_MNG_ID  /*설계서첨부파일관리ID*/
-			, OPR_NO       /*조작자번호 */
-			, DB_CHG_TS    /*DB변경일시*/
-		)
-		VALUES
-			(
-				'0000000000'
-				, #{prjt_id}                          /*프로젝트ID*/
-				, #{bzcd}                             /*업무구분코드*/
-				, #{pgm_id}                           /*프로그램ID*/
-				, #{bz_dtls_txt}                      /*업무세부내용*/
-				, #{pgm_nm}                           /*프로그램명*/
-				, #{dvlp_dis_cd}                      /*개발구분코드*/
-				, #{pgm_dis_cd}                       /*프로그램구분코드*/
-				, #{enlpe_nm}                         /*프로그램세부구분코드*/
-				, REPLACE(#{frcs_sta_dt}, '-', '')    /*계획시작일자*/
-				, REPLACE(#{frcs_end_dt}, '-', '')    /*계획종료일자*/
-				, ''                                /*실제시작일자*/
-				, ''                                /*실제종료일자*/
-				, '000'                               /*처리단계코드*/
-				, #{prg_txt}                          /*진행현황*/
-				, #{dvlpe_no}                         /*개발자번호*/
-				, ''                                /*개발자확인일자*/
-				, #{pl_no}                            /*PL번호*/
-				, ''                                /*PL확인일자*/
-				, #{crpe_no}                          /*담당자번호*/
-				, #{rmrk}                             /*비고*/
-				, #{atfl_mng_id}                      /*첨부파일관리ID*/
-				, ''                                  /*설계서첨부파일관리ID*/
-				, #{login_emp_no}                     /*조작자번호*/
-				, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-			)
-		]]>
-  </insert>
-  <update id="update_9005_01" parameterType="Map">
-   <![CDATA[
-	  UPDATE pms_pgm_mng
-	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
-		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
-		, PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
-		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
-		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
-		, FRCS_END_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END /*계획종료일자*/
-		, STA_DT       = CASE WHEN #{prc_step_cd} IN ('100','200') AND STA_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  REPLACE(#{sta_dt}, '-', '') END /*실제시작일자*/
-		, END_DT       = CASE WHEN #{prc_step_cd} = '400' AND #{end_dt} IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{end_dt}, '-', '') END  /*실제종료일자*/
-		, PRC_STEP_CD  = #{prc_step_cd}  /*처리단계코드*/
-		, PRG_TXT      = #{prg_txt}      /*진행현황*/
-		, DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
-		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND DVLPE_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{dvlpe_cnf_dt}, '-', '')  END /*개발자확인일자*/
-		, PL_NO        = #{pl_no}        /*PL번호*/
-		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND PL_CNF_DT IS NULL THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{pl_cnf_dt}, '-', '')  END    /*PL확인일자*/
-		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
-		, RMRK         = #{rmrk}         /*비고*/
-		, OPR_NO       = #{login_emp_no}        /*조작자번호*/
-		, ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
-		, PAL_ATFL_MNG_ID = #{pal_atfl_mng_id}  /*설계서 첨부파일관리ID*/
-		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-	  WHERE PGM_ID      = #{pgm_id}
-		AND BZCD        = #{bzcd}
-		AND PRJT_ID     = #{prjt_id}
-		AND BKUP_ID     = #{bkup_id}
-	  ]]>
-  </update>
+    <select id="select_9005_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
+        SELECT A.MAN_NO
+        ,B.EMPNM AS MAN_NM
+        ,A.RANK_NM
+        ,A.MAN_CD
+        ,A.SKILL_GRD
+        ,A.CAREER
+        ,CONCAT(floor(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT,'01'),'%Y-%m-%d'),DATE_FORMAT(NOW(),'%Y-%m-%d')) /
+        12),' 년 ',
+        MOD(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT,'01'),'%Y-%m-%d'),DATE_FORMAT(NOW(),'%Y-%m-%d')) , 12),'개월')
+        AS NOW_CAREER
+        ,A.MAIN_SKILL
+        ,A.DUTY_TXT
+        ,A.QLFKS_NM1
+        ,A.GRD_CD
+        FROM pms_man_pfle_info A
+        LEFT OUTER JOIN
+        pms_emp_info B
+        ON B.EMPNO = A.MAN_NO
+        AND B.PRJT_ID = A.PRJT_ID
+        AND B.BKUP_ID = A.BKUP_ID
+        LEFT OUTER JOIN
+        (SELECT BKUP_ID, PRJT_ID, MAN_NO , MIN(STA_DT) AS STA_DT
+        FROM pms_career_lst
+        GROUP BY BKUP_ID, PRJT_ID, MAN_NO) C
+        ON C.MAN_NO = A.MAN_NO
+        AND C.PRJT_ID = A.PRJT_ID
+        AND C.BKUP_ID = A.BKUP_ID
+        WHERE A.BKUP_ID = '0000000000'
+        AND A.PRJT_ID = #{prjt_id}
+        <if test='skill_grd != "" and skill_grd != null and skill_grd != "TTT"'>
+            AND A.SKILL_GRD = #{skill_grd}
+        </if>
+        <if test='main_skill != "" and main_skill != null'>
+            AND A.MAIN_SKILL LIKE CONCAT('%', #{main_skill},'%')
+        </if>
+        <if test='duty_txt != "" and duty_txt != null'>
+            AND A.DUTY_TXT LIKE CONCAT('%', #{duty_txt},'%')
+        </if>
+        <if test='man_no != "" and man_no != null'>
+            AND A.MAN_NO = #{man_no}
+        </if>
+        AND EXISTS (SELECT 'x'
+        FROM pms_cpy_his_lst S
+        WHERE 1 = 1
+        <if test='company_nm != "" and company_nm != null'>
+            AND S.COMPANY_NM LIKE CONCAT('%', #{company_nm},'%')
+        </if>
+        AND S.MAN_NO = A.MAN_NO
+        AND A.PRJT_ID = A.PRJT_ID
+        AND A.BKUP_ID = A.BKUP_ID)
+        AND EXISTS (SELECT 'x'
+        FROM pms_career_lst S
+        WHERE 1 = 1
+        <if test='proj_nm != "" and proj_nm != null'>
+            AND S.PROJ_NM LIKE CONCAT('%', #{proj_nm},'%')
+        </if>
+        <if test='exe_cpy_nm != "" and exe_cpy_nm != null'>
+            AND S.EXE_CPY_NM LIKE CONCAT('%', #{exe_cpy_nm},'%')
+        </if>
+        AND S.MAN_NO = A.MAN_NO
+        AND A.PRJT_ID = A.PRJT_ID
+        AND A.BKUP_ID = A.BKUP_ID)
+        ORDER BY B.EMPNM
+    </select>
+    <select id="select_9005_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
+        SELECT CONCAT('[최종변경일자 : ', DATE_FORMAT(A.DB_CHG_TS, '%Y-%m-%d'), ']')            AS LAST_CHG_DT
+             , A.MAN_NO
+             , B.EMPNM                                                                    AS MAN_NM
+             , A.RANK_NM
+             , A.MAN_CD
+             , CASE
+                   WHEN A.BIRTHDAY IS NOT NULL AND A.BIRTHDAY != ''
+                    THEN STR_TO_DATE(A.BIRTHDAY, '%Y%m%d')
+                   ELSE A.BIRTHDAY
+            END                                                                           AS BIRTHDAY
+             , CONCAT('만 ', CASE
+                                WHEN DATE_FORMAT(NOW(), '%m%d') > SUBSTR(A.BIRTHDAY, 5, 4)
+                                    THEN CAST(DATE_FORMAT(NOW(), '%Y') AS INT) - CAST(SUBSTR(A.BIRTHDAY, 1, 4) AS INT)
+                                ELSE CAST(DATE_FORMAT(NOW(), '%Y') AS INT) - CAST(SUBSTR(A.BIRTHDAY, 1, 4) AS INT) -
+                                     1 END, '세')                                          AS AGE
+             , A.ADDRESS
+             , A.SKILL_GRD
+             , A.CAREER
+             , CONCAT(floor(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT, '01'), '%Y-%m-%d'),
+                                                DATE_FORMAT(NOW(), '%Y-%m-%d')) / 12), ' 년 ',
+                      MOD(TIMESTAMPDIFF(MONTH,DATE_FORMAT(CONCAT(C.STA_DT, '01'), '%Y-%m-%d'),
+                                              DATE_FORMAT(NOW(), '%Y-%m-%d')), 12), '개월') AS NOW_CAREER
+             , CASE
+                   WHEN A.ENTER_YMD IS NOT NULL AND A.ENTER_YMD != ''
+                    THEN STR_TO_DATE(A.ENTER_YMD, '%Y%m%d')
+                   ELSE A.ENTER_YMD
+            END                                                                           AS ENTER_YMD
+             , A.SEX_NM
+             , A.MAIN_SKILL
+             , A.DUTY_TXT
+             , A.CPNO
+             , A.COMPANY_NM
+             , A.GRD_CD
+             , A.SCHOLL_NM1
+             , CASE
+                   WHEN A.GDT_YM1 IS NOT NULL AND A.GDT_YM1 != ''
+                   THEN SUBSTR(STR_TO_DATE(A.GDT_YM1, '%Y%m'), 1, 7)
+                   ELSE A.GDT_YM1
+            END                                                                           AS GDT_YM1
+             , A.STUDY1
+             , A.SCHOLL_NM2
+             , CASE
+                   WHEN A.GDT_YM2 IS NOT NULL AND A.GDT_YM2 != ''
+                   THEN SUBSTR(STR_TO_DATE(A.GDT_YM2, '%Y%m'), 1, 7)
+                   ELSE A.GDT_YM2
+            END                                                                           AS GDT_YM2
+             , A.STUDY2
+             , A.SCHOLL_NM3
+             , CASE
+                   WHEN A.GDT_YM3 IS NOT NULL AND A.GDT_YM3 != ''
+                   THEN SUBSTR(STR_TO_DATE(A.GDT_YM3, '%Y%m'), 1, 7)
+                   ELSE A.GDT_YM3
+            END                                                                           AS GDT_YM3
+             , A.STUDY3
+             , A.QLFKS_NM1
+             , CASE
+                   WHEN A.AQU_YMM1 IS NOT NULL AND A.AQU_YMM1 != ''
+                    THEN STR_TO_DATE(A.AQU_YMM1, '%Y%m%d')
+                   ELSE A.AQU_YMM1
+            END                                                                           AS AQU_YMM1
+             , A.QLFKS_NM2
+             , CASE
+                   WHEN A.AQU_YMM2 IS NOT NULL AND A.AQU_YMM2 != ''
+                    THEN STR_TO_DATE(A.AQU_YMM2, '%Y%m%d')
+                   ELSE A.AQU_YMM2
+            END                                                                           AS AQU_YMM2
+             , A.QLFKS_NM3
+             , CASE
+                   WHEN A.AQU_YMM3 IS NOT NULL AND A.AQU_YMM3 != ''
+                    THEN STR_TO_DATE(A.AQU_YMM3, '%Y%m%d')
+                   ELSE A.AQU_YMM3
+            END                                                                           AS AQU_YMM3
+             , A.QLFKS_NM4
+             , CASE
+                   WHEN A.AQU_YMM4 IS NOT NULL AND A.AQU_YMM4 != ''
+                    THEN STR_TO_DATE(A.AQU_YMM4, '%Y%m%d')
+                   ELSE A.AQU_YMM4
+            END                                                                           AS AQU_YMM4
+             , A.QLFKS_NM5
+             , CASE
+                   WHEN A.AQU_YMM5 IS NOT NULL AND A.AQU_YMM5 != ''
+                    THEN STR_TO_DATE(A.AQU_YMM5, '%Y%m%d')
+                   ELSE A.AQU_YMM5
+            END                                                                           AS AQU_YMM5
+             , A.ATFL_MNG_ID
+             , A.BKUP_ID
+             , A.PRJT_ID
+        FROM pms_man_pfle_info A
+                 LEFT OUTER JOIN
+             pms_emp_info B
+             ON B.EMPNO = A.MAN_NO
+                 AND B.PRJT_ID = A.PRJT_ID
+                 AND B.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             (SELECT BKUP_ID, PRJT_ID, MAN_NO, MIN(STA_DT) AS STA_DT
+              FROM pms_career_lst
+              GROUP BY BKUP_ID, PRJT_ID, MAN_NO) C
+             ON C.MAN_NO = A.MAN_NO
+                 AND C.PRJT_ID = A.PRJT_ID
+                 AND C.BKUP_ID = A.BKUP_ID
+        WHERE A.BKUP_ID = '0000000000'
+          AND A.PRJT_ID = #{prjt_id}
+          AND A.MAN_NO = #{man_no}
+    </select>
+    <select id="select_9005_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
+        SELECT A.COMPANY_NM
+             , CASE
+                   WHEN A.ENTER_DT IS NOT NULL AND A.ENTER_DT != ''
+                   THEN SUBSTR(STR_TO_DATE(A.ENTER_DT, '%Y%m'), 1, 7)
+                   ELSE A.ENTER_DT
+            END AS ENTER_DT
+             , CASE
+                   WHEN A.RSNT_DT IS NOT NULL AND A.RSNT_DT != '' AND A.RSNT_DT
+            != '현재'
+                   THEN SUBSTR(STR_TO_DATE(A.RSNT_DT, '%Y%m'), 1, 7)
+                   ELSE A.RSNT_DT
+        END
+        AS RSNT_DT
+             , A.RSSB_BNS
+             , A.RMRK
+             , A.BKUP_ID
+             , A.PRJT_ID
+             , A.MAN_NO
+             , A.SQNO
+        FROM pms_cpy_his_lst A
+        WHERE A.BKUP_ID = '0000000000'
+          AND A.PRJT_ID =
+        #{prjt_id}
+        AND
+        A
+        .
+        MAN_NO
+        =
+        #{man_no}
+        ORDER
+        BY
+        A
+        .
+        ENTER_DT
+        DESC
+    </select>
+    <select id="select_9005_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
+        SELECT A.EXE_CPY_NM
+             , CASE
+                   WHEN A.STA_DT IS NOT NULL AND A.STA_DT != ''
+                   THEN SUBSTR(STR_TO_DATE(A.STA_DT, '%Y%m'), 1, 7)
+                   ELSE A.STA_DT
+            END AS STA_DT
+             , CASE
+                   WHEN A.END_DT IS NOT NULL AND A.END_DT != '' AND A.END_DT
+            != '현재'
+                   THEN SUBSTR(STR_TO_DATE(A.END_DT, '%Y%m'), 1, 7)
+                   ELSE A.END_DT
+        END
+        AS END_DT
+             , A.PROJ_NM
+             , A.RSSB_BNS
+             , A.DUTY_TXT
+             , A.USE_OS
+             , A.RLT_SKILL
+             , A.BKUP_ID
+             , A.PRJT_ID
+             , A.MAN_NO
+             , A.SQNO
+        FROM pms_career_lst A
+        WHERE A.BKUP_ID = '0000000000'
+          AND A.PRJT_ID =
+        #{prjt_id}
+        AND
+        A
+        .
+        MAN_NO
+        =
+        #{man_no}
+        ORDER
+        BY
+        A
+        .
+        STA_DT
+        DESC
+    </select>
+    <insert id="insert_9005_01" parameterType="Map">
+        INSERT INTO pms_man_pfle_info
+        ( BKUP_ID
+        , PRJT_ID
+        , MAN_NO
+        , BIRTHDAY
+        , RANK_NM
+        , ENTER_YMD
+        , MAN_CD
+        , CPNO
+        , COMPANY_NM
+        , ADDRESS
+        , SEX_NM
+        , SKILL_GRD
+        , CAREER
+        , MAIN_SKILL
+        , DUTY_TXT
+        , GRD_CD
+        , SCHOLL_NM1
+        , GDT_YM1
+        , STUDY1
+        , SCHOLL_NM2
+        , GDT_YM2
+        , STUDY2
+        , SCHOLL_NM3
+        , GDT_YM3
+        , STUDY3
+        , QLFKS_NM1
+        , AQU_YMM1
+        , QLFKS_NM2
+        , AQU_YMM2
+        , QLFKS_NM3
+        , AQU_YMM3
+        , QLFKS_NM4
+        , AQU_YMM4
+        , QLFKS_NM5
+        , AQU_YMM5
+        , ATFL_MNG_ID
+        , OPR_NO
+        , DB_CHG_TS)
+        VALUES ( '0000000000'
+               , #{prjt_id} /*프로젝트ID*/
+               , #{man_no}
+               , REPLACE(#{birthday}, '-', '')
+               , #{rank_nm}
+               , REPLACE(#{enter_ymd}, '-', '')
+               , #{man_cd}
+               , #{cpno}
+               , #{company_nm}
+               , #{address}
+               , #{sex_nm}
+               , #{skill_grd}
+               , #{career}
+               , #{main_skill}
+               , #{duty_txt}
+               , #{grd_cd}
+               , #{scholl_nm1}
+               , REPLACE(#{gdt_ym1}, '-', '')
+               , #{study1}
+               , #{scholl_nm2}
+               , REPLACE(#{gdt_ym2}, '-', '')
+               , #{study2}
+               , #{scholl_nm3}
+               , REPLACE(#{gdt_ym3}, '-', '')
+               , #{study3}
+               , #{qlfks_nm1}
+               , REPLACE(#{aqu_ymm1}, '-', '')
+               , #{qlfks_nm2}
+               , REPLACE(#{aqu_ymm2}, '-', '')
+               , #{qlfks_nm3}
+               , REPLACE(#{aqu_ymm3}, '-', '')
+               , #{qlfks_nm4}
+               , REPLACE(#{aqu_ymm4}, '-', '')
+               , #{qlfks_nm5}
+               , REPLACE(#{aqu_ymm5}, '-', '')
+               , ''
+               , #{login_emp_no} /*조작자번호*/
+               , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
+               )
+    </insert>
 
-	<update id="update_9005_02" parameterType="Map">
-   <![CDATA[
-		UPDATE pms_pgm_mng
-		   SET ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
-		     , OPR_NO       = #{empno}
-		     , DVLP_DIS_CD  = '400'
-		     , DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d')
-		WHERE PGM_ID        = #{pgm_id}
-		   AND BZCD         = #{bzcd}
-		   AND PRJT_ID      = #{prjt_id}
-		   AND BKUP_ID      = #{bkup_id}
-		]]>
-  </update>
+    <insert id="insert_9005_02" parameterType="Map">
+        INSERT INTO pms_cpy_his_lst
+        ( BKUP_ID
+        , PRJT_ID
+        , MAN_NO
+        , SQNO
+        , COMPANY_NM
+        , ENTER_DT
+        , RSNT_DT
+        , RSSB_BNS
+        , RMRK
+        , OPR_NO
+        , DB_CHG_TS)
+        VALUES ( '0000000000'
+               , #{prjt_id} /*프로젝트ID*/
+               , #{man_no}
+               , (SELECT NVL(MAX(SQNO) + 1, 1) AS SQNO
+                  FROM pms_cpy_his_lst ALIAS_FOR_SUBQUERY
+                  WHERE BKUP_ID = '0000000000'
+                    AND PRJT_ID = #{prjt_id}
+                    AND MAN_NO = #{man_no})
+               , #{company_nm}
+               , #{enter_dt}
+               , #{rsnt_dt}
+               , #{rssb_bns}
+               , #{rmrk}
+               , #{login_emp_no} /*조작자번호*/
+               , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
+               )
+    </insert>
 
-	<delete id="delete_9005_01" parameterType="Map">
-   <![CDATA[
-		DELETE FROM pms_pgm_mng
-		 WHERE PGM_ID        = #{pgm_id}
-		   AND BZCD          = #{bzcd}
-		   AND PRJT_ID       = #{prjt_id}
-		   AND BKUP_ID       = #{bkup_id}
-		]]>
-  </delete>
+    <insert id="insert_9005_03" parameterType="Map">
+        INSERT INTO pms_career_lst
+        ( BKUP_ID
+        , PRJT_ID
+        , MAN_NO
+        , SQNO
+        , EXE_CPY_NM
+        , STA_DT
+        , END_DT
+        , PROJ_NM
+        , RSSB_BNS
+        , DUTY_TXT
+        , USE_OS
+        , RLT_SKILL
+        , OPR_NO
+        , DB_CHG_TS)
+        VALUES ( '0000000000'
+               , #{prjt_id} /*프로젝트ID*/
+               , #{man_no}
+               , (SELECT NVL(MAX(SQNO) + 1, 1) AS SQNO
+                  FROM pms_career_lst ALIAS_FOR_SUBQUERY
+                  WHERE BKUP_ID = '0000000000'
+                    AND PRJT_ID = #{prjt_id}
+                    AND MAN_NO = #{man_no})
+               , #{exe_cpy_nm}
+               , #{sta_dt}
+               , #{end_dt}
+               , #{proj_nm}
+               , #{rssb_bns}
+               , #{duty_txt}
+               , #{use_os}
+               , #{rlt_skill}
+               , #{login_emp_no} /*조작자번호*/
+               , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
+               )
+    </insert>
+    <delete id="delete_9005_01" parameterType="Map">
+        DELETE
+        FROM pms_man_pfle_info
+        WHERE 1 = 1
+          AND BKUP_ID = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND MAN_NO = #{man_no}
+    </delete>
+    <delete id="delete_9005_02" parameterType="Map">
+        DELETE
+        FROM pms_cpy_his_lst
+        WHERE 1 = 1
+          AND BKUP_ID = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND MAN_NO = #{man_no}
+    </delete>
+    <delete id="delete_9005_03" parameterType="Map">
+        DELETE
+        FROM pms_career_lst
+        WHERE 1 = 1
+          AND BKUP_ID = '0000000000'
+          AND PRJT_ID = #{prjt_id}
+          AND MAN_NO = #{man_no}
+    </delete>
 </mapper>
