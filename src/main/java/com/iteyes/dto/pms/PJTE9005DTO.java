@@ -66,19 +66,17 @@ public class PJTE9005DTO {
     private String use_os;      // 사용OS
     private String rlt_skill;   // 관련기술
 
-    private String atfl_mng_id_yn;          //
-    private String pal_atfl_mng_id_yn;      //
-    private String excelUplod;              //
+    private String atfl_mng_id_yn;          // 첨부파일 관리 ID
+    private String excelUplod;              // 그리드 엑셀업로드 여부
 
 
     private List<PJTE9005DTO> updatedRows;
     private List<PJTE9005DTO> createdRows;
     private List<PJTE9005DTO> deletedRows;
-    private List<PJTE9005DTO> gridData;
+    private List<PJTE9005DTO> gridData2;
+    private List<PJTE9005DTO> gridData3;
 
     private String mng_id;                  // 관리ID
-
-    private String bz_dtls_cd;                // 업무세부코드
 
     private String db_chg_ts;               // db변경일시
     private String aut_id;                  // 권한

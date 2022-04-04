@@ -15,8 +15,10 @@ public interface PJTE9005Service {
 	List<PJTE9005DTO> select_9005_04(PJTE9005DTO PJTE9005) throws Exception ;
 	/*등록*/
 	boolean insert_9005_01(PJTE9005DTO PJTE9005) throws Exception ;
-	/*수정*/
-	boolean update_9005_01(PJTE9005DTO PJTE9005) throws Exception ;
+	boolean insert_9005_02(PJTE9005DTO PJTE9005) throws Exception ;
+	boolean insert_9005_03(PJTE9005DTO PJTE9005) throws Exception ;
 	/*삭제*/
 	boolean delete_9005_01(PJTE9005DTO PJTE9005) throws Exception ;
+	boolean delete_9005_02(PJTE9005DTO PJTE9005) throws Exception ;
+	boolean delete_9005_03(PJTE9005DTO PJTE9005) throws Exception ;
 }
