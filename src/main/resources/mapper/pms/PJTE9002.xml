@@ -172,6 +172,15 @@
           AND    POST_ID     = #{mng_id}
     </update>
 
+    <update id="update_9002_11" parameterType="Map">
+        UPDATE pms_mtng_room_mng
+        SET    ATFL_MNG_ID  = #{atfl_mng_id}
+        WHERE  BKUP_ID      = #{bkup_id}
+          AND    PRJT_ID      = #{prjt_id}
+          AND    MTNG_ROOM_ID = #{mng_id}
+          AND    SQNO         = #{sqno}
+    </update>
+
     <select id="select_9002_10" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9002DTO">
         SELECT CONCAT(CONCAT(#{login_emp_no},#{file_rgs_dscd}),TRIM(LPAD(NVL(MAX(DTLS_TYNM)+1,1),7,'0'))) AS ATFL_MNG_ID
              ,TRIM(LPAD(NVL(MAX(DTLS_TYNM)+1,1),7,'0')) AS DTLS_TYNM

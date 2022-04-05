@@ -223,6 +223,8 @@ public class PJTE9002Controller {
 				result = pjte9002Service.update_9002_08(PJTE9002);
 			}else if(file_rgs_dscd.equals("802")){
 				result = pjte9002Service.update_9002_09(PJTE9002);
+			}else if(file_rgs_dscd.equals("803")){
+				result = pjte9002Service.update_9002_11(PJTE9002);
 			}
 
 		}
