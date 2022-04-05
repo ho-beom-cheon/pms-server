@@ -10,7 +10,7 @@
            , A.STEP_CD
            , A.MNG_ID
            , A.HGRN_MNG_ID
-           , CONCAT(B.ETC_TXT1, ' ', A.ACVT_NM) AS ACVT_NM
+           , CONCAT(B.ETC_TXT1, A.ACVT_NM) AS ACVT_NM
            , A.TASK_NM
            , A.CRPE_NM
            , A.WBS_PRC_STS_CD
@@ -102,7 +102,7 @@
                , #{bzcd}
                , #{hgrn_mng_id}
                , #{step_cd}
-               , #{acvt_nm} => LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
+               , LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
                , #{task_nm}
                , #{crpe_nm}
                , REPLACE(#{pln_sta_dt}, '-', '')
