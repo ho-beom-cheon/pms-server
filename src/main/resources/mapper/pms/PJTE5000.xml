@@ -10,7 +10,7 @@
            , A.STEP_CD
            , A.MNG_ID
            , A.HGRN_MNG_ID
-           , CONCAT(B.ETC_TXT1, ' ', A.ACVT_NM) AS ACVT_NM
+           , CONCAT(B.ETC_TXT1, A.ACVT_NM) AS ACVT_NM
            , A.TASK_NM
            , A.CRPE_NM
            , A.WBS_PRC_STS_CD
