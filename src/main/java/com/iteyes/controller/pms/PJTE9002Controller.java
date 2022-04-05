@@ -176,7 +176,7 @@ public class PJTE9002Controller {
 
 		String path = null;
 		// 파일등록구분코드에 따른 path 설정
-		if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
+		if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901") || request.getParameter("file_rgs_dscd").equals("902") ){
 //			path = "/home/admin/fileUpload/uploadForm/" + request.getParameter("file_rgs_dscd");
 			path = upload_form_dir + request.getParameter("file_rgs_dscd");
 		}else{
