@@ -104,20 +104,16 @@ public class PJTE9900Controller {
         PJTE9900C.setBkup_id(PJTE9900.getBkup_id());   //백업 id
         PJTE9900C.setDept_cd(PJTE9900.getDept_cd());   //부문코드
         if(PJTE9900C.getDept_cd().equals("TTT")){
-            PJTE9900C.setDept_cd("100");   //부문코드
-            PJTE9900C.setDept_etc("F");   //부문코드
-        }else if(PJTE9900C.getDept_cd().equals("100")){
-            PJTE9900C.setDept_etc("F");   //부문코드
-        }else if(PJTE9900C.getDept_cd().equals("110")){
-            PJTE9900C.setDept_etc("Y");   //부문코드
-        }else if(PJTE9900C.getDept_cd().equals("120")){
-            PJTE9900C.setDept_etc("B");   //부문코드
-        }else if(PJTE9900C.getDept_cd().equals("200")){
-            PJTE9900C.setDept_etc("D");   //부문코드
-        }else if(PJTE9900C.getDept_cd().equals("210")){
-            PJTE9900C.setDept_etc("P");   //부문코드
-        }else if(PJTE9900C.getDept_cd().equals("300")){
-            PJTE9900C.setDept_etc("T");   //부문코드
+            PJTE9900C.setDept_cd("10200000");   //부문코드
+            PJTE9900C.setDept_etc("F");   //부문코드가 TTT(전체)일 경우 Dept_etc : F
+        }else if(PJTE9900C.getDept_cd().equals("10100000")){
+            PJTE9900C.setDept_etc("R");   //부문코드가 10100000(리스크부문)일 경우 Dept_etc : R
+        }else if(PJTE9900C.getDept_cd().equals("10200000")){
+            PJTE9900C.setDept_etc("F");   //부문코드가 10200000(금융사업부문)일 경우 Dept_etc : F
+        }else if(PJTE9900C.getDept_cd().equals("10300000")){
+            PJTE9900C.setDept_etc("P");   //부문코드가 10300000(플랫폼부문)일 경우 Dept_etc : P
+        }else if(PJTE9900C.getDept_cd().equals("10400000")){
+            PJTE9900C.setDept_etc("D");   //부문코드가 10400000(DT부문)일 경우 Dept_etc : D
         }
 
         for (int i = 0; i < PJTE9900.getGridData().size(); i++) {
