@@ -46,7 +46,7 @@ public class PmsApplication extends SpringBootServletInitializer implements WebM
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedOrigins("https://pms.gurmwi.io")
+                .allowedOrigins("https://peyes.gurmwi.io")
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowedOriginPatterns("*")
