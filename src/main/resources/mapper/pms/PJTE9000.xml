@@ -18,6 +18,7 @@
                ,IP_ADDR
                ,REAL_PRJT_ID
                ,DEPT_CD
+               ,DEL_YN
                ,(CASE WHEN NVL(str_to_date(PLAN_THW_STDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(PLAN_THW_STDT, '%Y%m%d'), '') END) AS PLAN_THW_STDT
                ,(CASE WHEN NVL(str_to_date(PLAN_THW_ENDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(PLAN_THW_ENDT, '%Y%m%d'), '') END) AS PLAN_THW_ENDT
                ,(CASE WHEN NVL(str_to_date(REAL_THW_STDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(REAL_THW_STDT, '%Y%m%d'), '') END) AS REAL_THW_STDT
@@ -124,6 +125,7 @@
             ,REAL_THW_ENDT = REPLACE(#{real_thw_endt}, '-', '')
             ,REAL_PRJT_ID  = #{real_prjt_id}
             ,DEPT_CD       = #{dept_cd}
+            ,DEL_YN        = #{del_yn}
             ,OPR_NO        = #{login_emp_no}
             ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
           WHERE  1 = 1
@@ -153,6 +155,7 @@
           ,REAL_THW_ENDT
           ,REAL_PRJT_ID
           ,DEPT_CD
+          ,DEL_YN
           ,OPR_NO
           ,DB_CHG_TS
           )
@@ -176,6 +179,12 @@
                , REPLACE(#{real_thw_endt}, '-', '')
                , #{real_prjt_id}
                , #{dept_cd}
+               <if test=' del_yn == "Y" '>
+                , 'Y'
+               </if>
+               <if test=' del_yn != "Y" '>
+                , 'N'
+               </if>
                , #{login_emp_no}       /*조작자번호*/
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
                )
@@ -814,6 +823,8 @@
                ,REAL_THW_STDT
                ,REAL_THW_ENDT
                ,REAL_PRJT_ID
+               ,DEPT_NO
+               ,DEL_YN
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
@@ -1192,6 +1203,7 @@
                ,REAL_THW_ENDT
                ,REAL_PRJT_ID
                ,DEPT_CD
+               ,DEL_YN
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
