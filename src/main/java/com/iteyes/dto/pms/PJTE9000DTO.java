@@ -87,6 +87,7 @@ public class PJTE9000DTO {
     private String plan_thw_endt;      // 계획투입종료일자
     private String real_thw_stdt;      // 실제투입시작일자
     private String real_thw_endt;      // 실제투입종료일자
+    private String del_yn;             // 삭제여부
 
     private String login_emp_no;        // opr_no
 
