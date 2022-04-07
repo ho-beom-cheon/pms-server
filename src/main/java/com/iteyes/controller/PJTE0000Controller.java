@@ -96,9 +96,14 @@ public class PJTE0000Controller {
             List<PJTE0000DTO> pwd_list = userService.pwdInfo(PJTE0000Dto);
 
             /* 시스템관리에서 로그인 변경할 시엔, 암호화된 비밀번호와 암호화된 비밀번호를 비교하기 때문에 userInfo를 통해 얻은 list를 이용*/
-            if( user.getPassword().equals(list.get(0).getLgn_pwd()) ){
-//                log.debug("encodedPassword ::"+ encodedPassword);
-//                log.debug("password ::"+ user.getPassword());
+            if( passwordEncoder.matches(user.getPassword(), pwd_list.get(0).getLgn_pwd()) ){
+                /*
+                평문과 암호화된 비밀번호를 비교하기 위한 로직
+                PJTE0000Dto에 암호화된 비밀번호를 세팅하고 userInfo 쿼리를 다시 돌려서 로그인 하는 방식
+                */
+
+                PJTE0000Dto.setLgn_pwd( pwd_list.get(0).getLgn_pwd() );
+                list = userService.userInfo(PJTE0000Dto);
 
                 if (list.size() == 0) {
                     User loginUser = userService.signin(null, null, null, null);
@@ -114,14 +119,9 @@ public class PJTE0000Controller {
                     resultMap.put("data", list);
                     status = HttpStatus.OK;
                 }
-            }else if( passwordEncoder.matches(user.getPassword(), pwd_list.get(0).getLgn_pwd()) ){
-                /*
-                평문과 암호화된 비밀번호를 비교하기 위한 로직
-                PJTE0000Dto에 암호화된 비밀번호를 세팅하고 userInfo 쿼리를 다시 돌려서 로그인 하는 방식
-                */
-
-                PJTE0000Dto.setLgn_pwd( pwd_list.get(0).getLgn_pwd() );
-                list = userService.userInfo(PJTE0000Dto);
+            } else if( user.getPassword().equals(list.get(0).getLgn_pwd()) ){
+//                log.debug("encodedPassword ::"+ encodedPassword);
+//                log.debug("password ::"+ user.getPassword());
 
                 if (list.size() == 0) {
                     User loginUser = userService.signin(null, null, null, null);
