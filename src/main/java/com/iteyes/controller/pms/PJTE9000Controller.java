@@ -428,7 +428,6 @@ public class PJTE9000Controller {
 		result = pjte9000Service.insert_9000_10(PJTE9000C);
 
 		result = pjte9000Service.delete_9000_20(PJTE9000D);
-		result = pjte9000Service.delete_9000_21(PJTE9000D);
 		result = pjte9000Service.delete_9000_22(PJTE9000D);
 		result = pjte9000Service.delete_9000_23(PJTE9000D);
 		result = pjte9000Service.delete_9000_24(PJTE9000D);
@@ -436,17 +435,22 @@ public class PJTE9000Controller {
 		result = pjte9000Service.delete_9000_26(PJTE9000D);
 		result = pjte9000Service.delete_9000_27(PJTE9000D);
 		result = pjte9000Service.delete_9000_28(PJTE9000D);
-		result = pjte9000Service.delete_9000_29(PJTE9000D);
-		result = pjte9000Service.delete_9000_30(PJTE9000D);
 		result = pjte9000Service.delete_9000_31(PJTE9000D);
 		result = pjte9000Service.delete_9000_32(PJTE9000D);
 		result = pjte9000Service.delete_9000_33(PJTE9000D);
-		result = pjte9000Service.delete_9000_34(PJTE9000D);
 		result = pjte9000Service.delete_9000_35(PJTE9000D);
 		result = pjte9000Service.delete_9000_36(PJTE9000D);
+		result = pjte9000Service.delete_9000_60(PJTE9000D);
+		result = pjte9000Service.delete_9000_61(PJTE9000D);
+		result = pjte9000Service.delete_9000_62(PJTE9000D);
+		result = pjte9000Service.delete_9000_63(PJTE9000D);
+		result = pjte9000Service.delete_9000_64(PJTE9000D);
+		result = pjte9000Service.delete_9000_65(PJTE9000D);
+		result = pjte9000Service.delete_9000_66(PJTE9000D);
+		result = pjte9000Service.delete_9000_67(PJTE9000D);
+		result = pjte9000Service.delete_9000_68(PJTE9000D);
 
 		result = pjte9000Service.insert_9000_20(PJTE9000C);
-		result = pjte9000Service.insert_9000_21(PJTE9000C);
 		result = pjte9000Service.insert_9000_22(PJTE9000C);
 		result = pjte9000Service.insert_9000_23(PJTE9000C);
 		result = pjte9000Service.insert_9000_24(PJTE9000C);
@@ -454,14 +458,20 @@ public class PJTE9000Controller {
 		result = pjte9000Service.insert_9000_26(PJTE9000C);
 		result = pjte9000Service.insert_9000_27(PJTE9000C);
 		result = pjte9000Service.insert_9000_28(PJTE9000C);
-		result = pjte9000Service.insert_9000_29(PJTE9000C);
-		result = pjte9000Service.insert_9000_30(PJTE9000C);
 		result = pjte9000Service.insert_9000_31(PJTE9000C);
 		result = pjte9000Service.insert_9000_32(PJTE9000C);
 		result = pjte9000Service.insert_9000_33(PJTE9000C);
-		result = pjte9000Service.insert_9000_34(PJTE9000C);
 		result = pjte9000Service.insert_9000_35(PJTE9000C);
 		result = pjte9000Service.insert_9000_36(PJTE9000C);
+		result = pjte9000Service.insert_9000_60(PJTE9000C);
+		result = pjte9000Service.insert_9000_61(PJTE9000C);
+		result = pjte9000Service.insert_9000_62(PJTE9000C);
+		result = pjte9000Service.insert_9000_63(PJTE9000C);
+		result = pjte9000Service.insert_9000_64(PJTE9000C);
+		result = pjte9000Service.insert_9000_65(PJTE9000C);
+		result = pjte9000Service.insert_9000_66(PJTE9000C);
+		result = pjte9000Service.insert_9000_67(PJTE9000C);
+		result = pjte9000Service.insert_9000_68(PJTE9000C);
 		return result;
 	}
 
