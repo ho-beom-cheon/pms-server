@@ -462,7 +462,7 @@
      <insert id="insert_9000_10" parameterType="Map">
 
           <selectKey resultType = "string" keyProperty="sort_seq" order="BEFORE">
-               SELECT MAX(SORT_SEQ)+1 FROM pms_cd_del_mng WHERE GRP_TYCD = '1000000027' AND PRJT_ID = '1000000001' AND BKUP_ID = '0000000000'
+               SELECT MAX(SORT_SEQ)+1 FROM pms_cd_del_mng WHERE GRP_TYCD = '1000000027' AND PRJT_ID = #{prjt_id} AND BKUP_ID = '0000000000'
           </selectKey>
 
           INSERT INTO pms_cd_del_mng
