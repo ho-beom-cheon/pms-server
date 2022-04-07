@@ -19,6 +19,7 @@ public interface PJTE0000Service {
     
     // 사용자 정보를 가져온다.
     List<PJTE0000DTO> userInfo(PJTE0000DTO PJTE0000Dto) throws Exception;
+    List<PJTE0000DTO> pwdInfo(PJTE0000DTO PJTE0000Dto) throws Exception;
 
     // 비밀번호 변경 정보
     boolean pw_change_0000(PJTE0000DTO user) throws Exception;
