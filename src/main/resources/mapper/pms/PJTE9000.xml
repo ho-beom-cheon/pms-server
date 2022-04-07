@@ -539,14 +539,6 @@
             AND    PRJT_ID = #{prjt_id}
      </delete>
 
-     <delete id="delete_9000_21" parameterType="Map">
-          DELETE
-          FROM   pms_aut_mng
-          WHERE  1 = 1
-            AND    BKUP_ID	= #{new_bkup_id}
-            AND    PRJT_ID  = #{prjt_id}
-     </delete>
-
      <delete id="delete_9000_22" parameterType="Map">
           DELETE
           FROM   pms_cd_del_mng
@@ -603,22 +595,6 @@
             AND    PRJT_ID  = #{prjt_id}
      </delete>
 
-     <delete id="delete_9000_29" parameterType="Map">
-          DELETE
-          FROM   pms_menu_aut_mng
-          WHERE  1 = 1
-            AND    BKUP_ID	= #{new_bkup_id}
-            AND    PRJT_ID  = #{prjt_id}
-     </delete>
-
-     <delete id="delete_9000_30" parameterType="Map">
-          DELETE
-          FROM   pms_menu_mng
-          WHERE  1 = 1
-            AND    BKUP_ID	= #{new_bkup_id}
-            AND    PRJT_ID  = #{prjt_id}
-     </delete>
-
      <delete id="delete_9000_31" parameterType="Map">
           DELETE
           FROM   pms_ntar_mng
@@ -643,14 +619,6 @@
             AND    PRJT_ID  = #{prjt_id}
      </delete>
 
-     <delete id="delete_9000_34" parameterType="Map">
-          DELETE
-          FROM   pms_scrn_mng
-          WHERE  1 = 1
-            AND    BKUP_ID	= #{new_bkup_id}
-            AND    PRJT_ID  = #{prjt_id}
-     </delete>
-
      <delete id="delete_9000_35" parameterType="Map">
           DELETE
           FROM   pms_wbs_mng
@@ -662,6 +630,78 @@
      <delete id="delete_9000_36" parameterType="Map">
           DELETE
           FROM   pms_week_rpt_mng
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_60" parameterType="Map">
+          DELETE
+          FROM   pms_blt_brd_mng
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_61" parameterType="Map">
+          DELETE
+          FROM   pms_career_lst
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_62" parameterType="Map">
+          DELETE
+          FROM   pms_cmnt_lst
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_63" parameterType="Map">
+          DELETE
+          FROM   pms_cpy_his_lst
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_64" parameterType="Map">
+          DELETE
+          FROM   pms_kanban_mng
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_65" parameterType="Map">
+          DELETE
+          FROM   pms_man_pfle_info
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_66" parameterType="Map">
+          DELETE
+          FROM   pms_mtng_room_mng
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_67" parameterType="Map">
+          DELETE
+          FROM   pms_post_info
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_68" parameterType="Map">
+          DELETE
+          FROM   pms_rpl_lst
           WHERE  1 = 1
             AND    BKUP_ID	= #{new_bkup_id}
             AND    PRJT_ID  = #{prjt_id}
@@ -681,22 +721,6 @@
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_atfl_mng
-          WHERE  BKUP_ID = '0000000000'
-            AND    PRJT_ID = #{prjt_id}
-     </insert>
-
-     <insert id="insert_9000_21" parameterType="Map">
-          INSERT INTO pms_aut_mng
-          SELECT #{new_bkup_id} AS BKUP_ID
-               ,PRJT_ID
-               ,AUT_ID
-               ,AUT_NM
-               ,`RGS-DT`
-               ,CANC_DT
-               ,USG_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-          FROM   pms_aut_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
      </insert>
@@ -823,9 +847,9 @@
                ,REAL_THW_STDT
                ,REAL_THW_ENDT
                ,REAL_PRJT_ID
-               ,DEPT_NO
-               ,DEL_YN
+               ,DEPT_CD
                ,#{login_emp_no}                     /*조작자번호*/
+               ,DEL_YN
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
           WHERE  BKUP_ID = '0000000000'
@@ -933,38 +957,6 @@
             AND    PRJT_ID = #{prjt_id}
      </insert>
 
-     <insert id="insert_9000_29" parameterType="Map">
-          INSERT INTO pms_menu_aut_mng
-          SELECT #{new_bkup_id} AS BKUP_ID
-               ,PRJT_ID
-               ,MENU_ID
-               ,AUT_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-          FROM   pms_menu_aut_mng
-          WHERE  BKUP_ID = '0000000000'
-            AND    PRJT_ID = #{prjt_id}
-     </insert>
-
-     <insert id="insert_9000_30" parameterType="Map">
-          INSERT INTO pms_menu_mng
-          SELECT #{new_bkup_id} AS BKUP_ID
-               ,PRJT_ID
-               ,MENU_ID
-               ,MENU_NM
-               ,LEV_NO
-               ,SCRN_ID
-               ,HGRN_MENU_ID
-               ,SORT_SEQ
-               ,MENU_MARK_DSCD
-               ,USG_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-          FROM   pms_menu_mng
-          WHERE  BKUP_ID = '0000000000'
-            AND    PRJT_ID = #{prjt_id}
-     </insert>
-
      <insert id="insert_9000_31" parameterType="Map">
           INSERT INTO pms_ntar_mng
           SELECT #{new_bkup_id} AS BKUP_ID
@@ -1039,20 +1031,6 @@
             AND    PRJT_ID = #{prjt_id}
      </insert>
 
-     <insert id="insert_9000_34" parameterType="Map">
-          INSERT INTO pms_scrn_mng
-          SELECT #{new_bkup_id} AS BKUP_ID
-               ,PRJT_ID
-               ,SCRN_ID
-               ,SCRN_NM
-               ,SORC_PATH
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
-          FROM   pms_scrn_mng
-          WHERE  BKUP_ID = '0000000000'
-            AND    PRJT_ID = #{prjt_id}
-     </insert>
-
      <insert id="insert_9000_35" parameterType="Map">
           INSERT INTO pms_wbs_mng
           SELECT #{new_bkup_id} AS BKUP_ID
@@ -1093,6 +1071,7 @@
                ,REAL_PRJT_ID
                ,WEEK_YYMM
                ,WEEK_SQN_CD
+               ,DEPT_CD
                ,PM_NO
                ,ALL_REAL_PRG
                ,ALL_PRED_PRG
@@ -1109,6 +1088,211 @@
                WHERE  BKUP_ID = '0000000000'
                AND    PRJT_ID = #{prjt_id}
     </insert>
+
+     <insert id="insert_9000_60" parameterType="Map">
+          INSERT INTO pms_blt_brd_mng
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,GESIPAN_ID
+               ,BUBUN_CD
+               ,GESIPAN_TITL
+               ,GESIPAN_DSC
+               ,BSN_CLS_CD
+               ,ANNYM_YN
+               ,AFRM_YN
+               ,CMNT_YN
+               ,RPLY_YN
+               ,GOOD_YN
+               ,NMB_INQ_YN
+               ,PGN_YN
+               ,FILE_UPLD_YN
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_blt_brd_mng
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_61" parameterType="Map">
+          INSERT INTO pms_career_lst
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,MAN_NO
+               ,SQNO
+               ,EXE_CPY_NM
+               ,STA_DT
+               ,END_DT
+               ,PROJ_NM
+               ,RSSB_BNS
+               ,DUTY_TXT
+               ,USE_OS
+               ,RLT_SKILL
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_career_lst
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_62" parameterType="Map">
+          INSERT INTO pms_cmnt_lst
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,POST_ID
+               ,CMNT_NO
+               ,PRN_CMNT_CD
+               ,CMNT_TITL
+               ,TXT_PSW
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_cmnt_lst
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_63" parameterType="Map">
+          INSERT INTO pms_cpy_his_lst
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,MAN_NO
+               ,SQNO
+               ,COMPANY_NM
+               ,ENTER_DT
+               ,RSNT_DT
+               ,RSSB_BNS
+               ,RMRK
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_cpy_his_lst
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_64" parameterType="Map">
+          INSERT INTO pms_kanban_mng
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,DEPT_CD
+               ,MNG_ID
+               ,WORK_TASK
+               ,WORK_STEP_CD
+               ,REG_NM
+               ,REG_DT
+               ,COM_RGS_DT
+               ,CRPE_NM
+               ,PTCP_NM
+               ,COM_DUE_DT
+               ,STOP_DT
+               ,RE_STA_DT
+               ,COM_DT
+               ,BAK_WORK_ID
+               ,CON_WORK_ID
+               ,RMRK
+               ,MARK
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_kanban_mng
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_65" parameterType="Map">
+          INSERT INTO pms_man_pfle_info
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,MAN_NO
+               ,BIRTHDAY
+               ,RANK_NM
+               ,ENTER_YMD
+               ,MAN_CD
+               ,CPNO
+               ,COMPANY_NM
+               ,ADDRESS
+               ,SEX_NM
+               ,SKILL_GRD
+               ,CAREER
+               ,MAIN_SKILL
+               ,DUTY_TXT
+               ,GRD_CD
+               ,SCHOLL_NM1
+               ,GDT_YM1
+               ,STUDY1
+               ,SCHOLL_NM2
+               ,GDT_YM2
+               ,STUDY2
+               ,SCHOLL_NM3
+               ,GDT_YM3
+               ,STUDY3
+               ,QLFKS_NM1
+               ,AQU_YMM1
+               ,QLFKS_NM2
+               ,AQU_YMM2
+               ,QLFKS_NM3
+               ,AQU_YMM3
+               ,QLFKS_NM4
+               ,AQU_YMM4
+               ,QLFKS_NM5
+               ,AQU_YMM5
+               ,ATFL_MNG_ID
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_man_pfle_info
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_66" parameterType="Map">
+          INSERT INTO pms_mtng_room_mng
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,MTNG_ROOM_ID
+               ,SQNO
+               ,RSR_NO
+               ,RSR_DT
+               ,RSRV_STRT
+               ,RSRV_ENDT
+               ,MTNG_TTL
+               ,ATFL_MNG_ID
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_mtng_room_mng
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_67" parameterType="Map">
+          INSERT INTO pms_post_info
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,POST_ID
+               ,GESIPAN_ID
+               ,POST_TITL
+               ,POST_DSC
+               ,VIEW_CNT
+               ,TXT_PSW
+               ,ATFL_MNG_ID
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_post_info
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
+
+     <insert id="insert_9000_68" parameterType="Map">
+          INSERT INTO pms_rpl_lst
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,POST_ID
+               ,RPL_NO
+               ,RPL_TITL
+               ,GOOD_CD
+               ,TXT_PSW
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_rpl_lst
+		WHERE  BKUP_ID = '0000000000'
+		AND    PRJT_ID = #{prjt_id}
+  </insert>
 
      <insert id="insert_9000_90" parameterType="Map">
           INSERT INTO pms_cd_mng
@@ -1203,8 +1387,8 @@
                ,REAL_THW_ENDT
                ,REAL_PRJT_ID
                ,DEPT_CD
-               ,DEL_YN
                ,#{login_emp_no}                     /*조작자번호*/
+               ,DEL_YN
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
           WHERE  BKUP_ID = '0000000000'

@@ -32,6 +32,12 @@ public class PJTE0000ServiceImpl implements PJTE0000Service {
 	}
 
     @Override
+    public List<PJTE0000DTO> pwdInfo(PJTE0000DTO PJTE0000) throws Exception {
+
+        return PJTE0000Mapper.select_0120_02(PJTE0000);
+    }
+
+    @Override
     public boolean pw_change_0000(PJTE0000DTO user) throws Exception {
         return PJTE0000Mapper.pw_change_0000(user);
     }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.iteyes.dto.PJTE0000DTO;
 import com.iteyes.dto.User;
@@ -47,6 +48,9 @@ public class PJTE0000Controller {
         return jsonStr;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PutMapping(value = "/pwChange")
     public @ResponseBody
     boolean pwChange(@RequestBody User user) throws Exception {
@@ -56,8 +60,13 @@ public class PJTE0000Controller {
         try {
             PJTE0000DTO updateUser = new PJTE0000DTO();
 
+            /* 비밀번호 변경(초기비밀번호 변경 포함)시 암호화된 비밀번호로 설정*/
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            log.debug("encodedPassword ::"+ encodedPassword);
+            log.debug("password ::"+ user.getPassword());
+
             updateUser.setEmpno(user.getUserId());
-            updateUser.setLgn_pwd(user.getPassword());
+            updateUser.setLgn_pwd(encodedPassword);
             updateUser.setPrjt_id(user.getPjt_selected());
 
             result = userService.pw_change_0000(updateUser);
@@ -81,22 +90,56 @@ public class PJTE0000Controller {
             PJTE0000Dto.setPrjt_id(user.getPjt_selected());
             PJTE0000Dto.setBtn_gubun(user.getBtn_gubun());
 
+
+            /* 기존 로그인 쿼리인 userInfo, 암호화된 비밀번호 로그인을 위한 쿼리인 pwdInfo*/
             List<PJTE0000DTO> list = userService.userInfo(PJTE0000Dto);
+            List<PJTE0000DTO> pwd_list = userService.pwdInfo(PJTE0000Dto);
 
-            if (list.size() == 0) {
-                User loginUser = userService.signin(null, null, null, null);
-            } else if (list.size() != 0) {
-                User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id(), list.get(0).getBtn_gubun());
-                // 로그인 성공했다면 토큰을 생성한다.
-                String token = jwtService.create(loginUser);
-                // 토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자.
-                res.setHeader("jwt-auth-token", token);
+            /* 시스템관리에서 로그인 변경할 시엔, 암호화된 비밀번호와 암호화된 비밀번호를 비교하기 때문에 userInfo를 통해 얻은 list를 이용*/
+            if( user.getPassword().equals(list.get(0).getLgn_pwd()) ){
+//                log.debug("encodedPassword ::"+ encodedPassword);
+//                log.debug("password ::"+ user.getPassword());
 
-                resultMap.put("auth_token", token);
-                resultMap.put("status", true);
-                resultMap.put("data", list);
-                status = HttpStatus.OK;
+                if (list.size() == 0) {
+                    User loginUser = userService.signin(null, null, null, null);
+                } else if (list.size() != 0) {
+                    User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id(), list.get(0).getBtn_gubun());
+                    // 로그인 성공했다면 토큰을 생성한다.
+                    String token = jwtService.create(loginUser);
+                    // 토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자.
+                    res.setHeader("jwt-auth-token", token);
+
+                    resultMap.put("auth_token", token);
+                    resultMap.put("status", true);
+                    resultMap.put("data", list);
+                    status = HttpStatus.OK;
+                }
+            }else if( passwordEncoder.matches(user.getPassword(), pwd_list.get(0).getLgn_pwd()) ){
+                /*
+                평문과 암호화된 비밀번호를 비교하기 위한 로직
+                PJTE0000Dto에 암호화된 비밀번호를 세팅하고 userInfo 쿼리를 다시 돌려서 로그인 하는 방식
+                */
+
+                PJTE0000Dto.setLgn_pwd( pwd_list.get(0).getLgn_pwd() );
+                list = userService.userInfo(PJTE0000Dto);
+
+                if (list.size() == 0) {
+                    User loginUser = userService.signin(null, null, null, null);
+                } else if (list.size() != 0) {
+                    User loginUser = userService.signin(list.get(0).getEmpno(), list.get(0).getLgn_pwd(), list.get(0).getPrjt_id(), list.get(0).getBtn_gubun());
+                    // 로그인 성공했다면 토큰을 생성한다.
+                    String token = jwtService.create(loginUser);
+                    // 토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자.
+                    res.setHeader("jwt-auth-token", token);
+
+                    resultMap.put("auth_token", token);
+                    resultMap.put("status", true);
+                    resultMap.put("data", list);
+                    status = HttpStatus.OK;
+                }
             }
+
+
         } catch (RuntimeException e) {
             log.error("로그인 실패", e);
             resultMap.put("message", e.getMessage());
