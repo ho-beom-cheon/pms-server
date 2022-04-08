@@ -1,21 +1,16 @@
 package com.iteyes.controller.pms;
 
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.iteyes.dto.pms.PJTE2100DTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE5000DTO;
+import com.iteyes.service.PJTE5000Service;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.service.PJTE5000Service;
-
-import lombok.extern.log4j.Log4j2;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -30,10 +25,8 @@ public class PJTE5000Controller {
     String select(HttpServletRequest request) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-
         /* 빈 dto 생성 */
         PJTE5000DTO PJTE5000 = new PJTE5000DTO();
-
         /* dto 값 셋팅*/
         PJTE5000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE5000.setPrjt_id(request.getParameter("prjt_nm_selected"));
@@ -72,22 +65,56 @@ public class PJTE5000Controller {
 
         return jsonStr;
     }
-
-    @DeleteMapping(value = "/delete")
+    @PutMapping(value = "/update")
     public @ResponseBody
-    boolean delete(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
+    boolean update(HttpServletRequest request, @RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
+
+        PJTE5000DTO PJTE5000 = new PJTE5000DTO();
+        boolean result = true;
+        if (PJTE5000dto.getUpdatedRows().size() != 0) {
+            for (int i = 0; i < PJTE5000dto.getUpdatedRows().size(); i++) {
+                PJTE5000.setPrjt_id(PJTE5000dto.getUpdatedRows().get(i).getPrjt_id());
+                PJTE5000.setBkup_id(PJTE5000dto.getBkup_id());
+                PJTE5000.setMng_cd(PJTE5000dto.getUpdatedRows().get(i).getMng_cd());
+                PJTE5000.setBzcd(PJTE5000dto.getUpdatedRows().get(i).getBzcd());
+                PJTE5000.setStep_cd(PJTE5000dto.getUpdatedRows().get(i).getStep_cd());
+                PJTE5000.setMng_id(PJTE5000dto.getUpdatedRows().get(i).getMng_id());
+                PJTE5000.setHgrn_mng_id(PJTE5000dto.getUpdatedRows().get(i).getHgrn_mng_id());
+                PJTE5000.setAcvt_nm(PJTE5000dto.getUpdatedRows().get(i).getAcvt_nm());
+                PJTE5000.setTask_nm(PJTE5000dto.getUpdatedRows().get(i).getTask_nm());
+                PJTE5000.setCrpe_nm(PJTE5000dto.getUpdatedRows().get(i).getCrpe_nm());
+                PJTE5000.setPln_sta_dt(PJTE5000dto.getUpdatedRows().get(i).getPln_sta_dt());
+                PJTE5000.setPln_sta_tim(PJTE5000dto.getUpdatedRows().get(i).getPln_sta_tim());
+                PJTE5000.setPln_end_dt(PJTE5000dto.getUpdatedRows().get(i).getPln_end_dt());
+                PJTE5000.setPln_end_tim(PJTE5000dto.getUpdatedRows().get(i).getPln_end_tim());
+                PJTE5000.setWgt_rt(PJTE5000dto.getUpdatedRows().get(i).getWgt_rt());
+                PJTE5000.setPrg_rt(PJTE5000dto.getUpdatedRows().get(i).getPrg_rt());
+                PJTE5000.setRmrk(PJTE5000dto.getUpdatedRows().get(i).getRmrk());
+                PJTE5000.setSort(PJTE5000dto.getUpdatedRows().get(i).getSort());
+                PJTE5000.setAtfl_mng_id(PJTE5000dto.getUpdatedRows().get(i).getAtfl_mng_id());
+                PJTE5000.setLogin_emp_no(PJTE5000dto.getLogin_emp_no());
+
+                result = pjte5000Service.update_5000_01(PJTE5000);
+            }
+        }
+        return result;
+    }
+    @PutMapping(value = "/delete")
+    public @ResponseBody
+    boolean delete(HttpServletRequest request, @RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
         boolean result = true;
 
-        if (PJTE5000dto.getRowData().size() != 0) {
+        if (PJTE5000dto.getGridData().size() != 0) {
             PJTE5000DTO PJTE5000D = new PJTE5000DTO();
+            for (int i = 0; i < PJTE5000dto.getGridData().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
+                PJTE5000D.setPrjt_id(PJTE5000dto.getGridData().get(i).getPrjt_id());
+                PJTE5000D.setBzcd(PJTE5000dto.getGridData().get(i).getBzcd());
+                PJTE5000D.setMng_cd(PJTE5000dto.getGridData().get(i).getMng_cd());
 
-            /* dto 값 셋팅*/
-            PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
-            PJTE5000D.setPrjt_id(PJTE5000dto.getPrjt_id());
-            PJTE5000D.setBzcd(PJTE5000dto.getBzcd());
-            PJTE5000D.setMng_cd(PJTE5000dto.getMng_cd());
-
-            pjte5000Service.delete_5000_01(PJTE5000D);
+                pjte5000Service.delete_5000_01(PJTE5000D);
+            }
         }
         return result;
     }
@@ -96,10 +123,23 @@ public class PJTE5000Controller {
     public @ResponseBody
     boolean insert(@RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
 
-        PJTE5000DTO PJTE5000 = new PJTE5000DTO();
         boolean result = true;
+        PJTE5000DTO PJTE5000 = new PJTE5000DTO();
 
-        if(PJTE5000dto.getExcelUplod().equals("Y")) {
+        if (PJTE5000dto.getGridData().size() != 0) {
+            PJTE5000DTO PJTE5000D = new PJTE5000DTO();
+            for (int i = 0; i < PJTE5000dto.getGridData().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
+                PJTE5000D.setPrjt_id(PJTE5000dto.getGridData().get(i).getPrjt_id());
+                PJTE5000D.setBzcd(PJTE5000dto.getGridData().get(i).getBzcd());
+                PJTE5000D.setMng_cd(PJTE5000dto.getGridData().get(i).getMng_cd());
+
+                pjte5000Service.delete_5000_01(PJTE5000D);
+            }
+        }
+
+        if (PJTE5000dto.getGridData().size() != 0) {
             for (int i = 0; i < PJTE5000dto.getGridData().size(); i++) {
                 PJTE5000.setPrjt_id(PJTE5000dto.getPrjt_id());
                 PJTE5000.setMng_cd(PJTE5000dto.getGridData().get(i).getMng_cd());
@@ -109,51 +149,21 @@ public class PJTE5000Controller {
                 PJTE5000.setHgrn_mng_id(PJTE5000dto.getGridData().get(i).getHgrn_mng_id());
                 PJTE5000.setAcvt_nm(PJTE5000dto.getGridData().get(i).getAcvt_nm());
                 PJTE5000.setTask_nm(PJTE5000dto.getGridData().get(i).getTask_nm());
-                PJTE5000.setAtfl_mng_id_yn(PJTE5000dto.getGridData().get(i).getAtfl_mng_id_yn());
                 PJTE5000.setCrpe_nm(PJTE5000dto.getGridData().get(i).getCrpe_nm());
-                PJTE5000.setWbs_prc_sts_cd(PJTE5000dto.getGridData().get(i).getWbs_prc_sts_cd());
                 PJTE5000.setPln_sta_dt(PJTE5000dto.getGridData().get(i).getPln_sta_dt());
                 PJTE5000.setPln_sta_tim(PJTE5000dto.getGridData().get(i).getPln_sta_tim());
                 PJTE5000.setPln_end_dt(PJTE5000dto.getGridData().get(i).getPln_end_dt());
                 PJTE5000.setPln_end_tim(PJTE5000dto.getGridData().get(i).getPln_end_tim());
-                PJTE5000.setAcl_sta_dt(PJTE5000dto.getGridData().get(i).getAcl_sta_dt());
-                PJTE5000.setAcl_sta_tim(PJTE5000dto.getGridData().get(i).getAcl_sta_tim());
-                PJTE5000.setAcl_end_dt(PJTE5000dto.getGridData().get(i).getAcl_end_dt());
-                PJTE5000.setAcl_end_tim(PJTE5000dto.getGridData().get(i).getAcl_end_tim());
                 PJTE5000.setWgt_rt(PJTE5000dto.getGridData().get(i).getWgt_rt());
                 PJTE5000.setPrg_rt(PJTE5000dto.getGridData().get(i).getPrg_rt());
                 PJTE5000.setRmrk(PJTE5000dto.getGridData().get(i).getRmrk());
+                PJTE5000.setSort(PJTE5000dto.getGridData().get(i).getSort());
+                PJTE5000.setAtfl_mng_id(PJTE5000dto.getGridData().get(i).getAtfl_mng_id());
+                PJTE5000.setLogin_emp_no(PJTE5000dto.getGridData().get(i).getLogin_emp_no());
 
                 result = pjte5000Service.insert_5000_01(PJTE5000);
             }
-        } else {
-            if (PJTE5000dto.getRowData().size() != 0) {
-                for (int i = 0; i < PJTE5000dto.getRowData().size(); i++) {
-                    PJTE5000.setPrjt_id(PJTE5000dto.getRowData().get(i).getPrjt_id());
-                    PJTE5000.setMng_cd(PJTE5000dto.getRowData().get(i).getMng_cd());
-                    PJTE5000.setBzcd(PJTE5000dto.getRowData().get(i).getBzcd());
-                    PJTE5000.setStep_cd(PJTE5000dto.getRowData().get(i).getStep_cd());
-                    PJTE5000.setMng_id(PJTE5000dto.getRowData().get(i).getMng_id());
-                    PJTE5000.setHgrn_mng_id(PJTE5000dto.getRowData().get(i).getHgrn_mng_id());
-                    PJTE5000.setAcvt_nm(PJTE5000dto.getRowData().get(i).getAcvt_nm());
-                    PJTE5000.setTask_nm(PJTE5000dto.getRowData().get(i).getTask_nm());
-                    PJTE5000.setCrpe_nm(PJTE5000dto.getRowData().get(i).getCrpe_nm());
-                    PJTE5000.setPln_sta_dt(PJTE5000dto.getRowData().get(i).getPln_sta_dt());
-                    PJTE5000.setPln_sta_tim(PJTE5000dto.getRowData().get(i).getPln_sta_tim());
-                    PJTE5000.setPln_end_dt(PJTE5000dto.getRowData().get(i).getPln_end_dt());
-                    PJTE5000.setPln_end_tim(PJTE5000dto.getRowData().get(i).getPln_end_tim());
-                    PJTE5000.setWgt_rt(PJTE5000dto.getRowData().get(i).getWgt_rt());
-                    PJTE5000.setPrg_rt(PJTE5000dto.getRowData().get(i).getPrg_rt());
-                    PJTE5000.setRmrk(PJTE5000dto.getRowData().get(i).getRmrk());
-                    PJTE5000.setSort(PJTE5000dto.getRowData().get(i).getSort());
-                    PJTE5000.setAtfl_mng_id(PJTE5000dto.getRowData().get(i).getAtfl_mng_id());
-                    PJTE5000.setLogin_emp_no(PJTE5000dto.getRowData().get(i).getLogin_emp_no());
-
-                    result = pjte5000Service.insert_5000_01(PJTE5000);
-                }
-            }
         }
-
         return result;
     }
 }
