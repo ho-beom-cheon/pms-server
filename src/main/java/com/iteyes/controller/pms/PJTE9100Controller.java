@@ -1,7 +1,6 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.pms.PJTE4000DTO;
 import com.iteyes.dto.pms.PJTE9100DTO;
 import com.iteyes.service.PJTE9100Service;
 import lombok.extern.log4j.Log4j2;
