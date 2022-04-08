@@ -24,8 +24,11 @@ public class PJTE5000ServiceImpl implements PJTE5000Service {
         return pjte5000Mapper.insert_5000_01(pjte5000);
     }
     @Override
+    public boolean update_5000_01(PJTE5000DTO pjte5000) throws Exception {
+        return pjte5000Mapper.update_5000_01(pjte5000);
+    }
+    @Override
     public boolean delete_5000_01(PJTE5000DTO pjte5000) throws Exception {
         return pjte5000Mapper.delete_5000_01(pjte5000);
     }
-
 }

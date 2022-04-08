@@ -9,7 +9,6 @@
 			, DTLS_TYNM
 			, SORT_SEQ
 		 FROM pms_cd_del_mng
-		     _mng
 		WHERE USE_YN   = 'Y'
 		  AND GRP_TYCD = '0000000000'
 		  AND PRJT_ID  = '0000000000'
