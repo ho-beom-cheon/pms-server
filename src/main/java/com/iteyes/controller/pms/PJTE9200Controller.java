@@ -119,13 +119,14 @@ public class PJTE9200Controller {
 
     @PostMapping(value = "/insert")
     public @ResponseBody
-    boolean insert(@RequestBody PJTE9200DTO PJTE9200C) throws Exception {
+    int insert(@RequestBody PJTE9200DTO PJTE9200C) throws Exception {
 
-        boolean result = false;
 
         ObjectMapper mapper = new ObjectMapper();
 
-        result = pjte9200Service.insert_9200_01(PJTE9200C);
+        pjte9200Service.insert_9200_01(PJTE9200C);
+
+        int result = PJTE9200C.getSqno();
 
         return result;
 

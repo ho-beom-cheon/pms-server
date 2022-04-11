@@ -15,7 +15,7 @@ public interface PJTE9200Service {
     boolean update_9200_01(PJTE9200DTO PJTE9200) throws Exception;
 
     /* insert */
-    boolean insert_9200_01(PJTE9200DTO PJTE9200) throws Exception;
+    int insert_9200_01(PJTE9200DTO PJTE9200) throws Exception;
 
     /* delete */
     boolean delete_9200_01(PJTE9200DTO PJTE9200) throws Exception;

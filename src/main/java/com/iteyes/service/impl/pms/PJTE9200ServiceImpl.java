@@ -36,7 +36,7 @@ public class PJTE9200ServiceImpl implements PJTE9200Service {
 
     /* insert */
     @Override
-    public boolean insert_9200_01(PJTE9200DTO PJTE9200) throws Exception {
+    public int insert_9200_01(PJTE9200DTO PJTE9200) throws Exception {
 
         return pjte9200Mapper.insert_9200_01(PJTE9200);
     }
