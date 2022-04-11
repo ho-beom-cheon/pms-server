@@ -41,6 +41,7 @@
 		FROM pms_kanban_mng A
 		LEFT OUTER JOIN pms_cd_del_mng B
 		ON A.PRJT_ID = B.PRJT_ID
+		AND A.BKUP_ID = B.BKUP_ID
 		AND A.DEPT_CD = B.DTLS_TYCD
 		AND B.GRP_TYCD = '1000000040'
 		AND B.PRJT_ID = '0000000003'
@@ -94,6 +95,7 @@
 		FROM pms_kanban_mng A
 				 LEFT OUTER JOIN pms_cd_del_mng B
 								 ON A.PRJT_ID = B.PRJT_ID
+									 AND A.BKUP_ID = B.BKUP_ID
 									 AND A.DEPT_CD = B.DTLS_TYCD
 									 AND B.GRP_TYCD = '1000000040'
 									 AND B.PRJT_ID = '0000000003'
