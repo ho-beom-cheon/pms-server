@@ -131,7 +131,7 @@ public class PJTE5000Controller {
             for (int i = 0; i < PJTE5000dto.getGridData().size(); i++) {
                 /* dto 값 셋팅*/
                 PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
-                PJTE5000D.setPrjt_id(PJTE5000dto.getGridData().get(i).getPrjt_id());
+                PJTE5000D.setPrjt_id(PJTE5000dto.getPrjt_id());
                 PJTE5000D.setBzcd(PJTE5000dto.getGridData().get(i).getBzcd());
                 PJTE5000D.setMng_cd(PJTE5000dto.getGridData().get(i).getMng_cd());
 
