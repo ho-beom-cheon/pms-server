@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9200Mapper">
+    <select id="select_9200_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9200DTO">
+        SELECT
+        CASE WHEN A.RSR_DT IS NOT NULL AND A.RSR_DT != ''
+        THEN STR_TO_DATE(A.RSR_DT, '%Y%m%d') ELSE A.RSR_DT
+        END AS RSR_DT
+        ,CONCAT(SUBSTR(A.RSRV_STRT,1,2),':',SUBSTR(A.RSRV_STRT,3,2)) AS RSRV_STRT_NM
+        ,CONCAT(SUBSTR(A.RSRV_ENDT,1,2),':',SUBSTR(A.RSRV_ENDT,3,2)) AS RSRV_ENDT_NM
+        ,B.DTLS_TYNM AS MTNG_ROOM_NM
+        ,A.MTNG_TTL
+        ,C.EMPNM AS RSR_NM
+        ,D.ORG_FILE_NM
+        ,A.BKUP_ID
+        ,A.PRJT_ID
+        ,A.MTNG_ROOM_ID
+        ,A.SQNO
+        ,A.RSR_NO
+        ,A.ATFL_MNG_ID
+        ,A.RSRV_STRT
+        ,A.RSRV_ENDT
+        FROM   pms_mtng_room_mng A
+        LEFT OUTER JOIN
+        pms_cd_del_mng   B
+        ON  B.DTLS_TYCD  = A.MTNG_ROOM_ID
+        AND B.GRP_TYCD   = '1000000047'
+        AND B.PRJT_ID    = A.PRJT_ID
+        AND B.BKUP_ID    = A.BKUP_ID
+        LEFT OUTER JOIN
+        pms_emp_info   C
+        ON  C.EMPNO      = A.RSR_NO
+        AND C.PRJT_ID    = A.PRJT_ID
+        AND C.BKUP_ID    = A.BKUP_ID
+        LEFT OUTER JOIN
+        pms_atfl_mng   D
+        ON  D.SQNO          = 1
+        AND D.FILE_RGS_DSCD = '803'
+        AND D.ATFL_MNG_ID   = A.ATFL_MNG_ID
+        AND D.PRJT_ID       = A.PRJT_ID
+        AND D.BKUP_ID       = A.BKUP_ID
+        WHERE  A.BKUP_ID      = '0000000000'
+        AND    A.PRJT_ID      = #{prjt_id}
+        <if test='mtng_room_id != "" and mtng_room_id != null and mtng_room_id != "TTT"'>
+            AND    A.MTNG_ROOM_ID = #{mtng_room_id}
+        </if>
+        <if test='rsr_strt != ""  and rsr_strt != null and rsr_endt != ""  and rsr_endt != null'>
+            AND    A.RSR_DT       BETWEEN REPLACE(#{rsr_strt}, '-', '') AND REPLACE(#{rsr_endt}, '-', '')
+        </if>
+        <if test='rsr_no != "" and rsr_no != null'>
+            AND    A.RSR_NO       = #{rsr_no}
+        </if>
+        ORDER BY A.RSR_DT, A.MTNG_ROOM_ID, A.RSRV_STRT
+    </select>
+    <select id="select_9200_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9200DTO">
+        <![CDATA[
+        SELECT CASE WHEN count(*) = 0 THEN 'Y' ELSE 'N' END AS SAVE_YN
+        FROM   pms_mtng_room_mng
+        WHERE  BKUP_ID      = '0000000000'
+        AND    PRJT_ID      = #{prjt_id}
+        AND    MTNG_ROOM_ID = #{mtng_room_id}
+        AND    RSR_DT       = REPLACE(#{rsr_dt}, '-', '')
+        AND  ((RSRV_STRT   <= #{rsrv_strt}
+        AND    RSRV_ENDT    > #{rsrv_strt})
+        OR    (RSRV_STRT    < #{rsrv_endt}
+        AND    RSRV_ENDT   >= #{rsrv_endt}))
+        AND    SQNO        != #{sqno}
+        ]]>
+    </select>
+    <update id="update_9200_01" parameterType="Map">
+        UPDATE pms_mtng_room_mng
+        SET    RSR_NO      = #{rsr_no}
+          ,RSR_DT      = REPLACE(#{rsr_dt}, '-', '')
+          ,RSRV_STRT   = #{rsrv_strt}
+          ,RSRV_ENDT   = #{rsrv_endt}
+          ,MTNG_TTL    = #{mtng_ttl}
+          ,ATFL_MNG_ID    = #{atfl_mng_id}
+          ,OPR_NO      = #{login_emp_no}
+          ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    BKUP_ID      = '0000000000'
+          AND    PRJT_ID      = #{prjt_id}
+          AND    MTNG_ROOM_ID = #{mtng_room_id}
+          AND    SQNO         = #{sqno}
+    </update>
+    <insert id="insert_9200_01" parameterType="Map">
+        <selectKey resultType = "int" keyProperty="sqno" order="BEFORE">
+            SELECT NVL(MAX(SQNO)+1,1) AS SQNO
+            FROM   pms_mtng_room_mng
+            WHERE  BKUP_ID = '0000000000'
+            AND    PRJT_ID      = #{prjt_id}
+            AND    MTNG_ROOM_ID = #{mtng_room_id}
+        </selectKey>
+
+        INSERT INTO pms_mtng_room_mng
+        (
+        BKUP_ID
+        ,PRJT_ID
+        ,MTNG_ROOM_ID
+        ,SQNO
+        ,RSR_NO
+        ,RSR_DT
+        ,RSRV_STRT
+        ,RSRV_ENDT
+        ,MTNG_TTL
+        ,ATFL_MNG_ID
+        ,OPR_NO
+        ,DB_CHG_TS
+        )
+        VALUES
+        (
+        '0000000000'
+        , #{prjt_id}
+        , #{mtng_room_id}
+        , #{sqno}
+        , #{rsr_no}
+        , REPLACE(#{rsr_dt}, '-', '')
+        , #{rsrv_strt}
+        , #{rsrv_endt}
+        , #{mtng_ttl}
+        , #{atfl_mng_id}
+        , #{login_emp_no}
+        , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        )
+  </insert>
+  <delete id="delete_9200_01" parameterType="Map">
+      DELETE FROM pms_mtng_room_mng
+      WHERE  1 = 1
+        AND    BKUP_ID      = '0000000000'
+        AND    PRJT_ID      = #{prjt_id}
+        AND    MTNG_ROOM_ID = #{mtng_room_id}
+        AND    SQNO         = #{sqno}
+  </delete>
+</mapper>
