@@ -15,6 +15,7 @@ public class PJTE9001DTO {
     private String catn_dcd;       /*구성원구분*/
     private String email_addr;     /*이메일주소*/
     private String cpno;           /*휴대폰번호*/
+    private String dept_nm;           /*부서*/
     private String lgn_pwd;        /*로그인비밀번호*/
     private String aut_cd;         /*권한ID*/
     private String ip_addr;        /*IP주소*/
