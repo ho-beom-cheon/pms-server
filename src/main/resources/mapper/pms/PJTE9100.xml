@@ -22,10 +22,10 @@
         FROM   pms_blt_brd_mng A
         WHERE  A.BKUP_ID      = '0000000000'
         AND    A.PRJT_ID      = #{prjt_id}
-        <if test='bubun_cd != "" and bubun_cd != null'>
+        <if test='bubun_cd != "" and bubun_cd != null and bubun_cd != "10000000"'>
             AND    A.BUBUN_CD     = #{bubun_cd}
         </if>
-        <if test='bsn_cls_cd != "" and bsn_cls_cd != null'>
+        <if test='bsn_cls_cd != "" and bsn_cls_cd != null and bsn_cls_cd != "TTT"'>
             AND    A.BSN_CLS_CD   = #{bsn_cls_cd}
         </if>
         <if test='gesipan_titl != "" and gesipan_titl != null'>
@@ -59,7 +59,7 @@
     </update>
 
     <insert id="insert_9100_01" parameterType="Map">
-        <selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
+        <selectKey resultType = "string" keyProperty="gesipan_id" order="BEFORE">
             SELECT NVL(LPAD(MAX(GESIPAN_ID)+1,10,'0'),'0000000001') AS GESIPAN_ID
             FROM   pms_blt_brd_mng
             WHERE  BKUP_ID = '0000000000'
