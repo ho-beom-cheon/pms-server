@@ -1,13 +1,9 @@
 package com.iteyes.controller.pms;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.iteyes.dto.FileData;
 import com.iteyes.dto.pms.PJTE9003DTO;
 import com.iteyes.service.PJTE9003Service;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -17,17 +13,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
 @Controller
 @Log4j2
+@CrossOrigin
 @RequestMapping(value = "/PJTE9003", method = {RequestMethod.GET, RequestMethod.POST})
 public class PJTE9003Controller {
 	@Autowired
@@ -62,10 +56,13 @@ public class PJTE9003Controller {
 
 	@GetMapping(value = "/fileDownload", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(String fileName) throws Exception{
+	public ResponseEntity<Resource> downloadFile(String fileName, String filePath) throws Exception{
 		String fileFoler = "C:\\file_ex\\";
 		log.debug("fileNm : ", fileName);
-		Resource resource = new FileSystemResource(fileFoler + fileName);
+		log.debug("filePath : ", filePath);
+
+//		Resource resource = new FileSystemResource(fileFoler + fileName);
+		Resource resource = new FileSystemResource(filePath + "/" + fileName);
 		log.debug(resource);
 
 		String resourceName = resource.getFilename();

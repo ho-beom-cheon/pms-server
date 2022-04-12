@@ -144,6 +144,7 @@ public class PJTE9002Controller {
 		PJTE9002.setTst_case_id(request.getParameter("tst_case_id"));
 		PJTE9002.setPgm_id(request.getParameter("pgm_id"));
 		PJTE9002.setBzcd(request.getParameter("bzcd"));
+		PJTE9002.setRoom_sqno(request.getParameter("room_sqno"));
 
 		String file_rgs_dscd = request.getParameter("file_rgs_dscd");
 

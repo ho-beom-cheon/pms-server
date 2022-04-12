@@ -2,6 +2,7 @@ package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE2100DTO;
+import com.iteyes.dto.pms.PJTE5000DTO;
 import com.iteyes.service.PJTE2100Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +115,20 @@ public class PJTE2100Controller {
         boolean result = false;
 
         PJTE2100DTO PJTE2100C = new PJTE2100DTO();
+
+        if (PJTE2100.getGridData().size() != 0) {
+            PJTE2100DTO PJTE2100D = new PJTE2100DTO();
+            for (int i = 0; i < PJTE2100.getGridData().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE2100D.setBkup_id(PJTE2100.getBkup_id());
+                PJTE2100D.setPrjt_id(PJTE2100.getPrjt_id());
+                PJTE2100D.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
+                PJTE2100D.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+
+                pjte2100Service.delete_2100_01(PJTE2100D);
+            }
+        }
+
 
         if(PJTE2100.getExcelUplod() == "Y") {
 
