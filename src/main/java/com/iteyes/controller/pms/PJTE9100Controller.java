@@ -33,7 +33,7 @@ public class PJTE9100Controller {
         PJTE9100.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE9100.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE9100.setBubun_cd(request.getParameter("bubun_cd_selected"));
-        PJTE9100.setBsn_cls_cd(request.getParameter("bsn_cls_cd_selected_iss"));
+        PJTE9100.setBsn_cls_cd(request.getParameter("bsn_cls_cd_selected"));
         PJTE9100.setGesipan_titl(request.getParameter("gesipan_titl"));
 
         /* 서비스 요청**/
