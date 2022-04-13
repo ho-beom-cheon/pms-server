@@ -83,6 +83,7 @@ public class PJTE5000Controller {
                 PJTE5000.setAcvt_nm(PJTE5000dto.getUpdatedRows().get(i).getAcvt_nm());
                 PJTE5000.setTask_nm(PJTE5000dto.getUpdatedRows().get(i).getTask_nm());
                 PJTE5000.setCrpe_nm(PJTE5000dto.getUpdatedRows().get(i).getCrpe_nm());
+                PJTE5000.setWbs_prc_sts_cd(PJTE5000dto.getUpdatedRows().get(i).getWbs_prc_sts_cd());
                 PJTE5000.setPln_sta_dt(PJTE5000dto.getUpdatedRows().get(i).getPln_sta_dt());
                 PJTE5000.setPln_sta_tim(PJTE5000dto.getUpdatedRows().get(i).getPln_sta_tim());
                 PJTE5000.setPln_end_dt(PJTE5000dto.getUpdatedRows().get(i).getPln_end_dt());
