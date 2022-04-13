@@ -4,7 +4,7 @@
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE5000Mapper">
     <select id="select_5000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE5000DTO">
-     <![CDATA[
+        <![CDATA[
       SELECT A.MNG_CD
            , A.BZCD
            , A.STEP_CD
@@ -46,25 +46,25 @@
       AND A.BKUP_ID = #{bkup_id}
       AND A.PRJT_ID = #{prjt_id}
       ]]>
-      <if test='bzcd != "TTT"'>
-          AND A.BZCD = #{bzcd}
-      </if>
-      <if test='mng_cd != "TTT"'>
-          AND A.MNG_CD = #{mng_cd}
-      </if>
-      <if test='wbs_prc_sts_cd != "TTT"'>
-          AND A.WBS_PRC_STS_CD = #{wbs_prc_sts_cd}
-      </if>
-      <if test='crpe_nm != "" and crpe_nm != null'>
-          AND A.CRPE_NM LIKE CONCAT(CONCAT('%',#{crpe_nm}),'%')
-      </if>
-      <if test='pln_sta_dt != ""  and pln_sta_dt != null and pln_end_dt != ""  and pln_end_dt != null'>
-          AND A.PLN_END_DT BETWEEN #{pln_sta_dt} AND #{pln_end_dt}
-      </if>
-      <if test='acl_sta_dt != ""  and acl_sta_dt != null and acl_end_dt != ""  and acl_end_dt != null'>
-          AND A.ACL_END_DT BETWEEN #{acl_sta_dt} AND #{acl_end_dt}
-      </if>
-      ORDER BY A.SORT
+        <if test='bzcd != "TTT"'>
+            AND A.BZCD = #{bzcd}
+        </if>
+        <if test='mng_cd != "TTT"'>
+            AND A.MNG_CD = #{mng_cd}
+        </if>
+        <if test='wbs_prc_sts_cd != "TTT"'>
+            AND A.WBS_PRC_STS_CD = #{wbs_prc_sts_cd}
+        </if>
+        <if test='crpe_nm != "" and crpe_nm != null'>
+            AND A.CRPE_NM LIKE CONCAT(CONCAT('%',#{crpe_nm}),'%')
+        </if>
+        <if test='pln_sta_dt != ""  and pln_sta_dt != null and pln_end_dt != ""  and pln_end_dt != null'>
+            AND A.PLN_END_DT BETWEEN #{pln_sta_dt} AND #{pln_end_dt}
+        </if>
+        <if test='acl_sta_dt != ""  and acl_sta_dt != null and acl_end_dt != ""  and acl_end_dt != null'>
+            AND A.ACL_END_DT BETWEEN #{acl_sta_dt} AND #{acl_end_dt}
+        </if>
+        ORDER BY A.MNG_ID
     </select>
 
     <insert id="insert_5000_01" parameterType="Map">
@@ -134,29 +134,29 @@
     </delete>
 
     <update id="update_5000_01" parameterType="Map">
-  		UPDATE pms_wbs_mng
-  		SET    HGRN_MNG_ID     = #{hgrn_mng_id}
-            ,STEP_CD         = #{step_cd}
-            ,ACVT_NM         = LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
-            ,TASK_NM         = #{task_nm}
-            ,CRPE_NM         = #{crpe_nm}
-            ,PLN_STA_DT      = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_sta_dt}  ELSE PLN_STA_DT  END
-            ,PLN_STA_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_sta_tim} ELSE PLN_STA_TIM END
-            ,PLN_END_DT      = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_end_dt}  ELSE PLN_END_DT  END
-            ,PlN_END_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_end_tim} ELSE PLN_END_TIM END
-            ,ACL_STA_DT      = CASE WHEN #{wbs_prc_sts_cd} = '200' THEN DATE_FORMAT(NOW(),'%Y%m%d%') ELSE ACL_STA_DT  END
-            ,ACL_STA_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '200' THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_STA_TIM END
-            ,ACL_END_DT      = CASE WHEN #{wbs_prc_sts_cd} = '300' THEN DATE_FORMAT(NOW(),'%Y%m%d%') ELSE ACL_END_DT  END
-            ,ACL_END_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '300' THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_END_TIM END
-            ,WGT_RT          = #{wgt_rt}
-            ,PRG_RT          = #{prg_rt}
-            ,WBS_PRC_STS_CD  = #{wbs_prc_sts_cd}
-            ,RMRK            = #{rmrk}
-            ,SORT            = #{sort}
-            ,OPR_NO	         = #{login_emp_no}
-            ,DB_CHG_TS	     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
-  		WHERE 1 = 1
-  		  AND BKUP_ID  = #{bkup_id}
+        UPDATE pms_wbs_mng
+        SET    HGRN_MNG_ID     = #{hgrn_mng_id}
+          ,STEP_CD         = #{step_cd}
+          ,ACVT_NM         = LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
+          ,TASK_NM         = #{task_nm}
+          ,CRPE_NM         = #{crpe_nm}
+          ,PLN_STA_DT      = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_sta_dt}  ELSE PLN_STA_DT  END
+          ,PLN_STA_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_sta_tim} ELSE PLN_STA_TIM END
+          ,PLN_END_DT      = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_end_dt}  ELSE PLN_END_DT  END
+          ,PlN_END_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_end_tim} ELSE PLN_END_TIM END
+          ,ACL_STA_DT      = CASE WHEN #{wbs_prc_sts_cd} = '200' THEN DATE_FORMAT(NOW(),'%Y%m%d%') ELSE ACL_STA_DT  END
+          ,ACL_STA_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '200' THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_STA_TIM END
+          ,ACL_END_DT      = CASE WHEN #{wbs_prc_sts_cd} = '300' THEN DATE_FORMAT(NOW(),'%Y%m%d%') ELSE ACL_END_DT  END
+          ,ACL_END_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '300' THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_END_TIM END
+          ,WGT_RT          = #{wgt_rt}
+          ,PRG_RT          = #{prg_rt}
+          ,WBS_PRC_STS_CD  = #{wbs_prc_sts_cd}
+          ,RMRK            = #{rmrk}
+          ,SORT            = #{sort}
+          ,OPR_NO	         = #{login_emp_no}
+          ,DB_CHG_TS	     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE 1 = 1
+          AND BKUP_ID  = #{bkup_id}
           AND PRJT_ID  = #{prjt_id}
           AND MNG_CD   = #{mng_cd}
           AND MNG_ID   = #{mng_id}
