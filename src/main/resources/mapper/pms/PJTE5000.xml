@@ -102,7 +102,7 @@
                , #{bzcd}
                , #{hgrn_mng_id}
                , #{step_cd}
-               , LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
+               , LTRIM(REPLACE(REPLACE(#{acvt_nm}, '➥', ''),'☞',''))
                , #{task_nm}
                , #{crpe_nm}
                , REPLACE(#{pln_sta_dt}, '-', '')
@@ -137,7 +137,7 @@
         UPDATE pms_wbs_mng
         SET    HGRN_MNG_ID     = #{hgrn_mng_id}
           ,STEP_CD         = #{step_cd}
-          ,ACVT_NM         = LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
+          ,ACVT_NM         = LTRIM(REPLACE(REPLACE(#{acvt_nm}, '➥', ''),'☞',''))
           ,TASK_NM         = #{task_nm}
           ,CRPE_NM         = #{crpe_nm}
           ,PLN_STA_DT      = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_sta_dt}  ELSE PLN_STA_DT  END
