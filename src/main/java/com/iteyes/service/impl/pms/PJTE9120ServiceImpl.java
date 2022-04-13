@@ -28,12 +28,6 @@ public class PJTE9120ServiceImpl implements PJTE9120Service {
 		List<PJTE9120DTO> list = new ArrayList<>();
 
 		list = PJTE9120Mapper.select_9120_01(PJTE9120);
-		/*연관작업조회*/
-		/*
-		if(PJTE9120.getGubun().equals("3")) {
-			list = PJTE9120Mapper.select_9120_03(PJTE9120);
-		}*/
-
 		return list;
 	}
 
@@ -43,6 +37,49 @@ public class PJTE9120ServiceImpl implements PJTE9120Service {
 
 		list = PJTE9120Mapper.select_9120_02(PJTE9120);
 		return list;
+	}
+
+	@Override
+	public boolean update_9120_01(PJTE9120DTO PJTE9120) throws Exception {
+		return PJTE9120Mapper.update_9120_01(PJTE9120);
+	}
+
+	@Override
+	public List<PJTE9120DTO> select_9120_03(PJTE9120DTO PJTE9120) throws Exception{
+		List<PJTE9120DTO> list = new ArrayList<>();
+
+		list = PJTE9120Mapper.select_9120_03(PJTE9120);
+		return list;
+	}
+
+	@Override
+	public boolean insert_9120_01(PJTE9120DTO PJTE9120C) throws Exception {
+		return PJTE9120Mapper.insert_9120_01(PJTE9120C);
+	}
+
+	@Override
+	public boolean delete_9120_01(PJTE9120DTO PJTE9120D) throws Exception {
+		return PJTE9120Mapper.delete_9120_01(PJTE9120D);
+	}
+
+	@Override
+	public boolean insert_9120_02(PJTE9120DTO PJTE9120C) throws Exception {
+		return PJTE9120Mapper.insert_9120_02(PJTE9120C);
+	}
+
+	@Override
+	public boolean delete_9120_02(PJTE9120DTO PJTE9120D) throws Exception {
+		return PJTE9120Mapper.delete_9120_02(PJTE9120D);
+	}
+
+	@Override
+	public boolean insert_9120_03(PJTE9120DTO PJTE9120C) throws Exception {
+		return PJTE9120Mapper.insert_9120_03(PJTE9120C);
+	}
+
+	@Override
+	public boolean delete_9120_03(PJTE9120DTO PJTE9120D) throws Exception {
+		return PJTE9120Mapper.delete_9120_03(PJTE9120D);
 	}
 
 
