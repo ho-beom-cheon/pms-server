@@ -102,7 +102,7 @@
                , #{bzcd}
                , #{hgrn_mng_id}
                , #{step_cd}
-               , #{acvt_nm} = LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
+               , LTRIM(REPLACE(#{acvt_nm}, '➥', ''))
                , #{task_nm}
                , #{crpe_nm}
                , REPLACE(#{pln_sta_dt}, '-', '')
