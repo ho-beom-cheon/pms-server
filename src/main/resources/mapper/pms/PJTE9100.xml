@@ -22,7 +22,7 @@
         FROM   pms_blt_brd_mng A
         WHERE  A.BKUP_ID      = '0000000000'
         AND    A.PRJT_ID      = #{prjt_id}
-        <if test='bubun_cd != "" and bubun_cd != null and bubun_cd != "10000000"'>
+        <if test='bubun_cd != "" and bubun_cd != null and bubun_cd != "TTT"'>
             AND    A.BUBUN_CD     = #{bubun_cd}
         </if>
         <if test='bsn_cls_cd != "" and bsn_cls_cd != null and bsn_cls_cd != "TTT"'>
