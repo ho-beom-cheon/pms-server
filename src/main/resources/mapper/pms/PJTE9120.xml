@@ -162,6 +162,23 @@
 		  AND    CMNT_NO	   = #{cmnt_no}
 	</delete>
 
+	<!--  delete_9120_01 이후 연쇄 삭제작업(게시글에 종속된 답글 및 댓글)  -->
+	<delete id="delete_9120_10" parameterType="Map">
+		DELETE FROM pms_rpl_lst
+		WHERE  1 = 1
+		  AND    BKUP_ID     = '0000000000'
+		  AND    PRJT_ID     = #{prjt_id}
+		  AND    POST_ID     = #{post_id}
+	</delete>
+
+	<delete id="delete_9120_11" parameterType="Map">
+		DELETE FROM pms_cmnt_lst
+		WHERE  1 = 1
+		  AND    BKUP_ID     = '0000000000'
+		  AND    PRJT_ID     = #{prjt_id}
+		  AND    POST_ID     = #{post_id}
+	</delete>
+
 	<insert id="insert_9120_01" parameterType="Map">
 		<selectKey resultType = "string" keyProperty="post_id" order="BEFORE">
 			SELECT NVL(LPAD(MAX(POST_ID)+1,10,'0'),'0000000001') AS POST_ID

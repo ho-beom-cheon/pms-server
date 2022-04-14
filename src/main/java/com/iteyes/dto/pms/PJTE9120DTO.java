@@ -38,13 +38,14 @@ public class PJTE9120DTO {
     // 그리드2 (답글내역)
     private String rpl_titl;        // 답글제목
     private String db_chg_ts;       // 등록일시
-    private String good_nm;         // 좋아요구분명
-    private String emp_nm;          // 등록자
+    private String good_cd;         // 좋아요구분코드(insert)
+    private String good_nm;         // 좋아요구분명(select)
+    private String empnm;           // 등록자
     private String rpl_no;          // 답글번호
 
     // 그리드3 (댓글내역)
     private String cmnt_titl;       // 댓글제목
-    private String cmnt_no;         // 댓글번호
+    private int cmnt_no;            // 댓글번호
     private String prn_cmnt_cd;     // 상위댓글코드
 
     private String empno;           // 직원번호
