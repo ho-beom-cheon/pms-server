@@ -21,10 +21,14 @@ stages:
   - build
   - test
   - deploy
+  - publish
 
 build:
   stage: build
   script:
+    - pwd
+    - ls
+    - id
     - ./gradlew $GRADLE_OPTS clean assemble
   except:
     - tags
@@ -46,8 +50,26 @@ test:
 deploy:jar:
   stage: deploy
   script:
+    - pwd
+    - id
+    - ls
     - ./gradlew publish -s -DinstallAtEnd=true -DdeployAtEnd=true
   only:
     - master
   environment:
     name: production - v$REVISION$CHANGELIST
+
+publish:
+  stage: publish
+  tags:
+    - pms
+    - api
+  before_script:
+    - echo "before_publish"
+    - pwd
+    - ls
+  script:
+    - sonar-scanner $SONAR_OPTS
+  when: manual
+  only:
+    - master
