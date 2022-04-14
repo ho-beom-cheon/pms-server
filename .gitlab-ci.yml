@@ -58,6 +58,7 @@ deploy:jar:
     - master
   environment:
     name: production - v$REVISION$CHANGELIST
+  when: manual
 
 publish:
   stage: publish
@@ -68,8 +69,10 @@ publish:
     - echo "before_publish"
     - pwd
     - ls
+    - ./gradlew $GRADLE_OPTS clean assemble
   script:
-    - sonar-scanner $SONAR_OPTS
+    - pwd
+    - ls
   when: manual
   only:
     - master
