@@ -74,6 +74,8 @@ publish:
     - ./gradlew publish
     - pwd
     - ls
+    - cd ../../../
+    - sh publish.sh
   when: manual
   only:
     - master
