@@ -67,10 +67,10 @@ publish:
     - api
   before_script:
     - echo "before_publish"
-    - pwd
-    - ls
-    - ./gradlew $GRADLE_OPTS clean assemble
+    - chmod +x gradlew
+    - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
+    - ./gradlew $GRADLE_OPTS clean assemble
     - pwd
     - ls
   when: manual
