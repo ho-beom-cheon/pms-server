@@ -134,6 +134,7 @@
     </delete>
 
     <update id="update_5000_01" parameterType="Map">
+        <![CDATA[
         UPDATE pms_wbs_mng
         SET    HGRN_MNG_ID     = #{hgrn_mng_id}
           ,STEP_CD         = #{step_cd}
@@ -144,22 +145,26 @@
           ,PLN_STA_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_sta_tim} ELSE PLN_STA_TIM END
           ,PLN_END_DT      = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_end_dt}  ELSE PLN_END_DT  END
           ,PlN_END_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{pln_end_tim} ELSE PLN_END_TIM END
-          ,ACL_STA_DT      = CASE WHEN #{wbs_prc_sts_cd} = '200' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_STA_DT  END
-          ,ACL_STA_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '200' THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_STA_TIM END
-          ,ACL_END_DT      = CASE WHEN #{wbs_prc_sts_cd} = '300' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_END_DT  END
-          ,ACL_END_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '300' THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_END_TIM END
+          ,ACL_STA_DT      = CASE WHEN #{wbs_prc_sts_cd} = '200' OR (#{prg_rt} > 0 AND #{prg_rt} < 100) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_STA_DT  END
+          ,ACL_STA_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '200' OR (#{prg_rt} > 0 AND #{prg_rt} < 100) THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_STA_TIM END
+          ,ACL_END_DT      = CASE WHEN #{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100 THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_END_DT  END
+          ,ACL_END_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100 THEN DATE_FORMAT(NOW(),'%H:%i')  ELSE ACL_END_TIM END
           ,WGT_RT          = #{wgt_rt}
           ,PRG_RT          = #{prg_rt}
-          ,WBS_PRC_STS_CD  = #{wbs_prc_sts_cd}
-          ,RMRK            = #{rmrk}
-          ,SORT            = #{sort}
-          ,OPR_NO	         = #{login_emp_no}
-          ,DB_CHG_TS	     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+          ,WBS_PRC_STS_CD  = CASE WHEN #{mng_cd} = '100' THEN
+                                          CASE WHEN #{prg_rt} = 0 THEN '100'
+                                               WHEN #{prg_rt} != 0 AND #{prg_rt} < 100 THEN '200' ELSE '300' END
+                                 ELSE #{wbs_prc_sts_cd} END
+             ,RMRK             = #{rmrk}
+        ,SORT             = #{sort}
+        ,OPR_NO           = #{login_emp_no}
+        ,DB_CHG_TS        = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE 1 = 1
-          AND BKUP_ID  = #{bkup_id}
-          AND PRJT_ID  = #{prjt_id}
-          AND MNG_CD   = #{mng_cd}
-          AND MNG_ID   = #{mng_id}
-          AND BZCD     = #{bzcd}
+        AND BKUP_ID  = #{bkup_id}
+        AND PRJT_ID  = #{prjt_id}
+        AND MNG_CD   = #{mng_cd}
+        AND MNG_ID   = #{mng_id}
+        AND BZCD     = #{bzcd}
+        ]]>
     </update>
 </mapper>
