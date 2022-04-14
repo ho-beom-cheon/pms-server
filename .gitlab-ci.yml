@@ -71,6 +71,7 @@ publish:
     - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
     - ./gradlew $GRADLE_OPTS clean assemble
+    - ./gradlew publish
     - pwd
     - ls
   when: manual
