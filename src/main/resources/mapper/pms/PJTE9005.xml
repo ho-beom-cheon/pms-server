@@ -325,7 +325,7 @@
                , REPLACE(#{aqu_ymm4}, '-', '')
                , #{qlfks_nm5}
                , REPLACE(#{aqu_ymm5}, '-', '')
-               , ''
+               , #{atfl_mng_id}
                , #{login_emp_no} /*조작자번호*/
                , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') /*DB변경일시*/
                )

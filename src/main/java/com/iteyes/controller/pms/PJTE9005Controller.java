@@ -221,6 +221,7 @@ public class PJTE9005Controller {
         PJTE9005C.setAqu_ymm4    (PJTE9005.getAqu_ymm4    ());
         PJTE9005C.setQlfks_nm5   (PJTE9005.getQlfks_nm5   ());
         PJTE9005C.setAqu_ymm5    (PJTE9005.getAqu_ymm5    ());
+        PJTE9005C.setAtfl_mng_id (PJTE9005.getAtfl_mng_id ());
 
         result = pjte9005Service.insert_9005_01(PJTE9005C);
 
