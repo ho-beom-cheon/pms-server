@@ -36,10 +36,17 @@ public class PJTE9110Controller {
         PJTE9110.setGesipan_dsc(request.getParameter("gesipan_dsc"));
         PJTE9110.setGesipan_titl(request.getParameter("gesipan_titl"));
 
+        PJTE9110.setAnnym_yn(request.getParameter("annym_yn"));
+        PJTE9110.setNmb_inq_yn(request.getParameter("nmb_inq_yn"));
+        PJTE9110.setCmnt_yn(request.getParameter("cmnt_yn"));
+        PJTE9110.setRply_yn(request.getParameter("rply_yn"));
+        PJTE9110.setFile_upld_yn(request.getParameter("file_upld_yn"));
+
+
         /* 서비스 요청 */
         List<PJTE9110DTO> list = pjte9110Service.select_9110_01(PJTE9110);
 
-        /* map 형태로 저장 */
+        /* map 형태로 저장 --- 변경하지 말 것. */
         Map<String, Object> hm = new HashMap();
         Map<String, Object> hm1 = new HashMap();
         HashMap<String, Object> hm1_pagination = new HashMap();
