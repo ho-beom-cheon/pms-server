@@ -19,8 +19,8 @@
              ,A.BKUP_ID
              ,A.PRJT_ID
              ,A.GESIPAN_ID
-             ,A.BUBUN_CD
-             ,A.BSN_CLS_CD
+             ,B.DTLS_TYNM AS BUBUN_NM
+             ,C.DTLS_TYNM AS BSN_CLS_NM
         FROM   pms_blt_brd_mng A
                    LEFT OUTER JOIN
                pms_cd_del_mng   B
@@ -36,10 +36,10 @@
                    AND C.BKUP_ID    = A.BKUP_ID
         WHERE  A.BKUP_ID   = '0000000000'
           AND    A.PRJT_ID   = #{prjt_id}
-          AND   (A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd}, 1,2),'000000')
-            OR     A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd}, 1,4),'0000')
-            OR     A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd}, 1,6),'00')
-            OR     A.BUBUN_CD  = '10102040'
+          AND   (A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd},1,2),'000000')
+            OR     A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd},1,4),'0000')
+            OR     A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd},1,6),'00')
+            OR     A.BUBUN_CD  = #{login_dept_cd}
             OR     A.AFRM_YN   = 'N')
         ORDER BY A.GESIPAN_ID DESC
     </select>
