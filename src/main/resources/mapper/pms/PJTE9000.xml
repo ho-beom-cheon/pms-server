@@ -1214,6 +1214,10 @@
                ,MAIN_SKILL
                ,DUTY_TXT
                ,GRD_CD
+               ,NXT_PRJ_NM
+               ,STN_CLS_CD
+               ,WTH_DT
+               ,PRV_PRJ_CD
                ,SCHOLL_NM1
                ,GDT_YM1
                ,STUDY1
