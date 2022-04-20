@@ -251,14 +251,17 @@ public class PJTE9120Controller {
     @PutMapping(value = "/delete_9120_01")
     public @ResponseBody
     boolean delete_9120_01(HttpServletRequest request, @RequestBody PJTE9120DTO PJTE9120) throws Exception {
-        boolean result = true;
+        boolean result = false;
 
         PJTE9120DTO PJTE9120D = new PJTE9120DTO();
         /* dto 값 셋팅 */
         PJTE9120D.setPrjt_id(PJTE9120.getPrjt_id());
         PJTE9120D.setPost_id(PJTE9120.getPost_id());
+        PJTE9120D.setTxt_psw(PJTE9120.getTxt_psw());
 
-        PJTE9120Service.delete_9120_01(PJTE9120D);
+        result = PJTE9120Service.delete_9120_01(PJTE9120D)
+               && PJTE9120Service.delete_9120_10(PJTE9120D)
+               && PJTE9120Service.delete_9120_11(PJTE9120D);
 
         return result;
     }
@@ -301,15 +304,16 @@ public class PJTE9120Controller {
     @PutMapping(value = "/delete_9120_02")
     public @ResponseBody
     boolean delete_9120_02(HttpServletRequest request, @RequestBody PJTE9120DTO PJTE9120) throws Exception {
-        boolean result = true;
+        boolean result = false;
 
         PJTE9120DTO PJTE9120D = new PJTE9120DTO();
         /* dto 값 셋팅 */
         PJTE9120D.setPrjt_id(PJTE9120.getPrjt_id());
         PJTE9120D.setPost_id(PJTE9120.getPost_id());
         PJTE9120D.setRpl_no(PJTE9120.getRpl_no());
+        PJTE9120D.setTxt_psw(PJTE9120.getTxt_psw());
 
-        PJTE9120Service.delete_9120_02(PJTE9120D);
+        result = PJTE9120Service.delete_9120_02(PJTE9120D);
 
         return result;
     }
@@ -351,17 +355,17 @@ public class PJTE9120Controller {
     @PutMapping(value = "/delete_9120_03")
     public @ResponseBody
     boolean delete_9120_03(HttpServletRequest request, @RequestBody PJTE9120DTO PJTE9120) throws Exception {
-        boolean result = true;
+        boolean result = false;
 
         PJTE9120DTO PJTE9120D = new PJTE9120DTO();
         /* dto 값 셋팅 */
         PJTE9120D.setPrjt_id(PJTE9120.getPrjt_id());
         PJTE9120D.setPost_id(PJTE9120.getPost_id());
         PJTE9120D.setCmnt_no(PJTE9120.getCmnt_no());
+        PJTE9120D.setTxt_psw(PJTE9120.getTxt_psw());
 
-        PJTE9120Service.delete_9120_03(PJTE9120D);
+        result = PJTE9120Service.delete_9120_03(PJTE9120D);
 
         return result;
     }
-
 }
