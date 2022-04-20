@@ -19,7 +19,7 @@
 			 ,A.ORG_FILE_NM
 		FROM  (SELECT A.POST_TITL
 					,DATE_FORMAT(A.DB_CHG_TS,'%Y-%m-%d %H:%i:%s') AS POST_DT
-					,CASE WHEN D.ANNYM_YN   = 'Y' THEN B.EMPNM    ELSE '' END AS POST_NM
+					,CASE WHEN D.ANNYM_YN   = 'Y' THEN '' ELSE B.EMPNM END AS POST_NM
 					,CASE WHEN D.NMB_INQ_YN = 'Y' THEN A.VIEW_CNT ELSE 0  END AS VIEW_CNT
 					,A.POST_DSC
 					,A.TXT_PSW
@@ -129,28 +129,42 @@
 
 	<update id="update_9120_01" parameterType="Map">
 		UPDATE pms_post_info
-		SET    VIEW_CNT      = VIEW_CNT + 1
-		WHERE  1 = 1
-		  AND    BKUP_ID     = '0000000000'
-		  AND    PRJT_ID     = #{prjt_id}
-		  AND    POST_ID     = #{post_id}
+		   SET VIEW_CNT    = VIEW_CNT + 1
+		 WHERE 1 = 1
+		   AND BKUP_ID     = '0000000000'
+		   AND PRJT_ID     = #{prjt_id}
+		   AND POST_ID     = #{post_id}
+           AND TXT_PSW     = #{txt_psw}
 	</update>
+
+	<update id="update_9120_02" parameterType="Map">
+		UPDATE pms_post_info
+		   SET
+		 WHERE 1 = 1
+		   AND BKUP_ID     = '0000000000'
+		   AND PRJT_ID     = #{prjt_id}
+		   AND POST_ID     = #{post_id}
+           AND TXT_PSW     = #{txt_psw}
+	</update>
+
 
 	<delete id="delete_9120_01" parameterType="Map">
 		DELETE FROM pms_post_info
-		WHERE  1 = 1
-		  AND    BKUP_ID     = '0000000000'
-		  AND    PRJT_ID     = #{prjt_id}
-		  AND    POST_ID     = #{post_id}
+		 WHERE 1 = 1
+		   AND BKUP_ID     = '0000000000'
+		   AND PRJT_ID     = #{prjt_id}
+		   AND POST_ID     = #{post_id}
+		   AND TXT_PSW     = #{txt_psw}
 	</delete>
 
 	<delete id="delete_9120_02" parameterType="Map">
 		DELETE FROM pms_rpl_lst
-		WHERE  1 = 1
-		  AND    BKUP_ID     = '0000000000'
-		  AND    PRJT_ID     = #{prjt_id}
-		  AND    POST_ID     = #{post_id}
-		  AND    RPL_NO	     = #{rpl_no}
+		 WHERE 1 = 1
+		   AND BKUP_ID     = '0000000000'
+		   AND PRJT_ID     = #{prjt_id}
+		   AND POST_ID     = #{post_id}
+		   AND RPL_NO	  = #{rpl_no}
+		   AND TXT_PSW     = #{txt_psw}
 	</delete>
 
 	<delete id="delete_9120_03" parameterType="Map">
@@ -160,6 +174,7 @@
 		  AND    PRJT_ID     = #{prjt_id}
 		  AND    POST_ID     = #{post_id}
 		  AND    CMNT_NO	   = #{cmnt_no}
+		  AND TXT_PSW     = #{txt_psw}
 	</delete>
 
 	<!--  delete_9120_01 이후 연쇄 삭제작업(게시글에 종속된 답글 및 댓글)  -->
