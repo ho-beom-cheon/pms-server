@@ -230,17 +230,16 @@
               SELECT '40'     AS TODO_CD
                    , COUNT(*) AS TODO_CNT
               FROM pms_rq_mng A
-              WHERE A.REQ_PRC_STEP_CD = '100'
-                AND #{login_aut_cd} IN ('500', '600')
+              WHERE A.REQ_PRC_STEP_CD = '200'
+                AND A.PRCPE_NO = #{login_emp_no}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
               SELECT '41'     AS TODO_CD
                    , COUNT(*) AS TODO_CNT
               FROM pms_rq_mng A
-              WHERE A.REQ_PRC_STEP_CD = '200'
+              WHERE A.REQ_PRC_STEP_CD = '100'
                 AND #{login_aut_cd} IN ('500', '600')
-                AND A.PRCPE_NO = #{login_emp_no}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -627,8 +626,8 @@
                    ON B.DTLS_TYCD = A.REQ_DSCD
                        AND B.PRJT_ID = A.PRJT_ID
                        AND B.BKUP_ID = A.BKUP_ID
-              WHERE A.REQ_PRC_STEP_CD = '100'
-                AND #{login_aut_cd} IN ('500', '600')
+              WHERE A.REQ_PRC_STEP_CD = '200'
+                AND A.PRCPE_NO = #{login_emp_no}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '40'
@@ -649,9 +648,8 @@
                    ON B.DTLS_TYCD = A.REQ_DSCD
                        AND B.PRJT_ID = A.PRJT_ID
                        AND B.BKUP_ID = A.BKUP_ID
-              WHERE A.REQ_PRC_STEP_CD = '200'
+              WHERE A.REQ_PRC_STEP_CD = '100'
                 AND #{login_aut_cd} IN ('500', '600')
-                AND A.PRCPE_NO = #{login_emp_no}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '41'
