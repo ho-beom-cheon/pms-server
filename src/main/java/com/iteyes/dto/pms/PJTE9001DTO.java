@@ -13,16 +13,9 @@ public class PJTE9001DTO {
     private String empnm;          /*직원명*/
     private String rank_nm;        /*직급명*/
     private String catn_dcd;       /*구성원구분*/
-    private String email_addr;     /*이메일주소*/
-    private String cpno;           /*휴대폰번호*/
     private String dept_nm;           /*부서*/
     private String lgn_pwd;        /*로그인비밀번호*/
     private String aut_cd;         /*권한ID*/
-    private String ip_addr;        /*IP주소*/
-    private String plan_thw_stdt;  /*예정투입시작일자*/
-    private String plan_thw_endt;  /*예정투입종료일자*/
-    private String real_thw_stdt;  /*실제투입시작일자*/
-    private String real_thw_endt;  /*실제투입종료일자*/
     private String opr_no;         /*조작자번호*/
     private String db_chg_ts;      /*DB변경일시*/
     /*storage 공통 */

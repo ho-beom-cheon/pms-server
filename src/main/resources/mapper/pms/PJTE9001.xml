@@ -34,15 +34,8 @@
            , A.EMPNM                   /*직원명       */
            , A.RANK_NM                 /*직급명       */
            , A.CATN_DCD                /*구성원구분    */
-           , A.EMAIL_ADDR              /*이메일주소    */
-           , A.CPNO                    /*휴대폰번호    */
            , A.LGN_PWD                 /*로그인비밀번호 */
            , A.AUT_CD                  /*권한ID      */
-           , A.IP_ADDR                 /*IP주소       */
-           , A.PLAN_THW_STDT           /*예정투입시작일자*/
-           , A.PLAN_THW_ENDT           /*예정투입종료일자*/
-           , A.REAL_THW_STDT           /*실제투입시작일자*/
-           , A.REAL_THW_ENDT           /*실제투입종료일자*/
       FROM pms_emp_info A
            LEFT OUTER JOIN
             pms_cd_del_mng   B
