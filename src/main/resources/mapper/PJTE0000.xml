@@ -30,8 +30,6 @@
 	SELECT A.EMPNO
 	     , A.PRJT_ID
 		 , A.EMPNM
-		 , A.EMAIL_ADDR
-		 , A.CPNO
 		 , A.BZCD
 		 , A.AUT_CD
 		 , A.LGN_PWD
