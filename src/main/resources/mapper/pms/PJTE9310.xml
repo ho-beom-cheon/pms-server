@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9310Mapper">
+	<select id="select_9310_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9310DTO">
+		SELECT C.DTLS_TYNM AS DEPT_NM
+		,D.DTLS_TYNM AS HDQ_NM
+		,E.DTLS_TYNM AS TM_NM
+		,B.RANK_NM
+		,B.EMPNO
+		,B.EMPNM
+		,A.ENT_DT
+		,A.INP_PRJ_NM
+		,A.INP_DT
+		,A.WTH_DT
+		,A.PRJ_TYP_NM
+		,A.PRF_AR
+		,A.RMRK
+		,A.INP_CLS_CD
+		,A.WTH_SCH_YN
+		,CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') AS DEPT_CD
+		FROM   pms_emp_info   B
+		LEFT OUTER JOIN
+		pms_inp_mnp_stt   A
+		ON    A.EMPNO      = B.EMPNO
+		AND   A.PRJT_ID    = B.PRJT_ID
+		AND   A.BKUP_ID    = B.BKUP_ID
+		LEFT OUTER JOIN
+		pms_cd_del_mng   C
+		ON  C.DTLS_TYCD  = CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000')
+		AND C.GRP_TYCD   = '1000000044'
+		AND C.PRJT_ID    = B.PRJT_ID
+		AND C.BKUP_ID    = B.BKUP_ID
+		LEFT OUTER JOIN
+		pms_cd_del_mng   D
+		ON  D.DTLS_TYCD  = CONCAT(SUBSTR(B.DEPT_CD,1,6),'00')
+		AND D.GRP_TYCD   = '1000000044'
+		AND D.PRJT_ID    = B.PRJT_ID
+		AND D.BKUP_ID    = B.BKUP_ID
+		LEFT OUTER JOIN
+		pms_cd_del_mng   E
+		ON  E.DTLS_TYCD  = B.DEPT_CD
+		AND E.GRP_TYCD   = '1000000044'
+		AND E.PRJT_ID    = B.PRJT_ID
+		AND E.BKUP_ID    = B.BKUP_ID
+		WHERE  B.BKUP_ID = #{bkup_id}
+		AND    B.PRJT_ID = #{prjt_id}
+		<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
+			AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
+		</if>
+		ORDER BY C.DTLS_TYNM, D.DTLS_TYNM, E.DTLS_TYNM, B.EMPNM
+	</select>
+
+	<delete id="delete_9310_01" parameterType="Map">
+		DELETE FROM pms_inp_mnp_stt
+		WHERE  1 = 1
+		AND    BKUP_ID      = '0000000000'
+		AND    PRJT_ID      = #{prjt_id}
+		<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
+			AND    DEPT_CD = #{dept_cd}
+		</if>
+	</delete>
+
+	<insert id="insert_9310_01" parameterType="Map">
+		INSERT INTO pms_inp_mnp_stt
+		(
+			BKUP_ID
+		,PRJT_ID
+		,EMPNO
+		,ENT_DT
+		,INP_PRJ_NM
+		,INP_DT
+		,WTH_DT
+		,PRF_AR
+		,PRJ_TYP_NM
+		,INP_CLS_CD
+		,RMRK
+		,WTH_SCH_YN
+		,DEPT_CD
+		,OPR_NO
+		,DB_CHG_TS
+		)
+		VALUES
+			(
+				'0000000000'
+			, #{prjt_id}
+			, #{empno}
+			, #{ent_dt}
+			, #{inp_prj_nm}
+			, #{inp_dt}
+			, #{wth_dt}
+			, #{prf_ar}
+			, #{prj_typ_nm}
+			, #{inp_cls_cd}
+			, #{rmrk}
+			, #{wth_sch_yn}
+			, #{dept_cd}
+			, #{login_emp_no}
+			, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+			)
+	</insert>
+</mapper>
