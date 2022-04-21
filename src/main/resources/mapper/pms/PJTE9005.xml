@@ -277,6 +277,7 @@
         , MAIN_SKILL
         , DUTY_TXT
         , GRD_CD
+        , NXT_PRJ_NM
         , SCHOLL_NM1
         , GDT_YM1
         , STUDY1
@@ -315,6 +316,7 @@
                , #{main_skill}
                , #{duty_txt}
                , #{grd_cd}
+               , #{nxt_prj_nm}
                , #{scholl_nm1}
                , REPLACE(#{gdt_ym1}, '-', '')
                , #{study1}

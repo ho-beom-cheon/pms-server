@@ -11,18 +11,11 @@
                ,EMPNM
                ,RANK_NM
                ,CATN_DCD
-               ,EMAIL_ADDR
-               ,CPNO
                ,LGN_PWD
                ,AUT_CD
-               ,IP_ADDR
                ,REAL_PRJT_ID
                ,DEPT_CD
                ,DEL_YN
-               ,(CASE WHEN NVL(str_to_date(PLAN_THW_STDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(PLAN_THW_STDT, '%Y%m%d'), '') END) AS PLAN_THW_STDT
-               ,(CASE WHEN NVL(str_to_date(PLAN_THW_ENDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(PLAN_THW_ENDT, '%Y%m%d'), '') END) AS PLAN_THW_ENDT
-               ,(CASE WHEN NVL(str_to_date(REAL_THW_STDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(REAL_THW_STDT, '%Y%m%d'), '') END) AS REAL_THW_STDT
-               ,(CASE WHEN NVL(str_to_date(REAL_THW_ENDT, '%Y%m%d'), '') = '0000-00-00' THEN '' ELSE NVL(str_to_date(REAL_THW_ENDT, '%Y%m%d'), '') END) AS REAL_THW_ENDT
           FROM   pms_emp_info
           WHERE  1 = 1
             AND    BKUP_ID = #{bkup_id}
@@ -111,18 +104,11 @@
      <update id="update_9000_01" parameterType="Map" >
           UPDATE pms_emp_info
           SET    EMPNM         = #{empnm}
-            ,EMAIL_ADDR    = #{email_addr}
             ,RANK_NM       = #{rank_nm}
-            ,CPNO          = #{cpno}
             ,LGN_PWD       = #{lgn_pwd}
             ,BZCD          = #{bzcd}
             ,CATN_DCD      = #{catn_dcd}
             ,AUT_CD        = #{aut_cd}
-            ,IP_ADDR       = #{ip_addr}
-            ,PLAN_THW_STDT = REPLACE(#{plan_thw_stdt}, '-', '')
-            ,PLAN_THW_ENDT = REPLACE(#{plan_thw_endt}, '-', '')
-            ,REAL_THW_STDT = REPLACE(#{real_thw_stdt}, '-', '')
-            ,REAL_THW_ENDT = REPLACE(#{real_thw_endt}, '-', '')
             ,REAL_PRJT_ID  = #{real_prjt_id}
             ,DEPT_CD       = #{dept_cd}
             ,DEL_YN        = #{del_yn}
@@ -141,18 +127,11 @@
           ,PRJT_ID
           ,EMPNO
           ,EMPNM
-          ,EMAIL_ADDR
           ,RANK_NM
-          ,CPNO
           ,LGN_PWD
           ,BZCD
           ,CATN_DCD
           ,AUT_CD
-          ,IP_ADDR
-          ,PLAN_THW_STDT
-          ,PLAN_THW_ENDT
-          ,REAL_THW_STDT
-          ,REAL_THW_ENDT
           ,REAL_PRJT_ID
           ,DEPT_CD
           ,DEL_YN
@@ -165,18 +144,11 @@
                , #{prjt_id}
                , #{empno}
                , #{empnm}
-               , #{email_addr}
                , #{rank_nm}
-               , #{cpno}
                , #{lgn_pwd}
                , #{bzcd}
                , #{catn_dcd}
                , #{aut_cd}
-               , #{ip_addr}
-               , REPLACE(#{plan_thw_stdt}, '-', '')
-               , REPLACE(#{plan_thw_endt}, '-', '')
-               , REPLACE(#{real_thw_stdt}, '-', '')
-               , REPLACE(#{real_thw_endt}, '-', '')
                , #{real_prjt_id}
                , #{dept_cd}
                <if test=' del_yn == "Y" '>
@@ -707,6 +679,30 @@
             AND    PRJT_ID  = #{prjt_id}
      </delete>
 
+     <delete id="delete_9000_69" parameterType="Map">
+          DELETE
+          FROM   pms_prj_prs_rqs
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_70" parameterType="Map">
+          DELETE
+          FROM   pms_prj_prs_sch
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_71" parameterType="Map">
+          DELETE
+          FROM   pms_inp_mnp_stt
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
      <insert id="insert_9000_20" parameterType="Map">
           INSERT INTO pms_atfl_mng
           SELECT #{new_bkup_id} AS BKUP_ID
@@ -834,18 +830,11 @@
                ,PRJT_ID
                ,EMPNO
                ,EMPNM
-               ,EMAIL_ADDR
                ,RANK_NM
-               ,CPNO
                ,LGN_PWD
                ,BZCD
                ,CATN_DCD
                ,AUT_CD
-               ,IP_ADDR
-               ,PLAN_THW_STDT
-               ,PLAN_THW_ENDT
-               ,REAL_THW_STDT
-               ,REAL_THW_ENDT
                ,REAL_PRJT_ID
                ,DEPT_CD
                ,#{login_emp_no}                     /*조작자번호*/
@@ -1215,9 +1204,6 @@
                ,DUTY_TXT
                ,GRD_CD
                ,NXT_PRJ_NM
-               ,STN_CLS_CD
-               ,WTH_DT
-               ,PRV_PRJ_CD
                ,SCHOLL_NM1
                ,GDT_YM1
                ,STUDY1
@@ -1298,6 +1284,66 @@
 		AND    PRJT_ID = #{prjt_id}
   </insert>
 
+     <insert id="insert_9000_69" parameterType="Map">
+          INSERT INTO pms_prj_prs_rqs
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,REAL_PRJT_ID
+               ,SQNO
+               ,SCH_ENT_DT
+               ,SKILL_GRD
+               ,MAIN_SKILL
+               ,DUTY_TXT
+               ,OTH_CNT
+               ,NMBR_RCRT
+               ,APLC_DTLS
+               ,DEL_YN
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+          FROM   pms_prj_prs_rqs
+          WHERE  BKUP_ID = '0000000000'
+            AND    PRJT_ID = #{prjt_id}
+     </insert>
+
+     <insert id="insert_9000_70" parameterType="Map">
+          INSERT INTO pms_prj_prs_sch
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,EMPNO
+               ,SQNO
+               ,STA_DT
+               ,END_DT
+               ,SCH_CNT
+               ,DEL_YN
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+          FROM   pms_prj_prs_sch
+          WHERE  BKUP_ID = '0000000000'
+            AND    PRJT_ID = #{prjt_id}
+     </insert>
+
+     <insert id="insert_9000_71" parameterType="Map">
+          INSERT INTO pms_inp_mnp_stt
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,EMPNO
+               ,ENT_DT
+               ,INP_PRJ_NM
+               ,INP_DT
+               ,WTH_DT
+               ,PRJ_TYP_NM
+               ,PRF_AR
+               ,RMRK
+               ,INP_CLS_CD
+               ,WTH_SCH_YN
+               ,DEPT_CD
+               ,#{login_emp_no}                     /*조작자번호*/
+               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+          FROM   pms_inp_mnp_stt
+          WHERE  BKUP_ID = '0000000000'
+            AND    PRJT_ID = #{prjt_id}
+     </insert>
+
      <insert id="insert_9000_90" parameterType="Map">
           INSERT INTO pms_cd_mng
           SELECT BKUP_ID
@@ -1377,18 +1423,11 @@
                ,#{new_prjt_id} AS PRJT_ID
                ,EMPNO
                ,EMPNM
-               ,EMAIL_ADDR
                ,RANK_NM
-               ,CPNO
                ,'Admin211111' AS LGN_PWD
                ,BZCD
                ,CATN_DCD
                ,AUT_CD
-               ,IP_ADDR
-               ,PLAN_THW_STDT
-               ,PLAN_THW_ENDT
-               ,REAL_THW_STDT
-               ,REAL_THW_ENDT
                ,REAL_PRJT_ID
                ,DEPT_CD
                ,#{login_emp_no}                     /*조작자번호*/

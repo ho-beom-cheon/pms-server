@@ -66,6 +66,11 @@ public class PJTE9005DTO {
     private String use_os;      // 사용OS
     private String rlt_skill;   // 관련기술
 
+    private String nxt_prj_nm;   // 차기희망프로젝트및업무
+    private String inp_prj_nm;   // 이전프로젝트
+    private String wth_dt;   // 철수일자
+    private String inp_cls_cd;   // 투입구분
+
     private String atfl_mng_id_yn;          // 첨부파일 관리 ID
     private String excelUplod;              // 그리드 엑셀업로드 여부
 
