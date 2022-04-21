@@ -80,7 +80,6 @@ public class PJTE9000DTO {
     private String bzcd;               // 업무구분코드
     private String catn_dcd;           // 구성원구분코드
     private String aut_cd;             // 권한구분코드
-    private String ip_addr;            // IP주소
     private String del_yn;             // 삭제여부
 
     private String login_emp_no;        // opr_no
