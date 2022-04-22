@@ -44,6 +44,7 @@ public class PJTE2100DTO {
 	private String grp_tycd;                //
     private String dtls_tycd;               //
     private String dtls_tynm;               //
+    private String rqu_sbh_id;               //
     private String sort_seq;                //
 	private String dvlpe_sta_dt;            // 개발시작일자
 	private String dvlpe_end_dt;            // 개발종료일자
