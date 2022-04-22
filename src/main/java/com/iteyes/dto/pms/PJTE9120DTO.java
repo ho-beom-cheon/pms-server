@@ -26,6 +26,8 @@ public class PJTE9120DTO {
     private String post_dt;         // 게시일자
     private String post_nm;         // 게시자
     private String view_cnt;        // 조회횟수
+    private String rpl_cnt;         // 답글갯수
+    private String cmnt_cnt;        // 댓글갯수
 
     // 그리드1_2 (게시정보)
     private String post_titl;       // 게시글 제목(게시정보_게시제목)

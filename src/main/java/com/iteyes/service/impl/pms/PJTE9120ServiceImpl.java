@@ -58,7 +58,7 @@ public class PJTE9120ServiceImpl implements PJTE9120Service {
 	}
 
 	@Override
-	public boolean delete_9120_01(PJTE9120DTO PJTE9120D) throws Exception {
+	public int delete_9120_01(PJTE9120DTO PJTE9120D) throws Exception {
 		return PJTE9120Mapper.delete_9120_01(PJTE9120D);
 	}
 
@@ -83,12 +83,17 @@ public class PJTE9120ServiceImpl implements PJTE9120Service {
 	}
 
 	@Override
-	public boolean delete_9120_10(PJTE9120DTO PJTE9120D) throws Exception {
+	public int delete_9120_10(PJTE9120DTO PJTE9120D) throws Exception {
 		return PJTE9120Mapper.delete_9120_10(PJTE9120D);
 	}
 	@Override
-	public boolean delete_9120_11(PJTE9120DTO PJTE9120D) throws Exception {
+	public int delete_9120_11(PJTE9120DTO PJTE9120D) throws Exception {
 		return PJTE9120Mapper.delete_9120_11(PJTE9120D);
+	}
+
+	@Override
+	public boolean update_9120_02(PJTE9120DTO PJTE9120) throws Exception {
+		return PJTE9120Mapper.update_9120_02(PJTE9120);
 	}
 
 }
