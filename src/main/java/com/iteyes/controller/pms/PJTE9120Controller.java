@@ -250,8 +250,10 @@ public class PJTE9120Controller {
      */
     @PutMapping(value = "/delete_9120_01")
     public @ResponseBody
-    boolean delete_9120_01(HttpServletRequest request, @RequestBody PJTE9120DTO PJTE9120) throws Exception {
-        boolean result = false;
+    int delete_9120_01(HttpServletRequest request, @RequestBody PJTE9120DTO PJTE9120) throws Exception {
+        int result = 0;
+        int result_reply = 0;
+        int result_comment = 0;
 
         PJTE9120DTO PJTE9120D = new PJTE9120DTO();
         /* dto 값 셋팅 */
@@ -259,9 +261,17 @@ public class PJTE9120Controller {
         PJTE9120D.setPost_id(PJTE9120.getPost_id());
         PJTE9120D.setTxt_psw(PJTE9120.getTxt_psw());
 
-        result = PJTE9120Service.delete_9120_01(PJTE9120D)
-               && PJTE9120Service.delete_9120_10(PJTE9120D)
-               && PJTE9120Service.delete_9120_11(PJTE9120D);
+        if(Integer.parseInt(PJTE9120.getRpl_cnt()) != 0) {
+            result_reply = PJTE9120Service.delete_9120_10(PJTE9120D);
+            result += result_reply;
+        }
+
+        if(Integer.parseInt(PJTE9120.getCmnt_cnt()) != 0) {
+            result_comment = PJTE9120Service.delete_9120_11(PJTE9120D);
+            result += result_comment;
+        }
+
+        result = PJTE9120Service.delete_9120_01(PJTE9120D);
 
         return result;
     }
@@ -368,4 +378,27 @@ public class PJTE9120Controller {
 
         return result;
     }
+
+    /**
+         * 게시정보 첨부 등록
+         * @author
+         * @param
+         * @return result
+         * @throws Exception
+         */
+        @PutMapping("/update_9120_02")
+        public @ResponseBody boolean update_9120_02(@RequestBody PJTE9120DTO PJTE9120) throws Exception{
+            boolean result = false;
+
+            PJTE9120DTO PJTE9120U = new PJTE9120DTO();
+
+            PJTE9120U.setPrjt_id(PJTE9120.getPrjt_id());
+            PJTE9120U.setPost_id(PJTE9120.getPost_id());
+            PJTE9120U.setAtfl_mng_id(PJTE9120.getAtfl_mng_id());
+            PJTE9120U.setTxt_psw(PJTE9120.getTxt_psw());
+
+            result = PJTE9120Service.update_9120_02(PJTE9120U);
+
+            return result;
+        }
 }

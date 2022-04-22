@@ -1,8 +1,10 @@
 package com.iteyes.dto.pms;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PJTE1000DTO {
 
     private String login_emp_no;        /*직원번호*/

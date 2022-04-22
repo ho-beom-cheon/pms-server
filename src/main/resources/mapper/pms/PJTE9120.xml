@@ -17,6 +17,8 @@
 			 ,A.POST_ID
 			 ,A.GESIPAN_ID
 			 ,A.ORG_FILE_NM
+		     ,A.RPL_CNT
+		     ,A.CMNT_CNT
 		FROM  (SELECT A.POST_TITL
 					,DATE_FORMAT(A.DB_CHG_TS,'%Y-%m-%d %H:%i:%s') AS POST_DT
 					,CASE WHEN D.ANNYM_YN   = 'Y' THEN '' ELSE B.EMPNM END AS POST_NM
@@ -126,7 +128,7 @@
 				 AND    A.POST_ID   = #{post_id}) A
 		ORDER BY SUBSTR(A.PRN_CMNT_CD,1,6) DESC, A.PRN_CMNT_CD
 	</select>
-
+<!-- 조회수 증가-->
 	<update id="update_9120_01" parameterType="Map">
 		UPDATE pms_post_info
 		   SET VIEW_CNT    = VIEW_CNT + 1
@@ -134,12 +136,12 @@
 		   AND BKUP_ID     = '0000000000'
 		   AND PRJT_ID     = #{prjt_id}
 		   AND POST_ID     = #{post_id}
-           AND TXT_PSW     = #{txt_psw}
 	</update>
 
+<!--	게시정보 첨부 등록 업데이트-->
 	<update id="update_9120_02" parameterType="Map">
 		UPDATE pms_post_info
-		   SET
+		   SET ATFL_MNG_ID = #{atfl_mng_id}
 		 WHERE 1 = 1
 		   AND BKUP_ID     = '0000000000'
 		   AND PRJT_ID     = #{prjt_id}

@@ -18,7 +18,9 @@ public interface PJTE9120Service {
 	/* 게시정보등록 */
 	boolean insert_9120_01(PJTE9120DTO PJTE9120C) throws Exception;
 	/* 게시정보삭제 */
-	boolean delete_9120_01(PJTE9120DTO PJTE9120D) throws Exception;
+	int delete_9120_01(PJTE9120DTO PJTE9120D) throws Exception;
+	int delete_9120_10(PJTE9120DTO PJTE9120D) throws Exception;
+	int delete_9120_11(PJTE9120DTO PJTE9120D) throws Exception;
 	/* 답글정보등록 */
 	boolean insert_9120_02(PJTE9120DTO PJTE9120C) throws Exception;
 	/* 답글정보삭제 */
@@ -27,6 +29,7 @@ public interface PJTE9120Service {
 	boolean insert_9120_03(PJTE9120DTO PJTE9120C) throws Exception;
 	/* 댓글정보삭제 */
 	boolean delete_9120_03(PJTE9120DTO PJTE9120D) throws Exception;
-	boolean delete_9120_10(PJTE9120DTO PJTE9120D) throws Exception;
-	boolean delete_9120_11(PJTE9120DTO PJTE9120D) throws Exception;
+	/* 게시정보 첨부등록 */
+	boolean update_9120_02(PJTE9120DTO PJTE9120) throws Exception;
+
 }
