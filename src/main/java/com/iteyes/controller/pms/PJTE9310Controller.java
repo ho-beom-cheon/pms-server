@@ -77,7 +77,7 @@ public class PJTE9310Controller {
         /* dto 값 셋팅*/
         PJTE9310.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE9310.setBkup_id(request.getParameter("bkup_id_selected"));
-        PJTE9310.setDept_cd(request.getParameter("dept_cd"));
+        PJTE9310.setDept_cd(request.getParameter("dept_cd_selected"));
 
         /* 서비스 요청**/
         List<PJTE9310DTO> list = PJTE9310Service.select_9310_01(PJTE9310);
