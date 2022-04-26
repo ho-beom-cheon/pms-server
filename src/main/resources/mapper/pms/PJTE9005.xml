@@ -158,7 +158,7 @@
              , A.PRJT_ID
              , A.NXT_PRJ_NM
              , D.INP_PRJ_NM
-             , D.WTH_DT
+             , substring(D.WTH_DT, 0,3) || '+' || substring(D.WTH_DT, 4,2) || substring(D.WTH_DT, 7,2) AS WTH_DT
              , D.INP_CLS_CD
         FROM pms_man_pfle_info A
                  LEFT OUTER JOIN

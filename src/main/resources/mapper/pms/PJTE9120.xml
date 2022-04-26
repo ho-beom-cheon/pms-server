@@ -114,9 +114,7 @@
 					,A.POST_ID
 					,A.CMNT_NO
 					,A.PRN_CMNT_CD
-					,CASE WHEN LENGTH(A.PRN_CMNT_CD)/6 = 1 THEN 1
-						  WHEN MOD(LENGTH(A.PRN_CMNT_CD)/6,2) = 0
-							  THEN LENGTH(A.PRN_CMNT_CD)/6 ELSE LENGTH(A.PRN_CMNT_CD)/6+1 END AS LEN
+				    ,<![CDATA[CASE WHEN LENGTH(A.PRN_CMNT_CD)/6 < 3 THEN LENGTH(A.PRN_CMNT_CD)/6 ELSE LENGTH(A.PRN_CMNT_CD)/6+(LENGTH(A.PRN_CMNT_CD)/6-1) END ]]> AS LEN
 			   FROM   pms_cmnt_lst A
 						  LEFT OUTER JOIN
 					  pms_emp_info   B
@@ -153,18 +151,27 @@
 		   AND BKUP_ID     = '0000000000'
 		   AND PRJT_ID     = #{prjt_id}
 		   AND POST_ID     = #{post_id}
-		   AND RPL_NO	  = #{rpl_no}
+		   AND RPL_NO	   = #{rpl_no}
 		   AND TXT_PSW     = #{txt_psw}
 	</delete>
 
 	<delete id="delete_9120_03" parameterType="Map">
 		DELETE FROM pms_cmnt_lst
-		WHERE  1 = 1
-		  AND    BKUP_ID     = '0000000000'
-		  AND    PRJT_ID     = #{prjt_id}
-		  AND    POST_ID     = #{post_id}
-		  AND    CMNT_NO	 = #{cmnt_no}
-		  AND TXT_PSW        = #{txt_psw}
+	 	 WHERE  1 = 1
+	       AND BKUP_ID     = '0000000000'
+	       AND PRJT_ID     = #{prjt_id}
+	       AND POST_ID     = #{post_id}
+	       AND PRN_CMNT_CD LIKE CONCAT(#{prn_cmnt_cd}, '%')
+	       AND EXISTS (
+	       			   SELECT *
+	       			     FROM pms_cmnt_lst
+	       			    WHERE 1=1
+	      			      AND BKUP_ID     = '0000000000'
+	      			 	  AND PRJT_ID     = #{prjt_id}
+	      		 		  AND POST_ID     = #{post_id}
+		                  AND CMNT_NO	  = #{cmnt_no}
+	       	 		      AND TXT_PSW     = #{txt_psw}
+	  			      )
 	</delete>
 
 	<!--  delete_9120_01 이후 연쇄 삭제작업(게시글에 종속된 답글 및 댓글)  -->
