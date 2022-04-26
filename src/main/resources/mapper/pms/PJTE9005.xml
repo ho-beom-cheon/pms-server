@@ -158,7 +158,9 @@
              , A.PRJT_ID
              , A.NXT_PRJ_NM
              , D.INP_PRJ_NM
-             , substring(D.WTH_DT, 0,3) || '+' || substring(D.WTH_DT, 4,2) || substring(D.WTH_DT, 7,2) AS WTH_DT
+             , CASE WHEN D.WTH_DT IS NULL THEN D.WTH_DT
+                    ELSE CONCAT(substring(D.WTH_DT, 1,4),'-',substring(D.WTH_DT, 5,2),'-',substring(D.WTH_DT, 7,2))
+                END AS WTH_DT
              , D.INP_CLS_CD
         FROM pms_man_pfle_info A
                  LEFT OUTER JOIN

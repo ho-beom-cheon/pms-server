@@ -171,7 +171,7 @@ public class PJTE9005Controller {
 
         PJTE9005DTO PJTE9005D = new PJTE9005DTO();
 
-        PJTE9005D.setPrjt_id     (PJTE9005.getPrjt_id());
+        PJTE9005D.setPrjt_id(PJTE9005.getPrjt_id());
         PJTE9005D.setMan_no(PJTE9005.getMan_no());
 
         if(PJTE9005.getMan_no() != null || PJTE9005.getMan_no() != "") {
@@ -197,6 +197,10 @@ public class PJTE9005Controller {
         PJTE9005C.setNow_career  (PJTE9005.getNow_career  ());
         PJTE9005C.setEnter_ymd   (PJTE9005.getEnter_ymd   ());
         PJTE9005C.setSex_nm      (PJTE9005.getSex_nm      ());
+        PJTE9005C.setInp_prj_nm  (PJTE9005.getInp_prj_nm  ());
+        PJTE9005C.setWth_dt      (PJTE9005.getWth_dt      ());
+        PJTE9005C.setInp_cls_cd  (PJTE9005.getInp_cls_cd  ());
+        PJTE9005C.setNxt_prj_nm  (PJTE9005.getNxt_prj_nm  ());
         PJTE9005C.setMain_skill  (PJTE9005.getMain_skill  ());
         PJTE9005C.setDuty_txt    (PJTE9005.getDuty_txt    ());
         PJTE9005C.setCpno        (PJTE9005.getCpno        ());
