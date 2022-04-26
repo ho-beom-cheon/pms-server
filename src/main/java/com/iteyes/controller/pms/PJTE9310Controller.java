@@ -111,30 +111,42 @@ public class PJTE9310Controller {
     public @ResponseBody boolean insert_9310_01(@RequestBody PJTE9310DTO PJTE9310) throws Exception{
         boolean result = false;
 
-        PJTE9310DTO PJTE9310C = new PJTE9310DTO();
+        if(PJTE9310.getGridData().size() != 0) {
 
-        PJTE9310C.setPrjt_id(PJTE9310.getPrjt_id());
-        PJTE9310C.setDept_nm(PJTE9310.getDept_nm());
-        PJTE9310C.setHdq_nm(PJTE9310.getHdq_nm());
-        PJTE9310C.setTm_nm(PJTE9310.getTm_nm());
-        PJTE9310C.setRank_nm(PJTE9310.getRank_nm());
-        PJTE9310C.setEmpno(PJTE9310.getEmpno());
-        PJTE9310C.setEmpnm(PJTE9310.getEmpnm());
-        PJTE9310C.setEnt_dt(PJTE9310.getEnt_dt());
-        PJTE9310C.setInp_prj_nm(PJTE9310.getInp_prj_nm());
-        PJTE9310C.setInp_dt(PJTE9310.getInp_dt());
-        PJTE9310C.setWth_dt(PJTE9310.getWth_dt());
-        PJTE9310C.setPrj_typ_nm(PJTE9310.getPrj_typ_nm());
-        PJTE9310C.setPrf_ar(PJTE9310.getPrf_ar());
-        PJTE9310C.setRmrk(PJTE9310.getRmrk());
-        PJTE9310C.setInp_cls_cd(PJTE9310.getInp_cls_cd());
-        PJTE9310C.setWth_sch_yn(PJTE9310.getWth_sch_yn());
-        PJTE9310C.setDept_cd(PJTE9310.getDept_cd());
+            PJTE9310DTO PJTE9310D = new PJTE9310DTO();
+            PJTE9310DTO PJTE9310C = new PJTE9310DTO();
 
-        PJTE9310C.setLogin_emp_no(PJTE9310.getLogin_emp_no());
+            for (int i = 0; i < PJTE9310.getGridData().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE9310D.setPrjt_id(PJTE9310.getGridData().get(i).getPrjt_id());
+                PJTE9310D.setEmpno(PJTE9310.getGridData().get(i).getEmpno());
 
-        result = PJTE9310Service.insert_9310_01(PJTE9310C);
+                PJTE9310Service.delete_9310_01(PJTE9310D);
+            }
 
+            for (int i = 0; i < PJTE9310.getGridData().size(); i++) {
+                PJTE9310C.setPrjt_id(PJTE9310.getPrjt_id());
+                PJTE9310C.setDept_nm(PJTE9310.getGridData().get(i).getDept_nm());
+                PJTE9310C.setHdq_nm(PJTE9310.getGridData().get(i).getHdq_nm());
+                PJTE9310C.setTm_nm(PJTE9310.getGridData().get(i).getTm_nm());
+                PJTE9310C.setRank_nm(PJTE9310.getGridData().get(i).getRank_nm());
+                PJTE9310C.setEmpno(PJTE9310.getGridData().get(i).getEmpno());
+                PJTE9310C.setEmpnm(PJTE9310.getGridData().get(i).getEmpnm());
+                PJTE9310C.setEnt_dt(PJTE9310.getGridData().get(i).getEnt_dt());
+                PJTE9310C.setInp_prj_nm(PJTE9310.getGridData().get(i).getInp_prj_nm());
+                PJTE9310C.setInp_dt(PJTE9310.getGridData().get(i).getInp_dt());
+                PJTE9310C.setWth_dt(PJTE9310.getGridData().get(i).getWth_dt());
+                PJTE9310C.setPrj_typ_nm(PJTE9310.getGridData().get(i).getPrj_typ_nm());
+                PJTE9310C.setPrf_ar(PJTE9310.getGridData().get(i).getPrf_ar());
+                PJTE9310C.setRmrk(PJTE9310.getGridData().get(i).getRmrk());
+                PJTE9310C.setInp_cls_cd(PJTE9310.getGridData().get(i).getInp_cls_cd());
+                PJTE9310C.setWth_sch_yn(PJTE9310.getGridData().get(i).getWth_sch_yn());
+
+                PJTE9310C.setLogin_emp_no(PJTE9310.getLogin_emp_no());
+
+                result = PJTE9310Service.insert_9310_01(PJTE9310C);
+            }
+        }
         return result;
     }
 

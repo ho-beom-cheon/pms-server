@@ -95,7 +95,7 @@
 			, #{inp_cls_cd}
 			, #{rmrk}
 			, #{wth_sch_yn}
-			, #{dept_cd}
+			, (SELECT CONCAT(SUBSTR(DEPT_CD,1,4),'0000') FROM pms_emp_info WHERE BKUP_ID = '0000000000' AND PRJT_ID = #{prjt_id} AND EMPNO = #{empno})
 			, #{login_emp_no}
 			, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 			)
