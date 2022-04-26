@@ -84,12 +84,12 @@
            FROM(SELECT *
                   FROM pms_cd_del_mng
                  WHERE GRP_TYCD   = '1000000038'
-                   AND PRJT_ID ='0000000001') A
+                   AND PRJT_ID =#{prjt_id}) A
                  LEFT OUTER JOIN
                        pms_cd_del_mng B
                    ON A.PRJT_ID=B.PRJT_ID
                   AND B.GRP_TYCD   = '1000000039'
-                  AND B.PRJT_ID ='0000000001'
+                  AND B.PRJT_ID =#{prjt_id}
         ) B
         ON  A.PRJT_ID = B.PRJT_ID
         AND A.REAL_PRJT_ID = B.DTLS_TYCD1
