@@ -372,6 +372,7 @@ public class PJTE9120Controller {
         PJTE9120D.setPrjt_id(PJTE9120.getPrjt_id());
         PJTE9120D.setPost_id(PJTE9120.getPost_id());
         PJTE9120D.setCmnt_no(PJTE9120.getCmnt_no());
+        PJTE9120D.setPrn_cmnt_cd(PJTE9120.getPrn_cmnt_cd());
         PJTE9120D.setTxt_psw(PJTE9120.getTxt_psw());
 
         result = PJTE9120Service.delete_9120_03(PJTE9120D);
