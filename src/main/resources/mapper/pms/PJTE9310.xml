@@ -10,10 +10,10 @@
 		,B.RANK_NM
 		,B.EMPNO
 		,B.EMPNM
-		,A.ENT_DT
+		, CASE WHEN A.ENT_DT IS NOT NULL AND A.ENT_DT != '' THEN STR_TO_DATE(A.ENT_DT , '%Y%m%d') ELSE '' END AS ENT_DT
 		,A.INP_PRJ_NM
-		,A.INP_DT
-		,A.WTH_DT
+		, CASE WHEN A.INP_DT IS NOT NULL AND A.INP_DT != '' THEN STR_TO_DATE(A.INP_DT , '%Y%m%d') ELSE '' END AS INP_DT
+		, CASE WHEN A.WTH_DT IS NOT NULL AND A.WTH_DT != '' THEN STR_TO_DATE(A.WTH_DT , '%Y%m%d') ELSE '' END AS WTH_DT
 		,A.PRJ_TYP_NM
 		,A.PRF_AR
 		,A.RMRK
@@ -49,7 +49,7 @@
 		<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
 			AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
 		</if>
-		ORDER BY C.DTLS_TYNM, D.DTLS_TYNM, E.DTLS_TYNM, B.EMPNM
+		ORDER BY C.DTLS_TYNM, D.DTLS_TYNM, E.DTLS_TYNM, A.INP_PRJ_NM, B.EMPNM
 	</select>
 
 	<delete id="delete_9310_01" parameterType="Map">
@@ -86,10 +86,10 @@
 				'0000000000'
 			, #{prjt_id}
 			, #{empno}
-			, #{ent_dt}
+			, REGEXP_REPLACE(#{ent_dt}, '[^[:alnum:][:space:]]+', '') /* 정규식 사용하여 '-', '.' 등 모든 특수문자 제거 */
 			, #{inp_prj_nm}
-			, #{inp_dt}
-			, #{wth_dt}
+			, REGEXP_REPLACE(#{inp_dt}, '[^[:alnum:][:space:]]+', '')
+			, REGEXP_REPLACE(#{wth_dt}, '[^[:alnum:][:space:]]+', '')
 			, #{prf_ar}
 			, #{prj_typ_nm}
 			, #{inp_cls_cd}
