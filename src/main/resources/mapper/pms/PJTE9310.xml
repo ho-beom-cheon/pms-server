@@ -5,32 +5,32 @@
 <mapper namespace="com.iteyes.mapper.pms.PJTE9310Mapper">
 	<select id="select_9310_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9310DTO">
 		SELECT A.DEPT_NM
-		,A.HDQ_NM
-		,A.TM_NM
-		,A.RANK_NM
-		,A.EMPNO
-		,A.EMPNM
-		,A.ENT_DT
-		,A.INP_PRJ_NM
-		,A.INP_DT
-		,A.WTH_DT
-		,A.PRJ_TYP_NM
-		,A.PRF_AR
-		,A.RMRK
-		,A.INP_CLS_CD
-		,A.WTH_SCH_YN
-		,A.DEPT_CD
-		,A.PRJT_ID
+			  ,A.HDQ_NM
+			  ,A.TM_NM
+			  ,A.RANK_NM
+			  ,A.EMPNO
+			  ,A.EMPNM
+			  ,A.ENT_DT
+			  ,A.INP_PRJ_NM
+			  ,A.INP_DT
+			  ,A.WTH_DT
+			  ,A.PRJ_TYP_NM
+			  ,A.PRF_AR
+			  ,A.RMRK
+			  ,A.INP_CLS_CD
+			  ,A.WTH_SCH_YN
+			  ,A.DEPT_CD
+			  ,A.PRJT_ID
 		FROM  (SELECT C.DTLS_TYNM AS DEPT_NM
 					,CASE WHEN B.BZCD IN ('400','500')       THEN '' ELSE D.DTLS_TYNM END AS HDQ_NM
 					,CASE WHEN B.BZCD IN ('300','400','500') THEN '' ELSE E.DTLS_TYNM END AS TM_NM
 					,CONCAT(B.RANK_NM,'[',F.DTLS_TYNM ,']') AS RANK_NM
 					,B.EMPNO
 					,B.EMPNM
-					,A.ENT_DT
+					,DATE_FORMAT(A.ENT_DT,'%Y-%m-%d') AS ENT_DT
 					,A.INP_PRJ_NM
-					,A.INP_DT
-					,A.WTH_DT
+					,DATE_FORMAT(A.INP_DT,'%Y-%m-%d') AS INP_DT
+					,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
 					,A.PRJ_TYP_NM
 					,A.PRF_AR
 					,A.RMRK
