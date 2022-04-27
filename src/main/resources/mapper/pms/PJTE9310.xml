@@ -69,6 +69,7 @@
 					AND F.BKUP_ID    = B.BKUP_ID
 					WHERE  B.BKUP_ID = #{bkup_id}
 					AND    B.PRJT_ID = #{prjt_id}
+					AND    B.EMPNO   != 'Admin'
 					<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
 						AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
 					</if>
