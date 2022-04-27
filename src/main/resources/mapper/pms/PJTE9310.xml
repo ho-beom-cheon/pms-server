@@ -20,6 +20,7 @@
 		,A.INP_CLS_CD
 		,A.WTH_SCH_YN
 		,A.DEPT_CD
+		,A.PRJT_ID
 		FROM  (SELECT C.DTLS_TYNM AS DEPT_NM
 					,CASE WHEN B.BZCD IN ('400','500')       THEN '' ELSE D.DTLS_TYNM END AS HDQ_NM
 					,CASE WHEN B.BZCD IN ('300','400','500') THEN '' ELSE E.DTLS_TYNM END AS TM_NM
@@ -37,6 +38,7 @@
 					,A.WTH_SCH_YN
 					,CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') AS DEPT_CD
 					,F.SORT_SEQ
+					,A.PRJT_ID
 					FROM   pms_emp_info   B
 					LEFT OUTER JOIN
 					pms_inp_mnp_stt   A
