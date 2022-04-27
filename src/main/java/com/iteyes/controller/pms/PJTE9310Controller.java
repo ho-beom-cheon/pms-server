@@ -116,13 +116,12 @@ public class PJTE9310Controller {
             PJTE9310DTO PJTE9310D = new PJTE9310DTO();
             PJTE9310DTO PJTE9310C = new PJTE9310DTO();
 
-            for (int i = 0; i < PJTE9310.getGridData().size(); i++) {
-                /* dto 값 셋팅*/
-                PJTE9310D.setPrjt_id(PJTE9310.getGridData().get(i).getPrjt_id());
-                PJTE9310D.setEmpno(PJTE9310.getGridData().get(i).getEmpno());
 
-                PJTE9310Service.delete_9310_01(PJTE9310D);
-            }
+            /* dto 값 셋팅*/
+            PJTE9310D.setPrjt_id(PJTE9310.getPrjt_id());
+            PJTE9310D.setDept_cd(PJTE9310.getDept_cd());
+            PJTE9310Service.delete_9310_01(PJTE9310D);
+
 
             for (int i = 0; i < PJTE9310.getGridData().size(); i++) {
                 PJTE9310C.setPrjt_id(PJTE9310.getPrjt_id());
