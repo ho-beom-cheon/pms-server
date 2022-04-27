@@ -4,52 +4,76 @@
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9310Mapper">
 	<select id="select_9310_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9310DTO">
-		SELECT C.DTLS_TYNM AS DEPT_NM
-		,D.DTLS_TYNM AS HDQ_NM
-		,E.DTLS_TYNM AS TM_NM
-		,B.RANK_NM
-		,B.EMPNO
-		,B.EMPNM
-		, CASE WHEN A.ENT_DT IS NOT NULL AND A.ENT_DT != '' THEN STR_TO_DATE(A.ENT_DT , '%Y%m%d') ELSE '' END AS ENT_DT
+		SELECT A.DEPT_NM
+		,A.HDQ_NM
+		,A.TM_NM
+		,A.RANK_NM
+		,A.EMPNO
+		,A.EMPNM
+		,A.ENT_DT
 		,A.INP_PRJ_NM
-		, CASE WHEN A.INP_DT IS NOT NULL AND A.INP_DT != '' THEN STR_TO_DATE(A.INP_DT , '%Y%m%d') ELSE '' END AS INP_DT
-		, CASE WHEN A.WTH_DT IS NOT NULL AND A.WTH_DT != '' THEN STR_TO_DATE(A.WTH_DT , '%Y%m%d') ELSE '' END AS WTH_DT
+		,A.INP_DT
+		,A.WTH_DT
 		,A.PRJ_TYP_NM
 		,A.PRF_AR
 		,A.RMRK
 		,A.INP_CLS_CD
 		,A.WTH_SCH_YN
-		,CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') AS DEPT_CD
-		FROM   pms_emp_info   B
-		LEFT OUTER JOIN
-		pms_inp_mnp_stt   A
-		ON    A.EMPNO      = B.EMPNO
-		AND   A.PRJT_ID    = B.PRJT_ID
-		AND   A.BKUP_ID    = B.BKUP_ID
-		LEFT OUTER JOIN
-		pms_cd_del_mng   C
-		ON  C.DTLS_TYCD  = CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000')
-		AND C.GRP_TYCD   = '1000000044'
-		AND C.PRJT_ID    = B.PRJT_ID
-		AND C.BKUP_ID    = B.BKUP_ID
-		LEFT OUTER JOIN
-		pms_cd_del_mng   D
-		ON  D.DTLS_TYCD  = CONCAT(SUBSTR(B.DEPT_CD,1,6),'00')
-		AND D.GRP_TYCD   = '1000000044'
-		AND D.PRJT_ID    = B.PRJT_ID
-		AND D.BKUP_ID    = B.BKUP_ID
-		LEFT OUTER JOIN
-		pms_cd_del_mng   E
-		ON  E.DTLS_TYCD  = B.DEPT_CD
-		AND E.GRP_TYCD   = '1000000044'
-		AND E.PRJT_ID    = B.PRJT_ID
-		AND E.BKUP_ID    = B.BKUP_ID
-		WHERE  B.BKUP_ID = #{bkup_id}
-		AND    B.PRJT_ID = #{prjt_id}
-		<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
-			AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
-		</if>
-		ORDER BY C.DTLS_TYNM, D.DTLS_TYNM, E.DTLS_TYNM, A.INP_PRJ_NM, B.EMPNM
+		,A.DEPT_CD
+		FROM  (SELECT C.DTLS_TYNM AS DEPT_NM
+					,CASE WHEN B.BZCD IN ('400','500')       THEN '' ELSE D.DTLS_TYNM END AS HDQ_NM
+					,CASE WHEN B.BZCD IN ('300','400','500') THEN '' ELSE E.DTLS_TYNM END AS TM_NM
+					,CONCAT(B.RANK_NM,'[',F.DTLS_TYNM ,']') AS RANK_NM
+					,B.EMPNO
+					,B.EMPNM
+					,A.ENT_DT
+					,A.INP_PRJ_NM
+					,A.INP_DT
+					,A.WTH_DT
+					,A.PRJ_TYP_NM
+					,A.PRF_AR
+					,A.RMRK
+					,A.INP_CLS_CD
+					,A.WTH_SCH_YN
+					,CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') AS DEPT_CD
+					,F.SORT_SEQ
+					FROM   pms_emp_info   B
+					LEFT OUTER JOIN
+					pms_inp_mnp_stt   A
+					ON    A.EMPNO      = B.EMPNO
+					AND   A.PRJT_ID    = B.PRJT_ID
+					AND   A.BKUP_ID    = B.BKUP_ID
+					LEFT OUTER JOIN
+					pms_cd_del_mng   C
+					ON  C.DTLS_TYCD  = CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000')
+					AND C.GRP_TYCD   = '1000000044'
+					AND C.PRJT_ID    = B.PRJT_ID
+					AND C.BKUP_ID    = B.BKUP_ID
+					LEFT OUTER JOIN
+					pms_cd_del_mng   D
+					ON  D.DTLS_TYCD  = CONCAT(SUBSTR(B.DEPT_CD,1,6),'00')
+					AND D.GRP_TYCD   = '1000000044'
+					AND D.PRJT_ID    = B.PRJT_ID
+					AND D.BKUP_ID    = B.BKUP_ID
+					LEFT OUTER JOIN
+					pms_cd_del_mng   E
+					ON  E.DTLS_TYCD  = B.DEPT_CD
+					AND E.GRP_TYCD   = '1000000044'
+					AND E.PRJT_ID    = B.PRJT_ID
+					AND E.BKUP_ID    = B.BKUP_ID
+					LEFT OUTER JOIN
+					pms_cd_del_mng  F
+					ON  F.DTLS_TYCD  = B.BZCD
+					AND F.GRP_TYCD   = '1000000001'
+					AND F.PRJT_ID    = B.PRJT_ID
+					AND F.BKUP_ID    = B.BKUP_ID
+					WHERE  B.BKUP_ID = #{bkup_id}
+					AND    B.PRJT_ID = #{prjt_id}
+					<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
+						AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
+					</if>
+					) A
+		ORDER BY A.DEPT_NM, A.HDQ_NM,A.TM_NM, A.SORT_SEQ DESC, A.INP_PRJ_NM, A.EMPNM
 	</select>
 
 	<delete id="delete_9310_01" parameterType="Map">
