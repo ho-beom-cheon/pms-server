@@ -23,6 +23,7 @@
 		WHERE USE_YN   = 'Y'
 		  AND GRP_TYCD = '0000000000'
 		  AND BKUP_ID  = '0000000000'
+        ORDER BY SORT_SEQ
 		]]>
     </select>
 
