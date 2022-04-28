@@ -11,7 +11,7 @@
              , B.DTLS_TYNM1 AS REAL_PRJT_NM
              , C.EMPNM AS PM_NM
              , A.PM_NO
-             , A.WEEK_YYMM
+             , REPLACE(#{week_yymm},'-','') AS WEEK_YYMM
              , B.DTLS_TYCD2 AS WEEK_SQN_CD
              , A.DEPT_CD
              , F.DTLS_TYNM AS DEPT_NM
@@ -141,7 +141,7 @@
         AND   B.DTLS_TYCD1 = CASE WHEN  #{real_prjt_id}  = 'TTT' THEN  B.DTLS_TYCD1  ELSE  #{real_prjt_id}  END
         <choose>
             <when test='week_seq_val == "Y" and week_sqn_cd =="TTT"'>
-                <![CDATA[  AND   B.DTLS_TYCD2 <= (WEEK(DATE_FORMAT(NOW(),"%Y%m%d"),5)-WEEK(DATE_SUB(DATE_FORMAT(NOW(),"%Y%m%d"),INTERVAL DAYOFMONTH(DATE_FORMAT(NOW(),"%Y%m%d"))-1 DAY),5)+1) *100 ]]>
+                <![CDATA[  AND   B.DTLS_TYCD2 <= RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0') ]]>
             </when>
             <otherwise>
                 AND   B.DTLS_TYCD2 = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD2 ELSE #{week_sqn_cd} END
@@ -153,7 +153,7 @@
         <if test='pm_no != "" and pm_no != null'>
             AND    A.PM_NO = #{pm_no}
         </if>
-        ORDER BY B.DTLS_TYCD1 DESC, B.DTLS_TYCD2 ASC,A.WEEK_YYMM DESC
+        ORDER BY B.DTLS_TYCD2 DESC, B.DTLS_TYCD1 DESC
     </select>
 
     <select id="select_8000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
