@@ -4,23 +4,29 @@
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE9000Mapper">
      <select id="select_9000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
-          SELECT PRJT_ID
-               ,BKUP_ID
-               ,BZCD
-               ,EMPNO
-               ,EMPNM
-               ,RANK_NM
-               ,CATN_DCD
-               ,LGN_PWD
-               ,AUT_CD
-               ,REAL_PRJT_ID
-               ,DEPT_CD
-               ,DEL_YN
-          FROM   pms_emp_info
+          SELECT  A.PRJT_ID
+               ,A.BKUP_ID
+               ,A.BZCD
+               ,A.EMPNO
+               ,A.EMPNM
+               ,A.RANK_NM
+               ,A.CATN_DCD
+               ,A.LGN_PWD
+               ,A.AUT_CD
+               ,A.REAL_PRJT_ID
+               ,A.DEPT_CD
+               ,A.DEL_YN
+               ,B.SORT_SEQ
+          FROM   pms_emp_info A
+                      LEFT OUTER JOIN pms_cd_del_mng B ON
+                         B.DTLS_TYCD = A.BZCD
+                    AND B.GRP_TYCD  = '1000000001'
+                    AND B.PRJT_ID   = A.PRJT_ID
+                    AND B.BKUP_ID   = A.BKUP_ID
           WHERE  1 = 1
-            AND    BKUP_ID = #{bkup_id}
-            AND    PRJT_ID = #{prjt_id}
-          ORDER BY DEPT_CD, EMPNM
+            AND    A.BKUP_ID = #{bkup_id}
+            AND    A.PRJT_ID = #{prjt_id}
+          ORDER BY SUBSTR(A.DEPT_CD,1,6), A.DEPT_CD, B.SORT_SEQ DESC, A.EMPNM
      </select>
      <select id="select_9000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
           SELECT PRJT_ID
