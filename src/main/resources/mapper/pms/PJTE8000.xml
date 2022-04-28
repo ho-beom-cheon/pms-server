@@ -6,8 +6,8 @@
     <select id="select_8000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
         SELECT 		B.DTLS_TYCD1 AS REAL_PRJT_ID
              , B.BKUP_ID AS BKUP_ID
-             , B.ETC_TXT1 AS START_PRJT_DATE
-             , B.ETC_TXT2 AS END_PRJT_DATE
+             , DATE_FORMAT(B.ETC_TXT1,'%Y-%m-%d') AS START_PRJT_DATE
+             , DATE_FORMAT(B.ETC_TXT2,'%Y-%m-%d') AS END_PRJT_DATE
              , B.DTLS_TYNM1 AS REAL_PRJT_NM
              , C.EMPNM AS PM_NM
              , A.PM_NO
@@ -271,7 +271,7 @@
           AND    WEEK_YYMM       = REPLACE(#{week_yymm},'-','')
           AND    REAL_PRJT_ID	 = #{real_prjt_id}
           AND    DEPT_CD         = #{dept_cd}
-          AND    PRJT_ID         = '0000000001'
+          AND    PRJT_ID         = #{prjt_id}
           AND    BKUP_ID	     = '0000000000'
     </update>
 </mapper>
