@@ -54,7 +54,7 @@
 			AND A.REG_DT BETWEEN CONCAT((REPLACE(#{week_yymm}, '-', '')),'01') AND CONCAT((REPLACE(#{week_yymm}, '-', '')),'31 ')
 		</if>
 		<if test='over_due_dt_yn == "true"'>
-			<![CDATA[AND A.COM_RGS_DT < CURDATE() AND A.WORK_STEP_CD == '200']]>
+			<![CDATA[AND A.COM_RGS_DT < CURDATE() AND A.WORK_STEP_CD = '200']]>
 		</if>
 		ORDER BY A.REG_DT DESC, A.MNG_ID DESC
 	</select>
