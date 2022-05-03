@@ -26,44 +26,44 @@
           AND BKUP_ID  = '0000000000'
     </select>
     <select id="select_9001_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9001DTO">
-     <![CDATA[
-      SELECT PRJT_ID                 /*프로젝트*/
-           , BZCD                    /*업무구분*/
-           , EMPNO                   /*직원번호*/
-           , EMPNM                   /*직원명*/
-           , RANK_NM                 /*직급명*/
-           , CATN_DCD                /*구성원구분*/
-           , EMAIL_ADDR              /*이메일주소*/
-           , CPNO                    /*휴대폰번호*/
-           , LGN_PWD                 /*로그인비밀번호*/
-           , AUT_CD                  /*권한ID*/
-           , IP_ADDR                 /*IP주소*/
-           , PLAN_THW_STDT           /*예정투입시작일자*/
-           , PLAN_THW_ENDT           /*예정투입종료일자*/
-           , REAL_THW_STDT           /*실제투입시작일자*/
-           , REAL_THW_ENDT           /*실제투입종료일자*/
-      FROM pms_emp_info
+        <![CDATA[
+      SELECT A.PRJT_ID                 /*프로젝트     */
+           , B.DTLS_TYNM AS DEPT_NM    /*부서명       */
+           , A.BZCD                    /*업무구분     */
+           , A.EMPNO                   /*직원번호     */
+           , A.EMPNM                   /*직원명       */
+           , A.RANK_NM                 /*직급명       */
+           , A.CATN_DCD                /*구성원구분    */
+           , A.LGN_PWD                 /*로그인비밀번호 */
+           , A.AUT_CD                  /*권한ID      */
+      FROM pms_emp_info A
+           LEFT OUTER JOIN
+            pms_cd_del_mng   B
+            ON  B.DTLS_TYCD = A.DEPT_CD
+            AND B.GRP_TYCD  = '1000000044'
+            AND B.PRJT_ID   = A.PRJT_ID
+            AND B.BKUP_ID   = A.BKUP_ID
       ]]>
         WHERE 1=1
         /*프로젝트구분*/
         <if test='prjt_id != "" and prjt_id != null and prjt_id != "TTT"'>
-            AND PRJT_ID = #{prjt_id}
+            AND A.PRJT_ID = #{prjt_id}
         </if>
         /*백업ID*/
         <if test='bkup_id != "" and bkup_id != null and bkup_id != "TTT"'>
-            AND BKUP_ID = #{bkup_id}
+            AND A.BKUP_ID = #{bkup_id}
         </if>
         /*업무구분*/
         <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
-            AND BZCD = #{bzcd}
+            AND A.BZCD = #{bzcd}
         </if>
         /*직원번호*/
         <if test='empno != "" and empno != null'>
-            AND EMPNO LIKE CONCAT('%', #{empno}, '%')
+            AND A.EMPNO LIKE CONCAT('%', #{empno}, '%')
         </if>
         /*직원명*/
         <if test='empnm != "" and empnm != null'>
-            AND EMPNM LIKE CONCAT('%', #{empnm}, '%')
+            AND A.EMPNM LIKE CONCAT('%', #{empnm}, '%')
         </if>
     </select>
 </mapper>

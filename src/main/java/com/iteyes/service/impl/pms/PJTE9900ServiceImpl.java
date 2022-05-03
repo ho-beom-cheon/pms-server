@@ -1,6 +1,7 @@
 package com.iteyes.service.impl.pms;
 
 import com.iteyes.dto.pms.PJTE9900DTO;
+import com.iteyes.dto.pms.PJTE9900DTO;
 import com.iteyes.mapper.pms.PJTE9900Mapper;
 import com.iteyes.service.PJTE9900Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,40 @@ public class PJTE9900ServiceImpl implements PJTE9900Service {
 	public boolean delete_9900_01(PJTE9900DTO PJTE9900) throws Exception {
 
 		return pjte9900Mapper.delete_9900_01(PJTE9900);
+	}
+
+	@Override
+	public List<PJTE9900DTO> select_9900_10(PJTE9900DTO PJTE9900) throws Exception {
+
+		return pjte9900Mapper.select_9900_10(PJTE9900);
+
+	}
+
+	@Override
+	public boolean delete_9900_10(PJTE9900DTO PJTE9900) throws Exception {
+
+		return pjte9900Mapper.delete_9900_10(PJTE9900);
+
+	}
+
+	@Override
+	public boolean insert_9900_10(PJTE9900DTO PJTE9900) throws Exception {
+
+		return pjte9900Mapper.insert_9900_10(PJTE9900);
+
+	}
+
+	@Override
+	public boolean delete_9900_20(PJTE9900DTO PJTE9900) throws Exception {
+
+		return pjte9900Mapper.delete_9900_20(PJTE9900);
+
+	}
+
+	@Override
+	public boolean insert_9900_20(PJTE9900DTO PJTE9900) throws Exception {
+
+		return pjte9900Mapper.insert_9900_20(PJTE9900);
+
 	}
 }

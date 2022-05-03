@@ -2,14 +2,13 @@ package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE2100DTO;
+import com.iteyes.dto.pms.PJTE5000DTO;
 import com.iteyes.service.PJTE2100Service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +116,20 @@ public class PJTE2100Controller {
 
         PJTE2100DTO PJTE2100C = new PJTE2100DTO();
 
+        if (PJTE2100.getGridData().size() != 0) {
+            PJTE2100DTO PJTE2100D = new PJTE2100DTO();
+            for (int i = 0; i < PJTE2100.getGridData().size(); i++) {
+                /* dto 값 셋팅*/
+                PJTE2100D.setBkup_id(PJTE2100.getBkup_id());
+                PJTE2100D.setPrjt_id(PJTE2100.getPrjt_id());
+                PJTE2100D.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
+                PJTE2100D.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+
+                pjte2100Service.delete_2100_01(PJTE2100D);
+            }
+        }
+
+
         if(PJTE2100.getExcelUplod() == "Y") {
 
             PJTE2100DTO PJTE2100D = new PJTE2100DTO();
@@ -151,6 +164,7 @@ public class PJTE2100Controller {
                 PJTE2100C.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
                 PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
                 PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
+                PJTE2100C.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
                 PJTE2100C.setPrjt_id(PJTE2100.getPrjt_id());
 
                 PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
@@ -182,6 +196,7 @@ public class PJTE2100Controller {
                  PJTE2100C.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
                  PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
                  PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
+                 PJTE2100C.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
                  PJTE2100C.setPrjt_id(PJTE2100.getPrjt_id());
 
                  PJTE2100C.setLogin_aut_cd(PJTE2100.getLogin_aut_cd());
@@ -229,6 +244,7 @@ public class PJTE2100Controller {
             PJTE2100U.setEmpno(PJTE2100.getUpdatedRows().get(i).getEmpno());
             PJTE2100U.setPgm_id(PJTE2100.getUpdatedRows().get(i).getPgm_id());
             PJTE2100U.setBzcd(PJTE2100.getUpdatedRows().get(i).getBzcd());
+            PJTE2100U.setRqu_sbh_id(PJTE2100.getUpdatedRows().get(i).getRqu_sbh_id());
             PJTE2100U.setPrjt_id(PJTE2100.getUpdatedRows().get(i).getPrjt_id());
             PJTE2100U.setBkup_id(PJTE2100.getUpdatedRows().get(i).getBkup_id());
 

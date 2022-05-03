@@ -21,10 +21,14 @@ stages:
   - build
   - test
   - deploy
+  - publish
 
 build:
   stage: build
   script:
+    - pwd
+    - ls
+    - id
     - ./gradlew $GRADLE_OPTS clean assemble
   except:
     - tags
@@ -46,8 +50,31 @@ test:
 deploy:jar:
   stage: deploy
   script:
+    - pwd
+    - id
+    - ls
     - ./gradlew publish -s -DinstallAtEnd=true -DdeployAtEnd=true
   only:
     - master
   environment:
     name: production - v$REVISION$CHANGELIST
+
+publish:
+  stage: publish
+  tags:
+    - pms
+    - api
+  before_script:
+    - echo "before_publish"
+    - chmod +x gradlew
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+  script:
+    - ./gradlew $GRADLE_OPTS clean assemble
+    - ./gradlew publish
+    - pwd
+    - ls
+    - cd ../
+    - sh publish.sh
+  when: manual
+  only:
+    - master

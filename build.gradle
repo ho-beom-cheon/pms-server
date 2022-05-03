@@ -16,8 +16,6 @@ bootWar {
     archiveFileName = "pms-api.war"
     archiveVersion = "0.0.0"
 }
-
-
 configurations {
     implementation.exclude module: 'spring-boot-starter-logging'
     compileOnly {
@@ -28,7 +26,6 @@ configurations {
         it.outgoing.artifact(bootJar)
     }
 }
-
 publishing {
     publications {
         maven(MavenPublication) {
@@ -44,15 +41,12 @@ publishing {
             }
         }
     }
-
 }
-
 repositories {
     maven {
         url "https://nexus3.iteyes-lab.gurmwi.io/repository/maven-public/"
     }
 }
-
 dependencies {
     /* 스프링부트  */
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -90,5 +84,10 @@ dependencies {
     /* 테스트관련 */
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    /*패스워드 암호화 관련*/
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 }
 

@@ -41,6 +41,7 @@
 		FROM pms_kanban_mng A
 		LEFT OUTER JOIN pms_cd_del_mng B
 		ON A.PRJT_ID = B.PRJT_ID
+		AND A.BKUP_ID = B.BKUP_ID
 		AND A.DEPT_CD = B.DTLS_TYCD
 		AND B.GRP_TYCD = '1000000040'
 		AND B.PRJT_ID = '0000000003'
@@ -52,6 +53,10 @@
 		<if test='week_yymm != ""  and week_yymm != null'>
 			AND A.REG_DT BETWEEN CONCAT((REPLACE(#{week_yymm}, '-', '')),'01') AND CONCAT((REPLACE(#{week_yymm}, '-', '')),'31 ')
 		</if>
+		<if test='over_due_dt_yn == "true"'>
+			<![CDATA[AND A.COM_RGS_DT < CURDATE() AND A.WORK_STEP_CD = '200']]>
+		</if>
+		ORDER BY A.REG_DT DESC, A.MNG_ID DESC
 	</select>
 	<select id="select_9900_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
 		SELECT A.BKUP_ID
@@ -90,6 +95,7 @@
 		FROM pms_kanban_mng A
 				 LEFT OUTER JOIN pms_cd_del_mng B
 								 ON A.PRJT_ID = B.PRJT_ID
+									 AND A.BKUP_ID = B.BKUP_ID
 									 AND A.DEPT_CD = B.DTLS_TYCD
 									 AND B.GRP_TYCD = '1000000040'
 									 AND B.PRJT_ID = '0000000003'
@@ -99,6 +105,7 @@
 		  AND A.BKUP_ID = #{bkup_id}
 		  AND A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
 		  AND A.CON_WORK_ID = #{con_work_id}
+		ORDER BY A.REG_DT DESC, A.MNG_ID DESC
 	</select>
 	<select id="select_9900_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
 		SELECT A.BKUP_ID
@@ -121,6 +128,7 @@
 		<if test='mng_id != "" and mng_id != null'>
 			AND A.MNG_ID LIKE CONCAT(CONCAT('%',#{mng_id}),'%')
 		</if>
+		ORDER BY A.REG_DT DESC, A.MNG_ID DESC
 	</select>
 
 	<insert id="insert_9900_01" parameterType="Map">
@@ -211,4 +219,128 @@
 		  AND BKUP_ID = #{bkup_id}
 		]]>
   </delete>
+
+	<select id="select_9900_10" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9900DTO">
+		SELECT DATE_FORMAT(NOW(),'%Y%m%d%H')    AS NEW_BKUP_ID
+			 ,DATE_FORMAT(NOW(),'%Y-%m-%d:%H') AS NEW_BKUP_NM
+		FROM   DUAL
+	</select>
+
+	<delete id="delete_9900_10" parameterType="Map">
+		DELETE
+		FROM   pms_cd_del_mng
+		WHERE  1 = 1
+		  AND    DTLS_TYCD      = #{new_bkup_id}
+		  AND    GRP_TYCD	      = '1000000027'
+		  AND    PRJT_ID        = #{prjt_id}
+		  AND    BKUP_ID	      = '0000000000'
+	</delete>
+
+	<insert id="insert_9900_10" parameterType="Map">
+
+		<selectKey resultType = "string" keyProperty="sort_seq" order="BEFORE">
+			SELECT MAX(SORT_SEQ)+1 FROM pms_cd_del_mng WHERE GRP_TYCD = '1000000027' AND PRJT_ID = '0000000003' AND BKUP_ID = '0000000000'
+		</selectKey>
+
+		INSERT INTO pms_cd_del_mng
+		(
+		BKUP_ID
+		,PRJT_ID
+		,GRP_TYCD
+		,DTLS_TYCD
+		,DTLS_TYNM
+		,ETC_TXT1
+		,ETC_TXT2
+		,ETC_TXT3
+		,ETC_TXT4
+		,ETC_TXT5
+		,ETC_TXT6
+		,ETC_TXT7
+		,ETC_TXT8
+		,ETC_TXT9
+		,ETC_TXT10
+		,DTL_TXT1
+		,DTL_TXT2
+		,DTL_TXT3
+		,DTL_TXT4
+		,DTL_TXT5
+		,DTL_TXT6
+		,DTL_TXT7
+		,DTL_TXT8
+		,DTL_TXT9
+		,DTL_TXT10
+		,SORT_SEQ
+		,USE_YN
+		,OPR_NO
+		,DB_CHG_TS
+		)
+		VALUES
+		(
+		'0000000000'
+		, #{prjt_id}     /*프로젝트ID*/
+		, '1000000027'
+		, #{new_bkup_id}
+		, #{new_bkup_nm}
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, ''
+		, #{sort_seq}
+		, 'Y'
+		, #{login_emp_no}       /*조작자번호*/
+		, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		)
+	</insert>
+
+	<delete id="delete_9900_20" parameterType="Map">
+		DELETE
+		FROM   pms_kanban_mng
+		WHERE  1 = 1
+		  AND    BKUP_ID = #{new_bkup_id}
+		  AND    PRJT_ID = #{prjt_id}
+	</delete>
+
+	<insert id="insert_9900_20" parameterType="Map">
+		INSERT INTO pms_kanban_mng
+		SELECT #{new_bkup_id} AS BKUP_ID
+			 ,PRJT_ID
+			 ,DEPT_CD
+			 ,MNG_ID
+			 ,WORK_TASK
+			 ,WORK_STEP_CD
+			 ,REG_NM
+			 ,REG_DT
+			 ,COM_RGS_DT
+			 ,CRPE_NM
+			 ,PTCP_NM
+			 ,COM_DUE_DT
+			 ,STOP_DT
+			 ,RE_STA_DT
+			 ,COM_DT
+			 ,BAK_WORK_ID
+			 ,CON_WORK_ID
+			 ,RMRK
+			 ,MARK
+			 ,#{login_emp_no}                     /*조작자번호*/
+			 ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+		FROM   pms_kanban_mng
+		WHERE  BKUP_ID = '0000000000'
+		  AND    PRJT_ID = #{prjt_id}
+	</insert>
 </mapper>

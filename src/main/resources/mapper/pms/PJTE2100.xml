@@ -9,7 +9,6 @@
 			, DTLS_TYNM
 			, SORT_SEQ
 		 FROM pms_cd_del_mng
-		     _mng
 		WHERE USE_YN   = 'Y'
 		  AND GRP_TYCD = '0000000000'
 		  AND PRJT_ID  = '0000000000'
@@ -45,6 +44,7 @@
 		   , A.DVLP_DIS_CD        /* 개발구분 */
 		   , A.PGM_DIS_CD         /* 프로그램구분 */
 		   , A.ENLPE_NM           /* 프로그램세부구분코드 */
+		   , A.RQU_SBH_ID           /* 요구사항ID */
 	       , CASE WHEN A.FRCS_STA_DT IS NOT NULL AND A.FRCS_STA_DT != '' THEN STR_TO_DATE(A.FRCS_STA_DT , '%Y%m%d') ELSE '' END AS FRCS_STA_DT /* 예상시작일자 */
            , CASE WHEN A.FRCS_END_DT IS NOT NULL AND A.FRCS_END_DT != '' THEN STR_TO_DATE(A.FRCS_END_DT , '%Y%m%d') ELSE '' END AS FRCS_END_DT /* 예상종료일자 */
 	  	   , CASE WHEN A.STA_DT IS NOT NULL AND A.STA_DT != ''
@@ -194,6 +194,7 @@
 			, PL_NO        /*PL번호*/
 			, PL_CNF_DT    /*PL확인일자*/
 			, CRPE_NO      /*담당자번호*/
+		    , RQU_SBH_ID   /*요구사항ID*/
 			, RMRK         /*비고*/
 			, ATFL_MNG_ID  /*첨부파일관리ID*/
 		    , PAL_ATFL_MNG_ID  /*설계서첨부파일관리ID*/
@@ -222,6 +223,7 @@
 				, #{pl_no}                            /*PL번호*/
 				, ''                                /*PL확인일자*/
 				, #{crpe_no}                          /*담당자번호*/
+			    , #{rqu_sbh_id}
 				, #{rmrk}                             /*비고*/
 				, #{atfl_mng_id}                      /*첨부파일관리ID*/
 				, ''                                  /*설계서첨부파일관리ID*/
@@ -252,6 +254,7 @@
 		, RMRK         = #{rmrk}         /*비고*/
 		, OPR_NO       = #{login_emp_no}        /*조작자번호*/
 		, ATFL_MNG_ID  = #{atfl_mng_id}  /*첨부파일관리ID*/
+	    , RQU_SBH_ID   = #{rqu_sbh_id}   /*요구사항ID*/
 		, PAL_ATFL_MNG_ID = #{pal_atfl_mng_id}  /*설계서 첨부파일관리ID*/
 		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
 	  WHERE PGM_ID      = #{pgm_id}

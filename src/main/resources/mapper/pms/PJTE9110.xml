@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9110Mapper">
+    <select id="select_9110_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9110DTO">
+        SELECT A.BUBUN_CD
+             ,A.BSN_CLS_CD
+             ,A.GESIPAN_TITL
+             ,A.GESIPAN_DSC
+             ,A.ANNYM_YN
+             ,A.CMNT_YN
+             ,A.RPLY_YN
+             ,A.GOOD_YN
+             ,A.AFRM_YN
+             ,A.NMB_INQ_YN
+             ,A.PGN_YN
+             ,A.FILE_UPLD_YN
+             ,A.BKUP_ID
+             ,A.PRJT_ID
+             ,A.GESIPAN_ID
+             ,B.DTLS_TYNM AS BUBUN_NM
+             ,C.DTLS_TYNM AS BSN_CLS_NM
+        FROM   pms_blt_brd_mng A
+                   LEFT OUTER JOIN
+               pms_cd_del_mng   B
+               ON  B.DTLS_TYCD  = A.BUBUN_CD
+                   AND B.GRP_TYCD   = '1000000044'
+                   AND B.PRJT_ID    = A.PRJT_ID
+                   AND B.BKUP_ID    = A.BKUP_ID
+                   LEFT OUTER JOIN
+               pms_cd_del_mng   C
+               ON  C.DTLS_TYCD  = A.BSN_CLS_CD
+                   AND C.GRP_TYCD   = '1000000045'
+                   AND C.PRJT_ID    = A.PRJT_ID
+                   AND C.BKUP_ID    = A.BKUP_ID
+        WHERE  A.BKUP_ID   = '0000000000'
+          AND    A.PRJT_ID   = #{prjt_id}
+          AND   (A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd},1,2),'000000')
+            OR     A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd},1,4),'0000')
+            OR     A.BUBUN_CD  = CONCAT(SUBSTR(#{login_dept_cd},1,6),'00')
+            OR     A.BUBUN_CD  = #{login_dept_cd}
+            OR     A.AFRM_YN   = 'N')
+        ORDER BY A.GESIPAN_ID DESC
+    </select>
+
+</mapper>

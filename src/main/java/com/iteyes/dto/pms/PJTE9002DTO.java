@@ -101,5 +101,7 @@ public class PJTE9002DTO {
     private String week_yymm;          // 주간년월
     private String real_prjt_id;       // 투입프로젝트ID
 
+    /*회의실예약*/
+    private String room_sqno;          // 순번
 };
 ;

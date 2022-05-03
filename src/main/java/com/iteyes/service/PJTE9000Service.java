@@ -56,7 +56,6 @@ public interface PJTE9000Service {
 	boolean insert_9000_10(PJTE9000DTO PJTE9000) throws Exception;
 	// 이미 생성된 백업데이터 삭제
 	boolean delete_9000_20(PJTE9000DTO PJTE9000) throws Exception;
-	boolean delete_9000_21(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_22(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_23(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_24(PJTE9000DTO PJTE9000) throws Exception;
@@ -64,17 +63,25 @@ public interface PJTE9000Service {
 	boolean delete_9000_26(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_27(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_28(PJTE9000DTO PJTE9000) throws Exception;
-	boolean delete_9000_29(PJTE9000DTO PJTE9000) throws Exception;
-	boolean delete_9000_30(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_31(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_32(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_33(PJTE9000DTO PJTE9000) throws Exception;
-	boolean delete_9000_34(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_35(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_36(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_60(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_61(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_62(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_63(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_64(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_65(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_66(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_67(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_68(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_69(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_70(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_71(PJTE9000DTO PJTE9000) throws Exception;
 	// 데이터 백업
 	boolean insert_9000_20(PJTE9000DTO PJTE9000) throws Exception;
-	boolean insert_9000_21(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_22(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_23(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_24(PJTE9000DTO PJTE9000) throws Exception;
@@ -82,12 +89,21 @@ public interface PJTE9000Service {
 	boolean insert_9000_26(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_27(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_28(PJTE9000DTO PJTE9000) throws Exception;
-	boolean insert_9000_29(PJTE9000DTO PJTE9000) throws Exception;
-	boolean insert_9000_30(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_31(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_32(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_33(PJTE9000DTO PJTE9000) throws Exception;
-	boolean insert_9000_34(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_35(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_36(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_60(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_61(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_62(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_63(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_64(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_65(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_66(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_67(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_68(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_69(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_70(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_71(PJTE9000DTO PJTE9000) throws Exception;
 }

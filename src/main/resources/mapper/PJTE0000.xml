@@ -23,34 +23,44 @@
 		WHERE USE_YN   = 'Y'
 		  AND GRP_TYCD = '0000000000'
 		  AND BKUP_ID  = '0000000000'
+        ORDER BY SORT_SEQ
 		]]>
     </select>
 
 	<select id="select_0120_01" parameterType="Map" resultType="com.iteyes.dto.PJTE0000DTO">
-		SELECT A.EMPNO
-		     , A.PRJT_ID
-			 , A.EMPNM
-			 , A.EMAIL_ADDR
-			 , A.CPNO
-			 , A.BZCD
-			 , A.AUT_CD
-			 , A.LGN_PWD
-		     , A.REAL_PRJT_ID
-			 , A.DEPT_CD
-			 , CASE WHEN A.LGN_PWD != #{lgn_pwd}
-						THEN 'N'
-					WHEN A.LGN_PWD = #{empno} '211111'
-	                THEN 'C'
-					ELSE 'Y'
-			END AS LOGIN_YN
+	SELECT A.EMPNO
+	     , A.PRJT_ID
+		 , A.EMPNM
+		 , A.BZCD
+		 , A.AUT_CD
+		 , A.LGN_PWD
+	     , A.REAL_PRJT_ID
+		 , A.DEPT_CD
+		 , CASE WHEN A.LGN_PWD != #{lgn_pwd}
+		    		 THEN 'N'
+				WHEN A.DEL_YN = 'Y'
+			         THEN 'X'
+		        WHEN A.LGN_PWD = #{empno} '211111'
+		        	 THEN 'C'
+		        ELSE 'Y'
+		    END AS LOGIN_YN
+	 FROM pms_emp_info   A
+	WHERE 1=1
+	  AND A.EMPNO   = #{empno}
+	  AND A.PRJT_ID = #{prjt_id}
+	  AND A.BKUP_ID = '0000000000'
+	  <if test='btn_gubun == "Y"'>
+	  AND A.LGN_PWD = #{lgn_pwd}
+	</if>
+	</select>
+
+	<select id="select_0120_02" parameterType="Map" resultType="com.iteyes.dto.PJTE0000DTO">
+		SELECT A.LGN_PWD
+		, A.EMPNO
+		, A.PRJT_ID
 		FROM pms_emp_info   A
 		WHERE 1=1
-		  AND A.EMPNO   = #{empno}
-		  AND A.PRJT_ID = #{prjt_id}
-		  AND A.BKUP_ID = '0000000000'
-		<if test='btn_gubun == "Y"'>
-			AND A.LGN_PWD = #{lgn_pwd}
-		</if>
-
+		AND A.EMPNO   = #{empno}
+		AND A.PRJT_ID = #{prjt_id}
 	</select>
 </mapper>

@@ -75,18 +75,12 @@ public class PJTE9000DTO {
     /*PMS직원정보*/
     private String empno;              // 직원번호
     private String empnm;              // 직원명
-    private String email_addr;         // 이메일주소
     private String rank_nm;            // 직급명
-    private String cpno;               // 휴대전화번호
     private String lgn_pwd;            // 로그인비밀번호
     private String bzcd;               // 업무구분코드
     private String catn_dcd;           // 구성원구분코드
     private String aut_cd;             // 권한구분코드
-    private String ip_addr;            // IP주소
-    private String plan_thw_stdt;      // 계획투입시작일자
-    private String plan_thw_endt;      // 계획투입종료일자
-    private String real_thw_stdt;      // 실제투입시작일자
-    private String real_thw_endt;      // 실제투입종료일자
+    private String del_yn;             // 삭제여부
 
     private String login_emp_no;        // opr_no
 

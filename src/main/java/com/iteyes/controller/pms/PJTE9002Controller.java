@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -61,7 +62,11 @@ public class PJTE9002Controller {
 
 	}
 
+	@Value("${file-upload-dir}")
+	private String file_upload_dir;
 
+	@Value("${upload-form-dir}")
+	private String upload_form_dir;
 
 	@PostMapping("/insert")
 //	public @ResponseBody String insert(HttpServletRequest request, @RequestParam("file") MultipartFile files) throws Exception{
@@ -81,11 +86,15 @@ public class PJTE9002Controller {
 			// 파일등록구분코드가 900,901 때는 uploadForm
 			File folder = null;
 
-			if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
-				folder = new File("/home/admin/fileUpload/uploadForm/"+request.getParameter("file_rgs_dscd"));
+			log.debug("upload_form_dir :: "+upload_form_dir);
+			log.debug("file_upload_dir :: "+file_upload_dir);
+			if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901") || request.getParameter("file_rgs_dscd").equals("902")){
+//				folder = new File("/home/admin/fileUpload/uploadForm/"+request.getParameter("file_rgs_dscd"));
+				folder = new File(upload_form_dir+request.getParameter("file_rgs_dscd"));
 
 			}else{
-				folder = new File("/home/admin/fileUpload/"+request.getParameter("prjt_id"));
+//				folder = new File("/home/admin/fileUpload/"+request.getParameter("prjt_id"));
+				folder = new File(file_upload_dir+request.getParameter("prjt_id"));
 
 			}
 			if (!folder.exists()) {
@@ -135,6 +144,7 @@ public class PJTE9002Controller {
 		PJTE9002.setTst_case_id(request.getParameter("tst_case_id"));
 		PJTE9002.setPgm_id(request.getParameter("pgm_id"));
 		PJTE9002.setBzcd(request.getParameter("bzcd"));
+		PJTE9002.setRoom_sqno(request.getParameter("room_sqno"));
 
 		String file_rgs_dscd = request.getParameter("file_rgs_dscd");
 
@@ -167,10 +177,12 @@ public class PJTE9002Controller {
 
 		String path = null;
 		// 파일등록구분코드에 따른 path 설정
-		if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901")){
-			path = "/home/admin/fileUpload/uploadForm/" + request.getParameter("file_rgs_dscd");
+		if(request.getParameter("file_rgs_dscd").equals("900") || request.getParameter("file_rgs_dscd").equals("901") || request.getParameter("file_rgs_dscd").equals("902") ){
+//			path = "/home/admin/fileUpload/uploadForm/" + request.getParameter("file_rgs_dscd");
+			path = upload_form_dir + request.getParameter("file_rgs_dscd");
 		}else{
-			path = "/home/admin/fileUpload/"+request.getParameter("prjt_id");
+//			path = "/home/admin/fileUpload/"+request.getParameter("prjt_id");
+			path = file_upload_dir+request.getParameter("prjt_id");
 
 		}
 
@@ -208,6 +220,12 @@ public class PJTE9002Controller {
 				result = pjte9002Service.update_9002_06(PJTE9002);
 			}else if(file_rgs_dscd.equals("800")){
 				result = pjte9002Service.update_9002_07(PJTE9002);
+			}else if(file_rgs_dscd.equals("801")){
+				result = pjte9002Service.update_9002_08(PJTE9002);
+			}else if(file_rgs_dscd.equals("802")){
+				result = pjte9002Service.update_9002_09(PJTE9002);
+			}else if(file_rgs_dscd.equals("803")){
+				result = pjte9002Service.update_9002_11(PJTE9002);
 			}
 
 		}

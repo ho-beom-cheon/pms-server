@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    username: pms
-    password: pms!2
-    url: jdbc:mariadb://115.85.183.34:3306/iteyesfintech
+    username: pms_dev
+    password: pms_dev!2
+    url: jdbc:mariadb://115.85.183.34:3306/iteyesfintech_dev
   sql:
     init:
       encoding: utf-8
@@ -43,4 +43,5 @@ jwt:
   salt: MYSALT
   expmin: 5
 
-file-upload-dir: C:\\fileupload\\
+file-upload-dir: D:\\fileupload\\
+upload-form-dir: D:\\fileupload\\uploadForm\\
