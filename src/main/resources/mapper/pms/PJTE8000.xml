@@ -11,7 +11,7 @@
              , B.DTLS_TYNM1 AS REAL_PRJT_NM
              , C.EMPNM AS PM_NM
              , A.PM_NO
-             , REPLACE(#{week_yymm},'-','') AS WEEK_YYMM
+             , A.WEEK_YYMM  AS WEEK_YYMM
              , B.DTLS_TYCD2 AS WEEK_SQN_CD
              , A.DEPT_CD
              , F.DTLS_TYNM AS DEPT_NM
