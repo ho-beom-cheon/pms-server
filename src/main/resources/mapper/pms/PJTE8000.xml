@@ -67,6 +67,9 @@
                             AND B.PRJT_ID = A.PRJT_ID
                             AND B.BKUP_ID = A.BKUP_ID
                     WHERE  A.DTLS_TYCD = CASE WHEN  #{real_prjt_id}  = 'TTT' THEN  A.DTLS_TYCD  ELSE #{real_prjt_id} END
+                    <if test='dept_cd != "TTT"'>
+                    AND    A.ETC_TXT3 = CASE WHEN #{dept_cd} = 'TTT' THEN A.ETC_TXT3 ELSE #{dept_cd} END
+                    </if>
                     AND    A.GRP_TYCD = '1000000038'
                     AND    A.PRJT_ID  = #{prjt_id}
                     AND    A.BKUP_ID  = '0000000000') A
@@ -103,9 +106,7 @@
                     <if test='pm_no != "" and pm_no != null'>
                         AND    A.PM_NO = #{pm_no}
                     </if>
-                    <if test='dept_cd != "TTT"'>
-                    AND   A.DEPT_CD = CASE WHEN #{dept_cd} = 'TTT' THEN A.DEPT_CD ELSE #{dept_cd} END
-                    </if>
+
                 ) B
                 ON  B.PRJT_ID      = A.PRJT_ID
                 AND B.REAL_PRJT_ID = A.REAL_PRJT_ID
