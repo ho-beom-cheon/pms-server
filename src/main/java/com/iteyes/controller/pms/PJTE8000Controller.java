@@ -101,7 +101,7 @@ public class PJTE8000Controller {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        List<PJTE8000DTO> list1 = pjte8000Service.select_8000_01(PJTE8000);
+        List<PJTE8000DTO> list1 = pjte8000Service.select_8000_03(PJTE8000);
 
         logger.debug("list1.size() =" + list1.size());
         if(list1.size() == 0){
