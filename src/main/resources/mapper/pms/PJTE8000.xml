@@ -61,7 +61,7 @@
                                                            ELSE RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0') END ]]>
                             </when>
                             <otherwise>
-                                AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD2 ELSE #{week_sqn_cd} END
+                                AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD ELSE #{week_sqn_cd} END
                             </otherwise>
                             </choose>
                             AND B.PRJT_ID = A.PRJT_ID
@@ -209,6 +209,16 @@
                                        AND    A.BKUP_ID      = E.BKUP_ID)
            AND    E.REAL_PRJT_ID = #{real_prjt_id}
            AND    E.BKUP_ID      = '0000000000'
+    </select>
+
+    <select id="select_8000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
+        SELECT REAL_PRJT_ID
+        FROM   pms_week_rpt_mng
+        WHERE  WEEK_SQN_CD  =  #{week_sqn_cd}
+        AND    WEEK_YYMM    = REPLACE(#{week_yymm},'-','')
+        AND    REAL_PRJT_ID = #{real_prjt_id}
+        AND    PRJT_ID      = #{prjt_id}
+        AND    BKUP_ID      = '0000000000'
     </select>
     <insert id="insert_8000_01" parameterType="Map" >
     INSERT INTO pms_week_rpt_mng
