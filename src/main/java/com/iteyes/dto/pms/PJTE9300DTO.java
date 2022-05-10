@@ -8,6 +8,9 @@ import java.util.List;
 public class PJTE9300DTO {
     //조회조건
     private String gubun;           //그리드 구분자
+    private String bkup_id;         // 백업 ID
+    private String prjt_id;         // 프로젝트 ID
+    private String dept_cd;      // 부문코드
 
     // 공통
     private String login_emp_no;     // 직원번호
@@ -17,7 +20,7 @@ public class PJTE9300DTO {
     private String login_catn_dcd;   // 구성원 구분코드
     private String login_aut_cd;     // 권한 ID
 
-    // 그리드1_1 (게시내역)
+    // 그리드1_1 (요청인력내역)
     private String real_prjt_id;         //투입프로젝트명
     private String sch_ent_dt;           //투입예정일자
     private String skill_grd;            //등급
@@ -27,12 +30,10 @@ public class PJTE9300DTO {
     private String nmbr_rcrt;            //모집인원
     private String opr_nm;               //등록자
     private String aplc_dtls;            //지원자내용
-    private String bkup_id;              //백업ID
-    private String prjt_id;              //프로젝트ID
     private String sqno;                 //순번
     private String opr_no;               //등록직원번호
 
-    //그리드2
+    //그리드2(대기인력내역)
     private String empnm;                // 직원명
     private String skill_grd_nm;         // 등급
     private String inp_prj_nm;           // 현/이전프로젝트
