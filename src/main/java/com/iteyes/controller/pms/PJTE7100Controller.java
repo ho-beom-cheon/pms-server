@@ -55,6 +55,37 @@ public class PJTE7100Controller {
         return jsonStr;
     }
 
+    @GetMapping(value = "/select_7100_02")
+    public @ResponseBody
+    String select02(HttpServletRequest request) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        PJTE7100DTO PJTE7100 = new PJTE7100DTO();
+
+
+        PJTE7100.setPrjt_id(request.getParameter("prjt_nm_selected"));
+        PJTE7100.setBkup_id(request.getParameter("bkup_id_selected"));
+        PJTE7100.setAs_pgm_id(request.getParameter("as_pgm_id"));
+        PJTE7100.setAs_pgm_dis_cd(request.getParameter("as_pgm_dis_cd"));
+
+        List<PJTE7100DTO> list = pjte7100Service.select_7100_02(PJTE7100);
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+    }
+
     @PostMapping(value = "/insert_7100_01")
     public @ResponseBody
     boolean insert(@RequestBody PJTE7100DTO PJTE7100) throws Exception {
@@ -63,16 +94,21 @@ public class PJTE7100Controller {
 
         boolean result = false;
 
-        ObjectMapper mapper = new ObjectMapper();
+        result = pjte7100Service.insert_7100_01(PJTE7100);
 
-        List<PJTE7100DTO> list1 = pjte7100Service.select_7100_02(PJTE7100);
+        return result;
+    }
 
-        logger.debug("list1.size() =" + list1.size());
-        if(list1.size() == 0){
-             result = pjte7100Service.insert_7100_01(PJTE7100);
-        }else{
-            result = pjte7100Service.update_7100_01(PJTE7100);
-        }
+    @PostMapping(value = "/update_7100_01")
+    public @ResponseBody
+    boolean update(@RequestBody PJTE7100DTO PJTE7100) throws Exception {
+
+        Logger logger = LogManager.getLogger(this.getClass());
+
+        boolean result = false;
+
+        result = pjte7100Service.update_7100_01(PJTE7100);
+
 
         return result;
 
