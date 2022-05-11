@@ -53,12 +53,12 @@
     </select>
 
     <select id="select_7100_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7100DTO">
-        SELECT PRJT_ID
+        SELECT CASE WHEN COUNT(*) = 0 THEN 'N' ELSE 'Y' END AS SAVE_YN
         FROM   pms_as_to_map
         WHERE  BKUP_ID       = #{bkup_id}
-          AND    PRJT_ID       = #{prjt_id}
-          AND    AS_PGM_ID     = #{as_pgm_id}
-          AND    AS_PGM_DIS_CD = #{as_pgm_dis_cd}
+        AND    PRJT_ID       = #{prjt_id}
+        AND    AS_PGM_ID     = #{as_pgm_id}
+        AND    AS_PGM_DIS_CD = #{as_pgm_dis_cd}
     </select>
 
 
