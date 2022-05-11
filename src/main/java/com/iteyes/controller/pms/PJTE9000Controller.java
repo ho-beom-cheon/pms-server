@@ -437,6 +437,7 @@ public class PJTE9000Controller {
 		result = pjte9000Service.delete_9000_69(PJTE9000D);
 		result = pjte9000Service.delete_9000_70(PJTE9000D);
 		result = pjte9000Service.delete_9000_71(PJTE9000D);
+		result = pjte9000Service.delete_9000_72(PJTE9000D);
 
 		result = pjte9000Service.insert_9000_20(PJTE9000C);
 		result = pjte9000Service.insert_9000_22(PJTE9000C);
@@ -463,6 +464,7 @@ public class PJTE9000Controller {
 		result = pjte9000Service.insert_9000_69(PJTE9000C);
 		result = pjte9000Service.insert_9000_70(PJTE9000C);
 		result = pjte9000Service.insert_9000_71(PJTE9000C);
+		result = pjte9000Service.insert_9000_72(PJTE9000C);
 		return result;
 	}
 
