@@ -15,8 +15,8 @@ public interface PJTE9300Mapper {
 	List<PJTE9300DTO> select_9300_02(PJTE9300DTO PJTE9300) throws Exception;
 	/* 투입현황등록 */
 	boolean insert_9300_01(PJTE9300DTO PJTE9300C) throws Exception;
-	boolean update_9300_01(PJTE9300DTO PJTE9300C) throws Exception;
-	boolean update_9300_02(PJTE9300DTO PJTE9300C) throws Exception;
-	boolean update_9300_03(PJTE9300DTO PJTE9300C) throws Exception;
+	boolean update_9300_01(PJTE9300DTO PJTE9300U) throws Exception;
+	boolean update_9300_02(PJTE9300DTO PJTE9300U) throws Exception;
+	boolean update_9300_03(PJTE9300DTO PJTE9300U) throws Exception;
 
 }

@@ -10,7 +10,7 @@ public class PJTE9300DTO {
     private String gubun;           //그리드 구분자
     private String bkup_id;         // 백업 ID
     private String prjt_id;         // 프로젝트 ID
-    private String dept_cd;      // 부문코드
+
 
     // 공통
     private String login_emp_no;     // 직원번호
@@ -30,7 +30,7 @@ public class PJTE9300DTO {
     private String nmbr_rcrt;            //모집인원
     private String opr_nm;               //등록자
     private String aplc_dtls;            //지원자내용
-    private String sqno;                 //순번
+    private int sqno;                 //순번
     private String opr_no;               //등록직원번호
 
     //그리드2(대기인력내역)
