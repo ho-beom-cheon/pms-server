@@ -202,7 +202,7 @@
                , #{tst_rst}
                , #{tst_achi_rst}
                , #{rmrk}
-               , #{atfl_mng_id}
+               , ''
                , #{login_emp_no}
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
             )
