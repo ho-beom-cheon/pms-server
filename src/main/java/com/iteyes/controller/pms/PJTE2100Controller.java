@@ -116,7 +116,7 @@ public class PJTE2100Controller {
 
         PJTE2100DTO PJTE2100C = new PJTE2100DTO();
 
-        if(PJTE2100.getExcelUplod() == "Y") {
+        if(PJTE2100.getExcelUplod().equals("Y")) {
 
             PJTE2100DTO PJTE2100D = new PJTE2100DTO();
 
