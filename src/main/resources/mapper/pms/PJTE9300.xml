@@ -37,6 +37,7 @@
 			 ,A.INP_PRJ_NM
 			 ,C.NXT_PRJ_NM
 			 ,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
+		     ,A.INP_CLS_CD
 		FROM   pms_inp_mnp_stt A
 				   LEFT OUTER JOIN
 			   pms_emp_info   B
