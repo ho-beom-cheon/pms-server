@@ -6,6 +6,9 @@ import lombok.Data;
 public class PJTE8000DTO {
     //추가
     private String week_seq_val;             /*주간녀월이 이번달인지 아닌지 확인*/
+    private String bef_aut_cd;        /*권한id*/
+    private String bef_emp_no;        /*직원번호*/
+
     //로그인세션
     private String login_aut_cd;        /*권한id*/
     private String login_bzcd;          /*업무구분*/
