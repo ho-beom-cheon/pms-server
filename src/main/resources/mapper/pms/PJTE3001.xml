@@ -267,11 +267,11 @@
         , #{rgpe_no}
         , #{dvlpe_no}
         , #{pl_no}
+        , REPLACE(#{ttmn_scd_dt}, '-', '')
         , ''
-        , REPLACE(#{ttmn_dt}, '-', '')
         , #{ttmn_txt}
         , #{err_prc_step_cd}
-        , ''
+        , #{bzcd}
         , ''
         , #{cctn_bzcd}
         , #{cctn_id}
