@@ -179,8 +179,8 @@
                , #{tst_case_nm}
                , #{scnr_id}
                , #{scnr_nm}
-               , DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%')
-               , DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%')
+               , REPLACE(#{frcs_sta_dt}, '-', '')
+               , REPLACE(#{frcs_end_dt}, '-', '')
                , ''
                , ''
                , #{dvlpe_eno}
