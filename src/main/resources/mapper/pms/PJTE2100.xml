@@ -237,7 +237,8 @@
 	  UPDATE pms_pgm_mng
 	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
 		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
+		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
+		                      WHEN #{dvlp_dis_cd} != '900'                                     THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
 		, PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
 		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
 		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
@@ -248,7 +249,7 @@
 							  WHEN #{prc_step_cd}  IN ('100','200') AND DVLPE_ENO = #{login_emp_no} THEN #{prc_step_cd}
 							  WHEN #{prc_step_cd}  = '300'          AND PL_ENO    = #{login_emp_no} THEN #{prc_step_cd}
 							  WHEN #{prc_step_cd}  = '400'          AND CRPE_ENO  = #{login_emp_no} THEN #{prc_step_cd}
-							  ELSE ITG_TST_PRC_CD END
+							  ELSE PRC_STEP_CD END
 		, PRG_TXT      = #{prg_txt}      /*진행현황*/
 		, DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
 		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT  END /*개발자확인일자*/
@@ -283,8 +284,7 @@
 	<delete id="delete_2100_01" parameterType="Map">
    <![CDATA[
 		DELETE FROM pms_pgm_mng
-		 WHERE PGM_ID        = #{pgm_id}
-		   AND BZCD          = #{bzcd}
+		 WHERE BZCD          = #{bzcd}
 		   AND PRJT_ID       = #{prjt_id}
 		   AND BKUP_ID       = #{bkup_id}
 		]]>
