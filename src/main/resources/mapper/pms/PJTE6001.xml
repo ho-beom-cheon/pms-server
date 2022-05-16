@@ -46,7 +46,7 @@
 			SELECT NVL(MAX(CAST(MNG_ID AS INT))+1,'1000000000') AS MNG_ID
 			FROM   pms_rq_mng
 			WHERE  PRJT_ID  = #{prjt_id}
-			AND    BKUP_ID  = #{bkup_id}
+			AND    BKUP_ID  = '0000000000'
 		</selectKey>
 		INSERT INTO pms_rq_mng
 		(
@@ -91,14 +91,14 @@
 		SET    BZCD	           = #{bzcd}
 		  ,REQ_DSCD	       = #{req_dscd}
 		  ,REQPE_NO	       = #{reqpe_no}
-		  ,REQ_DT	         = #{req_dt}
+		  ,REQ_DT	       = REPLACE(#{req_dt}, '-', '')
 		  ,REQ_TXT	       = #{req_txt}
 		  ,PRCPE_NO	       = #{prcpe_no}
-		  ,PRC_DT	         = CASE WHEN #{req_prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
+		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
 		  ,PRC_TXT	       = #{prc_txt}
 		  ,REQ_PRC_STEP_CD = #{req_prc_step_cd}
-		  ,OPR_NO	         = #{login_emp_no}
-		  ,DB_CHG_TS	     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+		  ,OPR_NO	       = #{login_emp_no}
+		  ,DB_CHG_TS	   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE  1 = 1
 		  AND    BKUP_ID  = #{bkup_id}
 		  AND    PRJT_ID  = #{prjt_id}

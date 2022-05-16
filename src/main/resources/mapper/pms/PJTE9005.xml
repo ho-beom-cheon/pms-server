@@ -303,8 +303,8 @@
                     AND PRJT_ID = #{prjt_id}
                     AND MAN_NO = #{man_no})
                , #{company_nm}
-               , #{enter_dt}
-               , #{rsnt_dt}
+               , REPLACE(#{enter_dt}, '-', '')
+               , REPLACE(#{rsnt_dt}, '-', '')
                , #{rssb_bns}
                , #{rmrk}
                , #{login_emp_no} /*조작자번호*/
@@ -337,8 +337,8 @@
                     AND PRJT_ID = #{prjt_id}
                     AND MAN_NO = #{man_no})
                , #{exe_cpy_nm}
-               , #{sta_dt}
-               , #{end_dt}
+               , REPLACE(#{sta_dt}, '-', '')
+               , REPLACE(#{end_dt}, '-', '')
                , #{proj_nm}
                , #{rssb_bns}
                , #{duty_txt}
