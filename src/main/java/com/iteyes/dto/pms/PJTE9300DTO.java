@@ -39,6 +39,7 @@ public class PJTE9300DTO {
     private String inp_prj_nm;           // 현/이전프로젝트
     private String nxt_prj_nm;           // 차기희망 프로젝트 및 업무
     private String wth_dt;               // 예정/철수일자
+    private String inp_cls_cd;           // 투입구분
 
 
     private List<PJTE9300DTO> updatedRows;
