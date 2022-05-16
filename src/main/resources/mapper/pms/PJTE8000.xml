@@ -22,7 +22,7 @@
             , B.STEP_REAL_PRG
             , B.STEP_PRED_PRG
             , B.PRG_TXT
-            , B.ISS_TXT
+            , CASE WHEN B.PM_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','900') THEN B.ISS_TXT ELSE '' END AS ISS_TXT
             , B.REQ_TXT
             , F1.ORG_FILE_NM
             , B.ATFL_MNG_ID
@@ -37,7 +37,7 @@
             , E.STEP_REAL_PRG	AS BEF_STEP_REAL_PRG
             , E.STEP_PRED_PRG	AS BEF_STEP_PRED_PRG
             , E.PRG_TXT	    AS BEF_PRG_TXT
-            , E.ISS_TXT	    AS BEF_ISS_TXT
+            , CASE WHEN B.PM_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','900') THEN  E.ISS_TXT	ELSE '' END AS BEF_ISS_TXT
             , E.REQ_TXT	    AS BEF_REQ_TXT
             , F2.ORG_FILE_NM   AS BEF_ORG_FILE_NM
             , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
@@ -170,7 +170,7 @@
              , E.STEP_REAL_PRG	AS BEF_STEP_REAL_PRG
              , E.STEP_PRED_PRG	AS BEF_STEP_PRED_PRG
              , E.PRG_TXT	    AS BEF_PRG_TXT
-             , E.ISS_TXT	    AS BEF_ISS_TXT
+             , CASE WHEN E.PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','900') THEN E.ISS_TXT ELSE '' END AS BEF_ISS_TXT
              , E.REQ_TXT	    AS BEF_REQ_TXT
              , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
              , I.ORG_FILE_NM    AS BEF_ORG_FILE_NM
@@ -265,14 +265,14 @@
 
     <update id="update_8000_01" parameterType="Map" >
         UPDATE pms_week_rpt_mng
-        SET    PM_NO	       = #{pm_no}
+        SET    PM_NO	 = #{pm_no}
           ,ALL_REAL_PRG	 = #{all_real_prg}
           ,ALL_PRED_PRG	 = #{all_pred_prg}
           ,STEP_NM	     = #{step_nm}
           ,STEP_REAL_PRG = #{step_real_prg}
           ,STEP_PRED_PRG = #{step_pred_prg}
           ,PRG_TXT	     = #{prg_txt}
-          ,ISS_TXT	     = #{iss_txt}
+          ,ISS_TXT	     = CASE WHEN PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','900') THEN  #{iss_txt} ELSE ISS_TXT END
           ,REQ_TXT	     = #{req_txt}
           ,ATFL_MNG_ID   = #{atfl_mng_id}
           ,OPR_NO        = #{login_emp_no}
