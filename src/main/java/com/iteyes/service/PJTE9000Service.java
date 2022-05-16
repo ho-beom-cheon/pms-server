@@ -80,6 +80,7 @@ public interface PJTE9000Service {
 	boolean delete_9000_69(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_70(PJTE9000DTO PJTE9000) throws Exception;
 	boolean delete_9000_71(PJTE9000DTO PJTE9000) throws Exception;
+	boolean delete_9000_72(PJTE9000DTO PJTE9000) throws Exception;
 	// 데이터 백업
 	boolean insert_9000_20(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_22(PJTE9000DTO PJTE9000) throws Exception;
@@ -106,4 +107,5 @@ public interface PJTE9000Service {
 	boolean insert_9000_69(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_70(PJTE9000DTO PJTE9000) throws Exception;
 	boolean insert_9000_71(PJTE9000DTO PJTE9000) throws Exception;
+	boolean insert_9000_72(PJTE9000DTO PJTE9000) throws Exception;
 }

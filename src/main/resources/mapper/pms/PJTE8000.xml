@@ -4,44 +4,43 @@
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE8000Mapper">
     <select id="select_8000_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
-
         SELECT A.REAL_PRJT_ID                     AS REAL_PRJT_ID
-        , A.BKUP_ID                                 AS BKUP_ID
-        , DATE_FORMAT(A.START_PRJT_DATE,'%Y-%m-%d') AS START_PRJT_DATE
-        , DATE_FORMAT(A.END_PRJT_DATE,'%Y-%m-%d')   AS END_PRJT_DATE
-        , A.REAL_PRJT_NM                            AS REAL_PRJT_NM
-        , C.EMPNM                                   AS PM_NM
-        , B.PM_NO                                   AS PM_NO
-        , REPLACE(#{week_yymm},'-','')               AS WEEK_YYMM
-        , A.WEEK_SQN_CD                              AS WEEK_SQN_CD
-        , B.DEPT_CD
-        , F.DTLS_TYNM                                AS DEPT_NM
-        , A.WEEK_SQN_NM                              AS WEEK_SQN_NM
-        , B.ALL_REAL_PRG
-        , B.ALL_PRED_PRG
-        , B.STEP_NM
-        , B.STEP_REAL_PRG
-        , B.STEP_PRED_PRG
-        , B.PRG_TXT
-        , B.ISS_TXT
-        , B.REQ_TXT
-        , F1.ORG_FILE_NM
-        , B.ATFL_MNG_ID
-        , G.EMPNM          AS BEF_PM_NM
-        , E.PM_NO	        AS BEF_PM_NO
-        , E.WEEK_YYMM	    AS BEF_WEEK_YYMM
-        , E.WEEK_SQN_CD    AS BEF_WEEK_SQN_CD
-        , H.DTLS_TYNM      AS BEF_WEEK_SQN_NM
-        , E.ALL_REAL_PRG	AS BEF_ALL_REAL_PRG
-        , E.ALL_PRED_PRG	AS BEF_ALL_PRED_PRG
-        , E.STEP_NM	    AS BEF_STEP_NM
-        , E.STEP_REAL_PRG	AS BEF_STEP_REAL_PRG
-        , E.STEP_PRED_PRG	AS BEF_STEP_PRED_PRG
-        , E.PRG_TXT	    AS BEF_PRG_TXT
-        , E.ISS_TXT	    AS BEF_ISS_TXT
-        , E.REQ_TXT	    AS BEF_REQ_TXT
-        , F2.ORG_FILE_NM   AS BEF_ORG_FILE_NM
-        , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
+            , A.BKUP_ID                                 AS BKUP_ID
+            , DATE_FORMAT(A.START_PRJT_DATE,'%Y-%m-%d') AS START_PRJT_DATE
+            , DATE_FORMAT(A.END_PRJT_DATE,'%Y-%m-%d')   AS END_PRJT_DATE
+            , A.REAL_PRJT_NM                            AS REAL_PRJT_NM
+            , C.EMPNM                                   AS PM_NM
+            , B.PM_NO                                   AS PM_NO
+            , REPLACE(#{week_yymm},'-','')               AS WEEK_YYMM
+            , A.WEEK_SQN_CD                              AS WEEK_SQN_CD
+            , B.DEPT_CD
+            , F.DTLS_TYNM                                AS DEPT_NM
+            , A.WEEK_SQN_NM                              AS WEEK_SQN_NM
+            , B.ALL_REAL_PRG
+            , B.ALL_PRED_PRG
+            , B.STEP_NM
+            , B.STEP_REAL_PRG
+            , B.STEP_PRED_PRG
+            , B.PRG_TXT
+            , B.ISS_TXT
+            , B.REQ_TXT
+            , F1.ORG_FILE_NM
+            , B.ATFL_MNG_ID
+            , G.EMPNM          AS BEF_PM_NM
+            , E.PM_NO	        AS BEF_PM_NO
+            , E.WEEK_YYMM	    AS BEF_WEEK_YYMM
+            , E.WEEK_SQN_CD    AS BEF_WEEK_SQN_CD
+            , H.DTLS_TYNM      AS BEF_WEEK_SQN_NM
+            , E.ALL_REAL_PRG	AS BEF_ALL_REAL_PRG
+            , E.ALL_PRED_PRG	AS BEF_ALL_PRED_PRG
+            , E.STEP_NM	    AS BEF_STEP_NM
+            , E.STEP_REAL_PRG	AS BEF_STEP_REAL_PRG
+            , E.STEP_PRED_PRG	AS BEF_STEP_PRED_PRG
+            , E.PRG_TXT	    AS BEF_PRG_TXT
+            , E.ISS_TXT	    AS BEF_ISS_TXT
+            , E.REQ_TXT	    AS BEF_REQ_TXT
+            , F2.ORG_FILE_NM   AS BEF_ORG_FILE_NM
+            , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
         FROM  (SELECT A.BKUP_ID
                     , A.PRJT_ID
                     , A.DTLS_TYCD AS REAL_PRJT_ID
@@ -61,7 +60,7 @@
                                                            ELSE RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0') END ]]>
                             </when>
                             <otherwise>
-                                AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD2 ELSE #{week_sqn_cd} END
+                                AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD ELSE #{week_sqn_cd} END
                             </otherwise>
                             </choose>
                             AND B.PRJT_ID = A.PRJT_ID
@@ -155,8 +154,7 @@
                 AND F2.ATFL_MNG_ID   = E.ATFL_MNG_ID
                 AND F2.PRJT_ID       = E.PRJT_ID
                 AND F2.BKUP_ID       = E.BKUP_ID
-        ORDER BY A.REAL_PRJT_NM, A.WEEK_SQN_CD DESC
-
+        ORDER BY A.WEEK_SQN_CD DESC, A.REAL_PRJT_NM
 </select>
 
     <select id="select_8000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
@@ -209,6 +207,16 @@
                                        AND    A.BKUP_ID      = E.BKUP_ID)
            AND    E.REAL_PRJT_ID = #{real_prjt_id}
            AND    E.BKUP_ID      = '0000000000'
+    </select>
+
+    <select id="select_8000_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
+        SELECT REAL_PRJT_ID
+        FROM   pms_week_rpt_mng
+        WHERE  WEEK_SQN_CD  =  #{week_sqn_cd}
+        AND    WEEK_YYMM    = REPLACE(#{week_yymm},'-','')
+        AND    REAL_PRJT_ID = #{real_prjt_id}
+        AND    PRJT_ID      = #{prjt_id}
+        AND    BKUP_ID      = '0000000000'
     </select>
     <insert id="insert_8000_01" parameterType="Map" >
     INSERT INTO pms_week_rpt_mng
