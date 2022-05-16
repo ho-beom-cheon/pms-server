@@ -265,14 +265,14 @@
 
     <update id="update_8000_01" parameterType="Map" >
         UPDATE pms_week_rpt_mng
-        SET    PM_NO	 = #{pm_no}
+        SET    PM_NO	 = CASE WHEN #{bef_aut_cd} IN ('500','900') THEN #{pm_no} ELSE PM_NO END
           ,ALL_REAL_PRG	 = #{all_real_prg}
           ,ALL_PRED_PRG	 = #{all_pred_prg}
           ,STEP_NM	     = #{step_nm}
           ,STEP_REAL_PRG = #{step_real_prg}
           ,STEP_PRED_PRG = #{step_pred_prg}
           ,PRG_TXT	     = #{prg_txt}
-          ,ISS_TXT	     = CASE WHEN PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','900') THEN  #{iss_txt} ELSE ISS_TXT END
+          ,ISS_TXT	     = CASE WHEN PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','900') THEN #{iss_txt} ELSE ISS_TXT END
           ,REQ_TXT	     = #{req_txt}
           ,ATFL_MNG_ID   = #{atfl_mng_id}
           ,OPR_NO        = #{login_emp_no}
