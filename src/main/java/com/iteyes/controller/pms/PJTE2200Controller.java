@@ -81,7 +81,7 @@ public class PJTE2200Controller {
 
         if(PJTE2200.getExcelUplod().equals("Y")) {
             PJTE2200D.setBzcd(PJTE2200.getBzcd());
-            PJTE2200D.setPrjt_id(PJTE2200.getPrjt_id());
+            PJTE2200D.setPrjt_id(PJTE2200.getLogin_proj_id());
             PJTE2200D.setSqn_cd(PJTE2200.getSqn_cd());
             PJTE2200D.setBkup_id("0000000000");
             pjte2200service.delete_2200_01(PJTE2200D);
@@ -131,8 +131,9 @@ public class PJTE2200Controller {
 
             PJTE2200C.setTst_achi_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
             PJTE2200C.setAtfl_mng_id(PJTE2200.getGridData().get(i).getAtfl_mng_id());
-            PJTE2200C.setBkup_id(PJTE2200.getGridData().get(i).getBkup_id());
-            PJTE2200C.setPrjt_id(PJTE2200.getPrjt_id());
+            PJTE2200C.setBkup_id("0000000000");
+            PJTE2200C.setPrjt_id(PJTE2200.getLogin_proj_id());
+
 
             PJTE2200C.setLogin_aut_cd(PJTE2200.getLogin_aut_cd());
             PJTE2200C.setLogin_emp_no(PJTE2200.getLogin_emp_no());
@@ -145,58 +146,58 @@ public class PJTE2200Controller {
         return result;
     }
 
-    @PutMapping("/update")
-    public @ResponseBody boolean update(HttpServletRequest request, @RequestBody PJTE2200DTO PJTE2200) throws Exception{
+    @PostMapping("/update")
+    public @ResponseBody boolean update(@RequestBody PJTE2200DTO PJTE2200) throws Exception{
         boolean result = false;
 
         PJTE2200DTO PJTE2200U = new PJTE2200DTO();
 
-        for(int i=0; i<PJTE2200.getUpdatedRows().size(); i++) {
-            PJTE2200U.setBzcd(PJTE2200.getUpdatedRows().get(i).getBzcd());
-            PJTE2200U.setSqn_cd(PJTE2200.getUpdatedRows().get(i).getSqn_cd());
-            PJTE2200U.setScnr_id(PJTE2200.getUpdatedRows().get(i).getScnr_id());
-            PJTE2200U.setScnr_nm(PJTE2200.getUpdatedRows().get(i).getScnr_nm());
+        for(int i=0; i<PJTE2200.getGridData().size(); i++) {
+            PJTE2200U.setBzcd(PJTE2200.getGridData().get(i).getBzcd());
+            PJTE2200U.setSqn_cd(PJTE2200.getGridData().get(i).getSqn_cd());
+            PJTE2200U.setScnr_id(PJTE2200.getGridData().get(i).getScnr_id());
+            PJTE2200U.setScnr_nm(PJTE2200.getGridData().get(i).getScnr_nm());
 
-            PJTE2200U.setTst_case_id(PJTE2200.getUpdatedRows().get(i).getTst_case_id());
-            PJTE2200U.setTst_case_nm(PJTE2200.getUpdatedRows().get(i).getTst_case_nm());
-            PJTE2200U.setItg_tst_prc_cd(PJTE2200.getUpdatedRows().get(i).getItg_tst_prc_cd());
-            PJTE2200U.setFrcs_sta_dt(PJTE2200.getUpdatedRows().get(i).getFrcs_sta_dt());
-            PJTE2200U.setFrcs_end_dt(PJTE2200.getUpdatedRows().get(i).getFrcs_end_dt());
+            PJTE2200U.setTst_case_id(PJTE2200.getGridData().get(i).getTst_case_id());
+            PJTE2200U.setTst_case_nm(PJTE2200.getGridData().get(i).getTst_case_nm());
+            PJTE2200U.setItg_tst_prc_cd(PJTE2200.getGridData().get(i).getItg_tst_prc_cd());
+            PJTE2200U.setFrcs_sta_dt(PJTE2200.getGridData().get(i).getFrcs_sta_dt());
+            PJTE2200U.setFrcs_end_dt(PJTE2200.getGridData().get(i).getFrcs_end_dt());
 
-            PJTE2200U.setSta_dt(PJTE2200.getUpdatedRows().get(i).getSta_dt());
-            PJTE2200U.setEnd_dt(PJTE2200.getUpdatedRows().get(i).getEnd_dt());
-            PJTE2200U.setDvlpe_cnf_dt(PJTE2200.getUpdatedRows().get(i).getDvlpe_cnf_dt());
-            PJTE2200U.setPl_cnf_dt(PJTE2200.getUpdatedRows().get(i).getPl_cnf_dt());
-            PJTE2200U.setDvlpe_enm(PJTE2200.getUpdatedRows().get(i).getDvlpe_enm());
+            PJTE2200U.setSta_dt(PJTE2200.getGridData().get(i).getSta_dt());
+            PJTE2200U.setEnd_dt(PJTE2200.getGridData().get(i).getEnd_dt());
+            PJTE2200U.setDvlpe_cnf_dt(PJTE2200.getGridData().get(i).getDvlpe_cnf_dt());
+            PJTE2200U.setPl_cnf_dt(PJTE2200.getGridData().get(i).getPl_cnf_dt());
+            PJTE2200U.setDvlpe_enm(PJTE2200.getGridData().get(i).getDvlpe_enm());
 
-            PJTE2200U.setDvlpe_eno(PJTE2200.getUpdatedRows().get(i).getDvlpe_eno());
-            PJTE2200U.setPl_enm(PJTE2200.getUpdatedRows().get(i).getPl_enm());
-            PJTE2200U.setPl_eno(PJTE2200.getUpdatedRows().get(i).getPl_eno());
-            PJTE2200U.setCrpe_enm(PJTE2200.getUpdatedRows().get(i).getCrpe_enm());
-            PJTE2200U.setCrpe_eno(PJTE2200.getUpdatedRows().get(i).getCrpe_eno());
+            PJTE2200U.setDvlpe_eno(PJTE2200.getGridData().get(i).getDvlpe_eno());
+            PJTE2200U.setPl_enm(PJTE2200.getGridData().get(i).getPl_enm());
+            PJTE2200U.setPl_eno(PJTE2200.getGridData().get(i).getPl_eno());
+            PJTE2200U.setCrpe_enm(PJTE2200.getGridData().get(i).getCrpe_enm());
+            PJTE2200U.setCrpe_eno(PJTE2200.getGridData().get(i).getCrpe_eno());
 
-            PJTE2200U.setErr_tot_cnt(PJTE2200.getUpdatedRows().get(i).getErr_tot_cnt());
-            PJTE2200U.setErr_cmpl_cnt(PJTE2200.getUpdatedRows().get(i).getErr_cmpl_cnt());
-            PJTE2200U.setErr_ncmpl_cnt(PJTE2200.getUpdatedRows().get(i).getErr_ncmpl_cnt());
-            PJTE2200U.setRmrk(PJTE2200.getUpdatedRows().get(i).getRmrk());
-            PJTE2200U.setPgm_id(PJTE2200.getUpdatedRows().get(i).getPgm_id());
+            PJTE2200U.setErr_tot_cnt(PJTE2200.getGridData().get(i).getErr_tot_cnt());
+            PJTE2200U.setErr_cmpl_cnt(PJTE2200.getGridData().get(i).getErr_cmpl_cnt());
+            PJTE2200U.setErr_ncmpl_cnt(PJTE2200.getGridData().get(i).getErr_ncmpl_cnt());
+            PJTE2200U.setRmrk(PJTE2200.getGridData().get(i).getRmrk());
+            PJTE2200U.setPgm_id(PJTE2200.getGridData().get(i).getPgm_id());
 
-            PJTE2200U.setScrn_id(PJTE2200.getUpdatedRows().get(i).getScrn_id());
-            PJTE2200U.setTrn_cd(PJTE2200.getUpdatedRows().get(i).getTrn_cd());
-            PJTE2200U.setRqu_sbh_id(PJTE2200.getUpdatedRows().get(i).getRqu_sbh_id());
-            PJTE2200U.setPrr_cnd(PJTE2200.getUpdatedRows().get(i).getPrr_cnd());
-            PJTE2200U.setInp_val(PJTE2200.getUpdatedRows().get(i).getInp_val());
+            PJTE2200U.setScrn_id(PJTE2200.getGridData().get(i).getScrn_id());
+            PJTE2200U.setTrn_cd(PJTE2200.getGridData().get(i).getTrn_cd());
+            PJTE2200U.setRqu_sbh_id(PJTE2200.getGridData().get(i).getRqu_sbh_id());
+            PJTE2200U.setPrr_cnd(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200U.setInp_val(PJTE2200.getGridData().get(i).getInp_val());
 
-            PJTE2200U.setTst_des(PJTE2200.getUpdatedRows().get(i).getTst_des());
-            PJTE2200U.setOup_val(PJTE2200.getUpdatedRows().get(i).getPrr_cnd());
-            PJTE2200U.setTp(PJTE2200.getUpdatedRows().get(i).getPrr_cnd());
-            PJTE2200U.setOup_mens(PJTE2200.getUpdatedRows().get(i).getPrr_cnd());
-            PJTE2200U.setTst_rst(PJTE2200.getUpdatedRows().get(i).getPrr_cnd());
+            PJTE2200U.setTst_des(PJTE2200.getGridData().get(i).getTst_des());
+            PJTE2200U.setOup_val(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200U.setTp(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200U.setOup_mens(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200U.setTst_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
 
-            PJTE2200U.setTst_achi_rst(PJTE2200.getUpdatedRows().get(i).getPrr_cnd());
-            PJTE2200U.setAtfl_mng_id(PJTE2200.getUpdatedRows().get(i).getAtfl_mng_id());
-            PJTE2200U.setBkup_id(PJTE2200.getUpdatedRows().get(i).getBkup_id());
-            PJTE2200U.setPrjt_id(PJTE2200.getUpdatedRows().get(i).getPrjt_id());
+            PJTE2200U.setTst_achi_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200U.setAtfl_mng_id(PJTE2200.getGridData().get(i).getAtfl_mng_id());
+            PJTE2200U.setBkup_id("0000000000");
+            PJTE2200U.setPrjt_id(PJTE2200.getLogin_proj_id());
 
             PJTE2200U.setLogin_aut_cd(PJTE2200.getLogin_aut_cd());
             PJTE2200U.setLogin_emp_no(PJTE2200.getLogin_emp_no());
