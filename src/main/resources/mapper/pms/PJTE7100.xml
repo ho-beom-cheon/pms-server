@@ -46,8 +46,8 @@
         <if test='to_pgm_id != "" and to_pgm_id != null'>
             AND    A.TO_PGM_ID LIKE CONCAT('%',CONCAT(#{to_pgm_id},'%'))
         </if>
-        <if test='use_pgm_id != "" and use_pgm_id != null'>
-            AND    A.USE_PGM_ID LIKE CONCAT('%',CONCAT(#{use_pgm_id},'%'))
+        <if test='use_pgm_txt != "" and use_pgm_txt != null'>
+            AND    A.USE_PGM_TXT LIKE CONCAT('%',CONCAT(#{use_pgm_txt},'%'))
         </if>
         ORDER BY A.AS_PGM_ID
     </select>
@@ -115,7 +115,7 @@
             , '100'
             , ''
             , ''
-            , #{Rmrk}
+            , #{rmrk}
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
             )
