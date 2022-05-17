@@ -117,7 +117,7 @@ public class PJTE9300Controller {
         return result;
     }
     // 저장 버튼(수정)
-    @PutMapping("/update_9300_01")
+    @PostMapping("/update_9300_01")
     public @ResponseBody boolean update_9300_01(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
         boolean result = false;
 
