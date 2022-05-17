@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
-
 @CrossOrigin
 @Controller
 @Log4j2
@@ -99,7 +98,7 @@ public class PJTE7100Controller {
         return result;
     }
 
-    @PostMapping(value = "/update_7100_01")
+    @PutMapping(value = "/update_7100_01")
     public @ResponseBody
     boolean update(@RequestBody PJTE7100DTO PJTE7100) throws Exception {
 
