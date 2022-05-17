@@ -179,15 +179,15 @@
                , #{tst_case_nm}
                , #{scnr_id}
                , #{scnr_nm}
-               , DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%')
-               , DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%')
-               , NULL
-               , NULL
+               , REPLACE(#{frcs_sta_dt}, '-', '')
+               , REPLACE(#{frcs_end_dt}, '-', '')
+               , ''
+               , ''
                , #{dvlpe_eno}
                , #{pl_eno}
                , #{crpe_eno}
-               , NULL
-               , NULL
+               , ''
+               , ''
                , #{itg_tst_prc_cd}
                , #{prr_cnd}
                , #{inp_val}
@@ -202,7 +202,7 @@
                , #{tst_rst}
                , #{tst_achi_rst}
                , #{rmrk}
-               , #{atfl_mng_id}
+               , ''
                , #{login_emp_no}
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
             )
@@ -217,10 +217,18 @@
              , SCNR_NM        = #{scnr_nm}
              , FRCS_STA_DT    = CASE WHEN #{login_aut_cd} IN ('500','600') THEN DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%') ELSE FRCS_STA_DT END
              , FRCS_END_DT    = CASE WHEN #{login_aut_cd} IN ('500','600') THEN DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%') ELSE FRCS_END_DT END
+             , STA_DT         = CASE WHEN (#{itg_tst_prc_cd} = '100' OR (#{itg_tst_prc_cd} = '200' AND STA_DT = '')) AND (DVLPE_ENO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
+             , END_DT         = CASE WHEN #{itg_tst_prc_cd} = '400' AND (CRPE_ENO  = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
+             , DVLPE_CNF_DT   = CASE WHEN #{itg_tst_prc_cd} = '200' AND (DVLPE_ENO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT END
+             , PL_CNF_DT      = CASE WHEN #{itg_tst_prc_cd} = '300' AND (PL_ENO    = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT END
              , DVLPE_ENO      = #{dvlpe_eno}
              , PL_ENO         = #{pl_eno}
              , CRPE_ENO       = #{crpe_eno}
-             , ITG_TST_PRC_CD = CASE WHEN #{login_aut_cd} IN ('500','600') THEN #{itg_tst_prc_cd} ELSE ITG_TST_PRC_CD END
+             , ITG_TST_PRC_CD = CASE WHEN #{login_aut_cd}   IN ('500','600')                                 THEN #{itg_tst_prc_cd}
+                                     WHEN #{itg_tst_prc_cd} IN ('100','200') AND DVLPE_ENO = #{login_emp_no} THEN #{itg_tst_prc_cd}
+                                     WHEN #{itg_tst_prc_cd} = '300'          AND PL_ENO    = #{login_emp_no} THEN #{itg_tst_prc_cd}
+                                     WHEN #{itg_tst_prc_cd} = '400'          AND CRPE_ENO  = #{login_emp_no} THEN #{itg_tst_prc_cd}
+                                     ELSE ITG_TST_PRC_CD END
              , PRR_CND        = #{prr_cnd}
              , INP_VAL        = #{inp_val}
              , TST_DES        = #{tst_des}
@@ -234,7 +242,6 @@
              , TST_RST        = #{tst_rst}
              , TST_ACHI_RST   = #{tst_achi_rst}
              , RMRK           = #{rmrk}
-             , ATFL_MNG_ID    = #{atfl_mng_id}
              , OPR_NO         = #{login_emp_no}
              , DB_CHG_TS      = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
          WHERE TST_CASE_ID    = #{tst_case_id}
@@ -247,5 +254,8 @@
     <delete id="delete_2200_01" parameterType="Map">
         DELETE FROM pms_itg_tst_mng
         WHERE PRJT_ID        = #{prjt_id}
+          AND BKUP_ID        = #{bkup_id}
+          AND SQN_CD         = #{sqn_cd}
+          AND BZCD           = #{bzcd}
     </delete>
 </mapper>

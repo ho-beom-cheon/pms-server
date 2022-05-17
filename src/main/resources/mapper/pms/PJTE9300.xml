@@ -5,31 +5,31 @@
 <mapper namespace="com.iteyes.mapper.pms.PJTE9300Mapper">
 	<select id="select_9300_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9300DTO">
 		SELECT A.REAL_PRJT_ID
-			 ,DATE_FORMAT(A.SCH_ENT_DT,'%Y-%m-%d') AS DATE_FORMAT
-			 ,A.SKILL_GRD
-			 ,A.MAIN_SKILL
-			 ,A.DUTY_TXT
-			 ,A.OTH_CNT
-			 ,A.NMBR_RCRT
-			 ,B.EMPNM AS OPR_NM
-			 ,A.APLC_DTLS
-			 ,A.BKUP_ID
-			 ,A.PRJT_ID
-			 ,A.SQNO
-			 ,A.OPR_NO
-		FROM   pms_prj_prs_rqs A
-				   LEFT OUTER JOIN
-			   pms_emp_info   B
-			   ON  B.EMPNO      = A.OPR_NO
-				   AND B.PRJT_ID    = A.PRJT_ID
-				   AND B.BKUP_ID    = A.BKUP_ID
-		WHERE  A.BKUP_ID = #{bkup_id}
-		  AND    A.PRJT_ID = #{prjt_id}
-		  AND    A.DEL_YN  = 'N'
+			 , DATE_FORMAT(A.SCH_ENT_DT,'%Y-%m-%d') AS SCH_ENT_DT
+			 , A.SKILL_GRD
+			 , A.MAIN_SKILL
+			 , A.DUTY_TXT
+			 , A.OTH_CNT
+			 , A.NMBR_RCRT
+			 , B.EMPNM AS OPR_NM
+			 , A.APLC_DTLS
+			 , A.BKUP_ID
+			 , A.PRJT_ID
+			 , A.SQNO
+			 , A.OPR_NO
+		FROM pms_prj_prs_rqs A
+				 LEFT OUTER JOIN pms_emp_info   B
+								 ON B.EMPNO    = A.OPR_NO
+									 AND B.PRJT_ID  = A.PRJT_ID
+									 AND B.BKUP_ID  = A.BKUP_ID
+		WHERE A.BKUP_ID  = #{bkup_id}
+		  AND A.PRJT_ID  = #{prjt_id}
+		  AND A.DEL_YN   = 'N'
 		ORDER BY A.SCH_ENT_DT
 	</select>
 
 	<select id="select_9300_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9300DTO">
+		<![CDATA[
 		SELECT CONCAT(B.EMPNM,'[',B.RANK_NM,']') AS EMPNM
 			 ,C.MAIN_SKILL
 			 ,C.DUTY_TXT
@@ -37,6 +37,7 @@
 			 ,A.INP_PRJ_NM
 			 ,C.NXT_PRJ_NM
 			 ,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
+		     ,A.INP_CLS_CD
 		FROM   pms_inp_mnp_stt A
 				   LEFT OUTER JOIN
 			   pms_emp_info   B
@@ -57,14 +58,15 @@
 		WHERE  A.BKUP_ID = #{bkup_id}
 		  AND    A.PRJT_ID = #{prjt_id}
 		  AND   (A.INP_CLS_CD = '대기'
-			OR     A.WTH_SCH_YN = 'Y')
+		  OR     A.WTH_DT <= DATE_FORMAT(ADDDATE(DATE_FORMAT(NOW(),'%Y-%m-%d'), INTERVAL 3 MONTH),'%Y%m%d'))
 		ORDER BY A.WTH_DT, B.EMPNM
+		]]>
 	</select>
 
 
 	<update id="update_9300_01" parameterType="Map">
 		UPDATE pms_prj_prs_rqs
-		SET    SCH_ENT_DT  = EGEXP_REPLACE(#{sch_ent_dt}, '[^[:alnum:][:space:]]+', '')  /* 정규식 사용하여 '-', '.' 등 모든 특수문자 제거 */
+		SET    SCH_ENT_DT  = REGEXP_REPLACE(#{sch_ent_dt}, '[^[:alnum:][:space:]]+', '')  /* 정규식 사용하여 '-', '.' 등 모든 특수문자 제거 */
 		  ,SKILL_GRD   = #{skill_grd}
 		  ,MAIN_SKILL  = #{main_skill}
 		  ,DUTY_TXT    = #{duty_txt}
@@ -75,20 +77,20 @@
 		WHERE  1 = 1
 		  AND    BKUP_ID      = '0000000000'
 		  AND    PRJT_ID      = #{prjt_id}
-		  AND    REAL_PRJT_ID = #{real_prjt_id}
+ 		  AND    REAL_PRJT_ID = #{real_prjt_id}
 		  AND    SQNO         = #{sqno}
 	</update>
 
 	<update id="update_9300_02" parameterType="Map">
 		UPDATE pms_prj_prs_rqs
-		SET    APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(A.APLC_DTLS,''))) = 0 THEN #{login_emp_nm} ELSE CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) END
-		  ,OPR_NO      = #{login_emp_no}
-		  ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
-		WHERE  1 = 1
-		  AND    BKUP_ID      = '0000000000'
-		  AND    PRJT_ID      = #{prjt_id}
-		  AND    REAL_PRJT_ID = #{real_prjt_id}
-		  AND    SQNO         = #{sqno}
+		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,''))) = 0 THEN #{login_emp_nm} ELSE CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) END
+		  , OPR_NO      = #{login_emp_no}
+		  , DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+		WHERE 1 = 1
+		  AND BKUP_ID      = '0000000000'
+		  AND PRJT_ID      = #{prjt_id}
+		  AND REAL_PRJT_ID = #{real_prjt_id}
+		  AND SQNO         = #{sqno}
 	</update>
 
 	<update id="update_9300_03" parameterType="Map">

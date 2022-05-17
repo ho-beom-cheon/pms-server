@@ -73,6 +73,9 @@ public class PJTE8000Controller {
         PJTE8000.setWeek_sqn_cd(request.getParameter("week_sqn_cd_selected"));
         PJTE8000.setReal_prjt_id(request.getParameter("real_prjt_id_selected"));
         PJTE8000.setDept_cd(request.getParameter("dept_cd_selected"));
+        PJTE8000.setBef_emp_no(request.getParameter("bef_emp_no"));
+        PJTE8000.setBef_aut_cd(request.getParameter("bef_aut_cd"));
+
 
         List<PJTE8000DTO> list2 = pjte8000Service.select_8000_02(PJTE8000);
 

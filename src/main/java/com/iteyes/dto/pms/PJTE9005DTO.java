@@ -18,6 +18,8 @@ public class PJTE9005DTO {
     private String skill_grd;   // 등급
     private String main_skill;  // 주요기술
     private String duty_txt;    // 주요업무
+    private String car_main_skill;  // 경력주요기술
+    private String car_duty_txt;    // 경력주요업무
     private String man_no;      // 인력번호
     private String man_nm;      // 이름
     private String company_nm;  // 재직처

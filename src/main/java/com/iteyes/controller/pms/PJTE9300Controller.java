@@ -21,13 +21,6 @@ public class PJTE9300Controller {
     @Autowired
     private PJTE9300Service PJTE9300Service;
 
-    /**
-     * 투입인력조회
-     * @author hib
-     * @param request
-     * @return jsonStr
-     * @throws Exception
-     */
     @GetMapping(value = "/select_9300_01")
     public @ResponseBody String select_9310_01(HttpServletRequest request) throws Exception{
 
@@ -92,77 +85,96 @@ public class PJTE9300Controller {
         return jsonStr;
 
     }
+    @PostMapping("/insert_9300_01")
+    public @ResponseBody boolean insert_9300_01(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
+        boolean result = false;
 
-//     /**
-//     * 투입현황 등록
-//     * @author hib
-//     * @param PJTE9300
-//     * @return result (true)
-//     * @throws Exception
-//     */
-//    @PostMapping("/insert_9310_01")
-//    public @ResponseBody boolean insert_9310_01(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
-//        boolean result = false;
-//
-//        if(PJTE9300.getGridData().size() != 0) {
-//
-//            PJTE9300DTO PJTE9300D = new PJTE9300DTO();
-//            PJTE9300DTO PJTE9300C = new PJTE9300DTO();
-//
-//
-//            /* dto 값 셋팅*/
-//            PJTE9300D.setPrjt_id(PJTE9300.getPrjt_id());
-//            PJTE9300D.setDept_cd(PJTE9300.getDept_cd());
-//            PJTE9300Service.delete_9310_01(PJTE9300D);
-//
-//
-//            for (int i = 0; i < PJTE9300.getGridData().size(); i++) {
-//                PJTE9300C.setPrjt_id(PJTE9300.getPrjt_id());
-//                PJTE9300C.setDept_nm(PJTE9300.getGridData().get(i).getDept_nm());
-//                PJTE9300C.setHdq_nm(PJTE9300.getGridData().get(i).getHdq_nm());
-//                PJTE9300C.setTm_nm(PJTE9300.getGridData().get(i).getTm_nm());
-//                PJTE9300C.setRank_nm(PJTE9300.getGridData().get(i).getRank_nm());
-//                PJTE9300C.setEmpno(PJTE9300.getGridData().get(i).getEmpno());
-//                PJTE9300C.setEmpnm(PJTE9300.getGridData().get(i).getEmpnm());
-//                PJTE9300C.setEnt_dt(PJTE9300.getGridData().get(i).getEnt_dt());
-//                PJTE9300C.setInp_prj_nm(PJTE9300.getGridData().get(i).getInp_prj_nm());
-//                PJTE9300C.setInp_dt(PJTE9300.getGridData().get(i).getInp_dt());
-//                PJTE9300C.setWth_dt(PJTE9300.getGridData().get(i).getWth_dt());
-//                PJTE9300C.setPrj_typ_nm(PJTE9300.getGridData().get(i).getPrj_typ_nm());
-//                PJTE9300C.setPrf_ar(PJTE9300.getGridData().get(i).getPrf_ar());
-//                PJTE9300C.setRmrk(PJTE9300.getGridData().get(i).getRmrk());
-//                PJTE9300C.setInp_cls_cd(PJTE9300.getGridData().get(i).getInp_cls_cd());
-//                PJTE9300C.setWth_sch_yn(PJTE9300.getGridData().get(i).getWth_sch_yn());
-//
-//                PJTE9300C.setLogin_emp_no(PJTE9300.getLogin_emp_no());
-//
-//                result = PJTE9300Service.insert_9310_01(PJTE9300C);
-//            }
-//        }
-//        return result;
-//    }
-//
-//    /**
-//     * 투입현황 삭제
-//     * @author hib
-//     * @param request
-//     * @param PJTE9300
-//     * @return result
-//     * @throws Exception
-//     */
-//    @PutMapping(value = "/delete_9310_01")
-//    public @ResponseBody
-//    boolean delete_9310_01(HttpServletRequest request, @RequestBody PJTE9300DTO PJTE9300) throws Exception {
-//        boolean result = false;
-//
-//        PJTE9300DTO PJTE9300D = new PJTE9300DTO();
-//        /* dto 값 셋팅 */
-//        PJTE9300D.setPrjt_id(PJTE9300.getPrjt_id());
-//        PJTE9300D.setDept_cd(PJTE9300.getDept_cd());
-//
-//
-//        result = PJTE9300Service.delete_9310_01(PJTE9300D);
-//
-//        return result;
-//    }
+        if(PJTE9300.getGridData().size() != 0) {
+
+            PJTE9300DTO PJTE9300C = new PJTE9300DTO();
+
+            /* dto 값 셋팅*/
+            PJTE9300C.setPrjt_id(PJTE9300.getPrjt_id());
+            PJTE9300C.setLogin_emp_no(PJTE9300.getLogin_emp_no());
+
+            for (int i = 0; i < PJTE9300.getGridData().size(); i++) {
+
+                PJTE9300C.setLogin_emp_no(PJTE9300.getLogin_emp_no());
+                PJTE9300C.setReal_prjt_id(PJTE9300.getGridData().get(i).getReal_prjt_id());
+                PJTE9300C.setSkill_grd(PJTE9300.getGridData().get(i).getSkill_grd());
+                PJTE9300C.setMain_skill(PJTE9300.getGridData().get(i).getMain_skill());
+                PJTE9300C.setDuty_txt(PJTE9300.getGridData().get(i).getDuty_txt());
+                PJTE9300C.setOth_cnt(PJTE9300.getGridData().get(i).getOth_cnt());
+                PJTE9300C.setNmbr_rcrt(PJTE9300.getGridData().get(i).getNmbr_rcrt());
+                PJTE9300C.setSch_ent_dt(PJTE9300.getGridData().get(i).getSch_ent_dt());
+                PJTE9300C.setSqno(PJTE9300.getGridData().get(i).getSqno());
+                System.out.println("sqno: " + PJTE9300.getGridData().get(i).getSqno());
+
+                result = PJTE9300Service.insert_9300_01(PJTE9300C);
+            }
+        }
+        System.out.println(result);
+        return result;
+    }
+    // 저장 버튼(수정)
+    @PutMapping("/update_9300_01")
+    public @ResponseBody boolean update_9300_01(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
+        boolean result = false;
+
+        PJTE9300DTO PJTE9300U = new PJTE9300DTO();
+
+        PJTE9300U.setPrjt_id(PJTE9300.getPrjt_id());
+        PJTE9300U.setLogin_emp_no(PJTE9300.getLogin_emp_no());
+
+        System.out.println("그리드 : " + PJTE9300.getGridData().size());
+        for (int i = 0; i < PJTE9300.getGridData().size(); i++) {
+            System.out.println("i : " + i);
+            PJTE9300U.setLogin_emp_no(PJTE9300.getLogin_emp_no());
+            PJTE9300U.setReal_prjt_id(PJTE9300.getGridData().get(i).getReal_prjt_id());
+            PJTE9300U.setSkill_grd(PJTE9300.getGridData().get(i).getSkill_grd());
+            PJTE9300U.setMain_skill(PJTE9300.getGridData().get(i).getMain_skill());
+            PJTE9300U.setDuty_txt(PJTE9300.getGridData().get(i).getDuty_txt());
+            PJTE9300U.setOth_cnt(PJTE9300.getGridData().get(i).getOth_cnt());
+            PJTE9300U.setNmbr_rcrt(PJTE9300.getGridData().get(i).getNmbr_rcrt());
+            PJTE9300U.setSch_ent_dt(PJTE9300.getGridData().get(i).getSch_ent_dt());
+            PJTE9300U.setSqno(PJTE9300.getGridData().get(i).getSqno());
+
+            result = PJTE9300Service.update_9300_01(PJTE9300U);
+        }
+
+        return result;
+    }
+    // 지원 버튼
+    @PutMapping("/update_9300_02")
+    public @ResponseBody boolean update_9300_02(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
+        boolean result = false;
+
+        PJTE9300DTO PJTE9300U = new PJTE9300DTO();
+
+        PJTE9300U.setPrjt_id(PJTE9300.getPrjt_id());
+        PJTE9300U.setLogin_emp_no(PJTE9300.getLogin_emp_no());
+        PJTE9300U.setLogin_emp_nm(PJTE9300.getLogin_emp_nm());
+        PJTE9300U.setReal_prjt_id(PJTE9300.getReal_prjt_id());
+        PJTE9300U.setSqno(PJTE9300.getSqno());
+
+        result = PJTE9300Service.update_9300_02(PJTE9300U);
+
+        return result;
+    }
+    // 삭제 버튼
+    @PutMapping("/update_9300_03")
+    public @ResponseBody boolean update_9300_03(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
+        boolean result = false;
+
+        PJTE9300DTO PJTE9300U = new PJTE9300DTO();
+
+        PJTE9300U.setPrjt_id(PJTE9300.getPrjt_id());
+        PJTE9300U.setLogin_emp_no(PJTE9300.getLogin_emp_no());
+        PJTE9300U.setReal_prjt_id(PJTE9300.getReal_prjt_id());
+        PJTE9300U.setSqno(PJTE9300.getSqno());
+
+        result = PJTE9300Service.update_9300_03(PJTE9300U);
+
+        return result;
+    }
 }

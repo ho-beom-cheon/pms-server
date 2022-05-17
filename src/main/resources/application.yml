@@ -42,5 +42,5 @@ jwt:
   salt: MYSALT
   expmin: 5
 
-file-upload-dir: C:\\fileupload\\
-upload-form-dir: C:\\fileupload\\uploadForm\\
+file-upload-dir: D:\\fileupload\\
+upload-form-dir: D:\\fileupload\\uploadForm\\

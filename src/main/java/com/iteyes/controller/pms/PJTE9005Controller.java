@@ -37,6 +37,8 @@ public class PJTE9005Controller {
         PJTE9005.setSkill_grd(request.getParameter("skill_grd_selected"));
         PJTE9005.setMain_skill(request.getParameter("main_skill"));
         PJTE9005.setDuty_txt(request.getParameter("duty_txt"));
+        PJTE9005.setCar_main_skill(request.getParameter("car_main_skill"));
+        PJTE9005.setCar_duty_txt(request.getParameter("car_duty_txt"));
         PJTE9005.setMan_no(request.getParameter("man_no"));
         PJTE9005.setMan_nm(request.getParameter("man_nm"));
         PJTE9005.setCompany_nm(request.getParameter("company_nm"));
