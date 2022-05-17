@@ -16,10 +16,10 @@
 			 , A.BKUP_ID
 			 , A.PRJT_ID
 			 , A.SQNO
-			 , A.OPR_NO
+			 , A.REQPE_NO AS OPR_NO
 		FROM pms_prj_prs_rqs A
 				 LEFT OUTER JOIN pms_emp_info   B
-								 ON B.EMPNO    = A.OPR_NO
+								 ON B.EMPNO    = A.REQPE_NO
 									 AND B.PRJT_ID  = A.PRJT_ID
 									 AND B.BKUP_ID  = A.BKUP_ID
 		WHERE A.BKUP_ID  = #{bkup_id}
@@ -73,6 +73,7 @@
 		  ,DUTY_TXT    = #{duty_txt}
 		  ,OTH_CNT     = #{oth_cnt}
 		  ,NMBR_RCRT   = #{nmbr_rcrt}
+		  ,OPR_NO      = #{login_emp_no}
 		  ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE  1 = 1
 		  AND    BKUP_ID      = '0000000000'
@@ -85,6 +86,7 @@
 		UPDATE pms_prj_prs_rqs
 		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,''))) = 0 THEN #{login_emp_nm}
 		                       WHEN INSTR(APLC_DTLS, #{login_emp_nm}) = 0 THEN CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) ELSE APLC_DTLS END
+		  ,OPR_NO      = #{login_emp_no}
 		  , DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE 1 = 1
 		  AND BKUP_ID      = '0000000000'
@@ -128,6 +130,7 @@
 		,OTH_CNT
 		,NMBR_RCRT
 		,APLC_DTLS
+		,REQPE_NO
 		,DEL_YN
 		,OPR_NO
 		,DB_CHG_TS
@@ -144,6 +147,7 @@
 		, #{duty_txt}
 		, #{oth_cnt}
 		, #{nmbr_rcrt}
+		, #{login_emp_no}
 		, ''
 		, 'N'
 		, #{login_emp_no}
