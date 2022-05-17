@@ -147,8 +147,8 @@
 		, #{duty_txt}
 		, #{oth_cnt}
 		, #{nmbr_rcrt}
-		, #{login_emp_no}
 		, ''
+		, #{login_emp_no}
 		, 'N'
 		, #{login_emp_no}
 		, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
