@@ -41,7 +41,8 @@
 		FROM   pms_inp_mnp_stt A
 				   LEFT OUTER JOIN
 			   pms_emp_info   B
-			   ON  B.EMPNO      = A.EMPNO
+			   ON  B.BZCD       NOT IN ('400','500')
+			       AND B.EMPNO      = A.EMPNO
 				   AND B.PRJT_ID    = A.PRJT_ID
 				   AND B.BKUP_ID    = A.BKUP_ID
 				   LEFT OUTER JOIN
@@ -72,7 +73,6 @@
 		  ,DUTY_TXT    = #{duty_txt}
 		  ,OTH_CNT     = #{oth_cnt}
 		  ,NMBR_RCRT   = #{nmbr_rcrt}
-		  ,OPR_NO      = #{login_emp_no}
 		  ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE  1 = 1
 		  AND    BKUP_ID      = '0000000000'
@@ -83,8 +83,8 @@
 
 	<update id="update_9300_02" parameterType="Map">
 		UPDATE pms_prj_prs_rqs
-		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,''))) = 0 THEN #{login_emp_nm} ELSE CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) END
-		  , OPR_NO      = #{login_emp_no}
+		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,''))) = 0 THEN #{login_emp_nm}
+		                       WHEN INSTR(APLC_DTLS, #{login_emp_nm}) = 0 THEN CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) ELSE APLC_DTLS END
 		  , DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE 1 = 1
 		  AND BKUP_ID      = '0000000000'
