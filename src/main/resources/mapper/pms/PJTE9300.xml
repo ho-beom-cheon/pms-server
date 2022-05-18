@@ -84,8 +84,8 @@
 
 	<update id="update_9300_02" parameterType="Map">
 		UPDATE pms_prj_prs_rqs
-		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,''))) = 0 THEN #{login_emp_nm}
-		                       WHEN INSTR(APLC_DTLS, #{login_emp_nm}) = 0 THEN CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) ELSE APLC_DTLS END
+		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,'')))   = 0 THEN CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')
+		                       WHEN INSTR(APLC_DTLS, CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')) = 0 THEN CONCAT(APLC_DTLS,' , ', CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')) ELSE APLC_DTLS END
 		  ,OPR_NO      = #{login_emp_no}
 		  , DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE 1 = 1
