@@ -27,7 +27,7 @@
 					,CONCAT(B.RANK_NM,'[',F.DTLS_TYNM ,']') AS RANK_NM
 					,B.EMPNO
 					,B.EMPNM
-					,DATE_FORMAT(A.ENT_DT,'%Y-%m-%d') AS ENT_DT
+					,CASE WHEN A.ENT_DT IS NULL OR A.ENT_DT = '' THEN DATE_FORMAT(G.ENTER_YMD,'%Y-%m-%d') ELSE DATE_FORMAT(A.ENT_DT,'%Y-%m-%d') END AS ENT_DT
 					,A.INP_PRJ_NM
 					,DATE_FORMAT(A.INP_DT,'%Y-%m-%d') AS INP_DT
 					,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
@@ -39,7 +39,7 @@
 					,CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') AS DEPT_CD
 					,F.SORT_SEQ
 					,A.PRJT_ID
-					FROM   pms_emp_info   B
+			 FROM   pms_emp_info   B
 					LEFT OUTER JOIN
 					pms_inp_mnp_stt   A
 					ON    A.EMPNO      = B.EMPNO
@@ -69,12 +69,17 @@
 					AND F.GRP_TYCD   = '1000000001'
 					AND F.PRJT_ID    = B.PRJT_ID
 					AND F.BKUP_ID    = B.BKUP_ID
-					WHERE  B.BKUP_ID = #{bkup_id}
-					AND    B.PRJT_ID = #{prjt_id}
-					AND    B.EMPNO   != 'Admin'
-					<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
-						AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
-					</if>
+		            LEFT OUTER JOIN
+		            pms_man_pfle_info  G
+		            ON  G.MAN_NO     = B.EMPNO
+		            AND G.PRJT_ID    = B.PRJT_ID
+		            AND G.BKUP_ID    = B.BKUP_ID
+			WHERE  B.BKUP_ID = #{bkup_id}
+			AND    B.PRJT_ID = #{prjt_id}
+			AND    B.EMPNO   != 'Admin'
+			<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
+			AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
+			</if>
 					) A
 		ORDER BY A.DEPT_NM, A.HDQ_NM,A.TM_NM, A.SORT_SEQ DESC, A.INP_PRJ_NM, A.EMPNM
 	</select>
