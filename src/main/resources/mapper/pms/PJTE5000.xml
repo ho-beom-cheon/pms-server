@@ -55,6 +55,9 @@
         <if test='wbs_prc_sts_cd != "TTT"'>
             AND A.WBS_PRC_STS_CD = #{wbs_prc_sts_cd}
         </if>
+        <if test='acvt_nm != "" and acvt_nm != null'>
+            AND A.ACVT_NM LIKE CONCAT(CONCAT('%',#{acvt_nm}),'%')
+        </if>
         <if test='crpe_nm != "" and crpe_nm != null'>
             AND A.CRPE_NM LIKE CONCAT(CONCAT('%',#{crpe_nm}),'%')
         </if>
