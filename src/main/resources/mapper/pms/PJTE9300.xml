@@ -39,7 +39,7 @@
 			 ,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
 		     ,A.INP_CLS_CD
 		FROM   pms_inp_mnp_stt A
-				   LEFT OUTER JOIN
+				   INNER JOIN
 			   pms_emp_info   B
 			   ON  B.BZCD       NOT IN ('400','500')
 			       AND B.EMPNO      = A.EMPNO
