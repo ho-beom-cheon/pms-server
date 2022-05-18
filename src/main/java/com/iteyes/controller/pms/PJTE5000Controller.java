@@ -34,7 +34,7 @@ public class PJTE5000Controller {
         PJTE5000.setMng_cd(request.getParameter("wbs_mng_cd_selected"));
         PJTE5000.setWbs_prc_sts_cd(request.getParameter("wbs_prc_sts_cd_selected"));
 
-        PJTE5000.setTask_nm(request.getParameter("task_nm"));
+        PJTE5000.setAcvt_nm(request.getParameter("acvt_nm"));
         PJTE5000.setCrpe_nm(request.getParameter("crpe_nm"));
         PJTE5000.setAcl_sta_dt(request.getParameter("acl_sta_dt"));
         PJTE5000.setAcl_end_dt(request.getParameter("acl_end_dt"));
