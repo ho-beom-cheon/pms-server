@@ -19,6 +19,7 @@ public class PJTE9300DTO {
     private String login_bzcd;       // 업무구분
     private String login_catn_dcd;   // 구성원 구분코드
     private String login_aut_cd;     // 권한 ID
+    private String login_dept_nm;     // 소속명
 
     // 그리드1_1 (요청인력내역)
     private String real_prjt_id;         //투입프로젝트명
