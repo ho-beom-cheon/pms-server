@@ -132,8 +132,13 @@
         WHERE 1 = 1
           AND BKUP_ID = #{bkup_id}
           AND PRJT_ID = #{prjt_id}
-          AND MNG_CD = #{mng_cd}
-          AND BZCD = #{bzcd}
+          AND MNG_CD  = #{mng_cd}
+        <if test='bzcd != ""'>
+          AND BZCD    = #{bzcd}
+        </if>
+        <if test='mng_id != ""'>
+          AND MNG_ID  = #{mng_id}
+        </if>
     </delete>
 
     <update id="update_5000_01" parameterType="Map">
