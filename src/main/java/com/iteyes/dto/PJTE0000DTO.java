@@ -17,6 +17,7 @@ public class PJTE0000DTO {
 	private String login_yn;			// login 구분
 	private String real_prjt_id;        // 투입프로젝트 id
 	private String dept_cd;        		// 부문코드
+	private String dept_nm;        		// 소속명
 
 	private String btn_gubun;           // 버튼 클릭 이벤트 구분
 }

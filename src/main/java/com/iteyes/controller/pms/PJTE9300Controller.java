@@ -155,6 +155,7 @@ public class PJTE9300Controller {
         PJTE9300U.setLogin_emp_no(PJTE9300.getLogin_emp_no());
         PJTE9300U.setLogin_emp_nm(PJTE9300.getLogin_emp_nm());
         PJTE9300U.setReal_prjt_id(PJTE9300.getReal_prjt_id());
+        PJTE9300U.setLogin_dept_nm(PJTE9300.getLogin_dept_nm());
         PJTE9300U.setSqno(PJTE9300.getSqno());
 
         result = PJTE9300Service.update_9300_02(PJTE9300U);
