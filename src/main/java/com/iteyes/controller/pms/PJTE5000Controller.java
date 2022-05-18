@@ -23,7 +23,7 @@ public class PJTE5000Controller {
     @GetMapping(value = "/select")
     public @ResponseBody
     String select(HttpServletRequest request) throws Exception {
-
+        log.debug("PJTE5000_Controller :: select 시작");
         ObjectMapper mapper = new ObjectMapper();
         /* 빈 dto 생성 */
         PJTE5000DTO PJTE5000 = new PJTE5000DTO();
@@ -68,7 +68,7 @@ public class PJTE5000Controller {
     @PutMapping(value = "/update")
     public @ResponseBody
     boolean update(HttpServletRequest request, @RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
-
+        log.debug("PJTE5000_Controller :: update 시작");
         PJTE5000DTO PJTE5000 = new PJTE5000DTO();
         boolean result = true;
         if (PJTE5000dto.getUpdatedRows().size() != 0) {
@@ -104,7 +104,7 @@ public class PJTE5000Controller {
     public @ResponseBody
     boolean delete(HttpServletRequest request, @RequestBody PJTE5000DTO PJTE5000dto) throws Exception {
         boolean result = true;
-
+        log.debug("PJTE5000_Controller :: delete 시작");
         if (PJTE5000dto.getGridData().size() != 0) {
             PJTE5000DTO PJTE5000D = new PJTE5000DTO();
             for (int i = 0; i < PJTE5000dto.getGridData().size(); i++) {
@@ -113,7 +113,7 @@ public class PJTE5000Controller {
                 PJTE5000D.setPrjt_id(PJTE5000dto.getGridData().get(i).getPrjt_id());
                 PJTE5000D.setBzcd(PJTE5000dto.getGridData().get(i).getBzcd());
                 PJTE5000D.setMng_cd(PJTE5000dto.getGridData().get(i).getMng_cd());
-
+                PJTE5000D.setMng_id(PJTE5000dto.getGridData().get(i).getMng_id());
                 pjte5000Service.delete_5000_01(PJTE5000D);
             }
         }
@@ -126,18 +126,21 @@ public class PJTE5000Controller {
 
         boolean result = true;
         PJTE5000DTO PJTE5000 = new PJTE5000DTO();
-
-        if (PJTE5000dto.getGridData().size() != 0) {
+        log.debug("PJTE5000_Controller :: insert 시작");
+        log.debug("getExcelUplod :: "+PJTE5000dto.getExcelUplod());
+        log.debug("getMng_cd :: "+PJTE5000dto.getMng_cd());
+        if(PJTE5000dto.getExcelUplod().equals("Y")) {
             PJTE5000DTO PJTE5000D = new PJTE5000DTO();
-            for (int i = 0; i < PJTE5000dto.getGridData().size(); i++) {
-                /* dto 값 셋팅*/
-                PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
-                PJTE5000D.setPrjt_id(PJTE5000dto.getPrjt_id());
-                PJTE5000D.setBzcd(PJTE5000dto.getGridData().get(i).getBzcd());
-                PJTE5000D.setMng_cd(PJTE5000dto.getGridData().get(i).getMng_cd());
-
-                pjte5000Service.delete_5000_01(PJTE5000D);
+            PJTE5000D.setBkup_id(PJTE5000dto.getBkup_id());
+            PJTE5000D.setPrjt_id(PJTE5000dto.getPrjt_id());
+            if(PJTE5000dto.getMng_cd().equals("100")) {
+                PJTE5000D.setBzcd("");
+            } else {
+                PJTE5000D.setBzcd(PJTE5000dto.getBzcd());
             }
+            PJTE5000D.setMng_cd(PJTE5000dto.getMng_cd());
+            PJTE5000D.setMng_id("");
+            pjte5000Service.delete_5000_01(PJTE5000D);
         }
 
         if (PJTE5000dto.getGridData().size() != 0) {
