@@ -53,6 +53,7 @@ public class PJTE2200DTO {
     private String atfl_mng_id_yn;         //첨부파일관리ID
     private String dvlpe_sta_dt;        //개발시작일자
     private String dvlpe_end_dt;        //개발종료일자
+    private String unt_tst_yn;          // 통합테스트시나리오증빙여부
 
     private String array_length;
     private List<PJTE2200DTO> updatedRows;

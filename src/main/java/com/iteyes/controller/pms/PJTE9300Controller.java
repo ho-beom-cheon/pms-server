@@ -117,7 +117,7 @@ public class PJTE9300Controller {
         return result;
     }
     // 저장 버튼(수정)
-    @PutMapping("/update_9300_01")
+    @PostMapping("/update_9300_01")
     public @ResponseBody boolean update_9300_01(@RequestBody PJTE9300DTO PJTE9300) throws Exception{
         boolean result = false;
 
@@ -155,6 +155,7 @@ public class PJTE9300Controller {
         PJTE9300U.setLogin_emp_no(PJTE9300.getLogin_emp_no());
         PJTE9300U.setLogin_emp_nm(PJTE9300.getLogin_emp_nm());
         PJTE9300U.setReal_prjt_id(PJTE9300.getReal_prjt_id());
+        PJTE9300U.setLogin_dept_nm(PJTE9300.getLogin_dept_nm());
         PJTE9300U.setSqno(PJTE9300.getSqno());
 
         result = PJTE9300Service.update_9300_02(PJTE9300U);

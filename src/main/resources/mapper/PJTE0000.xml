@@ -36,6 +36,7 @@
 		 , A.LGN_PWD
 	     , A.REAL_PRJT_ID
 		 , A.DEPT_CD
+	     , B.DTLS_TYNM AS DEPT_NM
 		 , CASE WHEN A.LGN_PWD != #{lgn_pwd}
 		    		 THEN 'N'
 				WHEN A.DEL_YN = 'Y'
@@ -45,7 +46,13 @@
 		        ELSE 'Y'
 		    END AS LOGIN_YN
 	 FROM pms_emp_info   A
-	WHERE 1=1
+		LEFT OUTER JOIN
+		pms_cd_del_mng   B
+		ON  B.DTLS_TYCD  = A.DEPT_CD
+		AND B.GRP_TYCD   = '1000000044'
+		AND B.PRJT_ID    = A.PRJT_ID
+		AND B.BKUP_ID    = A.BKUP_ID
+		WHERE 1=1
 	  AND A.EMPNO   = #{empno}
 	  AND A.PRJT_ID = #{prjt_id}
 	  AND A.BKUP_ID = '0000000000'

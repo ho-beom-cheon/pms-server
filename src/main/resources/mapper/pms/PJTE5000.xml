@@ -55,6 +55,9 @@
         <if test='wbs_prc_sts_cd != "TTT"'>
             AND A.WBS_PRC_STS_CD = #{wbs_prc_sts_cd}
         </if>
+        <if test='acvt_nm != "" and acvt_nm != null'>
+            AND A.ACVT_NM LIKE CONCAT(CONCAT('%',#{acvt_nm}),'%')
+        </if>
         <if test='crpe_nm != "" and crpe_nm != null'>
             AND A.CRPE_NM LIKE CONCAT(CONCAT('%',#{crpe_nm}),'%')
         </if>
@@ -64,7 +67,12 @@
         <if test='acl_sta_dt != ""  and acl_sta_dt != null and acl_end_dt != ""  and acl_end_dt != null'>
             AND A.ACL_END_DT BETWEEN #{acl_sta_dt} AND #{acl_end_dt}
         </if>
+        <if test='mng_cd == "100"'>
         ORDER BY A.MNG_ID
+        </if>
+        <if test='mng_cd != "100"'>
+            ORDER BY A.BZCD, A.MNG_ID
+        </if>
     </select>
 
     <insert id="insert_5000_01" parameterType="Map">
@@ -129,8 +137,13 @@
         WHERE 1 = 1
           AND BKUP_ID = #{bkup_id}
           AND PRJT_ID = #{prjt_id}
-          AND MNG_CD = #{mng_cd}
-          AND BZCD = #{bzcd}
+          AND MNG_CD  = #{mng_cd}
+        <if test='bzcd != "" and bzcd != "TTT" '>
+          AND BZCD    = #{bzcd}
+        </if>
+        <if test='mng_id != ""'>
+          AND MNG_ID  = #{mng_id}
+        </if>
     </delete>
 
     <update id="update_5000_01" parameterType="Map">

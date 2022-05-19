@@ -16,10 +16,10 @@
 			 , A.BKUP_ID
 			 , A.PRJT_ID
 			 , A.SQNO
-			 , A.OPR_NO
+			 , A.REQPE_NO AS OPR_NO
 		FROM pms_prj_prs_rqs A
 				 LEFT OUTER JOIN pms_emp_info   B
-								 ON B.EMPNO    = A.OPR_NO
+								 ON B.EMPNO    = A.REQPE_NO
 									 AND B.PRJT_ID  = A.PRJT_ID
 									 AND B.BKUP_ID  = A.BKUP_ID
 		WHERE A.BKUP_ID  = #{bkup_id}
@@ -39,9 +39,10 @@
 			 ,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
 		     ,A.INP_CLS_CD
 		FROM   pms_inp_mnp_stt A
-				   LEFT OUTER JOIN
+				   INNER JOIN
 			   pms_emp_info   B
-			   ON  B.EMPNO      = A.EMPNO
+			   ON  B.BZCD       NOT IN ('400','500')
+			       AND B.EMPNO      = A.EMPNO
 				   AND B.PRJT_ID    = A.PRJT_ID
 				   AND B.BKUP_ID    = A.BKUP_ID
 				   LEFT OUTER JOIN
@@ -83,8 +84,9 @@
 
 	<update id="update_9300_02" parameterType="Map">
 		UPDATE pms_prj_prs_rqs
-		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,''))) = 0 THEN #{login_emp_nm} ELSE CONCAT(APLC_DTLS,' , ', #{login_emp_nm}) END
-		  , OPR_NO      = #{login_emp_no}
+		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,'')))   = 0 THEN CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')
+		                       WHEN INSTR(APLC_DTLS, CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')) = 0 THEN CONCAT(APLC_DTLS,' , ', CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')) ELSE APLC_DTLS END
+		  ,OPR_NO      = #{login_emp_no}
 		  , DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE 1 = 1
 		  AND BKUP_ID      = '0000000000'
@@ -128,6 +130,7 @@
 		,OTH_CNT
 		,NMBR_RCRT
 		,APLC_DTLS
+		,REQPE_NO
 		,DEL_YN
 		,OPR_NO
 		,DB_CHG_TS
@@ -145,6 +148,7 @@
 		, #{oth_cnt}
 		, #{nmbr_rcrt}
 		, ''
+		, #{login_emp_no}
 		, 'N'
 		, #{login_emp_no}
 		, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
