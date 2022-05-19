@@ -67,7 +67,12 @@
         <if test='acl_sta_dt != ""  and acl_sta_dt != null and acl_end_dt != ""  and acl_end_dt != null'>
             AND A.ACL_END_DT BETWEEN #{acl_sta_dt} AND #{acl_end_dt}
         </if>
+        <if test='mng_cd == "100"'>
         ORDER BY A.MNG_ID
+        </if>
+        <if test='mng_cd != "100"'>
+            ORDER BY A.BZCD, A.MNG_ID
+        </if>
     </select>
 
     <insert id="insert_5000_01" parameterType="Map">
@@ -133,7 +138,7 @@
           AND BKUP_ID = #{bkup_id}
           AND PRJT_ID = #{prjt_id}
           AND MNG_CD  = #{mng_cd}
-        <if test='bzcd != ""'>
+        <if test='bzcd != "" and bzcd != "TTT" '>
           AND BZCD    = #{bzcd}
         </if>
         <if test='mng_id != ""'>
