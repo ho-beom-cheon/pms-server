@@ -112,12 +112,21 @@
             , #{to_pgm_nm}
             , #{use_pgm_txt}
             , #{dvlpe_no}
-            , '100'
-            , ''
-            , ''
+            , CASE WHEN #{excelUplod} = 'Y' THEN  #{trn_stt_cd} ELSE '100' END
+            , CASE WHEN #{excelUplod} = 'Y' THEN  #{sta_dt} ELSE '' END
+            , CASE WHEN #{excelUplod} = 'Y' THEN  #{end_dt} ELSE '' END
             , #{rmrk}
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
             )
     </insert>
+
+    <delete id="delete_7100_01" parameterType="Map">
+   <![CDATA[
+        DELETE FROM pms_as_to_map
+        WHERE 1=1
+          AND    BKUP_ID       = '0000000000'
+          AND    PRJT_ID       = #{prjt_id}
+        ]]>
+  </delete>
 </mapper>
