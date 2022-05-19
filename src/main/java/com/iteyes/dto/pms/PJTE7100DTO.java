@@ -32,6 +32,8 @@ public class PJTE7100DTO {
     private String db_chg_ts;       // DB변경일시
 
     private String save_yn;       // 저장여부
+    private String excelUplod;              //
+    private List<PJTE7100DTO> gridData;
 
     private List<PJTE7100DTO> rowDatas;
 

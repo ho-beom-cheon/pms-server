@@ -1,5 +1,6 @@
 package com.iteyes.mapper.pms;
 
+import com.iteyes.dto.pms.PJTE2100DTO;
 import com.iteyes.dto.pms.PJTE7100DTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,5 +13,7 @@ public interface PJTE7100Mapper {
 
     boolean update_7100_01(PJTE7100DTO PJTE7100) throws Exception;
     boolean insert_7100_01(PJTE7100DTO PJTE7100) throws Exception;
+    /*삭제*/
+    boolean delete_7100_01(PJTE7100DTO PJTE7100) throws Exception ;
 
 }
