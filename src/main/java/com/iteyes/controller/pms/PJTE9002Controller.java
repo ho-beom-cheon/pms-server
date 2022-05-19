@@ -132,6 +132,10 @@ public class PJTE9002Controller {
 
 		PJTE9002DTO PJTE9002 = new PJTE9002DTO();
 
+		log.debug("pgm_id : "+request.getParameter("pgm_id"));
+		log.debug("tst_case_id : "+request.getParameter("tst_case_id"));
+		log.debug("sqn_cd : "+request.getParameter("sqn_cd"));
+
 
 		String atfl_mng_id = request.getParameter("atfl_mng_id");
 		PJTE9002.setBkup_id(request.getParameter("bkup_id"));
