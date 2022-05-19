@@ -102,6 +102,12 @@
 		   , 'Y'    AS SAVE_YN  /* 등록여부*/
 		   , A.BKUP_ID          /* 백업ID */
 		   , A.PRJT_ID          /* 프로젝트ID  */
+	       , (SELECT CASE WHEN COUNT(*) = 0 THEN 'N' ELSE 'Y' END
+	          FROM   pms_cd_del_mng
+	          WHERE  DTLS_TYCD = A.PGM_DIS_CD
+	          AND    GRP_TYCD  = '1000000053'
+	          AND    PRJT_ID   = A.PRJT_ID
+	          AND    BKUP_ID   = A.BKUP_ID) AS UNT_TST_YN
 	    FROM pms_pgm_mng A          /* PMS프로그램관리 */
 	    LEFT OUTER JOIN
 	         pms_emp_info   B
