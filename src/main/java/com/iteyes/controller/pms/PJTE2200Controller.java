@@ -124,13 +124,13 @@ public class PJTE2200Controller {
             PJTE2200C.setInp_val(PJTE2200.getGridData().get(i).getInp_val());
 
             PJTE2200C.setTst_des(PJTE2200.getGridData().get(i).getTst_des());
-            PJTE2200C.setOup_val(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200C.setTp(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200C.setOup_mens(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200C.setTst_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200C.setOup_val(PJTE2200.getGridData().get(i).getOup_val());
+            PJTE2200C.setTp(PJTE2200.getGridData().get(i).getTp());
+            PJTE2200C.setOup_mens(PJTE2200.getGridData().get(i).getOup_mens());
+            PJTE2200C.setTst_rst(PJTE2200.getGridData().get(i).getTst_rst());
 
-            PJTE2200C.setTst_achi_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200C.setAtfl_mng_id(PJTE2200.getGridData().get(i).getAtfl_mng_id());
+            PJTE2200C.setTst_achi_rst(PJTE2200.getGridData().get(i).getTst_achi_rst());
+            PJTE2200C.setAtfl_mng_id("");
             PJTE2200C.setBkup_id("0000000000");
             PJTE2200C.setPrjt_id(PJTE2200.getLogin_proj_id());
 
@@ -189,13 +189,12 @@ public class PJTE2200Controller {
             PJTE2200U.setInp_val(PJTE2200.getGridData().get(i).getInp_val());
 
             PJTE2200U.setTst_des(PJTE2200.getGridData().get(i).getTst_des());
-            PJTE2200U.setOup_val(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200U.setTp(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200U.setOup_mens(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200U.setTst_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
+            PJTE2200U.setOup_val(PJTE2200.getGridData().get(i).getOup_val());
+            PJTE2200U.setTp(PJTE2200.getGridData().get(i).getTp());
+            PJTE2200U.setOup_mens(PJTE2200.getGridData().get(i).getOup_mens());
+            PJTE2200U.setTst_rst(PJTE2200.getGridData().get(i).getTst_rst());
 
-            PJTE2200U.setTst_achi_rst(PJTE2200.getGridData().get(i).getPrr_cnd());
-            PJTE2200U.setAtfl_mng_id(PJTE2200.getGridData().get(i).getAtfl_mng_id());
+            PJTE2200U.setTst_achi_rst(PJTE2200.getGridData().get(i).getTst_achi_rst());
             PJTE2200U.setBkup_id("0000000000");
             PJTE2200U.setPrjt_id(PJTE2200.getLogin_proj_id());
 
