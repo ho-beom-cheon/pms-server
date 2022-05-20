@@ -22,7 +22,7 @@
                      , CONCAT(A.PRJT_ID,'_',B.BZCD,'_구현_단위테스트케이스(',B.PGM_ID,')_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1) ) AS SAM_FILE_NM
                      , A.FILE_PATH
 		          FROM pms_atfl_mng A
-		          LEFT OUTER JOIN pms_pgm_mng B
+		          INNER JOIN pms_pgm_mng B
 		            ON B.ATFL_MNG_ID = A.ATFL_MNG_ID
 		           AND B.PRJT_ID     = A.PRJT_ID
 		           AND B.BKUP_ID     = A.BKUP_ID
@@ -47,7 +47,7 @@
                         END AS SAM_FILE_NM
                      , A.FILE_PATH
 		          FROM pms_atfl_mng A
-		          LEFT OUTER JOIN pms_pgm_mng B
+		               INNER JOIN pms_pgm_mng B
 		            ON B.PAL_ATFL_MNG_ID = A.ATFL_MNG_ID
 		           AND B.PRJT_ID         = A.PRJT_ID
 		           AND B.BKUP_ID         = A.BKUP_ID
@@ -55,8 +55,8 @@
 		         WHERE 1 = 1
 		           AND A.BKUP_ID         = #{bkup_id}
                    AND A.PRJT_ID         = #{prjt_id}
-                   AND A.FILE_RGS_DSCD   = '110'
-                   AND #{file_rgs_dscd} IN ('TTT','110')
+                   AND A.FILE_RGS_DSCD   = '101'
+                   AND #{file_rgs_dscd} IN ('TTT','101')
                  UNION ALL
                 SELECT A.SQNO
                      , B.BZCD
@@ -67,7 +67,7 @@
                      , CONCAT(A.PRJT_ID,'_',B.BZCD,'_테스트_통합테스트_케이스(결과)_v.1.0_',DATE_FORMAT(A.DB_CHG_TS,'%Y%m%d'),'.',SUBSTRING_INDEX(A.FILE_NM,'.',-1)) AS SAM_FILE_NM
                      , A.FILE_PATH
 		          FROM pms_atfl_mng A
-		          LEFT OUTER JOIN pms_itg_tst_mng B
+		               INNER JOIN pms_itg_tst_mng B
 		            ON B.ATFL_MNG_ID = A.ATFL_MNG_ID
 		           AND B.PRJT_ID     = A.PRJT_ID
 		           AND B.BKUP_ID     = A.BKUP_ID
