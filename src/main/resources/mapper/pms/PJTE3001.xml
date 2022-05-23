@@ -193,6 +193,20 @@
           AND A.PRJT_ID     = #{prjt_id}
           AND '1100'       != #{rgs_dscd}
     </select>
+
+    <select id="select_3001_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
+        SELECT MAX(MNG_ID) AS MNG_ID
+        FROM   pms_err_mng
+        WHERE  PRJT_ID     = #{prjt_id}
+          AND    BKUP_ID     = #{bkup_id}
+          AND    OPR_NO      = #{login_emp_no}
+          AND    CCTN_BZCD   = #{cctn_bzcd}
+          AND    CCTN_ID     = #{cctn_id}
+        <if test='rgs_dscd != "1100"'>
+          AND    CCTN_SQN_CD = #{cctn_sqn_cd}
+        </if>
+    </select>
+
     <update id="update_3001_01" parameterType="Map">
         UPDATE pms_err_mng
         SET BZCD             = #{bzcd}
