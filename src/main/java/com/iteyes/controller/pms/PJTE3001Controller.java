@@ -118,6 +118,40 @@ public class PJTE3001Controller {
 
     }
 
+    @GetMapping(value = "/select_3001_03")
+    public @ResponseBody
+    String select_3001_03(HttpServletRequest request) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        PJTE3001DTO PJTE3001 = new PJTE3001DTO();
+
+        PJTE3001.setPrjt_id(request.getParameter("prjt_id"));
+        PJTE3001.setBkup_id(request.getParameter("bkup_id"));
+        PJTE3001.setCctn_bzcd(request.getParameter("cctn_bzcd"));
+        PJTE3001.setCctn_id(request.getParameter("cctn_id"));
+        PJTE3001.setCctn_sqn_cd(request.getParameter("cctn_sqn_cd"));
+        PJTE3001.setRgs_dscd(request.getParameter("rgs_dscd"));
+        PJTE3001.setLogin_emp_no(request.getParameter("login_emp_no"));
+
+        List<PJTE3001DTO> list = pjte3001Service.select_3001_03(PJTE3001);
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+
+    }
+
     @PutMapping(value = "/update")
     public @ResponseBody
     boolean update(@RequestBody PJTE3001DTO PJTE3001) throws Exception {
