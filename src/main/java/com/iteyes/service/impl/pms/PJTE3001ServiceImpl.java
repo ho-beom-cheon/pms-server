@@ -50,6 +50,13 @@ public class PJTE3001ServiceImpl implements PJTE3001Service {
         return pjte3001Mapper.select_3001_02(PJTE3001);
     }
 
+    /* mng_id가 없을 때 신규 등록을 위한팝업 데이터 조회 select */
+    @Override
+    public List<PJTE3001DTO> select_3001_03(PJTE3001DTO PJTE3001) throws Exception {
+
+        return pjte3001Mapper.select_3001_03(PJTE3001);
+    }
+
     /* update */
     @Override
     public boolean update_3001_01(PJTE3001DTO PJTE3001) throws Exception {
