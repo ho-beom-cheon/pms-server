@@ -74,7 +74,8 @@
 		            ON  G.MAN_NO     = B.EMPNO
 		            AND G.PRJT_ID    = B.PRJT_ID
 		            AND G.BKUP_ID    = B.BKUP_ID
-			WHERE  B.BKUP_ID = #{bkup_id}
+			WHERE  B.DEL_YN  = 'N'
+		    AND    B.BKUP_ID = #{bkup_id}
 			AND    B.PRJT_ID = #{prjt_id}
 			AND    B.EMPNO   != 'Admin'
 			<if test='dept_cd != "" and dept_cd != null and dept_cd != "TTT"'>
