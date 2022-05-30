@@ -84,6 +84,8 @@ public class PJTE9000Controller {
 			PJTE9000C.setReal_prjt_id(PJTE9000.getCreatedRows().get(i).getReal_prjt_id());
 			PJTE9000C.setDept_cd(PJTE9000.getCreatedRows().get(i).getDept_cd());
 			PJTE9000C.setDel_yn(PJTE9000.getCreatedRows().get(i).getDel_yn());
+			PJTE9000C.setInp_dt(PJTE9000.getCreatedRows().get(i).getInp_dt());
+			PJTE9000C.setWth_dt(PJTE9000.getCreatedRows().get(i).getWth_dt());
 
 			result = pjte9000Service.insert_9000_01(PJTE9000C);
 		}
@@ -110,6 +112,8 @@ public class PJTE9000Controller {
 			PJTE9000U.setReal_prjt_id(PJTE9000.getUpdatedRows().get(i).getReal_prjt_id());
 			PJTE9000U.setDept_cd(PJTE9000.getUpdatedRows().get(i).getDept_cd());
 			PJTE9000U.setDel_yn(PJTE9000.getUpdatedRows().get(i).getDel_yn());
+			PJTE9000U.setInp_dt(PJTE9000.getUpdatedRows().get(i).getInp_dt());
+			PJTE9000U.setWth_dt(PJTE9000.getUpdatedRows().get(i).getWth_dt());
 
 			result = pjte9000Service.update_9000_01(PJTE9000U);
 		}
@@ -518,6 +522,9 @@ public class PJTE9000Controller {
 			PJTE9000C.setReal_prjt_id(PJTE9000.getRowDatas().get(i).getReal_prjt_id());
 			PJTE9000C.setDept_cd(PJTE9000.getRowDatas().get(i).getDept_cd());
 			PJTE9000C.setDel_yn(PJTE9000.getRowDatas().get(i).getDel_yn());
+			PJTE9000C.setInp_dt(PJTE9000.getRowDatas().get(i).getInp_dt());
+			PJTE9000C.setWth_dt(PJTE9000.getRowDatas().get(i).getWth_dt());
+
 
 			result = pjte9000Service.insert_9000_01(PJTE9000C);
 		}
