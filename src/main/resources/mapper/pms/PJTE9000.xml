@@ -17,6 +17,8 @@
                ,A.DEPT_CD
                ,A.DEL_YN
                ,B.SORT_SEQ
+               ,DATE_FORMAT(A.INP_DT,'%Y-%m-%d') AS INP_DT
+               ,DATE_FORMAT(A.WTH_DT,'%Y-%m-%d') AS WTH_DT
           FROM   pms_emp_info A
                       LEFT OUTER JOIN pms_cd_del_mng B ON
                          B.DTLS_TYCD = A.BZCD
@@ -118,6 +120,8 @@
             ,REAL_PRJT_ID  = #{real_prjt_id}
             ,DEPT_CD       = #{dept_cd}
             ,DEL_YN        = #{del_yn}
+            ,INP_DT        = REPLACE(#{inp_dt}, '-', '')
+            ,WTH_DT        = REPLACE(#{wth_dt}, '-', '')
             ,OPR_NO        = #{login_emp_no}
             ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
           WHERE  1 = 1
@@ -141,6 +145,8 @@
           ,REAL_PRJT_ID
           ,DEPT_CD
           ,DEL_YN
+          ,INP_DT
+          ,WTH_DT
           ,OPR_NO
           ,DB_CHG_TS
           )
@@ -163,6 +169,8 @@
                <if test=' del_yn != "Y" '>
                 , 'N'
                </if>
+               , REPLACE(#{inp_dt}, '-', '')
+               , REPLACE(#{wth_dt}, '-', '')
                , #{login_emp_no}       /*조작자번호*/
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
                )
@@ -851,8 +859,10 @@
                ,AUT_CD
                ,REAL_PRJT_ID
                ,DEPT_CD
-               ,#{login_emp_no}                     /*조작자번호*/
                ,DEL_YN
+               ,INP_DT
+               ,WTH_DT
+               ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
           WHERE  BKUP_ID = '0000000000'
@@ -1467,8 +1477,10 @@
                ,AUT_CD
                ,REAL_PRJT_ID
                ,DEPT_CD
-               ,#{login_emp_no}                     /*조작자번호*/
                ,DEL_YN
+               ,INP_DT
+               ,WTH_DT
+               ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
           WHERE  BKUP_ID = '0000000000'

@@ -81,6 +81,8 @@ public class PJTE9000DTO {
     private String catn_dcd;           // 구성원구분코드
     private String aut_cd;             // 권한구분코드
     private String del_yn;             // 삭제여부
+    private String inp_dt;             // 투입일자
+    private String wth_dt;             // 철수일자
 
     private String login_emp_no;        // opr_no
 
