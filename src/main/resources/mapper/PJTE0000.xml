@@ -53,6 +53,7 @@
 		AND B.PRJT_ID    = A.PRJT_ID
 		AND B.BKUP_ID    = A.BKUP_ID
 		WHERE 1=1
+	  AND A.DEL_YN  = 'N'
 	  AND A.EMPNO   = #{empno}
 	  AND A.PRJT_ID = #{prjt_id}
 	  AND A.BKUP_ID = '0000000000'
@@ -67,6 +68,7 @@
 		, A.PRJT_ID
 		FROM pms_emp_info   A
 		WHERE 1=1
+		AND A.DEL_YN  = 'N'
 		AND A.EMPNO   = #{empno}
 		AND A.PRJT_ID = #{prjt_id}
 	</select>
