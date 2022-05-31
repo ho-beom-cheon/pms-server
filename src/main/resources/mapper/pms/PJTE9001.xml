@@ -65,5 +65,6 @@
         <if test='empnm != "" and empnm != null'>
             AND A.EMPNM LIKE CONCAT('%', #{empnm}, '%')
         </if>
+        ORDER BY A.CATN_DCD, SUBSTR(A.DEPT_CD,1,6), B.DTLS_TYNM, A.BZCD, A.EMPNM
     </select>
 </mapper>
