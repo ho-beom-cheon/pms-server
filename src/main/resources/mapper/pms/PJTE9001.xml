@@ -65,6 +65,11 @@
         <if test='empnm != "" and empnm != null'>
             AND A.EMPNM LIKE CONCAT('%', #{empnm}, '%')
         </if>
-        ORDER BY A.CATN_DCD, SUBSTR(A.DEPT_CD,1,6), B.DTLS_TYNM, A.BZCD, A.EMPNM
+        <if test='prjt_id == "0000000001" or prjt_id == "0000000003"'>
+        ORDER BY A.CATN_DCD, SUBSTR(A.DEPT_CD,1,6), B.DTLS_TYNM, A.BZCD DESC, A.EMPNM
+        </if>
+        <if test='prjt_id != "0000000001" and prjt_id != "0000000003"'>
+            ORDER BY A.BZCD, A.EMPNM
+        </if>
     </select>
 </mapper>
