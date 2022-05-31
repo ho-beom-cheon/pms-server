@@ -70,7 +70,7 @@
         AND S.MAN_NO = A.MAN_NO
         AND A.PRJT_ID = A.PRJT_ID
         AND A.BKUP_ID = A.BKUP_ID)
-        ORDER BY B.EMPNM
+        ORDER BY A.MAN_CD, B.EMPNM
     </select>
     <select id="select_9005_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9005DTO">
         SELECT CONCAT('[최종변경일자 : ', DATE_FORMAT(A.DB_CHG_TS, '%Y-%m-%d'), ']') AS LAST_CHG_DT
