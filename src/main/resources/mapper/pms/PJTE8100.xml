@@ -4,85 +4,79 @@
 
 <mapper namespace="com.iteyes.mapper.pms.PJTE8100Mapper">
     <select id="select_8100_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8100DTO">
-        SELECT
-        CASE WHEN A.RSR_DT IS NOT NULL AND A.RSR_DT != ''
-        THEN STR_TO_DATE(A.RSR_DT, '%Y%m%d') ELSE A.RSR_DT
-        END AS RSR_DT
-        ,CONCAT(SUBSTR(A.RSRV_STRT,1,2),':',SUBSTR(A.RSRV_STRT,3,2)) AS RSRV_STRT_NM
-        ,CONCAT(SUBSTR(A.RSRV_ENDT,1,2),':',SUBSTR(A.RSRV_ENDT,3,2)) AS RSRV_ENDT_NM
-        ,B.DTLS_TYNM AS MTNG_ROOM_NM
-        ,A.MTNG_TTL
-        ,C.EMPNM AS RSR_NM
-        ,D.ORG_FILE_NM
-        ,A.BKUP_ID
-        ,A.PRJT_ID
-        ,A.MTNG_ROOM_ID
-        ,A.SQNO
-        ,A.RSR_NO
-        ,A.ATFL_MNG_ID
-        ,A.RSRV_STRT
-        ,A.RSRV_ENDT
-        FROM   pms_mtng_room_mng A
-        LEFT OUTER JOIN
-        pms_cd_del_mng   B
-        ON  B.DTLS_TYCD  = A.MTNG_ROOM_ID
-        AND B.GRP_TYCD   = '1000000047'
-        AND B.PRJT_ID    = A.PRJT_ID
-        AND B.BKUP_ID    = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_emp_info   C
-        ON  C.EMPNO      = A.RSR_NO
-        AND C.PRJT_ID    = A.PRJT_ID
-        AND C.BKUP_ID    = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_atfl_mng   D
-        ON  D.SQNO          = 1
-        AND D.FILE_RGS_DSCD = '803'
-        AND D.ATFL_MNG_ID   = A.ATFL_MNG_ID
-        AND D.PRJT_ID       = A.PRJT_ID
-        AND D.BKUP_ID       = A.BKUP_ID
+        SELECT A.MNG_ID
+              ,DATE_FORMAT(A.MTN_DT,'%Y-%m-%d') AS MTN_DT
+              ,A.CNF_WEK
+              ,A.MTN_DTL
+              ,A.MTN_RSL
+              ,B.EMPNM AS ATHR_NM
+              ,A.ATND_DTL
+              ,A.RQS_DTL
+              ,A.BKUP_ID
+              ,A.PRJT_ID
+              ,A.MTN_PLC
+              ,A.DEL_YN
+              ,A.ATHR_NO
+              ,A.MTN_TM
+              ,A.ATFL_MNG_ID
+              ,C.ORG_FILE_NM
+        FROM   pms_mnts_mng A
+               LEFT OUTER JOIN
+                 pms_emp_info   B
+               ON  B.EMPNO      = A.ATHR_NO
+               AND B.PRJT_ID    = A.PRJT_ID
+               AND B.BKUP_ID    = A.BKUP_ID
+               LEFT OUTER JOIN
+                 pms_atfl_mng   C
+               ON  C.SQNO          = 1
+               AND C.FILE_RGS_DSCD = '804'
+               AND C.ATFL_MNG_ID   = A.ATFL_MNG_ID
+               AND C.PRJT_ID       = A.PRJT_ID
+               AND C.BKUP_ID       = A.BKUP_ID
         WHERE  A.BKUP_ID      = '0000000000'
         AND    A.PRJT_ID      = #{prjt_id}
-        <if test='mtng_room_id != "" and mtng_room_id != null and mtng_room_id != "TTT"'>
-            AND    A.MTNG_ROOM_ID = #{mtng_room_id}
+        <if test='athr_no != "" and athr_no != null'>
+            AND    A.ATHR_NO = #{athr_no}
         </if>
-        <if test='rsr_strt != ""  and rsr_strt != null and rsr_endt != ""  and rsr_endt != null'>
-            AND    A.RSR_DT       BETWEEN REPLACE(#{rsr_strt}, '-', '') AND REPLACE(#{rsr_endt}, '-', '')
+        <if test='cnf_wek != ""  and cnf_wek != null'>
+            AND    A.CNF_WEK   LIKE CONCAT('%',#{cnf_wek},'%')
         </if>
-        <if test='rsr_no != "" and rsr_no != null'>
-            AND    A.RSR_NO       = #{rsr_no}
+        <if test='mtn_dtl != "" and mtn_dtl != null'>
+            AND    A.MTN_DTL   LIKE CONCAT('%',#{mtn_dtl},'%')
         </if>
-        ORDER BY A.RSR_DT, A.MTNG_ROOM_ID, A.RSRV_STRT
+        <if test='del_yn != "Y" and mtn_dtl != null'>
+            AND    A.DEL_YN  = 'N'
+        </if>
+        ORDER BY A.MTN_DT DESC, A.MTN_TM DESC
     </select>
 
     <update id="update_8100_01" parameterType="Map">
         UPDATE pms_mnts_mng
-        SET    CNF_WEK      = #{cnf_wek}
-          ,MTN_DT      = REPLACE(#{mtn_dt}, '-', '')
-          ,MTN_TM   = #{mtn_tm}
-          ,MTN_PLC   = #{mtn_plc}
-          ,ATHR_NO    = #{athr_no}
-          ,MTN_DTL    = #{mtn_dtl}
-          ,MTN_RSL    = #{mtn_rsl}
-          ,RQS_DTL    = #{rqs_dtl}
-          ,ATND_DTL    = #{atnd_dtl}
-          ,OPR_NO      = #{login_emp_no}
-          ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        SET    CNF_WEK    = #{cnf_wek}
+              ,MTN_DT     = REPLACE(#{mtn_dt}, '-', '')
+              ,MTN_TM     = #{mtn_tm}
+              ,MTN_PLC    = #{mtn_plc}
+              ,MTN_DTL    = #{mtn_dtl}
+              ,MTN_RSL    = #{mtn_rsl}
+              ,RQS_DTL    = #{rqs_dtl}
+              ,ATND_DTL   = #{atnd_dtl}
+              ,OPR_NO     = #{login_emp_no}
+              ,DB_CHG_TS  = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
-          AND    BKUP_ID      = '0000000000'
-          AND    PRJT_ID      = #{prjt_id}
-          AND    MNG_ID = #{mng_id}
+        AND    BKUP_ID  = '0000000000'
+        AND    PRJT_ID  = #{prjt_id}
+        AND    MNG_ID   = #{mng_id}
     </update>
 
     <update id="update_8100_02" parameterType="Map">
         UPDATE pms_mnts_mng
         SET    DEL_YN      = 'Y'
-          ,OPR_NO      = #{login_emp_no}
-          ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+              ,OPR_NO      = #{login_emp_no}
+              ,DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
-          AND    BKUP_ID      = '0000000000'
-          AND    PRJT_ID      = #{prjt_id}
-          AND    MNG_ID = #{mng_id}
+        AND    BKUP_ID     = '0000000000'
+        AND    PRJT_ID     = #{prjt_id}
+        AND    MNG_ID      = #{mng_id}
     </update>
 
     <insert id="insert_8100_01" parameterType="Map">
@@ -90,7 +84,7 @@
             SELECT NVL(MAX(CAST(MNG_ID AS INT))+1,'1000000000') AS MNG_ID
             FROM   pms_mnts_mng
             WHERE  BKUP_ID = '0000000000'
-            AND    PRJT_ID      = #{prjt_id}
+            AND    PRJT_ID = #{prjt_id}
         </selectKey>
 
         INSERT INTO pms_mnts_mng
