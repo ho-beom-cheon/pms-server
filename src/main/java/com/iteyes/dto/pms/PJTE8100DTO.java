@@ -15,6 +15,7 @@ public class PJTE8100DTO {
     //그리드(금주)
     private String bkup_id;             /*백업id*/
     private String prjt_id;             /*프로젝트id*/
+    private String prjt_nm_selected;
     private String mng_id;              /*관리ID*/
     private String cnf_wek;             /*회의주제*/
     private String mtn_dt;              /*회의일자*/
@@ -26,8 +27,7 @@ public class PJTE8100DTO {
     private String rqs_dtl;             /*요청사항*/
     private String atnd_dtl;            /*참석자*/
     private String atfl_mng_id;         /*첨부파일관리ID*/
+    private String org_file_nm;         /*첨부파일명*/
     private String del_yn;              /*삭제여부*/
     private String athr_nm;             /*작성자사번*/
-    private String org_file_nm;         /*첨부파일명*/
-
 }

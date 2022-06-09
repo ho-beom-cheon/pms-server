@@ -32,6 +32,8 @@ public class PJTE8100Controller {
 
         PJTE8100DTO PJTE8100 = new PJTE8100DTO();
 
+        log.debug("setPrjt_id : ", request.getParameter("prjt_nm_selected"));
+
         PJTE8100.setLogin_emp_no(request.getParameter("login_emp_no"));
         PJTE8100.setLogin_bzcd(request.getParameter("login_bzcd"));
         PJTE8100.setLogin_aut_cd(request.getParameter("login_aut_cd"));

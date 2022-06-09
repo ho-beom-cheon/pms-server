@@ -1236,6 +1236,7 @@
                ,DUTY_TXT
                ,GRD_CD
                ,NXT_PRJ_NM
+               ,RMRK
                ,SCHOLL_NM1
                ,GDT_YM1
                ,STUDY1
