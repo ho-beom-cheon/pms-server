@@ -133,6 +133,7 @@
              , D.INP_PRJ_NM
              , STR_TO_DATE(D.WTH_DT, '%Y%m%d')                                              AS WTH_DT
              , D.INP_CLS_CD
+             , A.RMRK
         FROM   pms_man_pfle_info A
                LEFT OUTER JOIN
                     pms_emp_info B
@@ -217,6 +218,7 @@
         , DUTY_TXT
         , GRD_CD
         , NXT_PRJ_NM
+        , RMRK
         , SCHOLL_NM1
         , GDT_YM1
         , STUDY1
@@ -256,6 +258,7 @@
                , #{duty_txt}
                , #{grd_cd}
                , #{nxt_prj_nm}
+               , #{rmrk}
                , #{scholl_nm1}
                , REPLACE(#{gdt_ym1}, '-', '')
                , #{study1}
