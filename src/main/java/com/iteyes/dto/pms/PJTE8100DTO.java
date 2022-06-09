@@ -28,5 +28,6 @@ public class PJTE8100DTO {
     private String atfl_mng_id;         /*첨부파일관리ID*/
     private String del_yn;              /*삭제여부*/
     private String athr_nm;             /*작성자사번*/
+    private String org_file_nm;         /*첨부파일명*/
 
 }
