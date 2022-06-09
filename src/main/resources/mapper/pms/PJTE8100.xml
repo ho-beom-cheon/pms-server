@@ -38,6 +38,9 @@
         <if test='athr_no != "" and athr_no != null'>
             AND    A.ATHR_NO = #{athr_no}
         </if>
+        <if test='mtn_sdt != ""  and mtn_sdt != null and mtn_edt != ""  and mtn_edt != null'>
+            AND    A.MTN_DT  BETWEEN #{mtn_sdt} AND #{mtn_edt}
+        </if>
         <if test='cnf_wek != ""  and cnf_wek != null'>
             AND    A.CNF_WEK   LIKE CONCAT('%',#{cnf_wek},'%')
         </if>
@@ -60,6 +63,7 @@
               ,MTN_RSL    = #{mtn_rsl}
               ,RQS_DTL    = #{rqs_dtl}
               ,ATND_DTL   = #{atnd_dtl}
+              ,ATFL_MNG_ID= #{atfl_mng_id}
               ,OPR_NO     = #{login_emp_no}
               ,DB_CHG_TS  = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1

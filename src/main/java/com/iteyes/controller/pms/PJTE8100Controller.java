@@ -1,6 +1,7 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.dto.pms.PJTE7100DTO;
 import com.iteyes.dto.pms.PJTE8100DTO;
 import com.iteyes.service.PJTE8100Service;
 import lombok.extern.log4j.Log4j2;
@@ -96,12 +97,12 @@ public class PJTE8100Controller {
         PJTE8100U.setMtn_plc(PJTE8100.getMtn_plc());
         PJTE8100U.setAthr_no(PJTE8100.getAthr_no());
         PJTE8100U.setMtn_dtl(PJTE8100.getMtn_dtl());
-        PJTE8100U.setMtn_dtl(PJTE8100.getMtn_dtl());
+
 
         PJTE8100U.setMtn_rsl(PJTE8100.getMtn_rsl());
         PJTE8100U.setRqs_dtl(PJTE8100.getRqs_dtl());
         PJTE8100U.setAtnd_dtl(PJTE8100.getAtnd_dtl());
-
+        PJTE8100U.setAtfl_mng_id(PJTE8100.getAtfl_mng_id());
         PJTE8100U.setLogin_emp_no(PJTE8100.getLogin_emp_no());
 
         result = pjte8100Service.update_8100_01(PJTE8100U);
