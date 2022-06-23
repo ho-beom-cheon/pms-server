@@ -28,7 +28,12 @@
           WHERE  1 = 1
             AND    A.BKUP_ID = #{bkup_id}
             AND    A.PRJT_ID = #{prjt_id}
-          ORDER BY A.CATN_DCD, SUBSTR(A.DEPT_CD,1,6), A.DEPT_CD, B.SORT_SEQ DESC, A.EMPNM
+          <if test=' prjt_id == "0000000003" '>
+               ORDER BY A.CATN_DCD, SUBSTR(A.DEPT_CD,1,6), A.DEPT_CD, B.SORT_SEQ DESC, A.EMPNM
+          </if>
+          <if test=' prjt_id != "0000000003" '>
+               ORDER BY A.EMPNM
+          </if>
      </select>
      <select id="select_9000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9000DTO">
           SELECT PRJT_ID
