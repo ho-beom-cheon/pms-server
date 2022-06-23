@@ -43,12 +43,14 @@
                              (SELECT DTLS_TYCD    AS SQN_CD
                                     ,DTLS_TYNM    AS SQN_NM
                               FROM   pms_cd_del_mng
-                              WHERE  ETC_TXT1 = 'Y'
+                              WHERE  USE_YN   = 'Y'
                               AND    GRP_TYCD = '1000000006'
                               AND    PRJT_ID  = #{prjt_id}
                               AND    BKUP_ID  = #{bkup_id}) C
                               ON B.SQN_CD   = C.SQN_CD
-                  WHERE  GRP_TYCD = '1000000001'
+                  WHERE  USE_YN   = 'Y'
+                  AND    ETC_TXT1 = 'Y'
+                  AND    GRP_TYCD = '1000000001'
                   AND    PRJT_ID  = #{prjt_id}
                   AND    BKUP_ID  = #{bkup_id})   A
           LEFT OUTER JOIN
@@ -248,11 +250,13 @@
                                       (SELECT DTLS_TYCD    AS SQN_CD
                                              ,DTLS_TYNM    AS SQN_NM
                                        FROM   pms_cd_del_mng
-                                       WHERE  GRP_TYCD = '1000000006'
-                                                   AND    PRJT_ID  = #{prjt_id}
-                                                   AND    BKUP_ID  = #{bkup_id}) C
+                                       WHERE  USE_YN   = 'Y'
+                                       AND    GRP_TYCD = '1000000006'
+                                       AND    PRJT_ID  = #{prjt_id}
+                                       AND    BKUP_ID  = #{bkup_id}) C
                                        ON B.SQN_CD   = C.SQN_CD
-                           WHERE  ETC_TXT1 = 'Y'
+                           WHERE  USE_YN   = 'Y'
+                           AND    ETC_TXT1 = 'Y'
                            AND    GRP_TYCD = '1000000001'
                            AND    PRJT_ID  = #{prjt_id}
                            AND    BKUP_ID  = #{bkup_id}
