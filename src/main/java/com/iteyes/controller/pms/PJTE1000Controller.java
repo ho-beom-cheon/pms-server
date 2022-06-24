@@ -57,6 +57,7 @@ public class PJTE1000Controller {
         PJTE1000.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE1000.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE1000.setLogin_emp_no(request.getParameter("login_emp_no"));
+        PJTE1000.setLogin_emp_nm(request.getParameter("login_emp_nm"));
         PJTE1000.setLogin_bzcd(request.getParameter("login_bzcd"));
         PJTE1000.setLogin_aut_cd(request.getParameter("login_aut_cd"));
         PJTE1000.setGubun(request.getParameter("gubun"));
