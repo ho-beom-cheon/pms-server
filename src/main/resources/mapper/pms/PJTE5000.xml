@@ -32,7 +32,6 @@
                 FROM pms_wbs_mng B
                WHERE B.HGRN_MNG_ID = A.MNG_ID
                  AND B.MNG_CD      = A.MNG_CD
-                 AND B.BZCD        = A.BZCD
                  AND B.PRJT_ID     = A.PRJT_ID
                  AND B.BKUP_ID     = A.BKUP_ID) AS WBS_CNT
       FROM pms_wbs_mng A
