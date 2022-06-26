@@ -1030,9 +1030,9 @@
           INSERT INTO pms_wbs_mng
           SELECT #{new_bkup_id} AS BKUP_ID
                ,PRJT_ID
+               ,BZCD
                ,MNG_CD
                ,MNG_ID
-               ,BZCD
                ,HGRN_MNG_ID
                ,STEP_CD
                ,ACVT_NM
