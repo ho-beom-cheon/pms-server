@@ -46,8 +46,11 @@
         <if test='mtng_room_id != "" and mtng_room_id != null and mtng_room_id != "TTT"'>
             AND    A.MTNG_ROOM_ID = #{mtng_room_id}
         </if>
-        <if test='rsr_strt != ""  and rsr_strt != null and rsr_endt != ""  and rsr_endt != null'>
-            AND    A.RSR_DT       BETWEEN REPLACE(#{rsr_strt}, '-', '') AND REPLACE(#{rsr_endt}, '-', '')
+        <if test='rsr_strt != ""  and rsr_strt != null'>
+            AND    A.RSR_DT       >= REPLACE(#{rsr_strt}, '-', '')
+        </if>
+        <if test='rsr_endt != ""  and rsr_endt != null'>
+        <![CDATA[ AND    A.RSR_DT       <= REPLACE(#{rsr_endt}, '-', '')  ]]>
         </if>
         <if test='rsr_no != "" and rsr_no != null'>
             AND    A.RSR_NO       = #{rsr_no}
