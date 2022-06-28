@@ -88,7 +88,7 @@
                                         AND USE_YN = 'Y')
                 AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_NO = CASE
-                                  WHEN #{login_aut_cd} IN ('500', '600')
+                                  WHEN #{login_aut_cd} IN ('500', '600', '900')
                                       THEN A.PL_NO
                                   ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -106,7 +106,7 @@
                                         AND USE_YN = 'Y')
                 AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_NO = CASE
-                                    WHEN #{login_aut_cd} IN ('500', '600')
+                                    WHEN #{login_aut_cd} IN ('500', '600', '900')
                                         THEN A.CRPE_NO
                                     ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -128,7 +128,7 @@
                                      THEN #{login_bzcd}
                                  ELSE A.BZCD END
                 AND A.DVLPE_NO = CASE
-                                     WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                     WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                          THEN A.DVLPE_NO
                                      ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -150,7 +150,7 @@
               WHERE A.ITG_TST_PRC_CD = '200'
                 AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_ENO = CASE
-                                   WHEN #{login_aut_cd} IN ('500', '600')
+                                   WHEN #{login_aut_cd} IN ('500', '600', '900')
                                        THEN A.PL_ENO
                                    ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -162,7 +162,7 @@
               WHERE A.ITG_TST_PRC_CD = '300'
                 AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_ENO = CASE
-                                     WHEN #{login_aut_cd} IN ('500', '600')
+                                     WHEN #{login_aut_cd} IN ('500', '600', '900')
                                          THEN A.CRPE_ENO
                                      ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -178,7 +178,7 @@
                                      THEN #{login_bzcd}
                                  ELSE A.BZCD END
                 AND A.DVLPE_ENO = CASE
-                                      WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                      WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                           THEN A.DVLPE_ENO
                                       ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -193,7 +193,7 @@
                                      THEN #{login_bzcd}
                                  ELSE A.BZCD END
                 AND A.DVLPE_NO = CASE
-                                     WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                     WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                          THEN A.DVLPE_NO
                                      ELSE #{login_emp_no} END
                 AND A.PRJT_ID = #{prjt_id}
@@ -220,7 +220,7 @@
               FROM pms_err_mng A
               WHERE A.ERR_PRC_STEP_CD IN ('200', '300')
                 AND A.DVLPE_NO = CASE
-                                     WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                     WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                          THEN A.DVLPE_NO
                                      ELSE #{login_emp_no} END
                 AND DATE_ADD(A.RGS_DT, INTERVAL #{err_proc_days} DAY) <= #{s_day}
@@ -239,7 +239,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_rq_mng A
               WHERE A.REQ_PRC_STEP_CD = '100'
-                AND #{login_aut_cd} IN ('500', '600')
+                AND #{login_aut_cd} IN ('500', '600', '900')
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -256,11 +256,11 @@
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
                 AND A.CRPE_NM LIKE CASE
-                                       WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
-                AND A.PLN_STA_DT < #{proc_dt}
-                AND A.PLN_END_DT >= #{s_day}
+                AND A.PLN_STA_DT <= #{proc_dt}
+                AND A.PLN_STA_DT > #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -269,7 +269,7 @@
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '200'
                 AND A.CRPE_NM LIKE CASE
-                                       WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{proc_dt}
@@ -282,7 +282,7 @@
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD IN ('100', '200')
                 AND A.CRPE_NM LIKE CASE
-                                       WHEN #{login_aut_cd} IN ('200', '500', '600')
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_END_DT < #{s_day}
