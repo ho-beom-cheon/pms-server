@@ -288,6 +288,18 @@
                 AND A.PLN_END_DT < #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
+              UNION
+              SELECT '62'     AS TODO_CD
+                   , COUNT(*) AS TODO_CNT
+              FROM pms_wbs_mng A
+              WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.CRPE_NM LIKE CASE
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
+                                           THEN A.CRPE_NM
+                                       ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
+                AND A.PLN_STA_DT < #{s_day}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
              ) A
                  LEFT OUTER JOIN
              (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1
@@ -726,6 +738,23 @@
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_END_DT < #{s_day}
+                AND A.PRJT_ID = #{prjt_id}
+                AND A.BKUP_ID = #{bkup_id}
+                AND #{todo_cd} = '62'
+              UNION
+              SELECT A.BZCD
+                   , A.ACVT_NM    AS TODO_NM
+                   , A.PLN_STA_DT AS PLN_STA_DT
+                   , A.PLN_END_DT AS PLN_END_DT
+                   , A.RMRK       AS RMRK
+                   , A.SORT       AS SORT
+              FROM pms_wbs_mng A
+              WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.CRPE_NM LIKE CASE
+                                       WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
+                                           THEN A.CRPE_NM
+                                       ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
+                AND A.PLN_STA_DT < #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '62'
