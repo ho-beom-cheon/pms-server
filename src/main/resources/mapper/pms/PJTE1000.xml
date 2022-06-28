@@ -289,7 +289,7 @@
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
-              SELECT '62'     AS TODO_CD
+              SELECT '63'     AS TODO_CD
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
@@ -298,6 +298,7 @@
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{s_day}
+                AND A.PLN_END_DT <= #{proc_dt}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
              ) A
@@ -755,9 +756,10 @@
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{s_day}
+                AND A.PLN_END_DT <= #{proc_dt}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND #{todo_cd} = '62'
+                AND #{todo_cd} = '63'
              ) A
         ORDER BY A.BZCD, A.SORT, A.PLN_END_DT
         ]]>
