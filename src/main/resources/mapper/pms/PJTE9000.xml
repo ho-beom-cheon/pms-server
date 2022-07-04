@@ -1028,6 +1028,7 @@
                ,PAL_ATFL_MNG_ID
                ,RQU_SBH_ID
                ,RMRK
+               ,CNV_BS_DT
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_pgm_mng

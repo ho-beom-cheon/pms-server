@@ -148,6 +148,7 @@ public class PJTE2100Controller {
             PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
             PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
             PJTE2100C.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
+            PJTE2100C.setCnv_bs_dt(PJTE2100.getGridData().get(i).getCnv_bs_dt());
             PJTE2100C.setPrjt_id(PJTE2100.getLogin_proj_id());
             PJTE2100C.setBkup_id("0000000000");
 
@@ -196,6 +197,7 @@ public class PJTE2100Controller {
             PJTE2100U.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
             PJTE2100U.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
             PJTE2100U.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
+            PJTE2100U.setCnv_bs_dt(PJTE2100.getGridData().get(i).getCnv_bs_dt());
             PJTE2100U.setPrjt_id(PJTE2100.getLogin_proj_id());
             PJTE2100U.setBkup_id("0000000000");
 

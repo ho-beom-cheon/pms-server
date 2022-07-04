@@ -49,6 +49,7 @@ public class PJTE2100DTO {
 	private String dvlpe_sta_dt;            // 개발시작일자
 	private String dvlpe_end_dt;            // 개발종료일자
 	private String unt_tst_yn;              // 단위테스트증빙여부
+	private String cnv_bs_dt;              // 전환기준일자
 
 	private String atfl_mng_id_yn;          //
 	private String pal_atfl_mng_id_yn;      //
