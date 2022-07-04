@@ -108,6 +108,7 @@
 	          AND    GRP_TYCD  = '1000000053'
 	          AND    PRJT_ID   = A.PRJT_ID
 	          AND    BKUP_ID   = A.BKUP_ID) AS UNT_TST_YN
+	       , CASE WHEN A.CNV_BS_DT IS NOT NULL AND A.CNV_BS_DT != '' THEN STR_TO_DATE(A.CNV_BS_DT , '%Y%m%d') ELSE '' END AS CNV_BS_DT
 	    FROM pms_pgm_mng A          /* PMS프로그램관리 */
 	    LEFT OUTER JOIN
 	         pms_emp_info   B
@@ -204,6 +205,7 @@
 			, RMRK         /*비고*/
 			, ATFL_MNG_ID  /*첨부파일관리ID*/
 		    , PAL_ATFL_MNG_ID  /*설계서첨부파일관리ID*/
+		    , CNV_BS_DT
 			, OPR_NO       /*조작자번호 */
 			, DB_CHG_TS    /*DB변경일시*/
 		)
@@ -233,6 +235,7 @@
 				, #{rmrk}                             /*비고*/
 				, ''                                  /*첨부파일관리ID*/
 				, ''                                  /*설계서첨부파일관리ID*/
+				, REPLACE(#{cnv_bs_dt}, '-', '')
 				, #{login_emp_no}                     /*조작자번호*/
 				, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
 			)
@@ -264,6 +267,7 @@
 		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
 		, RMRK         = #{rmrk}         /*비고*/
 		, RQU_SBH_ID   = #{rqu_sbh_id}   /*요구사항ID*/
+	    , CNV_BS_DT    = REPLACE(#{cnv_bs_dt}, '-', '')
 	    , OPR_NO       = #{login_emp_no}        /*조작자번호*/
 		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
 	  WHERE PGM_ID      = #{pgm_id}
