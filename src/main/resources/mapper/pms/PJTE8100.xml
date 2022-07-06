@@ -20,6 +20,7 @@
               ,A.MTN_TM
               ,A.ATFL_MNG_ID
               ,C.ORG_FILE_NM
+              ,A.PRC_STEP_CD AS MTNG_PRC_STEP_CD
         FROM   pms_mnts_mng A
                LEFT OUTER JOIN
                  pms_emp_info   B
@@ -64,6 +65,7 @@
               ,RQS_DTL    = #{rqs_dtl}
               ,ATND_DTL   = #{atnd_dtl}
               ,ATFL_MNG_ID= #{atfl_mng_id}
+              ,PRC_STEP_CD = #{mtng_prc_step_cd}
               ,OPR_NO     = #{login_emp_no}
               ,DB_CHG_TS  = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
@@ -106,6 +108,7 @@
         ,RQS_DTL
         ,ATND_DTL
         ,ATFL_MNG_ID
+        ,PRC_STEP_CD
         ,DEL_YN
         ,OPR_NO
         ,DB_CHG_TS
@@ -125,6 +128,7 @@
         , #{rqs_dtl}
         , #{atnd_dtl}
         , ''
+        , #{mtng_prc_step_cd}
         , 'N'
         , #{login_emp_no}
         , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
