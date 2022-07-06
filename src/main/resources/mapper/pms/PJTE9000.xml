@@ -1421,6 +1421,7 @@
                ,RQS_DTL
                ,ATND_DTL
                ,ATFL_MNG_ID
+               ,PRC_STEP_CD
                ,DEL_YN
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/

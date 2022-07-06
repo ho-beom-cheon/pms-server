@@ -99,7 +99,7 @@ public class PJTE8100Controller {
         PJTE8100U.setMtn_plc(PJTE8100.getMtn_plc());
         PJTE8100U.setAthr_no(PJTE8100.getAthr_no());
         PJTE8100U.setMtn_dtl(PJTE8100.getMtn_dtl());
-
+        PJTE8100U.setMtng_prc_step_cd(PJTE8100.getMtng_prc_step_cd());
 
         PJTE8100U.setMtn_rsl(PJTE8100.getMtn_rsl());
         PJTE8100U.setRqs_dtl(PJTE8100.getRqs_dtl());
