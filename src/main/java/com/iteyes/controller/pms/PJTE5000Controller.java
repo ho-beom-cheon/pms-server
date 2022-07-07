@@ -90,6 +90,7 @@ public class PJTE5000Controller {
                 PJTE5000.setPln_end_tim(PJTE5000dto.getUpdatedRows().get(i).getPln_end_tim());
                 PJTE5000.setWgt_rt(PJTE5000dto.getUpdatedRows().get(i).getWgt_rt());
                 PJTE5000.setPrg_rt(PJTE5000dto.getUpdatedRows().get(i).getPrg_rt());
+                PJTE5000.setPlan_prg_rt(PJTE5000dto.getUpdatedRows().get(i).getPlan_prg_rt());
                 PJTE5000.setRmrk(PJTE5000dto.getUpdatedRows().get(i).getRmrk());
                 PJTE5000.setSort(PJTE5000dto.getUpdatedRows().get(i).getSort());
                 PJTE5000.setAtfl_mng_id(PJTE5000dto.getUpdatedRows().get(i).getAtfl_mng_id());
@@ -160,6 +161,7 @@ public class PJTE5000Controller {
                 PJTE5000.setPln_end_tim(PJTE5000dto.getGridData().get(i).getPln_end_tim());
                 PJTE5000.setWgt_rt(PJTE5000dto.getGridData().get(i).getWgt_rt());
                 PJTE5000.setPrg_rt(PJTE5000dto.getGridData().get(i).getPrg_rt());
+                PJTE5000.setPlan_prg_rt(PJTE5000dto.getGridData().get(i).getPlan_prg_rt());
                 PJTE5000.setRmrk(PJTE5000dto.getGridData().get(i).getRmrk());
                 PJTE5000.setSort(PJTE5000dto.getGridData().get(i).getSort());
                 PJTE5000.setAtfl_mng_id(PJTE5000dto.getGridData().get(i).getAtfl_mng_id());

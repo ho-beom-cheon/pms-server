@@ -32,6 +32,7 @@ public class PJTE5000DTO {
 	private String acl_end_tim;             //실제종료시간
 	private String wgt_rt;                  //가중치
 	private String prg_rt;                  //진행율
+	private String plan_prg_rt;             //계획진행율
 	private String rmrk;                    //비고
 	private String sort;                    //정렬
 	private String atfl_mng_id;             //첨부파일관리ID
