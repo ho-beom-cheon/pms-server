@@ -1080,6 +1080,7 @@
                ,ACL_END_TIM
                ,WGT_RT
                ,PRG_RT
+               ,PLAN_PRG_RT
                ,WBS_PRC_STS_CD
                ,RMRK
                ,SORT

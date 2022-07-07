@@ -24,6 +24,7 @@
            , A.ACL_END_TIM
            , A.WGT_RT
            , A.PRG_RT
+           , A.PLAN_PRG_RT
            , A.RMRK
            , A.SORT
            , A.ATFL_MNG_ID
@@ -96,6 +97,7 @@
         , ACL_END_TIM
         , WGT_RT
         , PRG_RT
+        , PLAN_PRG_RT
         , WBS_PRC_STS_CD
         , RMRK
         , SORT
@@ -121,7 +123,8 @@
                , ''
                , ''
                , #{wgt_rt}
-               , #{prg_rt}
+               , 0
+               , 0
                , '100'
                , #{rmrk}
                , #{sort}
@@ -163,6 +166,7 @@
           ,ACL_END_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100 THEN DATE_FORMAT(NOW(),'%H:%i')  ELSE ACL_END_TIM END
           ,WGT_RT          = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN #{wgt_rt}  ELSE WGT_RT  END
           ,PRG_RT          = #{prg_rt}
+          ,PLAN_PRG_RT     = #{plan_prg_rt}
           ,WBS_PRC_STS_CD  = CASE WHEN #{mng_cd} = '100' THEN
                                           CASE WHEN #{prg_rt} = 0 THEN '100'
                                                WHEN #{prg_rt} != 0 AND #{prg_rt} < 100 THEN '200' ELSE '300' END
