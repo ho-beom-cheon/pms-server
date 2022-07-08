@@ -95,7 +95,7 @@ public class PJTE5000Controller {
                 PJTE5000.setSort(PJTE5000dto.getUpdatedRows().get(i).getSort());
                 PJTE5000.setAtfl_mng_id(PJTE5000dto.getUpdatedRows().get(i).getAtfl_mng_id());
                 PJTE5000.setLogin_emp_no(PJTE5000dto.getLogin_emp_no());
-
+                PJTE5000.setLogin_aut_cd(PJTE5000dto.getLogin_aut_cd());
                 result = pjte5000Service.update_5000_01(PJTE5000);
             }
         }
