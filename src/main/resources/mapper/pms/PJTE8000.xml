@@ -66,7 +66,7 @@
                             AND B.PRJT_ID = A.PRJT_ID
                             AND B.BKUP_ID = A.BKUP_ID
                     WHERE  A.DTLS_TYCD = CASE WHEN  #{real_prjt_id}  = 'TTT' THEN  A.DTLS_TYCD  ELSE #{real_prjt_id} END
-                    <if test='dept_cd != "TTT"'>
+                    <if test='dept_cd != "TTT" and dept_cd != "null0000"'>
                     AND    A.ETC_TXT3 = CASE WHEN #{dept_cd} = 'TTT' THEN A.ETC_TXT3 ELSE #{dept_cd} END
                     </if>
                     AND    A.GRP_TYCD = '1000000038'
