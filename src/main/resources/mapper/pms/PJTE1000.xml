@@ -702,8 +702,8 @@
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
-                AND A.PLN_STA_DT < #{proc_dt}
-                AND A.PLN_STA_DT >= #{s_day}
+                AND A.PLN_STA_DT <= #{proc_dt}
+                AND A.PLN_STA_DT > #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '60'
