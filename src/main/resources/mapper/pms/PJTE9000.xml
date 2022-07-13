@@ -1397,6 +1397,8 @@
                ,USE_PGM_TXT
                ,DVLPE_NO
                ,TRN_STT_CD
+               ,FRCS_STA_DT
+               ,FRCS_END_DT
                ,STA_DT
                ,END_DT
                ,RMRK

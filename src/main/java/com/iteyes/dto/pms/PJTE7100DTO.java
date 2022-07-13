@@ -25,6 +25,8 @@ public class PJTE7100DTO {
     private String dvlpe_nm;       // 개발자명
     private String trn_stt_cd;       // 전환상태코드
     private String trn_stt_nm;       // 전환상태명
+    private String frcs_sta_dt;       // 계획시작일자
+    private String frcs_end_dt;       // 계획종료일자
     private String sta_dt;       // 실제시작일자
     private String end_dt;       // 실제종료일자
     private String rmrk;       // 비고

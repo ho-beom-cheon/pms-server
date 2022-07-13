@@ -160,10 +160,10 @@
           ,PLN_STA_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN #{pln_sta_tim} ELSE PLN_STA_TIM END
           ,PLN_END_DT      = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{pln_end_dt}, '-', '') ELSE PLN_END_DT  END
           ,PlN_END_TIM     = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN #{pln_end_tim} ELSE PLN_END_TIM END
-          ,ACL_STA_DT      = CASE WHEN #{wbs_prc_sts_cd} = '200' OR (#{prg_rt} > 0 AND #{prg_rt} < 100) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_STA_DT  END
-          ,ACL_STA_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '200' OR (#{prg_rt} > 0 AND #{prg_rt} < 100) THEN DATE_FORMAT(NOW(),'%H:%i')   ELSE ACL_STA_TIM END
-          ,ACL_END_DT      = CASE WHEN #{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100 THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_END_DT  END
-          ,ACL_END_TIM     = CASE WHEN #{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100 THEN DATE_FORMAT(NOW(),'%H:%i')  ELSE ACL_END_TIM END
+          ,ACL_STA_DT      = CASE WHEN (#{wbs_prc_sts_cd} = '200' OR (#{prg_rt} > 0 AND #{prg_rt} < 100)) AND ACL_STA_DT = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_STA_DT  END
+          ,ACL_STA_TIM     = CASE WHEN (#{wbs_prc_sts_cd} = '200' OR (#{prg_rt} > 0 AND #{prg_rt} < 100)) AND ACL_STA_TIM = '' THEN DATE_FORMAT(NOW(),'%H:%i')  ELSE ACL_STA_TIM END
+          ,ACL_END_DT      = CASE WHEN (#{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100) AND ACL_END_DT = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE ACL_END_DT  END
+          ,ACL_END_TIM     = CASE WHEN (#{wbs_prc_sts_cd} = '300' OR #{prg_rt} >= 100) AND ACL_END_TIM = '' THEN DATE_FORMAT(NOW(),'%H:%i')  ELSE ACL_END_TIM END
           ,WGT_RT          = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN #{wgt_rt}  ELSE WGT_RT  END
           ,PRG_RT          = #{prg_rt}
           ,PLAN_PRG_RT     = #{plan_prg_rt}
