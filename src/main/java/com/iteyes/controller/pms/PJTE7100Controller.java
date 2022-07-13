@@ -142,6 +142,8 @@ public class PJTE7100Controller {
             PJTE7100C.setRmrk(PJTE7100.getRowDatas().get(i).getRmrk());
             PJTE7100C.setUse_pgm_txt(PJTE7100.getRowDatas().get(i).getUse_pgm_txt());
             PJTE7100C.setTrn_stt_cd(PJTE7100.getRowDatas().get(i).getTrn_stt_cd());
+            PJTE7100C.setFrcs_sta_dt(PJTE7100.getRowDatas().get(i).getFrcs_sta_dt());
+            PJTE7100C.setFrcs_end_dt(PJTE7100.getRowDatas().get(i).getFrcs_end_dt());
             PJTE7100C.setSta_dt(PJTE7100.getRowDatas().get(i).getSta_dt());
             PJTE7100C.setEnd_dt(PJTE7100.getRowDatas().get(i).getEnd_dt());
 
