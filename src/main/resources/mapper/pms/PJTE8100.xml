@@ -128,7 +128,7 @@
         , #{rqs_dtl}
         , #{atnd_dtl}
         , ''
-        , #{mtng_prc_step_cd}
+        , '100'
         , 'N'
         , #{login_emp_no}
         , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
