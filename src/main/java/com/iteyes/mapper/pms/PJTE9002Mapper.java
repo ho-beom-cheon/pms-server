@@ -24,6 +24,8 @@ public interface PJTE9002Mapper {
     boolean update_9002_09(PJTE9002DTO PJTE9002) throws Exception;
     boolean update_9002_11(PJTE9002DTO PJTE9002) throws Exception;
     boolean update_9002_12(PJTE9002DTO PJTE9002) throws Exception;
+    boolean update_9002_13(PJTE9002DTO PJTE9002) throws Exception;
+
 
     List<PJTE9002DTO> select_9002_10(PJTE9002DTO PJTE9002) throws Exception ;
     boolean insert_9002_10(PJTE9002DTO PJTE9002) throws Exception;

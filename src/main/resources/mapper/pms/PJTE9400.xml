@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE9400Mapper">
+    <select id="select_9400_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9400DTO">
+        SELECT CASE WHEN A.LEN = 1
+        THEN CONCAT(A.FLD_NM, ' (',A.FILE_CNT,'건)')
+        ELSE CONCAT(LPAD('',A.LEN,' '),'➥ ',A.FLD_NM , ' (',A.FILE_CNT,'건)') END AS DIS_FLD_NM
+        ,A.RMRK
+        ,A.FLD_NM
+        ,A.BKUP_ID
+        ,A.FLD_MNG_ID
+        ,A.HGRN_MNG_ID
+        ,A.ATFL_MNG_ID
+        FROM  (SELECT A.BKUP_ID
+                    ,A.PRJT_ID
+                    ,A.FLD_MNG_ID
+                    ,A.HGRN_MNG_ID
+                    ,A.FLD_NM
+                    ,A.RMRK
+                    ,A.ATFL_MNG_ID
+                    ,<![CDATA[CASE WHEN LENGTH(A.HGRN_MNG_ID)/6 < 3 THEN LENGTH(A.HGRN_MNG_ID)/6 ELSE LENGTH(A.HGRN_MNG_ID)/6+(LENGTH(A.HGRN_MNG_ID)/6-1) END ]]>  AS LEN
+                    ,(SELECT COUNT(*) FROM pms_atfl_mng WHERE FILE_RGS_DSCD = '805' AND ATFL_MNG_ID = A.ATFL_MNG_ID AND PRJT_ID = A.PRJT_ID AND BKUP_ID = A.BKUP_ID) AS FILE_CNT
+                    FROM   pms_svn_file_mng A
+                    WHERE  A.USE_YN    = 'Y'
+                    AND    A.BKUP_ID   = #{bkup_id}
+                    AND    A.PRJT_ID   = #{prjt_id}) A
+        ORDER BY SUBSTR(A.HGRN_MNG_ID,1,6) , A.HGRN_MNG_ID
+    </select>
+
+
+
+    <update id="update_9400_01" parameterType="Map">
+        UPDATE pms_svn_file_mng
+        SET    FLD_NM        = #{fld_nm}
+              ,RMRK          = #{rmrk}
+              ,OPR_NO        = #{login_emp_no}
+              ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    BKUP_ID     = '0000000000'
+          AND    PRJT_ID     = #{prjt_id}
+          AND    FLD_MNG_ID  = #{fld_mng_id}
+    </update>
+
+    <update id="update_9400_02" parameterType="Map">
+        UPDATE pms_svn_file_mng
+        SET    USE_YN        = 'N'
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    BKUP_ID     = '0000000000'
+          AND    PRJT_ID     = #{prjt_id}
+          AND    HGRN_MNG_ID  LIKE CONCAT(#{hgrn_mng_id},'%')
+    </update>
+
+    <insert id="insert_9400_01" parameterType="Map">
+        <selectKey resultType = "int" keyProperty="fld_mng_id" order="BEFORE">
+            SELECT NVL(MAX(FLD_MNG_ID)+1,1) AS CMNT_NO
+            FROM   pms_svn_file_mng
+            WHERE  BKUP_ID = '0000000000'
+            AND    PRJT_ID = #{prjt_id}
+        </selectKey>
+
+        INSERT INTO pms_svn_file_mng
+        (
+         BKUP_ID
+        ,PRJT_ID
+        ,FLD_MNG_ID
+        ,HGRN_MNG_ID
+        ,FLD_NM
+        ,RMRK
+        ,ATFL_MNG_ID
+        ,USE_YN
+        ,OPR_NO
+        ,DB_CHG_TS
+        )
+        VALUES
+        (
+        '0000000000'
+        , #{prjt_id}
+        , #{fld_mng_id}
+        , CONCAT(#{coh_hgrn_mng_id},LPAD(#{fld_mng_id},6,'0'))
+        , #{fld_nm}
+        , #{rmrk}
+        , NULL
+        , 'Y'
+        , #{login_emp_no}
+        , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        )
+    </insert>
+</mapper>
