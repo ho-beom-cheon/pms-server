@@ -473,6 +473,7 @@ public class PJTE9000Controller {
 		result = pjte9000Service.insert_9000_72(PJTE9000C);
 		result = pjte9000Service.insert_9000_73(PJTE9000C);
 		result = pjte9000Service.insert_9000_74(PJTE9000C);
+
 		return result;
 	}
 

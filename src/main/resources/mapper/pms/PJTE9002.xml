@@ -182,7 +182,7 @@
     </update>
 
     <update id="update_9002_12" parameterType="Map">
-        UPDATE pms_svn_file_mng
+        UPDATE pms_mnts_mng
         SET    ATFL_MNG_ID  = #{atfl_mng_id}
         WHERE  BKUP_ID      = #{bkup_id}
           AND    PRJT_ID      = #{prjt_id}
@@ -190,7 +190,7 @@
     </update>
 
     <update id="update_9002_13" parameterType="Map">
-        UPDATE pms_mnts_mng
+        UPDATE pms_svn_file_mng
         SET    ATFL_MNG_ID  = #{atfl_mng_id}
         WHERE  BKUP_ID      = #{bkup_id}
           AND  PRJT_ID      = #{prjt_id}
@@ -206,6 +206,7 @@
           AND   BKUP_ID       = #{bkup_id}
           AND   PRJT_ID       = #{prjt_id}
     </select>
+
 
     <update id="update_9002_10" parameterType="Map">
         UPDATE pms_cd_del_mng

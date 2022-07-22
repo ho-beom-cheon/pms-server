@@ -1450,6 +1450,7 @@
                ,FLD_NM
                ,RMRK
                ,ATFL_MNG_ID
+               ,USE_YN
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_svn_file_mng

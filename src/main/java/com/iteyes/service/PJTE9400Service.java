@@ -13,4 +13,7 @@ public interface PJTE9400Service {
 
 	/*수정*/
 	boolean update_9400_01(PJTE9400DTO PJTE9400) throws Exception ;
+
+	/*수정*/
+	boolean update_9400_02(PJTE9400DTO PJTE9400) throws Exception ;
 }

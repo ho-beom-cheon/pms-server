@@ -23,9 +23,9 @@
                     ,<![CDATA[CASE WHEN LENGTH(A.HGRN_MNG_ID)/6 < 3 THEN LENGTH(A.HGRN_MNG_ID)/6 ELSE LENGTH(A.HGRN_MNG_ID)/6+(LENGTH(A.HGRN_MNG_ID)/6-1) END ]]>  AS LEN
                     ,(SELECT COUNT(*) FROM pms_atfl_mng WHERE FILE_RGS_DSCD = '805' AND ATFL_MNG_ID = A.ATFL_MNG_ID AND PRJT_ID = A.PRJT_ID AND BKUP_ID = A.BKUP_ID) AS FILE_CNT
                     FROM   pms_svn_file_mng A
-                    WHERE  A.BKUP_ID   = '0000000000'
-                    AND    A.PRJT_ID   = #{prjt_id}
-                    AND    A.POST_ID   = #{post_id}) A
+                    WHERE  A.USE_YN    = 'Y'
+                    AND    A.BKUP_ID   = #{bkup_id}
+                    AND    A.PRJT_ID   = #{prjt_id}) A
         ORDER BY SUBSTR(A.HGRN_MNG_ID,1,6) , A.HGRN_MNG_ID
     </select>
 
@@ -41,6 +41,17 @@
           AND    BKUP_ID     = '0000000000'
           AND    PRJT_ID     = #{prjt_id}
           AND    FLD_MNG_ID  = #{fld_mng_id}
+    </update>
+
+    <update id="update_9400_02" parameterType="Map">
+        UPDATE pms_svn_file_mng
+        SET    USE_YN        = 'N'
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    BKUP_ID     = '0000000000'
+          AND    PRJT_ID     = #{prjt_id}
+          AND    HGRN_MNG_ID  LIKE CONCAT(#{hgrn_mng_id},'%')
     </update>
 
     <insert id="insert_9400_01" parameterType="Map">
@@ -60,6 +71,7 @@
         ,FLD_NM
         ,RMRK
         ,ATFL_MNG_ID
+        ,USE_YN
         ,OPR_NO
         ,DB_CHG_TS
         )
@@ -71,7 +83,8 @@
         , CONCAT(#{coh_hgrn_mng_id},LPAD(#{fld_mng_id},6,'0'))
         , #{fld_nm}
         , #{rmrk}
-        , ''
+        , NULL
+        , 'Y'
         , #{login_emp_no}
         , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         )

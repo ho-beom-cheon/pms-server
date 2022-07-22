@@ -15,6 +15,7 @@ public class PJTE9400DTO {
     private String login_aut_cd;     // 권한 ID
     private String login_dept_nm;     // 소속명
 
+
     // 그리드1_1 (요청인력내역)
     private String bkup_id;         // 백업 ID
     private String prjt_id;         // 프로젝트 ID

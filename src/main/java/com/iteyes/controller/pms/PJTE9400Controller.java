@@ -63,13 +63,32 @@ public class PJTE9400Controller {
         PJTE9400U.setBkup_id         (PJTE9400.getBkup_id         ());
         PJTE9400U.setPrjt_id         (PJTE9400.getPrjt_id         ());
         PJTE9400U.setFld_mng_id      (PJTE9400.getFld_mng_id      ());    //폴더관리ID
-        PJTE9400U.setHgrn_mng_id     (PJTE9400.getHgrn_mng_id     ());    //상위관리ID
         PJTE9400U.setFld_nm          (PJTE9400.getFld_nm          ());    //폴더명
         PJTE9400U.setRmrk            (PJTE9400.getRmrk            ());    //비고
-        PJTE9400U.setCoh_hgrn_mng_id (PJTE9400.getCoh_hgrn_mng_id ());    //선택상위관리ID
         PJTE9400U.setLogin_emp_no    (PJTE9400.getLogin_emp_no    ());    //직원번호
 
         result = pjte9400Service.update_9400_01(PJTE9400U);
+
+        return result;
+
+    }
+
+
+    @PutMapping(value = "/update01")
+    public @ResponseBody
+    boolean update01(@RequestBody PJTE9400DTO PJTE9400) throws Exception {
+
+        boolean result = false;
+
+        PJTE9400DTO PJTE9400U = new PJTE9400DTO();
+
+        PJTE9400U.setBkup_id         (PJTE9400.getBkup_id         ());
+        PJTE9400U.setPrjt_id         (PJTE9400.getPrjt_id         ());
+        PJTE9400U.setFld_mng_id      (PJTE9400.getFld_mng_id      ());    //폴더관리ID
+        PJTE9400U.setHgrn_mng_id     (PJTE9400.getHgrn_mng_id     ());    //상위관리ID
+        PJTE9400U.setLogin_emp_no    (PJTE9400.getLogin_emp_no    ());    //직원번호
+
+        result = pjte9400Service.update_9400_02(PJTE9400U);
 
         return result;
 
