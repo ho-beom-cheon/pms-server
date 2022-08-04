@@ -60,7 +60,7 @@
           ,TRN_STT_CD    = #{trn_stt_cd}
           ,FRCS_STA_DT   = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT  END
           ,FRCS_END_DT   = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT  END
-          ,STA_DT        = CASE WHEN #{trn_stt_cd} = '200' AND STA_DT = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
+          ,STA_DT        = CASE WHEN #{trn_stt_cd} IN ('200','300') AND STA_DT = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
           ,END_DT        = CASE WHEN #{trn_stt_cd} = '300'                 THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
           ,RMRK          = #{rmrk}
           ,OPR_NO        = #{login_emp_no}
@@ -104,11 +104,11 @@
             , #{to_pgm_nm}
             , #{use_pgm_txt}
             , #{dvlpe_no}
-            , '100'
+            , #{trn_stt_cd}
             , REPLACE(#{frcs_sta_dt}, '-', '')
             , REPLACE(#{frcs_end_dt}, '-', '')
-            , ''
-            , ''
+            , REPLACE(#{sta_dt}, '-', '')
+            , REPLACE(#{end_dt}, '-', '')
             , #{rmrk}
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
