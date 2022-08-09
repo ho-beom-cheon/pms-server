@@ -37,6 +37,9 @@
         <if test='use_pgm_txt != "" and use_pgm_txt != null'>
             AND    A.USE_PGM_TXT LIKE CONCAT('%',CONCAT(#{use_pgm_txt},'%'))
         </if>
+        <if test='dvlpe_no != "" and dvlpe_no != null'>
+            AND    A.DVLPE_NO  = #{dvlpe_no}
+        </if>
         ORDER BY A.AS_PGM_ID
     </select>
 
@@ -60,7 +63,7 @@
           ,TRN_STT_CD    = #{trn_stt_cd}
           ,FRCS_STA_DT   = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT  END
           ,FRCS_END_DT   = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT  END
-          ,STA_DT        = CASE WHEN #{trn_stt_cd} IN ('200','300') AND STA_DT = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
+          ,STA_DT        = CASE WHEN #{trn_stt_cd} IN ('200','300') AND (STA_DT = '' OR STA_DT IS NULL) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
           ,END_DT        = CASE WHEN #{trn_stt_cd} = '300'                 THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
           ,RMRK          = #{rmrk}
           ,OPR_NO        = #{login_emp_no}
