@@ -41,7 +41,7 @@
 			AND    A.REQ_PRC_STEP_CD = #{req_prc_step_cd}
 		</if>
 		<if test='req_prc_step_cd == "TTT" and cmpl_yn != "Y"'>
-			AND    A.REQ_PRC_STEP_CD IN ('100','200','300')
+			AND    A.REQ_PRC_STEP_CD NOT IN ('900')
 		</if>
 		<if test='reqpe_no != "" and reqpe_no != null'>
 			AND    A.REQPE_NO  = #{reqpe_no}
