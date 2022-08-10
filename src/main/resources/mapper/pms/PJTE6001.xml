@@ -90,7 +90,6 @@
 		UPDATE pms_rq_mng
 		SET    BZCD	           = #{bzcd}
 		  ,REQ_DSCD	       = #{req_dscd}
-		  ,REQPE_NO	       = #{reqpe_no}
 		  ,REQ_DT	       = REPLACE(#{req_dt}, '-', '')
 		  ,REQ_TXT	       = #{req_txt}
 		  ,PRCPE_NO	       = #{prcpe_no}
