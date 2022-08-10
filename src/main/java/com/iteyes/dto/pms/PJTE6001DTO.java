@@ -9,6 +9,7 @@ public class PJTE6001DTO {
 	private String bzcd;
 	private String req_dscd;
 	private String reqpe_no;
+	private String reqpe_nm;
 	private String req_dt;
 	private String req_txt;
 	private String prcpe_nm;
