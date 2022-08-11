@@ -93,7 +93,7 @@
 		  ,REQ_DSCD	       = #{req_dscd}
 		  ,REQ_TXT	       = #{req_txt}
 		  ,PRCPE_NO	       = #{prcpe_no}
-		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
+		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '900' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
 		  ,PRC_TXT	       = #{prc_txt}
 		  ,REQ_PRC_STEP_CD = #{req_prc_step_cd}
 		  ,OPR_NO	       = #{login_emp_no}
