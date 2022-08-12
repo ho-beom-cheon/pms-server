@@ -157,7 +157,6 @@ public class PJTE7100Controller {
             }else{
                 result = pjte7100Service.update_7100_02(PJTE7100C);
             }
-
         }
 
         return result;
