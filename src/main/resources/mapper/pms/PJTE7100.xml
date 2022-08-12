@@ -84,7 +84,6 @@
           AND    AS_PGM_DIS_CD = #{as_pgm_dis_cd}
     </update>
 
-
     <update id="update_7100_02" parameterType="Map">
         UPDATE pms_as_to_map
         SET    AS_PGM_NM     = #{as_pgm_nm}

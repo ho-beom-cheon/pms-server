@@ -132,7 +132,7 @@ public class PJTE7100Controller {
 
             PJTE7100C.setAs_pgm_id(PJTE7100.getRowDatas().get(i).getAs_pgm_id());
             PJTE7100C.setDvlpe_no(PJTE7100.getRowDatas().get(i).getDvlpe_no());
-
+            PJTE7100C.setDvlpe_no(PJTE7100.getRowDatas().get(i).getDvlpe_no());
             PJTE7100C.setAs_pgm_dis_cd(PJTE7100.getRowDatas().get(i).getAs_pgm_dis_cd());
             PJTE7100C.setAs_pgm_nm(PJTE7100.getRowDatas().get(i).getAs_pgm_nm());
             PJTE7100C.setTo_pgm_id(PJTE7100.getRowDatas().get(i).getTo_pgm_id());
