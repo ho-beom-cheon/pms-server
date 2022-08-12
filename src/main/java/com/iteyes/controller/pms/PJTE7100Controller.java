@@ -1,12 +1,12 @@
 package com.iteyes.controller.pms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iteyes.dto.pms.PJTE2100DTO;
 import com.iteyes.dto.pms.PJTE7100DTO;
 import com.iteyes.service.PJTE7100Service;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -116,22 +116,19 @@ public class PJTE7100Controller {
     }
 
     @PostMapping("/create")
-    public @ResponseBody boolean create(@RequestBody PJTE7100DTO PJTE7100) throws Exception{
+    public @ResponseBody boolean create(@RequestBody @NotNull PJTE7100DTO PJTE7100) throws Exception{
         boolean result = false;
 
         PJTE7100DTO PJTE7100C = new PJTE7100DTO();
-
-        if(PJTE7100.getExcelUplod().equals("Y")) {
-
-            PJTE7100DTO PJTE7100D = new PJTE7100DTO();
-
-            PJTE7100D.setPrjt_id(PJTE7100.getLogin_proj_id());
-            PJTE7100D.setBkup_id("0000000000");
-
-            pjte7100Service.delete_7100_01(PJTE7100D);
-        }
+        PJTE7100DTO PJTE7100D = new PJTE7100DTO();
 
         for (int i = 0; i < PJTE7100.getRowDatas().size(); i++) {
+            PJTE7100D.setPrjt_id(PJTE7100.getLogin_proj_id());
+            PJTE7100D.setBkup_id("0000000000");
+            PJTE7100D.setAs_pgm_id(PJTE7100.getRowDatas().get(i).getAs_pgm_id());
+            PJTE7100D.setAs_pgm_dis_cd(PJTE7100.getRowDatas().get(i).getAs_pgm_dis_cd());
+
+            List<PJTE7100DTO> list1 = pjte7100Service.select_7100_03(PJTE7100D);
 
             PJTE7100C.setAs_pgm_id(PJTE7100.getRowDatas().get(i).getAs_pgm_id());
             PJTE7100C.setDvlpe_no(PJTE7100.getRowDatas().get(i).getDvlpe_no());
@@ -155,7 +152,12 @@ public class PJTE7100Controller {
             PJTE7100C.setLogin_emp_no(PJTE7100.getLogin_emp_no());
             PJTE7100C.setLogin_proj_id(PJTE7100.getLogin_proj_id());
 
-            result = pjte7100Service.insert_7100_01(PJTE7100C);
+            if(list1.size() == 0){
+                result = pjte7100Service.insert_7100_01(PJTE7100C);
+            }else{
+                result = pjte7100Service.update_7100_02(PJTE7100C);
+            }
+
         }
 
         return result;
