@@ -18,22 +18,9 @@ cache:
   key: $CI_COMMIT_REF_SLUG
 
 stages:
-  - build
   - test
   - deploy
   - publish
-
-build:
-  stage: build
-  script:
-    - pwd
-    - ls
-    - id
-    - ./gradlew $GRADLE_OPTS clean assemble
-  except:
-    - tags
-  only:
-    - master
 
 test:
   stage: test
