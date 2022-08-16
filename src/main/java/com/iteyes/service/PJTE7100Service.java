@@ -13,6 +13,7 @@ public interface PJTE7100Service {
 	boolean update_7100_02(PJTE7100DTO PJTE7100) throws Exception;
 	boolean insert_7100_01(PJTE7100DTO PJTE7100) throws Exception;
 
+
 	/*삭제*/
 	boolean delete_7100_01(PJTE7100DTO PJTE7100) throws Exception ;
 }
