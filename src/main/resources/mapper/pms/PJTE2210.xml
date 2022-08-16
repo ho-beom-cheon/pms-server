@@ -523,7 +523,7 @@
                                AND A.ITG_TST_PRC_CD IN ('000', '100', '200')
                                AND A.PRJT_ID	   = #{prjt_id}
                                AND A.BKUP_ID	   = #{bkup_id}
-                               AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT IS NOT NULL)
+                               AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT != '')
                            )  A
                      WHERE 1=1
                        AND (A.CRPE_YN = '부' OR A.PL_YN = '부')
