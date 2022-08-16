@@ -130,6 +130,7 @@ public class PJTE7100Controller {
 
             List<PJTE7100DTO> list1 = pjte7100Service.select_7100_03(PJTE7100D);
 
+
             PJTE7100C.setAs_pgm_id(PJTE7100.getRowDatas().get(i).getAs_pgm_id());
             PJTE7100C.setDvlpe_no(PJTE7100.getRowDatas().get(i).getDvlpe_no());
             PJTE7100C.setDvlpe_no(PJTE7100.getRowDatas().get(i).getDvlpe_no());
