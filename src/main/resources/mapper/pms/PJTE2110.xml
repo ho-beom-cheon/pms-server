@@ -466,7 +466,7 @@
                                      THEN '부'
                                      ELSE ''
                                  END AS PL_YN
-                              , RMRK         AS NPRRN
+                              , PRG_TXT         AS NPRRN
                            FROM pms_pgm_mng A
                           WHERE 1=1
                             AND A.DVLP_DIS_CD IN (
