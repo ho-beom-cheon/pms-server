@@ -15,6 +15,7 @@ public class PJTE7100DTO {
     private String bkup_id;      // 백업ID
     private String prjt_id;         // 프로젝트ID
     private String as_pgm_id;      // ASIS프로그램ID
+    private String info_as_pgm_dis_cd;  // ASIS프로그램구분코드
     private String as_pgm_dis_cd;       // ASIS프로그램구분코드
     private String as_pgm_dis_nm;       // ASIS프로그램구분명
     private String as_pgm_nm;       // ASIS프로그램명
@@ -35,8 +36,8 @@ public class PJTE7100DTO {
 
     private String save_yn;       // 저장여부
     private String excelUplod;              //
-    private List<PJTE7100DTO> gridData;
 
+    private List<PJTE7100DTO> gridData;
     private List<PJTE7100DTO> rowDatas;
 
 

@@ -34,11 +34,12 @@
         <if test='to_pgm_id != "" and to_pgm_id != null'>
             AND    A.TO_PGM_ID LIKE CONCAT('%',CONCAT(#{to_pgm_id},'%'))
         </if>
-        <if test='use_pgm_txt != "" and use_pgm_txt != null'>
-            AND    A.USE_PGM_TXT LIKE CONCAT('%',CONCAT(#{use_pgm_txt},'%'))
-        </if>
         <if test='dvlpe_no != "" and dvlpe_no != null'>
             AND    A.DVLPE_NO  = #{dvlpe_no}
+        </if>
+        /*ASIS프로그램구분코드*/
+        <if test='info_as_pgm_dis_cd != "" and info_as_pgm_dis_cd != null and info_as_pgm_dis_cd != "TTT"'>
+            AND A.AS_PGM_DIS_CD = #{info_as_pgm_dis_cd}
         </if>
         ORDER BY A.AS_PGM_ID
     </select>
