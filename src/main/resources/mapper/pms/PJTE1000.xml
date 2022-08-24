@@ -57,9 +57,11 @@
     <select id="select_1000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE1000DTO">
         <![CDATA[
         SELECT ROW_NUMBER()   OVER(PARTITION BY A.TODO_CD ORDER BY B.ETC_TXT1) AS SQNO
-         , A.TODO_CD
+             , A.TODO_CD
              , B.DTLS_TYNM AS TODO_NM
              , CONCAT(CAST(A.PROC_CNT AS CHAR(100)),'건') AS PROC_CNT
+             , B.ETC_TXT2 AS SCRN_ID
+             , '화면이동' AS BTN_NM
         FROM (SELECT '10'     AS TODO_CD
                    , COUNT(*) AS PROC_CNT
               FROM pms_pgm_mng A
@@ -323,7 +325,7 @@
                                   AND    BKUP_ID     = A.BKUP_ID)
              ) A
                  LEFT OUTER JOIN
-             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1
+             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1, ETC_TXT2
               FROM pms_cd_del_mng
               WHERE GRP_TYCD = '1000000030'
                 AND PRJT_ID = #{prjt_id}

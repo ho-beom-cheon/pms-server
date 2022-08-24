@@ -36,8 +36,8 @@ public class PJTE7100Controller {
         PJTE7100.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE7100.setAs_pgm_id(request.getParameter("as_pgm_id"));
         PJTE7100.setTo_pgm_id(request.getParameter("to_pgm_id"));
-        PJTE7100.setUse_pgm_txt(request.getParameter("use_pgm_txt"));
         PJTE7100.setDvlpe_no(request.getParameter("dvlpe_no"));
+        PJTE7100.setInfo_as_pgm_dis_cd(request.getParameter("info_as_pgm_dis_cd"));
 
         List<PJTE7100DTO> list = pjte7100Service.select_7100_01(PJTE7100);
 
