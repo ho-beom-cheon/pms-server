@@ -56,8 +56,8 @@
                             <choose>
                             <when test='week_seq_val == "Y" and week_sqn_cd =="TTT"'>
                                 <![CDATA[ AND   B.DTLS_TYCD <= CASE WHEN DAYOFWEEK(DATE_FORMAT(NOW(), "%Y%m%d")) IN (1,5,6,7)
-                                                           THEN RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1)+1,3,'0')
-                                                           ELSE RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0') END ]]>
+                                                                    THEN RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0')
+                                                                    ELSE RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1)-1,3,'0') END ]]>
                             </when>
                             <otherwise>
                                 AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD ELSE #{week_sqn_cd} END
