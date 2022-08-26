@@ -246,8 +246,8 @@
 	  UPDATE pms_pgm_mng
 	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
 		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
-		                      WHEN #{dvlp_dis_cd} != '900'                                     THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
+		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600','900') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
+		                      WHEN #{dvlp_dis_cd} != '900'                                           THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
 		, PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
 		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
 		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
