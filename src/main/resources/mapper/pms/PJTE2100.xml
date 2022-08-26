@@ -252,7 +252,7 @@
 		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
 		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
 		, FRCS_END_DT  = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END /*계획종료일자*/
-		, STA_DT       = CASE WHEN (#{prc_step_cd} IN ('100','110') OR (#{prc_step_cd} = '200' AND STA_DT = '')) AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  STA_DT END /*실제시작일자*/
+		, STA_DT       = CASE WHEN  #{prc_step_cd} IN ('100','110','200') AND STA_DT = '' AND (#{login_aut_cd} IN ('200','500','600','900') OR DVLPE_NO = #{login_emp_no}) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  STA_DT END /*실제시작일자*/
 		, END_DT       = CASE WHEN #{prc_step_cd} = '400' AND (CRPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END  /*실제종료일자*/
 		, PRC_STEP_CD  = CASE WHEN #{login_aut_cd} IN ('500','600','900')                                 THEN #{prc_step_cd}
 							  WHEN #{prc_step_cd}  IN ('100','110','200') AND (DVLPE_NO = #{login_emp_no} OR PL_NO = #{login_emp_no}) THEN #{prc_step_cd}
