@@ -56,7 +56,7 @@
                                          ELSE 0
                                           END
                                    )     AS AF_CMPL_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100')
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100','110')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -88,7 +88,7 @@
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100')
+                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -121,7 +121,7 @@
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','200')
+                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110','200')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -256,7 +256,7 @@
                                       , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
                                                  THEN 1 ELSE 0
                                              END) AS CMPL_CNT
-                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100')
+                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100','110')
                                                  THEN 1 ELSE 0
                                              END) AS NCMPL_CNT
                                    FROM pms_pgm_mng A
@@ -289,7 +289,7 @@
                                             ELSE 0
                                              END
                                       )     AS CMPL_CNT
-                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100')
+                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
                                             THEN 1
                                             ELSE 0
                                              END
@@ -458,7 +458,7 @@
                               , A.PL_NO       AS PL_ENO
                               , A.PRJT_ID      AS PRJT_ID
                               , A.BKUP_ID     AS BKUP_ID
-                              , CASE WHEN A.PRC_STEP_CD IN ('000', '100')
+                              , CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
                                      THEN '부'
                                      ELSE '여'
                                  END AS CRPE_YN
@@ -477,7 +477,7 @@
                                    AND GRP_TYCD = '1000000031'
                                    AND USE_YN   = 'Y'
                                 )
-                            AND A.PRC_STEP_CD IN ('000', '100', '200')
+                            AND A.PRC_STEP_CD IN ('000', '100', '110', '200')
                             AND A.PRJT_ID	   = #{prjt_id}
                             AND A.BKUP_ID	   = #{bkup_id}
                             AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT != '')
