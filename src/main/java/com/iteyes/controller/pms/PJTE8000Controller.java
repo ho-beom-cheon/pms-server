@@ -69,6 +69,7 @@ public class PJTE8000Controller {
 
         PJTE8000DTO PJTE8000 = new PJTE8000DTO();
 
+        PJTE8000.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE8000.setWeek_yymm(request.getParameter("week_yymm"));
         PJTE8000.setWeek_sqn_cd(request.getParameter("week_sqn_cd_selected"));
         PJTE8000.setReal_prjt_id(request.getParameter("real_prjt_id_selected"));
