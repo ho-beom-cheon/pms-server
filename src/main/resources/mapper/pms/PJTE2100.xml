@@ -267,7 +267,9 @@
 		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
 		, RMRK         = #{rmrk}         /*비고*/
 		, RQU_SBH_ID   = #{rqu_sbh_id}   /*요구사항ID*/
-	    , CNV_BS_DT    = REPLACE(#{cnv_bs_dt}, '-', '')
+	    , CNV_BS_DT    = CASE WHEN #{prc_step_cd}  IN ('100','110','200') AND (CNV_BS_DT = '' OR CNV_BS_DT IS NULL) AND (#{cnv_bs_dt} = '' OR #{cnv_bs_dt} IS NULL)
+	                          THEN DATE_FORMAT(NOW(),'%Y%m%d')
+	                          ELSE REPLACE(#{cnv_bs_dt}, '-', '') END
 	    , OPR_NO       = #{login_emp_no}        /*조작자번호*/
 		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
 	  WHERE PGM_ID      = #{pgm_id}
