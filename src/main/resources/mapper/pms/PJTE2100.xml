@@ -261,9 +261,11 @@
 							  ELSE PRC_STEP_CD END
 		, PRG_TXT      = #{prg_txt}      /*진행현황*/
 		, DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
-		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT  END /*개발자확인일자*/
+		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600')) AND (DVLPE_CNF_DT = '' OR DVLPE_CNF_DT IS NULL)
+		                      THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT  END /*개발자확인일자*/
 		, PL_NO        = #{pl_no}        /*PL번호*/
-		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND (PL_NO    = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT  END    /*PL확인일자*/
+		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND (PL_NO    = #{login_emp_no} OR #{login_aut_cd} IN ('500','600'))  AND (PL_CNF_DT = '' OR PL_CNF_DT IS NULL)
+		                      THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT  END    /*PL확인일자*/
 		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
 		, RMRK         = #{rmrk}         /*비고*/
 		, RQU_SBH_ID   = #{rqu_sbh_id}   /*요구사항ID*/
