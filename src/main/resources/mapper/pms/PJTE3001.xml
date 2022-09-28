@@ -237,7 +237,7 @@
             SELECT CONCAT(CONCAT('E',#{err_tycd}),LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,5,6) AS INT))+1,0),6,'0')) AS
             MNG_ID
             FROM pms_err_mng
-            WHERE ERR_TYCD = #{err_tycd}
+            WHERE MNG_ID LIKE  CONCAT('E',#{err_tycd},'%')
             AND PRJT_ID = #{prjt_id}
             AND BKUP_ID = #{bkup_id}
         </selectKey>

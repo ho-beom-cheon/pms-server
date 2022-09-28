@@ -380,7 +380,7 @@
              , A.SQN_NM        AS SQN_NM
              , A.PRJT_ID            AS PRJT_ID
 	         , A.BKUP_ID            AS BKUP_ID
-             , CASE WHEN COUNT(*) = 1
+             , CASE WHEN COUNT(*) = 1 AND B.ERR_TYCD IS NULL
                     THEN 0
                     ELSE COUNT(*)
                      END       AS TOT_ERR_CNT
@@ -465,6 +465,7 @@
             ON B.RGS_DSCD  LIKE '2%'
            AND B.BZCD        = A.BZCD
            AND B.CCTN_SQN_CD = A.SQN_CD
+           AND B.ERR_TYCD  NOT LIKE '8%'
            AND B.PRJT_ID	   = #{prjt_id}
            AND B.BKUP_ID	   = #{bkup_id}
          WHERE 1=1
