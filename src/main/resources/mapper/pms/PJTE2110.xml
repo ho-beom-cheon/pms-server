@@ -359,7 +359,7 @@
 	<select id="select_2110_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
          SELECT A.BZCD          AS BZCD
          , A.BZNM          AS BZNM
-         , CASE WHEN COUNT(*) = 1
+         , CASE WHEN COUNT(*) = 1 AND B.ERR_TYCD IS NULL
          THEN 0
          ELSE COUNT(*)
          END       AS TOT_ERR_CNT
@@ -421,6 +421,7 @@
          pms_err_mng  B
          ON B.RGS_DSCD   = '1100'
          AND B.BZCD      = A.BZCD
+         AND B.ERR_TYCD  NOT LIKE '8%'
          AND B.PRJT_ID	 = #{prjt_id}
          AND B.BKUP_ID	 = #{bkup_id}
          WHERE 1=1
@@ -489,8 +490,8 @@
 
            SELECT *
              FROM (SELECT A.BZCD
-                        , CASE WHEN A.RGS_DSCD = '100' THEN '결함'
-                               WHEN A.RGS_DSCD = '200' THEN '개선'
+                        , CASE WHEN A.ERR_TYCD = '100' THEN '결함'
+                               WHEN A.ERR_TYCD = '200' THEN '개선'
                                ELSE '기타결함'
                            END AS NPRRN_KBN
                         , A.CCTN_ID     AS CCTN_ID
