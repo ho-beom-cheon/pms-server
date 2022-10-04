@@ -467,8 +467,14 @@
                                      THEN '부'
                                      ELSE ''
                                  END AS PL_YN
-                              , PRG_TXT         AS NPRRN
+                              , CONCAT('처리단계 : ', B.DTLS_TYNM , CHAR(10) , A.PRG_TXT)        AS NPRRN
                            FROM pms_pgm_mng A
+                                LEFT OUTER JOIN
+                                pms_cd_del_mng B
+                                ON  B.BKUP_ID  = A.BKUP_ID
+                                AND B.PRJT_ID  = A.PRJT_ID
+                                AND B.GRP_TYCD = '1000000002'
+                                AND B.DTLS_TYCD = A.PRC_STEP_CD
                           WHERE 1=1
                             AND A.DVLP_DIS_CD IN (
                                 SELECT DTLS_TYCD
