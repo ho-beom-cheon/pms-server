@@ -31,4 +31,6 @@ public class PJTE8100DTO {
     private String del_yn;              /*삭제여부*/
     private String athr_nm;             /*작성자사번*/
     private String mtng_prc_step_cd;         /*진행상태*/
+    private String db_chg_ts;           /*db변경일시*/
+    private String db_chg_yn;           /*db변경여부*/
 }

@@ -54,4 +54,7 @@ public class PJTE8000DTO {
     private String bef_req_txt;             /*요청내용*/
     private String bef_org_file_nm;         /*첨부파일명*/
     private String bef_atfl_mng_id;         /*첨부파일 코드*/
+
+    private String db_chg_ts;           /*db변경일시*/
+    private String db_chg_yn;           /*db변경여부*/
 }
