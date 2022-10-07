@@ -41,6 +41,7 @@
             , E.REQ_TXT	    AS BEF_REQ_TXT
             , F2.ORG_FILE_NM   AS BEF_ORG_FILE_NM
             , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
+            , DATE_FORMAT(B.DB_CHG_TS,'%Y%m%d%H%i%s') AS DB_CHG_TS
         FROM  (SELECT A.BKUP_ID
                     , A.PRJT_ID
                     , A.DTLS_TYCD AS REAL_PRJT_ID
@@ -89,6 +90,7 @@
                     , A.ISS_TXT
                     , A.REQ_TXT
                     , A.ATFL_MNG_ID
+                    , A.DB_CHG_TS
                     , (SELECT MAX(CONCAT(S.WEEK_YYMM,S.WEEK_SQN_CD))
                         FROM   pms_week_rpt_mng S
                         WHERE  1 = 1
@@ -219,6 +221,18 @@
         AND    PRJT_ID      = #{prjt_id}
         AND    BKUP_ID      = '0000000000'
     </select>
+
+    <select id="select_8000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
+        SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE 'N' END AS DB_CHG_YN
+        FROM   pms_week_rpt_mng
+        WHERE  WEEK_SQN_CD  = #{week_sqn_cd}
+        AND    WEEK_YYMM    = REPLACE(#{week_yymm},'-','')
+        AND    REAL_PRJT_ID = #{real_prjt_id}
+        AND    PRJT_ID      = #{prjt_id}
+        AND    DATE_FORMAT(DB_CHG_TS,'%Y%m%d%H%i%s') > #{db_chg_ts}
+        AND    BKUP_ID      = '0000000000'
+    </select>
+
     <insert id="insert_8000_01" parameterType="Map" >
     INSERT INTO pms_week_rpt_mng
     (
@@ -282,7 +296,6 @@
           AND    WEEK_SQN_CD     = #{week_sqn_cd}
           AND    WEEK_YYMM       = REPLACE(#{week_yymm},'-','')
           AND    REAL_PRJT_ID	 = #{real_prjt_id}
-          AND    DEPT_CD         = #{dept_cd}
           AND    PRJT_ID         = #{prjt_id}
           AND    BKUP_ID	     = '0000000000'
     </update>
