@@ -37,6 +37,7 @@ public class PJTE4000DTO {
 	private String  db_chg_ts;        //DB변경일시
 	private String  slv_mpln_txt;     //해결방안내용
 	private String  cmpl_yn;          //완료건포함
+	private String db_chg_yn;           /*db변경여부*/
 
 }
 

@@ -15,6 +15,8 @@ public interface PJTE8000Mapper {
 
     List<PJTE8000DTO> select_8000_03(PJTE8000DTO PJTE8000) throws Exception;
 
+    List<PJTE8000DTO> select_8000_04(PJTE8000DTO PJTE8000) throws Exception;
+
     /* insert */
     boolean  insert_8000_01(PJTE8000DTO PJTE8000) throws Exception;
     /* update */

@@ -95,6 +95,37 @@ public class PJTE8000Controller {
         return jsonStr;
     }
 
+    @GetMapping(value = "/select04")
+    public @ResponseBody
+    String select04(HttpServletRequest request) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        PJTE8000DTO PJTE8000 = new PJTE8000DTO();
+
+        PJTE8000.setPrjt_id(request.getParameter("prjt_nm_selected"));
+        PJTE8000.setWeek_yymm(request.getParameter("week_yymm"));
+        PJTE8000.setWeek_sqn_cd(request.getParameter("week_sqn_cd"));
+        PJTE8000.setReal_prjt_id(request.getParameter("real_prjt_id"));
+        PJTE8000.setDb_chg_ts(request.getParameter("db_chg_ts"));
+
+        List<PJTE8000DTO> list2 = pjte8000Service.select_8000_04(PJTE8000);
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm1.put("contents", list2);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+    }
+
     @PostMapping(value = "/insert")
     public @ResponseBody
     boolean insert(@RequestBody PJTE8000DTO PJTE8000) throws Exception {

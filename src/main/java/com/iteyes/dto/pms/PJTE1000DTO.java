@@ -46,4 +46,6 @@ public class PJTE1000DTO {
     private String sort;
     private String scrn_id;                /*화면ID*/
     private String btn_nm;                /*버튼명*/
+    private String db_chg_ts;           /*db변경일시*/
+    private String db_chg_yn;           /*db변경여부*/
 }

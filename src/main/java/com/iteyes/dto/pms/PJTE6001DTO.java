@@ -19,6 +19,8 @@ public class PJTE6001DTO {
 	private String req_prc_step_cd;
 	private String atfl_mng_id;
 	private String opr_no;
+	private String db_chg_ts;           /*db변경일시*/
+	private String db_chg_yn;           /*db변경여부*/
 
 	private String bkup_id;
 	private String org_file_nm;
