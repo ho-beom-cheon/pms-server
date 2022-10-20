@@ -257,6 +257,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -275,6 +276,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '200'
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -293,6 +295,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD IN ('100', '200')
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -310,6 +313,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -720,6 +724,7 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -743,6 +748,7 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '200'
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -766,6 +772,7 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD IN ('100', '200')
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -788,6 +795,7 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
+                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
