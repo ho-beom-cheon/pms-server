@@ -65,7 +65,7 @@ public class PJTE4000Controller {
         return jsonStr;
 
     }
-
+    //test
     @PutMapping(value = "/update")
     public @ResponseBody
     boolean update(@RequestBody PJTE4000DTO PJTE4000) throws Exception {
