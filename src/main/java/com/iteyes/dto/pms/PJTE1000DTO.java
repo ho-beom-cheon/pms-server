@@ -44,4 +44,5 @@ public class PJTE1000DTO {
     private String pln_end_dt;          /*종료일자*/
     private String rmrk;                /*결함내용*/
     private String sort;
+    private String btn_nm;
 }

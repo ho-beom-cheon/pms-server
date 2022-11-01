@@ -60,6 +60,7 @@
          , A.TODO_CD
              , B.DTLS_TYNM AS TODO_NM
              , CONCAT(CAST(A.PROC_CNT AS CHAR(100)),'건') AS PROC_CNT
+             , '바로가기' AS BTN_NM
         FROM (SELECT '10'     AS TODO_CD
                    , COUNT(*) AS PROC_CNT
               FROM pms_pgm_mng A
