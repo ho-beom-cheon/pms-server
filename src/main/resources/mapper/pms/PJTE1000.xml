@@ -61,6 +61,7 @@
              , B.DTLS_TYNM AS TODO_NM
              , CONCAT(CAST(A.PROC_CNT AS CHAR(100)),'건') AS PROC_CNT
              ,  '바로가기' AS BTN_NM
+             , B.ETC_TXT2 AS SCRN_ID
         FROM (SELECT '10'     AS TODO_CD
                    , COUNT(*) AS PROC_CNT
               FROM pms_pgm_mng A
@@ -304,7 +305,7 @@
                 AND A.BKUP_ID = #{bkup_id}
              ) A
                  LEFT OUTER JOIN
-             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1
+             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1, ETC_TXT2
               FROM pms_cd_del_mng
               WHERE GRP_TYCD = '1000000030'
                 AND PRJT_ID = #{prjt_id}
