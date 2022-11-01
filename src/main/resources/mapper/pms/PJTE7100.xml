@@ -8,10 +8,8 @@
         ,A.AS_PGM_NM
         ,A.TO_PGM_ID
         ,A.TO_PGM_NM
-        ,C.DTLS_TYNM  AS AS_PGM_DIS_NM
         ,A.USE_PGM_TXT
         ,B.EMPNM      AS DVLPE_NM
-        ,D.DTLS_TYNM  AS TRN_STT_NM
         ,DATE_FORMAT(A.FRCS_STA_DT,'%Y-%m-%d') AS FRCS_STA_DT
         ,DATE_FORMAT(A.FRCS_END_DT,'%Y-%m-%d') AS FRCS_END_DT
         ,DATE_FORMAT(A.STA_DT,'%Y-%m-%d') AS STA_DT
@@ -28,18 +26,6 @@
         ON  B.EMPNO      = A.DVLPE_NO
         AND B.PRJT_ID    = A.PRJT_ID
         AND B.BKUP_ID    = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_cd_del_mng   C
-        ON  C.DTLS_TYCD  = A.AS_PGM_DIS_CD
-        AND C.GRP_TYCD   = '1000000051'
-        AND C.PRJT_ID    = A.PRJT_ID
-        AND C.BKUP_ID    = A.BKUP_ID
-        LEFT OUTER JOIN
-        pms_cd_del_mng   D
-        ON  D.DTLS_TYCD  = A.TRN_STT_CD
-        AND D.GRP_TYCD   = '1000000052'
-        AND D.PRJT_ID    = A.PRJT_ID
-        AND D.BKUP_ID    = A.BKUP_ID
         WHERE  A.BKUP_ID = #{bkup_id}
         AND    A.PRJT_ID = #{prjt_id}
         <if test='as_pgm_id != "" and as_pgm_id != null'>
@@ -48,10 +34,22 @@
         <if test='to_pgm_id != "" and to_pgm_id != null'>
             AND    A.TO_PGM_ID LIKE CONCAT('%',CONCAT(#{to_pgm_id},'%'))
         </if>
-        <if test='use_pgm_txt != "" and use_pgm_txt != null'>
-            AND    A.USE_PGM_TXT LIKE CONCAT('%',CONCAT(#{use_pgm_txt},'%'))
+        <if test='dvlpe_no != "" and dvlpe_no != null'>
+            AND    A.DVLPE_NO  = #{dvlpe_no}
         </if>
-        ORDER BY A.AS_PGM_ID
+        /*ASIS프로그램구분코드*/
+        <if test='info_as_pgm_dis_cd != "" and info_as_pgm_dis_cd != null and info_as_pgm_dis_cd != "TTT" and info_as_pgm_dis_cd != "999"'>
+            AND A.AS_PGM_DIS_CD = #{info_as_pgm_dis_cd}
+        </if>
+        <if test='info_as_pgm_dis_cd == "999"'>
+            AND A.AS_PGM_DIS_CD IN (SELECT DTLS_TYCD
+                                    FROM   pms_cd_del_mng
+                                    WHERE  USE_YN   = 'Y'
+                                    AND    GRP_TYCD = '1000000017'
+                                    AND    PRJT_ID  = A.PRJT_ID
+                                    AND    BKUP_ID  = A.BKUP_ID)
+        </if>
+        ORDER BY A.AS_PGM_DIS_CD DESC, A.AS_PGM_ID
     </select>
 
     <select id="select_7100_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7100DTO">
@@ -61,6 +59,16 @@
         AND    PRJT_ID       = #{prjt_id}
         AND    AS_PGM_ID     = #{as_pgm_id}
         AND    AS_PGM_DIS_CD = #{as_pgm_dis_cd}
+    </select>
+
+
+    <select id="select_7100_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7100DTO">
+        SELECT AS_PGM_ID
+        FROM   pms_as_to_map
+        WHERE  BKUP_ID       = #{bkup_id}
+          AND    PRJT_ID       = #{prjt_id}
+          AND    AS_PGM_ID     = #{as_pgm_id}
+          AND    AS_PGM_DIS_CD = #{as_pgm_dis_cd}
     </select>
 
 
@@ -74,8 +82,30 @@
           ,TRN_STT_CD    = #{trn_stt_cd}
           ,FRCS_STA_DT   = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT  END
           ,FRCS_END_DT   = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT  END
-          ,STA_DT        = CASE WHEN #{trn_stt_cd} = '200' AND STA_DT = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
-          ,END_DT        = CASE WHEN #{trn_stt_cd} = '300'                 THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
+          ,STA_DT        = CASE WHEN #{trn_stt_cd} IN ('200','300') AND (STA_DT = '' OR STA_DT IS NULL) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
+          ,END_DT        = CASE WHEN #{trn_stt_cd} = '300' AND (END_DT = '' OR END_DT IS NULL)          THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
+          ,RMRK          = #{rmrk}
+          ,OPR_NO        = #{login_emp_no}
+          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  1 = 1
+          AND    BKUP_ID       = '0000000000'
+          AND    PRJT_ID       = #{prjt_id}
+          AND    AS_PGM_ID     = #{as_pgm_id}
+          AND    AS_PGM_DIS_CD = #{as_pgm_dis_cd}
+    </update>
+
+    <update id="update_7100_02" parameterType="Map">
+        UPDATE pms_as_to_map
+        SET    AS_PGM_NM     = #{as_pgm_nm}
+          ,TO_PGM_ID     = #{to_pgm_id}
+          ,TO_PGM_NM     = #{to_pgm_nm}
+          ,USE_PGM_TXT   = #{use_pgm_txt}
+          ,DVLPE_NO      = #{dvlpe_no}
+          ,TRN_STT_CD    = #{trn_stt_cd}
+          ,FRCS_STA_DT   = REPLACE(#{frcs_sta_dt}, '-', '')
+          ,FRCS_END_DT   = REPLACE(#{frcs_end_dt}, '-', '')
+          ,STA_DT        = REPLACE(#{sta_dt}, '-', '')
+          ,END_DT        = REPLACE(#{end_dt}, '-', '')
           ,RMRK          = #{rmrk}
           ,OPR_NO        = #{login_emp_no}
           ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
@@ -118,11 +148,11 @@
             , #{to_pgm_nm}
             , #{use_pgm_txt}
             , #{dvlpe_no}
-            , '100'
+            , #{trn_stt_cd}
             , REPLACE(#{frcs_sta_dt}, '-', '')
             , REPLACE(#{frcs_end_dt}, '-', '')
-            , ''
-            , ''
+            , REPLACE(#{sta_dt}, '-', '')
+            , REPLACE(#{end_dt}, '-', '')
             , #{rmrk}
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')

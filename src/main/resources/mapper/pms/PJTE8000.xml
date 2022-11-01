@@ -22,7 +22,7 @@
             , B.STEP_REAL_PRG
             , B.STEP_PRED_PRG
             , B.PRG_TXT
-            , CASE WHEN B.PM_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','900') THEN B.ISS_TXT ELSE '' END AS ISS_TXT
+            , CASE WHEN B.PM_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600','900') THEN B.ISS_TXT ELSE '' END AS ISS_TXT
             , B.REQ_TXT
             , F1.ORG_FILE_NM
             , B.ATFL_MNG_ID
@@ -37,10 +37,11 @@
             , E.STEP_REAL_PRG	AS BEF_STEP_REAL_PRG
             , E.STEP_PRED_PRG	AS BEF_STEP_PRED_PRG
             , E.PRG_TXT	    AS BEF_PRG_TXT
-            , CASE WHEN B.PM_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','900') THEN  E.ISS_TXT	ELSE '' END AS BEF_ISS_TXT
+            , CASE WHEN B.PM_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600','900') THEN  E.ISS_TXT	ELSE '' END AS BEF_ISS_TXT
             , E.REQ_TXT	    AS BEF_REQ_TXT
             , F2.ORG_FILE_NM   AS BEF_ORG_FILE_NM
             , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
+            , DATE_FORMAT(B.DB_CHG_TS,'%Y%m%d%H%i%s') AS DB_CHG_TS
         FROM  (SELECT A.BKUP_ID
                     , A.PRJT_ID
                     , A.DTLS_TYCD AS REAL_PRJT_ID
@@ -56,8 +57,8 @@
                             <choose>
                             <when test='week_seq_val == "Y" and week_sqn_cd =="TTT"'>
                                 <![CDATA[ AND   B.DTLS_TYCD <= CASE WHEN DAYOFWEEK(DATE_FORMAT(NOW(), "%Y%m%d")) IN (1,5,6,7)
-                                                           THEN RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1)+1,3,'0')
-                                                           ELSE RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0') END ]]>
+                                                                    THEN RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1),3,'0')
+                                                                    ELSE RPAD(WEEK(DATE_FORMAT(NOW(), "%Y%m%d"), 1) - WEEK(DATE_FORMAT(LAST_DAY(ADDDATE(NOW(), INTERVAL -1 MONTH)), "%Y%m%d"), 1)-1,3,'0') END ]]>
                             </when>
                             <otherwise>
                                 AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD ELSE #{week_sqn_cd} END
@@ -89,6 +90,7 @@
                     , A.ISS_TXT
                     , A.REQ_TXT
                     , A.ATFL_MNG_ID
+                    , A.DB_CHG_TS
                     , (SELECT MAX(CONCAT(S.WEEK_YYMM,S.WEEK_SQN_CD))
                         FROM   pms_week_rpt_mng S
                         WHERE  1 = 1
@@ -170,7 +172,7 @@
              , E.STEP_REAL_PRG	AS BEF_STEP_REAL_PRG
              , E.STEP_PRED_PRG	AS BEF_STEP_PRED_PRG
              , E.PRG_TXT	    AS BEF_PRG_TXT
-             , CASE WHEN E.PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','900') THEN E.ISS_TXT ELSE '' END AS BEF_ISS_TXT
+             , CASE WHEN E.PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','600','900') THEN E.ISS_TXT ELSE '' END AS BEF_ISS_TXT
              , E.REQ_TXT	    AS BEF_REQ_TXT
              , E.ATFL_MNG_ID	AS BEF_ATFL_MNG_ID
              , I.ORG_FILE_NM    AS BEF_ORG_FILE_NM
@@ -206,6 +208,7 @@
                                        AND    A.PRJT_ID      = E.PRJT_ID
                                        AND    A.BKUP_ID      = E.BKUP_ID)
            AND    E.REAL_PRJT_ID = #{real_prjt_id}
+           AND    E.PRJT_ID      = #{prjt_id}
            AND    E.BKUP_ID      = '0000000000'
     </select>
 
@@ -218,6 +221,18 @@
         AND    PRJT_ID      = #{prjt_id}
         AND    BKUP_ID      = '0000000000'
     </select>
+
+    <select id="select_8000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE8000DTO">
+        SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE 'N' END AS DB_CHG_YN
+        FROM   pms_week_rpt_mng
+        WHERE  WEEK_SQN_CD  = #{week_sqn_cd}
+        AND    WEEK_YYMM    = REPLACE(#{week_yymm},'-','')
+        AND    REAL_PRJT_ID = #{real_prjt_id}
+        AND    PRJT_ID      = #{prjt_id}
+        AND    DATE_FORMAT(DB_CHG_TS,'%Y%m%d%H%i%s') > #{db_chg_ts}
+        AND    BKUP_ID      = '0000000000'
+    </select>
+
     <insert id="insert_8000_01" parameterType="Map" >
     INSERT INTO pms_week_rpt_mng
     (
@@ -265,14 +280,14 @@
 
     <update id="update_8000_01" parameterType="Map" >
         UPDATE pms_week_rpt_mng
-        SET    PM_NO	 = CASE WHEN #{bef_aut_cd} IN ('500','900') THEN #{pm_no} ELSE PM_NO END
+        SET    PM_NO	 = CASE WHEN #{bef_aut_cd} IN ('500','600','900') THEN #{pm_no} ELSE PM_NO END
           ,ALL_REAL_PRG	 = #{all_real_prg}
           ,ALL_PRED_PRG	 = #{all_pred_prg}
           ,STEP_NM	     = #{step_nm}
           ,STEP_REAL_PRG = #{step_real_prg}
           ,STEP_PRED_PRG = #{step_pred_prg}
           ,PRG_TXT	     = #{prg_txt}
-          ,ISS_TXT	     = CASE WHEN PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','900') THEN #{iss_txt} ELSE ISS_TXT END
+          ,ISS_TXT	     = CASE WHEN PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','600','900') THEN #{iss_txt} ELSE ISS_TXT END
           ,REQ_TXT	     = #{req_txt}
           ,ATFL_MNG_ID   = #{atfl_mng_id}
           ,OPR_NO        = #{login_emp_no}
@@ -281,7 +296,6 @@
           AND    WEEK_SQN_CD     = #{week_sqn_cd}
           AND    WEEK_YYMM       = REPLACE(#{week_yymm},'-','')
           AND    REAL_PRJT_ID	 = #{real_prjt_id}
-          AND    DEPT_CD         = #{dept_cd}
           AND    PRJT_ID         = #{prjt_id}
           AND    BKUP_ID	     = '0000000000'
     </update>

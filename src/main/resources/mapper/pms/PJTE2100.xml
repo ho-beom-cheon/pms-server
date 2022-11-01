@@ -174,7 +174,7 @@
 	  <if test='pl_no != "" and pl_no != null'>
 		AND A.PL_NO = #{pl_no}
 	  </if>
-	  ORDER BY A.BZCD, A.FRCS_STA_DT
+	  ORDER BY A.DVLP_DIS_CD, A.BZCD, A.FRCS_STA_DT
     </select>
 
 	<insert id="insert_2100_01" parameterType="Map">
@@ -246,28 +246,32 @@
 	  UPDATE pms_pgm_mng
 	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
 		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
-		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
-		                      WHEN #{dvlp_dis_cd} != '900'                                     THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
+		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600','900') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
+		                      WHEN #{dvlp_dis_cd} != '900'                                           THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
 		, PGM_DIS_CD   = #{pgm_dis_cd}   /*프로그램구분코드*/
 		, ENLPE_NM     = #{enlpe_nm}     /*프로그램세부구분코드*/
-		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
-		, FRCS_END_DT  = CASE WHEN #{login_aut_cd} IN ('500','600') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END /*계획종료일자*/
-		, STA_DT       = CASE WHEN (#{prc_step_cd} = '100' OR (#{prc_step_cd} = '200' AND STA_DT = '')) AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  STA_DT END /*실제시작일자*/
+		, FRCS_STA_DT  = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END /*계획시작일자*/
+		, FRCS_END_DT  = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END /*계획종료일자*/
+		, STA_DT       = CASE WHEN  #{prc_step_cd} IN ('100','110','200') AND STA_DT = '' AND (#{login_aut_cd} IN ('200','500','600','900') OR DVLPE_NO = #{login_emp_no}) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE  STA_DT END /*실제시작일자*/
 		, END_DT       = CASE WHEN #{prc_step_cd} = '400' AND (CRPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END  /*실제종료일자*/
-		, PRC_STEP_CD  = CASE WHEN #{login_aut_cd} IN ('500','600')                                 THEN #{prc_step_cd}
-							  WHEN #{prc_step_cd}  IN ('100','200') AND (DVLPE_NO = #{login_emp_no} OR PL_NO = #{login_emp_no}) THEN #{prc_step_cd}
+		, PRC_STEP_CD  = CASE WHEN #{login_aut_cd} IN ('500','600','900')                                 THEN #{prc_step_cd}
+							  WHEN #{prc_step_cd}  IN ('100','110','200') AND (DVLPE_NO = #{login_emp_no} OR PL_NO = #{login_emp_no}) THEN #{prc_step_cd}
 							  WHEN #{prc_step_cd}  = '300'          AND PL_NO    = #{login_emp_no} THEN #{prc_step_cd}
 							  WHEN #{prc_step_cd}  = '400'          AND CRPE_NO  = #{login_emp_no} THEN #{prc_step_cd}
 							  ELSE PRC_STEP_CD END
 		, PRG_TXT      = #{prg_txt}      /*진행현황*/
 		, DVLPE_NO     = #{dvlpe_no}     /*개발자번호*/
-		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT  END /*개발자확인일자*/
+		, DVLPE_CNF_DT = CASE WHEN #{prc_step_cd} = '200' AND (DVLPE_NO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600')) AND (DVLPE_CNF_DT = '' OR DVLPE_CNF_DT IS NULL)
+		                      THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE DVLPE_CNF_DT  END /*개발자확인일자*/
 		, PL_NO        = #{pl_no}        /*PL번호*/
-		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND (PL_NO    = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT  END    /*PL확인일자*/
+		, PL_CNF_DT    = CASE WHEN #{prc_step_cd} = '300' AND (PL_NO    = #{login_emp_no} OR #{login_aut_cd} IN ('500','600'))  AND (PL_CNF_DT = '' OR PL_CNF_DT IS NULL)
+		                      THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE PL_CNF_DT  END    /*PL확인일자*/
 		, CRPE_NO      = #{crpe_no}      /*담당자번호*/
 		, RMRK         = #{rmrk}         /*비고*/
 		, RQU_SBH_ID   = #{rqu_sbh_id}   /*요구사항ID*/
-	    , CNV_BS_DT    = REPLACE(#{cnv_bs_dt}, '-', '')
+	    , CNV_BS_DT    = CASE WHEN #{prc_step_cd}  IN ('100','110','200') AND (CNV_BS_DT = '' OR CNV_BS_DT IS NULL) AND (#{cnv_bs_dt} = '' OR #{cnv_bs_dt} IS NULL)
+	                          THEN DATE_FORMAT(NOW(),'%Y%m%d')
+	                          ELSE REPLACE(#{cnv_bs_dt}, '-', '') END
 	    , OPR_NO       = #{login_emp_no}        /*조작자번호*/
 		, DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
 	  WHERE PGM_ID      = #{pgm_id}

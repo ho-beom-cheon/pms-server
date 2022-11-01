@@ -55,6 +55,8 @@ public class PJTE2100DTO {
 	private String pal_atfl_mng_id_yn;      //
 	private String excelUplod;              //
 
+	private String db_chg_yn;           /*db변경여부*/
+
 
 	private List<PJTE2100DTO> updatedRows;
 	private List<PJTE2100DTO> createdRows;

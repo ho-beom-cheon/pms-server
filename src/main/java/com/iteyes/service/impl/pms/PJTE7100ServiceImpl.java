@@ -29,6 +29,13 @@ public class PJTE7100ServiceImpl implements PJTE7100Service {
     }
 
     @Override
+    public List<PJTE7100DTO> select_7100_03(PJTE7100DTO PJTE7100) throws Exception {
+
+        return pjte7100Mapper.select_7100_03(PJTE7100);
+
+    }
+
+    @Override
     public boolean insert_7100_01(PJTE7100DTO PJTE7100) throws Exception {
 
         return pjte7100Mapper.insert_7100_01(PJTE7100);
@@ -39,8 +46,15 @@ public class PJTE7100ServiceImpl implements PJTE7100Service {
     public boolean update_7100_01(PJTE7100DTO PJTE7100) throws Exception {
 
         return pjte7100Mapper.update_7100_01(PJTE7100);
+    }
+
+    @Override
+    public boolean update_7100_02(PJTE7100DTO PJTE7100) throws Exception {
+
+        return pjte7100Mapper.update_7100_02(PJTE7100);
 
     }
+
     /* delete */
     @Override
     public boolean delete_7100_01(PJTE7100DTO PJTE7100) throws Exception {

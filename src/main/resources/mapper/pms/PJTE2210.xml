@@ -380,7 +380,7 @@
              , A.SQN_NM        AS SQN_NM
              , A.PRJT_ID            AS PRJT_ID
 	         , A.BKUP_ID            AS BKUP_ID
-             , CASE WHEN COUNT(*) = 1
+             , CASE WHEN COUNT(*) = 1 AND B.ERR_TYCD IS NULL
                     THEN 0
                     ELSE COUNT(*)
                      END       AS TOT_ERR_CNT
@@ -465,6 +465,7 @@
             ON B.RGS_DSCD  LIKE '2%'
            AND B.BZCD        = A.BZCD
            AND B.CCTN_SQN_CD = A.SQN_CD
+           AND B.ERR_TYCD  NOT LIKE '8%'
            AND B.PRJT_ID	   = #{prjt_id}
            AND B.BKUP_ID	   = #{bkup_id}
          WHERE 1=1
@@ -516,14 +517,20 @@
                                         THEN '부'
                                         ELSE ''
                                          END    AS PL_YN
-                                 , RMRK         AS NPRRN
+                                 , CONCAT('처리단계 : ', B.DTLS_TYNM , CHAR(10) , A.RMRK)  AS NPRRN
                               FROM pms_itg_tst_mng A
+                                   LEFT OUTER JOIN
+                                pms_cd_del_mng B
+                                ON  B.BKUP_ID  = A.BKUP_ID
+                                AND B.PRJT_ID  = A.PRJT_ID
+                                AND B.GRP_TYCD = '1000000026'
+                                AND B.DTLS_TYCD = A.PRC_STEP_CD
                              WHERE 1=1
                                AND A.SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
                                AND A.ITG_TST_PRC_CD IN ('000', '100', '200')
                                AND A.PRJT_ID	   = #{prjt_id}
                                AND A.BKUP_ID	   = #{bkup_id}
-                               AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT IS NOT NULL)
+                               AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT != '')
                            )  A
                      WHERE 1=1
                        AND (A.CRPE_YN = '부' OR A.PL_YN = '부')

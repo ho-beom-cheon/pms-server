@@ -9,10 +9,11 @@
 			 ,A.REQ_DSCD
 			 ,A.REQ_DT
 			 ,B.EMPNM AS REQPE_NM
+		     ,A.REQPE_NO
 			 ,A.REQ_TXT
 			 ,A.PRC_DT
 			 ,C.EMPNM AS PRCPE_NM
-		     ,C.EMPNO AS PRCPE_NO
+		     ,A.PRCPE_NO AS PRCPE_NO
 			 ,A.PRC_TXT
 			 ,A.REQ_PRC_STEP_CD
 			 ,A.ATFL_MNG_ID
@@ -90,11 +91,9 @@
 		UPDATE pms_rq_mng
 		SET    BZCD	           = #{bzcd}
 		  ,REQ_DSCD	       = #{req_dscd}
-		  ,REQPE_NO	       = #{reqpe_no}
-		  ,REQ_DT	       = REPLACE(#{req_dt}, '-', '')
 		  ,REQ_TXT	       = #{req_txt}
 		  ,PRCPE_NO	       = #{prcpe_no}
-		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '400' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
+		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '900' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
 		  ,PRC_TXT	       = #{prc_txt}
 		  ,REQ_PRC_STEP_CD = #{req_prc_step_cd}
 		  ,OPR_NO	       = #{login_emp_no}

@@ -38,6 +38,8 @@ public class PJTE5000DTO {
 	private String atfl_mng_id;             //첨부파일관리ID
 	private String atfl_mng_id_yn;          //첨부파일관리ID
 	private String wbs_cnt;                 //하위건수
+	private String db_chg_ts;           /*db변경일시*/
+	private String db_chg_yn;           /*db변경여부*/
 
 	private String frcs_sta_dt;             // 예상시작일자
 	private String frcs_end_dt;             // 예상종료일자

@@ -56,7 +56,7 @@
                                          ELSE 0
                                           END
                                    )     AS AF_CMPL_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100')
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100','110')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -88,7 +88,7 @@
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100')
+                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -101,7 +101,7 @@
                                                           AND    PRJT_ID  = A.PRJT_ID
                                                           AND    GRP_TYCD = '1000000031'
                                                           AND    USE_YN   = 'Y')
-                            AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                            AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND DATE_FORMAT(#{inp_date},'%Y%m%d')
                             AND A.PRJT_ID	   = #{prjt_id}
                             AND A.BKUP_ID	   = #{bkup_id}
                           GROUP BY A.BZCD
@@ -121,7 +121,7 @@
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','200')
+                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110','200')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -135,7 +135,7 @@
                                                           AND    GRP_TYCD = '1000000031'
                                                           AND    USE_YN   = 'Y')
                             AND DATE_FORMAT(DATE_ADD(A.DVLPE_CNF_DT,INTERVAL CAST(#{proc_days} AS INT) DAY),'%Y%m%d')
-                        BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                        BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND DATE_FORMAT(#{inp_date},'%Y%m%d')
                             AND A.PRJT_ID	   = #{prjt_id}
                             AND A.BKUP_ID	   = #{bkup_id}
                           GROUP BY A.BZCD
@@ -256,7 +256,7 @@
                                       , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
                                                  THEN 1 ELSE 0
                                              END) AS CMPL_CNT
-                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100')
+                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100','110')
                                                  THEN 1 ELSE 0
                                              END) AS NCMPL_CNT
                                    FROM pms_pgm_mng A
@@ -289,7 +289,7 @@
                                             ELSE 0
                                              END
                                       )     AS CMPL_CNT
-                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100')
+                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
                                             THEN 1
                                             ELSE 0
                                              END
@@ -304,7 +304,7 @@
 								                                     AND    USE_YN   = 'Y')
                                AND A.PRJT_ID	   = #{prjt_id}
                                AND A.BKUP_ID	   = #{bkup_id}
-                               AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND #{inp_date}
+                               AND A.FRCS_END_DT BETWEEN DATE_FORMAT(DATE_ADD(#{inp_date},INTERVAL -6 DAY),'%Y%m%d') AND DATE_FORMAT(#{inp_date},'%Y%m%d')
                              GROUP BY A.BZCD, A.DVLPE_NO
                           ) BB
                    )   C
@@ -359,7 +359,7 @@
 	<select id="select_2110_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2110DTO">
          SELECT A.BZCD          AS BZCD
          , A.BZNM          AS BZNM
-         , CASE WHEN COUNT(*) = 1
+         , CASE WHEN COUNT(*) = 1 AND B.ERR_TYCD IS NULL
          THEN 0
          ELSE COUNT(*)
          END       AS TOT_ERR_CNT
@@ -421,6 +421,7 @@
          pms_err_mng  B
          ON B.RGS_DSCD   = '1100'
          AND B.BZCD      = A.BZCD
+         AND B.ERR_TYCD  NOT LIKE '8%'
          AND B.PRJT_ID	 = #{prjt_id}
          AND B.BKUP_ID	 = #{bkup_id}
          WHERE 1=1
@@ -458,7 +459,7 @@
                               , A.PL_NO       AS PL_ENO
                               , A.PRJT_ID      AS PRJT_ID
                               , A.BKUP_ID     AS BKUP_ID
-                              , CASE WHEN A.PRC_STEP_CD IN ('000', '100')
+                              , CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
                                      THEN '부'
                                      ELSE '여'
                                  END AS CRPE_YN
@@ -466,8 +467,14 @@
                                      THEN '부'
                                      ELSE ''
                                  END AS PL_YN
-                              , RMRK         AS NPRRN
+                              , CONCAT('처리단계 : ', B.DTLS_TYNM , CHAR(10) , A.PRG_TXT)        AS NPRRN
                            FROM pms_pgm_mng A
+                                LEFT OUTER JOIN
+                                pms_cd_del_mng B
+                                ON  B.BKUP_ID  = A.BKUP_ID
+                                AND B.PRJT_ID  = A.PRJT_ID
+                                AND B.GRP_TYCD = '1000000002'
+                                AND B.DTLS_TYCD = A.PRC_STEP_CD
                           WHERE 1=1
                             AND A.DVLP_DIS_CD IN (
                                 SELECT DTLS_TYCD
@@ -477,10 +484,10 @@
                                    AND GRP_TYCD = '1000000031'
                                    AND USE_YN   = 'Y'
                                 )
-                            AND A.PRC_STEP_CD IN ('000', '100', '200')
+                            AND A.PRC_STEP_CD IN ('000', '100', '110', '200')
                             AND A.PRJT_ID	   = #{prjt_id}
                             AND A.BKUP_ID	   = #{bkup_id}
-                            AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT IS NOT NULL)
+                            AND (A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') OR A.DVLPE_CNF_DT != '')
                   )  A
            WHERE 1=1
              AND (A.CRPE_YN = '부' OR A.PL_YN = '부')
@@ -489,8 +496,8 @@
 
            SELECT *
              FROM (SELECT A.BZCD
-                        , CASE WHEN A.RGS_DSCD = '100' THEN '결함'
-                               WHEN A.RGS_DSCD = '200' THEN '개선'
+                        , CASE WHEN A.ERR_TYCD = '100' THEN '결함'
+                               WHEN A.ERR_TYCD = '200' THEN '개선'
                                ELSE '기타결함'
                            END AS NPRRN_KBN
                         , A.CCTN_ID     AS CCTN_ID

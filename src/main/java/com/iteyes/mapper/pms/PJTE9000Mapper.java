@@ -75,6 +75,7 @@ public interface PJTE9000Mapper {
     boolean delete_9000_71(PJTE9000DTO PJTE9000) throws Exception;
     boolean delete_9000_72(PJTE9000DTO PJTE9000) throws Exception;
     boolean delete_9000_73(PJTE9000DTO PJTE9000) throws Exception;
+    boolean delete_9000_74(PJTE9000DTO PJTE9000) throws Exception;
 
     boolean insert_9000_20(PJTE9000DTO PJTE9000) throws Exception;
     boolean insert_9000_22(PJTE9000DTO PJTE9000) throws Exception;
@@ -103,4 +104,6 @@ public interface PJTE9000Mapper {
     boolean insert_9000_71(PJTE9000DTO PJTE9000) throws Exception;
     boolean insert_9000_72(PJTE9000DTO PJTE9000) throws Exception;
     boolean insert_9000_73(PJTE9000DTO PJTE9000) throws Exception;
+    boolean insert_9000_74(PJTE9000DTO PJTE9000) throws Exception;
+
 }
