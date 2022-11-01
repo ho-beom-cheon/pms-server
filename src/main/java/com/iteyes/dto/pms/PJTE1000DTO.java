@@ -45,4 +45,5 @@ public class PJTE1000DTO {
     private String rmrk;                /*결함내용*/
     private String sort;
     private String btn_nm;
+    private String scrn_id;
 }
