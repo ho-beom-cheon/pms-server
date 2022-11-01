@@ -57,11 +57,9 @@
     <select id="select_1000_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE1000DTO">
         <![CDATA[
         SELECT ROW_NUMBER()   OVER(PARTITION BY A.TODO_CD ORDER BY B.ETC_TXT1) AS SQNO
-             , A.TODO_CD
+         , A.TODO_CD
              , B.DTLS_TYNM AS TODO_NM
              , CONCAT(CAST(A.PROC_CNT AS CHAR(100)),'건') AS PROC_CNT
-             , B.ETC_TXT2 AS SCRN_ID
-             , '화면이동' AS BTN_NM
         FROM (SELECT '10'     AS TODO_CD
                    , COUNT(*) AS PROC_CNT
               FROM pms_pgm_mng A
@@ -88,7 +86,7 @@
                                         AND PRJT_ID = A.PRJT_ID
                                         AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
-                AND REPLACE(DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_NO = CASE
                                   WHEN #{login_aut_cd} IN ('500', '600', '900')
                                       THEN A.PL_NO
@@ -106,7 +104,7 @@
                                         AND PRJT_ID = A.PRJT_ID
                                         AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
-                AND REPLACE(DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_NO = CASE
                                     WHEN #{login_aut_cd} IN ('500', '600', '900')
                                         THEN A.CRPE_NO
@@ -150,7 +148,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_itg_tst_mng A
               WHERE A.ITG_TST_PRC_CD = '200'
-                AND REPLACE(DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_ENO = CASE
                                    WHEN #{login_aut_cd} IN ('500', '600', '900')
                                        THEN A.PL_ENO
@@ -162,7 +160,7 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_itg_tst_mng A
               WHERE A.ITG_TST_PRC_CD = '300'
-                AND REPLACE(DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_ENO = CASE
                                      WHEN #{login_aut_cd} IN ('500', '600', '900')
                                          THEN A.CRPE_ENO
@@ -225,7 +223,7 @@
                                      WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                          THEN A.DVLPE_NO
                                      ELSE #{login_emp_no} END
-                AND REPLACE(DATE_ADD(A.RGS_DT, INTERVAL #{err_proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.RGS_DT, INTERVAL #{err_proc_days} DAY) <= #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -257,7 +255,6 @@
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -266,36 +263,24 @@
                 AND A.PLN_STA_DT > #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
               UNION
               SELECT '61'     AS TODO_CD
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '200'
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
-                AND REPLACE(DATE_ADD(A.PLN_STA_DT, INTERVAL #{proc_days} DAY),'-','') >= #{s_day}
+                AND A.PLN_STA_DT < #{proc_dt}
                 AND A.PLN_END_DT >= #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
               UNION
               SELECT '62'     AS TODO_CD
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD IN ('100', '200')
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -303,17 +288,11 @@
                 AND A.PLN_END_DT < #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
               UNION
               SELECT '63'     AS TODO_CD
                    , COUNT(*) AS TODO_CNT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -322,14 +301,9 @@
                 AND A.PLN_END_DT <= #{proc_dt}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
              ) A
                  LEFT OUTER JOIN
-             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1, ETC_TXT2
+             (SELECT BKUP_ID, PRJT_ID, DTLS_TYCD, DTLS_TYNM, ETC_TXT1
               FROM pms_cd_del_mng
               WHERE GRP_TYCD = '1000000030'
                 AND PRJT_ID = #{prjt_id}
@@ -389,7 +363,7 @@
                                         AND PRJT_ID = A.PRJT_ID
                                         AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
-                AND REPLACE(DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_NO = CASE
                                   WHEN #{login_aut_cd} IN ('500', '600', '900')
                                       THEN A.PL_NO
@@ -412,7 +386,7 @@
                                         AND PRJT_ID = A.PRJT_ID
                                         AND GRP_TYCD = '1000000031'
                                         AND USE_YN = 'Y')
-                AND REPLACE(DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_NO = CASE
                                     WHEN #{login_aut_cd} IN ('500', '600', '900')
                                         THEN A.CRPE_NO
@@ -471,7 +445,7 @@
                    , 1                                                   AS SORT
               FROM pms_itg_tst_mng A
               WHERE A.ITG_TST_PRC_CD = '200'
-                AND REPLACE(DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.DVLPE_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.PL_ENO = CASE
                                    WHEN #{login_aut_cd} IN ('500', '600', '900')
                                        THEN A.PL_ENO
@@ -488,7 +462,7 @@
                    , 1                                                   AS SORT
               FROM pms_itg_tst_mng A
               WHERE A.ITG_TST_PRC_CD = '300'
-                AND REPLACE(DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.PL_CNF_DT, INTERVAL #{proc_days} DAY) <= #{s_day}
                 AND A.CRPE_ENO = CASE
                                      WHEN #{login_aut_cd} IN ('500', '600', '900')
                                          THEN A.CRPE_ENO
@@ -644,7 +618,7 @@
                                      WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                          THEN A.DVLPE_NO
                                      ELSE #{login_emp_no} END
-                AND REPLACE(DATE_ADD(A.RGS_DT, INTERVAL #{err_proc_days} DAY),'-','') <= #{s_day}
+                AND DATE_ADD(A.RGS_DT, INTERVAL #{err_proc_days} DAY) <= #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '33'
@@ -724,7 +698,6 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -733,11 +706,6 @@
                 AND A.PLN_STA_DT > #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
                 AND #{todo_cd} = '60'
               UNION
               SELECT A.BZCD
@@ -748,20 +716,14 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '200'
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
-                AND REPLACE(DATE_ADD(A.PLN_STA_DT, INTERVAL #{proc_days} DAY),'-','') >= #{s_day}
+                AND A.PLN_STA_DT < #{proc_dt}
                 AND A.PLN_END_DT >= #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
                 AND #{todo_cd} = '61'
               UNION
               SELECT A.BZCD
@@ -772,7 +734,6 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD IN ('100', '200')
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -780,11 +741,6 @@
                 AND A.PLN_END_DT < #{s_day}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
                 AND #{todo_cd} = '62'
               UNION
               SELECT A.BZCD
@@ -795,7 +751,6 @@
                    , A.SORT       AS SORT
               FROM pms_wbs_mng A
               WHERE A.WBS_PRC_STS_CD = '100'
-                AND A.MNG_CD <= '500'
                 AND A.CRPE_NM LIKE CASE
                                        WHEN #{login_aut_cd} IN ('200', '500', '600', '900')
                                            THEN A.CRPE_NM
@@ -804,11 +759,6 @@
                 AND A.PLN_END_DT <= #{proc_dt}
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
-                AND NOT EXISTS (SELECT '*'
-                                FROM   pms_wbs_mng
-                                WHERE  HGRN_MNG_ID = A.MNG_ID
-                                  AND    PRJT_ID     = A.PRJT_ID
-                                  AND    BKUP_ID     = A.BKUP_ID)
                 AND #{todo_cd} = '63'
              ) A
         ORDER BY A.BZCD, A.SORT, A.PLN_END_DT
