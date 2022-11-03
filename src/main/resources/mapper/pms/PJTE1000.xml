@@ -263,6 +263,7 @@
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT <= #{proc_dt}
                 AND A.PLN_STA_DT > #{s_day}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -276,6 +277,7 @@
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{proc_dt}
                 AND A.PLN_END_DT >= #{s_day}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -288,6 +290,7 @@
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_END_DT < #{s_day}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
               UNION
@@ -301,6 +304,7 @@
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{s_day}
                 AND A.PLN_END_DT <= #{proc_dt}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
              ) A
@@ -706,6 +710,7 @@
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT <= #{proc_dt}
                 AND A.PLN_STA_DT > #{s_day}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '60'
@@ -724,6 +729,7 @@
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{proc_dt}
                 AND A.PLN_END_DT >= #{s_day}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '61'
@@ -741,6 +747,7 @@
                                            THEN A.CRPE_NM
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_END_DT < #{s_day}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '62'
@@ -759,6 +766,7 @@
                                        ELSE CONCAT(CONCAT('%', #{login_emp_nm}), '%') END
                 AND A.PLN_STA_DT < #{s_day}
                 AND A.PLN_END_DT <= #{proc_dt}
+                AND A.MNG_CD  < '500'
                 AND A.PRJT_ID = #{prjt_id}
                 AND A.BKUP_ID = #{bkup_id}
                 AND #{todo_cd} = '63'
