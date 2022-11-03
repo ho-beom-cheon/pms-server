@@ -90,8 +90,8 @@
 		         WHERE 1 = 1
 		           AND A.BKUP_ID        = #{bkup_id}
                    AND A.PRJT_ID        = #{prjt_id}
-                   AND A.FILE_RGS_DSCD  = CASE WHEN #{file_rgs_dscd} = 'TTT' THEN A.FILE_RGS_DSCD ELSE #{file_rgs_dscd} END
-                   AND #{file_rgs_dscd} IN ('TTT','900','901','902')
+		           AND A.FILE_RGS_DSCD NOT IN ('100','101','200')
+		           AND A.FILE_RGS_DSCD  = CASE WHEN #{file_rgs_dscd} = 'TTT' THEN A.FILE_RGS_DSCD ELSE #{file_rgs_dscd} END
                ) A
         LEFT OUTER JOIN
          (
