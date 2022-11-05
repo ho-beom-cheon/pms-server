@@ -192,6 +192,41 @@
           AND A.BKUP_ID     = #{bkup_id}
           AND A.PRJT_ID     = #{prjt_id}
           AND '1100'       != #{rgs_dscd}
+          AND 'NICECBAP'   != #{prjt_id}
+        UNION ALL
+        SELECT A.TST_CASE_ID AS CCTN_ID
+             , A.TST_CASE_NM AS CCTN_NM
+             , #{rgs_dscd}   AS RGS_DSCD
+             , A.BZCD
+             , '100'         AS ERR_PRC_STEP_CD
+             , B.EMPNM       AS DVLPE_NM
+             , D.DVLPE_ENO
+             , C.EMPNM       AS PL_NM
+             , D.PL_ENO
+        FROM pms_itg_tst_mng A
+                 LEFT OUTER JOIN
+             pms_pgm_mng D
+             ON D.PGM_ID    = A.PGM_ID
+                 AND D.PRJT_ID = A.PRJT_ID
+                 AND D.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             pms_emp_info B
+             ON B.EMPNO = D.DVLPE_ENO
+                 AND B.PRJT_ID = A.PRJT_ID
+                 AND B.BKUP_ID = A.BKUP_ID
+                 LEFT OUTER JOIN
+             pms_emp_info C
+             ON C.EMPNO = D.PL_ENO
+                 AND C.PRJT_ID = A.PRJT_ID
+                 AND C.BKUP_ID = A.BKUP_ID
+        WHERE 1 = 1
+          AND A.SQN_CD      = #{cctn_sqn_cd}
+          AND A.BZCD        = #{cctn_bzcd}
+          AND A.TST_CASE_ID = #{cctn_id}
+          AND A.BKUP_ID     = #{bkup_id}
+          AND A.PRJT_ID     = #{prjt_id}
+          AND '1100'       != #{rgs_dscd}
+          AND 'NICECBAP'    = #{prjt_id}
     </select>
 
     <select id="select_3001_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE3001DTO">
