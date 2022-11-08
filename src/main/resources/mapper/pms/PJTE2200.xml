@@ -221,8 +221,8 @@
            SET TST_CASE_NM    = #{tst_case_nm}
              , SCNR_ID        = #{scnr_id}
              , SCNR_NM        = #{scnr_nm}
-             , FRCS_STA_DT    = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN DATE_FORMAT(#{frcs_sta_dt},'%Y%m%d%') ELSE FRCS_STA_DT END
-             , FRCS_END_DT    = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN DATE_FORMAT(#{frcs_end_dt},'%Y%m%d%') ELSE FRCS_END_DT END
+             , FRCS_STA_DT    = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_sta_dt}, '-', '') ELSE FRCS_STA_DT END
+             , FRCS_END_DT    = CASE WHEN #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{frcs_end_dt}, '-', '') ELSE FRCS_END_DT END
              , STA_DT         = CASE WHEN #{itg_tst_prc_cd} IN ('100','200') AND STA_DT = '' AND (DVLPE_ENO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600','900')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
              , END_DT         = CASE WHEN #{itg_tst_prc_cd} = '400' AND (CRPE_ENO  = #{login_emp_no} OR #{login_aut_cd} IN ('500','600')) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
              , DVLPE_CNF_DT   = CASE WHEN #{itg_tst_prc_cd} = '200' AND (DVLPE_ENO = #{login_emp_no} OR #{login_aut_cd} IN ('200','500','600'))  AND (DVLPE_CNF_DT = '' OR DVLPE_CNF_DT IS NULL)
