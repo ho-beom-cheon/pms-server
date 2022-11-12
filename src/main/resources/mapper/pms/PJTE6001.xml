@@ -77,10 +77,10 @@
 		, #{reqpe_no}
 		, DATE_FORMAT(NOW(),'%Y%m%d')
 		, #{req_txt}
+		, #{prcpe_no}
 		, ''
 		, ''
-		, ''
-		, '100'
+		, CASE WHEN #{prcpe_no} = '' OR #{prcpe_no} IS NULL THEN '100' ELSE '200' END
 		, ''
 		, #{login_emp_no}
 		, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
