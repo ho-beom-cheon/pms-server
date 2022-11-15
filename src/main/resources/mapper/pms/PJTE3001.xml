@@ -316,10 +316,10 @@
         , #{rgpe_no}
         , #{dvlpe_no}
         , #{pl_no}
-        , REPLACE(#{ttmn_scd_dt}, '-', '')
+        , CASE WHEN #{dvlpe_no} != '' AND REPLACE(#{ttmn_scd_dt}, '-', '') = '' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE REPLACE(#{ttmn_scd_dt}, '-', '') END
         , ''
         , #{ttmn_txt}
-        , #{err_prc_step_cd}
+        , CASE WHEN #{dvlpe_no} != '' AND #{err_prc_step_cd} = '100' THEN '200' ELSE #{err_prc_step_cd} END
         , #{bzcd}
         , ''
         , #{cctn_bzcd}
