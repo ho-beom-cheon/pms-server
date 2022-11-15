@@ -55,7 +55,7 @@
                             pms_cd_del_mng B
                             ON  B.GRP_TYCD   = '1000000039'
                             <choose>
-                            <when test='week_seq_val == "Y" and week_sqn_cd =="TTT"'>
+                            <when test='week_sqn_cd =="TTT"'>
                                 <![CDATA[ AND   B.DTLS_TYCD <= (SELECT MAX(WEEK_SQN_CD)
                                                                 FROM   pms_week_rpt_mng
                                                                 WHERE  WEEK_YYMM LIKE CONCAT(REPLACE(#{week_yymm},'-',''),'%')
@@ -63,7 +63,7 @@
                                                                 AND    BKUP_ID  = '0000000000') ]]>
                             </when>
                             <otherwise>
-                                AND   B.DTLS_TYCD = CASE WHEN #{week_sqn_cd} = 'TTT' THEN B.DTLS_TYCD ELSE #{week_sqn_cd} END
+                                AND   B.DTLS_TYCD = #{week_sqn_cd}
                             </otherwise>
                             </choose>
                             AND B.PRJT_ID = A.PRJT_ID
