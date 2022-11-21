@@ -420,7 +420,7 @@
          LEFT OUTER JOIN
          pms_err_mng  B
          ON B.RGS_DSCD   = '1100'
-         AND B.BZCD      = A.BZCD
+         AND B.CCTN_BZCD = A.BZCD
          AND B.ERR_TYCD  NOT LIKE '8%'
          AND B.PRJT_ID	 = #{prjt_id}
          AND B.BKUP_ID	 = #{bkup_id}
