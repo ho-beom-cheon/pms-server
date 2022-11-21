@@ -397,6 +397,7 @@
          FROM   pms_cd_del_mng
          WHERE  BKUP_ID  = A.BKUP_ID
          AND    PRJT_ID  = A.PRJT_ID
+         AND    DTLS_TYCD != '500'
          AND    GRP_TYCD = '1000000034'
          AND    USE_YN   = 'Y')
          THEN 1
