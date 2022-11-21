@@ -393,11 +393,10 @@
          ELSE 0
          END
          )            AS CMPL_CNT
-         , SUM(CASE WHEN B.ERR_TYCD != '300' AND B.ERR_PRC_STEP_CD NOT IN (SELECT DTLS_TYCD
+         , SUM(CASE WHEN B.ERR_TYCD != '300' AND B.ERR_PRC_STEP_CD != '500' AND B.ERR_PRC_STEP_CD NOT IN (SELECT DTLS_TYCD
          FROM   pms_cd_del_mng
          WHERE  BKUP_ID  = A.BKUP_ID
          AND    PRJT_ID  = A.PRJT_ID
-         AND    DTLS_TYCD != '500'
          AND    GRP_TYCD = '1000000034'
          AND    USE_YN   = 'Y')
          THEN 1
