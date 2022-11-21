@@ -53,7 +53,7 @@
                   AND    GRP_TYCD = '1000000001'
                   AND    PRJT_ID  = #{prjt_id}
                   AND    BKUP_ID  = #{bkup_id})   A
-          LEFT OUTER JOIN
+          INNER JOIN
                (SELECT AA.BZCD
                      , AA.SQN_CD
                      , AA.TOT_CNT
@@ -262,7 +262,7 @@
                            AND    BKUP_ID  = #{bkup_id}
                      ORDER BY A.DTLS_TYCD , A.DTLS_TYNM , B.SQN_CD, B.DVLPE_ENO
                    )   A
-                   LEFT OUTER JOIN
+                   INNER JOIN
                         (SELECT AA.BZCD
                               , AA.DVLPE_ENO
                               , AA.SQN_CD
@@ -460,7 +460,7 @@
     					  AND    A.PRJT_ID  = #{prjt_id}
     					  AND    A.BKUP_ID  = #{bkup_id}
                )            A
-          LEFT OUTER JOIN
+          INNER JOIN
                pms_err_mng  B
             ON B.RGS_DSCD  LIKE '2%'
            AND B.BZCD        = A.BZCD
@@ -524,7 +524,7 @@
                                 ON  B.BKUP_ID  = A.BKUP_ID
                                 AND B.PRJT_ID  = A.PRJT_ID
                                 AND B.GRP_TYCD = '1000000026'
-                                AND B.DTLS_TYCD = A.PRC_STEP_CD
+                                AND B.DTLS_TYCD = A.ITG_TST_PRC_CD
                              WHERE 1=1
                                AND A.SQN_CD   = CASE WHEN #{sqn_cd} = 'TTT' THEN SQN_CD ELSE #{sqn_cd} END
                                AND A.ITG_TST_PRC_CD IN ('000', '100', '200')
