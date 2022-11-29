@@ -47,6 +47,7 @@ public class PJTE9120DTO {
 
     // 그리드3 (댓글내역)
     private String cmnt_titl;       // 댓글제목
+    private String cmnt_titl1;       // 댓글제목
     private int cmnt_no;            // 댓글번호
     private String prn_cmnt_cd;     // 상위댓글코드
 
