@@ -95,8 +95,9 @@
 
 	<select id="select_9120_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9120DTO">
 		SELECT CASE WHEN A.LEN = 1
-						THEN A.CMNT_TITL
-					ELSE CONCAT(LPAD('',A.LEN,' '),'➥ ',A.CMNT_TITL) END AS CMNT_TITL
+						THEN REPLACE(A.CMNT_TITL,CHAR(10),' ')
+					ELSE CONCAT(LPAD('',A.LEN,' '),'➥ ',REPLACE(A.CMNT_TITL,CHAR(10),' ')) END AS CMNT_TITL1
+		     ,A.CMNT_TITL AS CMNT_TITL
 			 ,A.DB_CHG_TS
 			 ,A.EMPNM
 			 ,A.TXT_PSW
