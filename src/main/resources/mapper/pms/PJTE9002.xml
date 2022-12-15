@@ -219,6 +219,14 @@
           AND   PRJT_ID       = #{prjt_id}
     </update>
 
+    <update id="update_9002_14" parameterType="Map">
+        UPDATE rls_rqs_mng
+        SET    ATFL_MNG_ID  = #{atfl_mng_id}
+        WHERE  BKUP_ID      = #{bkup_id}
+          AND  PRJT_ID      = #{prjt_id}
+          AND  RQS_ID       = #{mng_id}
+    </update>
+
     <insert id="insert_9002_10" parameterType="Map">
         INSERT INTO pms_cd_del_mng
         (
