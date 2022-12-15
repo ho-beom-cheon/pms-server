@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iteyes.mapper.pms.PJTE7200Mapper">
+    <select id="select_7200_01" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7200DTO">
+        SELECT A.RQS_ID
+              ,A.RSN_RQS
+              ,DATE_FORMAT(A.RQS_DT,'%Y-%m-%d') AS RQS_DT
+              ,DATE_FORMAT(A.RLS_DT,'%Y-%m-%d %H:%i:%s') AS RLS_DT
+              ,A.DSTR
+              ,A.PRCS_STTS_CD
+              ,A.RQS_NO
+              ,B.EMPNM      AS RQS_NM
+              ,A.RVW_NO
+              ,C.EMPNM      AS RVW_NM
+              ,A.APRV_NO
+              ,D.EMPNM      AS APRV_NM
+              ,A.RMRMK
+              ,A.ATFL_MNG_ID
+              ,A.BKUP_ID
+              ,A.PRJT_ID
+              ,E.ORG_FILE_NM
+        FROM   rls_rqs_mng A
+               LEFT OUTER JOIN
+               pms_emp_info   B
+               ON  B.EMPNO      = A.RQS_NO
+               AND B.PRJT_ID    = A.PRJT_ID
+               AND B.BKUP_ID    = A.BKUP_ID
+               LEFT OUTER JOIN
+               pms_emp_info   C
+               ON  C.EMPNO      = A.RVW_NO
+               AND C.PRJT_ID    = A.PRJT_ID
+               AND C.BKUP_ID    = A.BKUP_ID
+               LEFT OUTER JOIN
+               pms_emp_info   D
+               ON  D.EMPNO      = A.APRV_NO
+               AND D.PRJT_ID    = A.PRJT_ID
+               AND D.BKUP_ID    = A.BKUP_ID
+               LEFT OUTER JOIN
+               pms_atfl_mng   E
+               ON  E.SQNO          = 1
+               AND E.FILE_RGS_DSCD = '806'
+               AND E.ATFL_MNG_ID   = A.ATFL_MNG_ID
+               AND E.PRJT_ID       = A.PRJT_ID
+               AND E.BKUP_ID       = A.BKUP_ID
+        WHERE  A.BKUP_ID = #{bkup_id}
+        AND    A.PRJT_ID = #{prjt_id}
+
+        <if test='rqs_dt != "" and rqs_dt != null'>
+            AND    A.RQS_DT LIKE CONCAT(#{rqs_dt},'%')
+        </if>
+        <if test='rls_dt != "" and rls_dt != null'>
+            AND    A.RLS_DT LIKE CONCAT(#{rls_dt},'%')
+        </if>
+        <if test='rqs_no != "" and rqs_no != null'>
+            AND    A.RQS_NO  = #{rqs_no}
+        </if>
+        <if test='rvw_no != "" and rvw_no != null'>
+            AND    A.RVW_NO  = #{rvw_no}
+        </if>
+        <if test='aprv_no != "" and aprv_no != null'>
+            AND    A.APRV_NO  = #{aprv_no}
+        </if>
+        <if test='prcs_stts_cd != "TTT"'>
+            AND    A.PRCS_STTS_CD = #{prcs_stts_cd}
+        </if>
+        <if test='prcs_stts_cd == "TTT" and cmpl_yn != "Y"'>
+            AND    A.PRCS_STTS_CD NOT IN ('900','910')
+        </if>
+        ORDER BY A.RQS_DT DESC
+    </select>
+
+    <select id="select_7200_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7200DTO">
+        SELECT A.SQNO
+              ,A.TST_CASE_ID
+              ,A.MDFC
+              ,A.PCK_NM
+        FROM   rls_pck_lst A
+        WHERE  A.RQS_ID  = #{rqs_id}
+        AND    A.BKUP_ID = #{bkup_id}
+        AND    A.PRJT_ID = #{prjt_id}
+    </select>
+
+
+    <select id="select_7200_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7200DTO">
+        SELECT NVL(MAX(CAST(A.RQS_ID AS INT))+1,'1000000000') AS MAX_RQS_ID
+        FROM   rls_rqs_mng A
+        WHERE  A.BKUP_ID = '0000000000'
+        AND    A.PRJT_ID = #{prjt_id}
+    </select>
+
+
+    <update id="update_7200_01" parameterType="Map">
+        UPDATE rls_rqs_mng
+        SET    RSN_RQS      = #{rsn_rqs}
+              ,RLS_DT       = REPLACE(REPLACE(REPLACE(#{rls_dt}, '-', ''),':',''),' ','')
+              ,DSTR         = #{dstr}
+              ,PRCS_STTS_CD = #{prcs_stts_cd}
+              ,RQS_NO       = #{rqs_no}
+              ,RVW_NO       = #{rvw_no}
+              ,APRV_NO      = #{aprv_no}
+              ,RMRMK        = #{rmrmk}
+              ,OPR_NO       = #{login_emp_no}
+              ,DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  RQS_ID       = #{rqs_id}
+        AND    BKUP_ID      = '0000000000'
+        AND    PRJT_ID      = #{prjt_id}
+    </update>
+
+    <insert id="insert_7200_01" parameterType="Map">
+        INSERT INTO rls_rqs_mng
+        (BKUP_ID
+        ,PRJT_ID
+        ,RQS_ID
+        ,RSN_RQS
+        ,RQS_DT
+        ,RLS_DT
+        ,DSTR
+        ,PRCS_STTS_CD
+        ,RQS_NO
+        ,RVW_NO
+        ,APRV_NO
+        ,RMRMK
+        ,ATFL_MNG_ID
+        ,OPR_NO
+        ,DB_CHG_TS
+        )
+        VALUES
+            ('0000000000'
+            , #{prjt_id}
+            , #{rqs_id}
+            , #{rsn_rqs}
+            , DATE_FORMAT(NOW(),'%Y%m%d')
+            , REPLACE(REPLACE(REPLACE(#{rls_dt}, '-', ''),':',''),' ','')
+            , #{dstr}
+            , #{prcs_stts_cd}
+            , #{rqs_no}
+            , #{rvw_no}
+            , #{aprv_no}
+            , #{rmrmk}
+            , ''
+            , #{login_emp_no}
+            , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+            )
+    </insert>
+
+    <insert id="insert_7200_02" parameterType="Map">
+        INSERT INTO rls_pck_lst
+            (BKUP_ID
+            ,PRJT_ID
+            ,RQS_ID
+            ,SQNO
+            ,TST_CASE_ID
+            ,MDFC
+            ,PCK_NM
+            ,OPR_NO
+            ,DB_CHG_TS
+            )
+        VALUES
+            ('0000000000'
+            , #{prjt_id}
+            , #{rqs_id}
+            , #{sqno}
+            , #{tst_case_id}
+            , #{mdfc}
+            , #{pck_nm}
+            , #{login_emp_no}
+            , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+            )
+    </insert>
+
+    <delete id="delete_7200_01" parameterType="Map">
+   <![CDATA[
+        DELETE
+        FROM   rls_pck_lst
+        WHERE  RQS_ID  = #{rqs_id}
+        AND    PRJT_ID = #{prjt_id}
+        AND    BKUP_ID = '0000000000'
+        ]]>
+  </delete>
+</mapper>
