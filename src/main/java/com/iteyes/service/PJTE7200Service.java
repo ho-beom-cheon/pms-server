@@ -14,8 +14,7 @@ public interface PJTE7200Service {
 	boolean insert_7200_02(PJTE7200DTO PJTE7200) throws Exception;
 
 	boolean update_7200_01(PJTE7200DTO PJTE7200) throws Exception;
-	boolean insert_7200_01(PJTE7200DTO PJTE7200) throws Exception;
-	boolean insert_7200_02(PJTE7200DTO PJTE7200) throws Exception;
+
 
 
 	/*삭제*/
