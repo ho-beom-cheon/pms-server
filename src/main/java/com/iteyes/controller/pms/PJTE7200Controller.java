@@ -30,12 +30,11 @@ public class PJTE7200Controller {
 
         PJTE7200DTO PJTE7200 = new PJTE7200DTO();
 
-
-        PJTE7200.setPrjt_id(request.getParameter("prjt_id"));
-        PJTE7200.setBkup_id(request.getParameter("bkup_id"));
+        PJTE7200.setPrjt_id(request.getParameter("prjt_nm_selected"));
+        PJTE7200.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE7200.setRqs_dt(request.getParameter("rqs_dt"));
         PJTE7200.setRls_dt(request.getParameter("rls_dt"));
-        PJTE7200.setPrcs_stts_cd(request.getParameter("prcs_stts_cd"));
+        PJTE7200.setPrcs_stts_cd(request.getParameter("prcs_stts_cd_selected"));
         PJTE7200.setRqs_no(request.getParameter("rqs_no"));
         PJTE7200.setRvw_no(request.getParameter("rvw_no"));
         PJTE7200.setAprv_no(request.getParameter("aprv_no"));
@@ -66,8 +65,8 @@ public class PJTE7200Controller {
         PJTE7200DTO PJTE7200 = new PJTE7200DTO();
 
 
-        PJTE7200.setPrjt_id(request.getParameter("prjt_id"));
-        PJTE7200.setBkup_id(request.getParameter("bkup_id"));
+        PJTE7200.setPrjt_id(request.getParameter("prjt_nm_selected"));
+        PJTE7200.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE7200.setRqs_id(request.getParameter("rqs_id"));
 
         List<PJTE7200DTO> list = pjte7200Service.select_7200_02(PJTE7200);
