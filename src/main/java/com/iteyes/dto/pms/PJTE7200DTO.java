@@ -34,7 +34,7 @@ public class PJTE7200DTO {
     private int sqno;              // 순번
     private String tst_case_id;    // 테스트케이스ID
     private String mdfc;           // 수정사항
-    private String pck_nm;         // 팩키지명
+    private String rqs_pck_nm;         // 팩키지명
 
     private String cmpl_yn;        // 완료포함여부
     private String max_rqs_id;     // 채번요청ID
