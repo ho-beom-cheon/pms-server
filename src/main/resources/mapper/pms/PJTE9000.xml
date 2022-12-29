@@ -746,6 +746,22 @@
             AND    PRJT_ID  = #{prjt_id}
      </delete>
 
+     <delete id="delete_9000_75" parameterType="Map">
+          DELETE
+          FROM   rls_rqs_mng
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
+     <delete id="delete_9000_76" parameterType="Map">
+          DELETE
+          FROM   rls_pck_lst
+          WHERE  1 = 1
+            AND    BKUP_ID	= #{new_bkup_id}
+            AND    PRJT_ID  = #{prjt_id}
+     </delete>
+
      <insert id="insert_9000_20" parameterType="Map">
           INSERT INTO pms_atfl_mng
           SELECT #{new_bkup_id} AS BKUP_ID
@@ -757,8 +773,8 @@
                ,FILE_NM
                ,ORG_FILE_NM
                ,RMRMK
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_atfl_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -793,8 +809,8 @@
                ,DTL_TXT10
                ,SORT_SEQ
                ,USE_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_cd_del_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -828,8 +844,8 @@
                ,GRID_COLM_NM20
                ,SORT_SEQ
                ,USG_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_NO    /*DB변경일시*/
           FROM   pms_cd_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -883,8 +899,8 @@
                ,DEL_YN
                ,INP_DT
                ,WTH_DT
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_emp_info
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -914,8 +930,8 @@
                ,CCTN_SQN_CD
                ,RGS_ATFL_MNG_ID
                ,TTMN_ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_err_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -943,8 +959,8 @@
                ,GD_TXT
                ,URGN_CD
                ,RMRK
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_iss_risk_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -984,8 +1000,8 @@
                ,TST_ACHI_RST
                ,RMRK
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_itg_tst_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1003,8 +1019,8 @@
                ,RGS_NO
                ,DEL_YN
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_ntar_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1037,8 +1053,8 @@
                ,RQU_SBH_ID
                ,RMRK
                ,CNV_BS_DT
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_pgm_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1059,8 +1075,8 @@
                ,PRC_TXT
                ,REQ_PRC_STEP_CD
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_rq_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1093,8 +1109,8 @@
                ,RMRK
                ,SORT
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
           FROM   pms_wbs_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1118,8 +1134,8 @@
                ,ISS_TXT
                ,REQ_TXT
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
                FROM   pms_week_rpt_mng
                WHERE  BKUP_ID = '0000000000'
                AND    PRJT_ID = #{prjt_id}
@@ -1142,8 +1158,8 @@
                ,NMB_INQ_YN
                ,PGN_YN
                ,FILE_UPLD_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS  /*DB변경일시*/
 		FROM   pms_blt_brd_mng
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1163,8 +1179,8 @@
                ,DUTY_TXT
                ,USE_OS
                ,RLT_SKILL
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
 		FROM   pms_career_lst
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1179,8 +1195,8 @@
                ,PRN_CMNT_CD
                ,CMNT_TITL
                ,TXT_PSW
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
 		FROM   pms_cmnt_lst
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1197,8 +1213,8 @@
                ,RSNT_DT
                ,RSSB_BNS
                ,RMRK
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
 		FROM   pms_cpy_his_lst
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1225,8 +1241,8 @@
                ,CON_WORK_ID
                ,RMRK
                ,MARK
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
 		FROM   pms_kanban_mng
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1272,8 +1288,8 @@
                ,QLFKS_NM5
                ,AQU_YMM5
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
 		FROM   pms_man_pfle_info
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1291,8 +1307,8 @@
                ,RSRV_ENDT
                ,MTNG_TTL
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
 		FROM   pms_mtng_room_mng
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1309,8 +1325,8 @@
                ,VIEW_CNT
                ,TXT_PSW
                ,ATFL_MNG_ID
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
 		FROM   pms_post_info
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1325,8 +1341,8 @@
                ,RPL_TITL
                ,GOOD_CD
                ,TXT_PSW
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
 		FROM   pms_rpl_lst
 		WHERE  BKUP_ID = '0000000000'
 		AND    PRJT_ID = #{prjt_id}
@@ -1347,8 +1363,8 @@
                ,APLC_DTLS
                ,REQPE_NO
                ,DEL_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
           FROM   pms_prj_prs_rqs
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1364,8 +1380,8 @@
                ,END_DT
                ,SCH_CNT
                ,DEL_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_prj_prs_sch
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1386,8 +1402,8 @@
                ,INP_CLS_CD
                ,WTH_SCH_YN
                ,DEPT_CD
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS  /*DB변경일시*/
           FROM   pms_inp_mnp_stt
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1410,8 +1426,8 @@
                ,STA_DT
                ,END_DT
                ,RMRK
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS    /*DB변경일시*/
           FROM   pms_as_to_map
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1434,8 +1450,8 @@
                ,ATFL_MNG_ID
                ,PRC_STEP_CD
                ,DEL_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_mnts_mng
           WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}
@@ -1451,9 +1467,47 @@
                ,RMRK
                ,ATFL_MNG_ID
                ,USE_YN
-               ,#{login_emp_no}                     /*조작자번호*/
-               ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_svn_file_mng
+          WHERE  BKUP_ID = '0000000000'
+            AND  PRJT_ID = #{prjt_id}
+     </insert>
+
+     <insert id="insert_9000_75" parameterType="Map">
+          INSERT INTO rls_rqs_mng
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,RQS_ID
+               ,RSN_RQS
+               ,RQS_DT
+               ,RLS_DT
+               ,DSTR
+               ,PRCS_STTS_CD
+               ,RQS_NO
+               ,RVW_NO
+               ,APRV_NO
+               ,RMRMK
+               ,ATFL_MNG_ID
+               ,OPR_NO                   /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
+          FROM   rls_rqs_mng
+          WHERE  BKUP_ID = '0000000000'
+            AND  PRJT_ID = #{prjt_id}
+     </insert>
+
+     <insert id="insert_9000_76" parameterType="Map">
+          INSERT INTO rls_pck_lst
+          SELECT #{new_bkup_id} AS BKUP_ID
+               ,PRJT_ID
+               ,RQS_ID
+               ,SQNO
+               ,TST_CASE_ID
+               ,MDFC
+               ,RQS_PCK_NM
+               ,OPR_NO                    /*조작자번호*/
+               ,DB_CHG_TS   /*DB변경일시*/
+          FROM   rls_pck_lst
           WHERE  BKUP_ID = '0000000000'
             AND  PRJT_ID = #{prjt_id}
      </insert>
