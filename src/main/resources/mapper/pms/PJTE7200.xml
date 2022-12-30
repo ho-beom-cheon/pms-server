@@ -73,6 +73,8 @@
               ,A.TST_CASE_ID
               ,A.MDFC
               ,A.RQS_PCK_NM
+              ,A.SCS_YN
+              ,A.ERR_MSG_CNT
         FROM   rls_pck_lst A
         WHERE  A.RQS_ID  = #{rqs_id}
         AND    A.BKUP_ID = #{bkup_id}
@@ -151,6 +153,8 @@
             ,TST_CASE_ID
             ,MDFC
             ,RQS_PCK_NM
+            ,SCS_YN
+            ,ERR_MSG_CNT
             ,OPR_NO
             ,DB_CHG_TS
             )
@@ -162,6 +166,8 @@
             , #{tst_case_id}
             , #{mdfc}
             , #{rqs_pck_nm}
+            , ''
+            , ''
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
             )
