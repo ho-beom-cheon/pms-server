@@ -39,6 +39,7 @@
 					,CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') AS DEPT_CD
 					,F.SORT_SEQ
 					,A.PRJT_ID
+		            ,D.SORT_SEQ AS HDQ_SORT_SEQ
 			 FROM   pms_emp_info   B
 					LEFT OUTER JOIN
 					pms_inp_mnp_stt   A
@@ -82,7 +83,7 @@
 			AND    CONCAT(SUBSTR(B.DEPT_CD,1,4),'0000') = #{dept_cd}
 			</if>
 					) A
-		ORDER BY A.DEPT_NM, A.HDQ_NM,A.TM_NM, A.SORT_SEQ DESC, A.INP_PRJ_NM, A.EMPNM
+		ORDER BY A.DEPT_NM, A.HDQ_SORT_SEQ, A.SORT_SEQ DESC, A.INP_PRJ_NM, A.EMPNM
 	</select>
 
 	<delete id="delete_9310_01" parameterType="Map">
