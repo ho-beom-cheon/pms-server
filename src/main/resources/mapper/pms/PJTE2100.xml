@@ -40,6 +40,7 @@
 		     A.BZCD               /* 업무구분 */
 		   , A.BZ_DTLS_TXT        /* 업무세부 */
 		   , A.PGM_ID             /* 프로그램ID */
+	       , A.SQN_CD
 		   , A.PGM_NM             /* 프로그램명 */
 		   , A.DVLP_DIS_CD        /* 개발구분 */
 		   , A.PGM_DIS_CD         /* 프로그램구분 */
@@ -185,6 +186,7 @@
 			, PRJT_ID      /*프로젝트ID*/
 			, BZCD         /*업무구분코드*/
 			, PGM_ID       /*프로그램ID*/
+			, SQN_CD       /* 차수 */
 			, BZ_DTLS_TXT  /*업무세부내용*/
 			, PGM_NM       /*프로그램명*/
 			, DVLP_DIS_CD  /*개발구분코드*/
@@ -215,6 +217,7 @@
 				, #{prjt_id}                          /*프로젝트ID*/
 				, #{bzcd}                             /*업무구분코드*/
 				, #{pgm_id}                           /*프로그램ID*/
+				, #{sqn_cd}
 				, #{bz_dtls_txt}                      /*업무세부내용*/
 				, #{pgm_nm}                           /*프로그램명*/
 				, #{dvlp_dis_cd}                      /*개발구분코드*/
@@ -244,7 +247,8 @@
   <update id="update_2100_01" parameterType="Map">
    <![CDATA[
 	  UPDATE pms_pgm_mng
-	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
+	  SET SQN_CD       = #{sqn_cd}
+	    , BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
 		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
 		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600','900') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
 		                      WHEN #{dvlp_dis_cd} != '900'                                           THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/

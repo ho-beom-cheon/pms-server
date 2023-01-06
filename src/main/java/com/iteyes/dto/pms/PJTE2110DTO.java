@@ -9,6 +9,7 @@ public class PJTE2110DTO {
 
     /* grid1 */
     private String bzcd;               //업무코드
+    private String sqn_cd;              //차수구분코드
     private String bznm;               //업무명
     private String tot_cnt;            //전체
     private String af_tot_cnt;         //전체계획_전체

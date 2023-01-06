@@ -146,6 +146,7 @@ public class PJTE2100Controller {
             PJTE2100C.setAtfl_mng_id(PJTE2100.getGridData().get(i).getAtfl_mng_id());
             PJTE2100C.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
             PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+            PJTE2100C.setSqn_cd(PJTE2100.getGridData().get(i).getSqn_cd());
             PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
             PJTE2100C.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
             PJTE2100C.setCnv_bs_dt(PJTE2100.getGridData().get(i).getCnv_bs_dt());
@@ -195,6 +196,7 @@ public class PJTE2100Controller {
             PJTE2100U.setPal_atfl_mng_id(PJTE2100.getGridData().get(i).getPal_atfl_mng_id());
             PJTE2100U.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
             PJTE2100U.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+            PJTE2100U.setSqn_cd(PJTE2100.getGridData().get(i).getSqn_cd());
             PJTE2100U.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
             PJTE2100U.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
             PJTE2100U.setCnv_bs_dt(PJTE2100.getGridData().get(i).getCnv_bs_dt());
