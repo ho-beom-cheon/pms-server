@@ -29,6 +29,7 @@ public class PJTE2110Controller {
 		PJTE2110.setBkup_id(request.getParameter("bkup_id_selected"));
 		PJTE2110.setPrjt_id(request.getParameter("prjt_nm_selected"));
 		PJTE2110.setBzcd(request.getParameter("bzcd_selected"));
+		PJTE2110.setSqn_cd(request.getParameter("sqn_cd_selected"));
 		PJTE2110.setInp_date(request.getParameter("inq_date"));
 		PJTE2110.setEmp_nm(request.getParameter("emp_nm"));
 		PJTE2110.setGubun(request.getParameter("gubun"));

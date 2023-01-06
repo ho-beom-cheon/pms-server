@@ -490,7 +490,7 @@
                  , D.NPRRN_KBN
                  , D.TST_CASE_ID
                  , D.TST_CASE_NM
-                 , CASE WHEN D.FRCS_END_DT IS NOT NULL AND D.FRCS_END_DT != '' THEN STR_TO_DATE(D.FRCS_END_DT , '%Y%m%d') ELSE '' END AS FRCS_END_DT
+                 , CASE WHEN D.FRCS_END_DT  IS NOT NULL AND D.FRCS_END_DT != '' THEN STR_TO_DATE(D.FRCS_END_DT , '%Y%m%d') ELSE '' END AS FRCS_END_DT
                  , CASE WHEN D.DVLPE_CNF_DT IS NOT NULL AND D.DVLPE_CNF_DT != '' THEN STR_TO_DATE(D.DVLPE_CNF_DT , '%Y%m%d') ELSE '' END AS DVLPE_CNF_DT
                  , B.EMPNM      AS DVLPE_NM
                  , C.EMPNM      AS PL_NM
@@ -500,7 +500,7 @@
               FROM (SELECT *
                       FROM (SELECT A.BZCD
                                  , A.SQN_CD       AS SQN_CD
-                                 , '통합테스트'       AS NPRRN_KBN
+                                 , '통합테스트'     AS NPRRN_KBN
                                  , A.TST_CASE_ID  AS TST_CASE_ID
                                  , A.TST_CASE_NM  AS TST_CASE_NM
                                  , A.FRCS_END_DT  AS FRCS_END_DT

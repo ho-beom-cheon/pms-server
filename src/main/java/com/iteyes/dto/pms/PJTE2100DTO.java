@@ -14,6 +14,7 @@ public class PJTE2100DTO {
 	private String bzcd;                    // 업무구분코드
 	private String bz_dtls_txt;             // 업무세부내용
 	private String pgm_id;                  // 프로그램id
+	private String sqn_cd;              //차수구분코드
 	private String pgm_nm;                  // 프로그램명
 	private String dvlp_dis_cd;             // 개발구분코드
 	private String pgm_dis_cd;              // 프로그램구분코드
