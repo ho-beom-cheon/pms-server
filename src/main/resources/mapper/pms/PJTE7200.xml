@@ -89,11 +89,10 @@
         AND    A.PRJT_ID = #{prjt_id}
     </select>
 
-
     <update id="update_7200_01" parameterType="Map">
         UPDATE rls_rqs_mng
         SET    RSN_RQS      = #{rsn_rqs}
-              ,RLS_DT       = #{rls_dt}
+              ,RLS_DT       = CASE WHEN #{prcs_stts_cd} = '500' AND PRCS_STTS_CD != '500' THEN DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') ELSE #{rls_dt} END
               ,DSTR         = #{dstr}
               ,PRCS_STTS_CD = #{prcs_stts_cd}
               ,RQS_NO       = #{rqs_no}
@@ -166,7 +165,7 @@
             , #{tst_case_id}
             , #{mdfc}
             , #{rqs_pck_nm}
-            , ''
+            , #{scs_yn}
             , ''
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
