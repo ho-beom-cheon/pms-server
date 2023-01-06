@@ -1032,6 +1032,7 @@
                ,PRJT_ID
                ,BZCD
                ,PGM_ID
+               ,SQN_CD
                ,BZ_DTLS_TXT
                ,PGM_NM
                ,DVLP_DIS_CD
