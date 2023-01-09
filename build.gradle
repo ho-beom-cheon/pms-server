@@ -40,12 +40,14 @@ publishing {
                 password System.getenv("REPO_PASS")
             }
         }
+        //mavenLocal()
     }
 }
 repositories {
     maven {
         url "https://nexus3.iteyes-lab.gurmwi.io/repository/maven-public/"
     }
+    //mavenLocal()
 }
 dependencies {
     /* 스프링부트  */
@@ -90,5 +92,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
+    /*json관려*/
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 

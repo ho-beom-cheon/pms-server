@@ -5,11 +5,19 @@ import com.iteyes.dto.pms.PJTE7200DTO;
 import com.iteyes.service.PJTE7200Service;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
@@ -161,7 +169,134 @@ public class PJTE7200Controller {
 
         return result;
     }
+    @GetMapping(value = "/tarCreate")
+    public @ResponseBody
+    String tarCreate(HttpServletRequest request) throws Exception {
+        /*[설 명]
+         * 1. HttpURLConnection은 http 통신을 수행할 객체입니다
+         * 2. URL 객체로 connection을 만듭니다
+         * 3. 응답받은 결과를 InputStream으로 받아서 버퍼에 순차적으로 쌓습니다
+         * */
 
+        //데이터 정의 실시
+//        String url = "http://10.94.30.90:14444/nideploy/reqmktar.jsp";
+//        String data = "reqid=" + request.getParameter("reqid") + "&" +"reqrscs=" + request.getParameter("reqrscs");
 
+        //테스트 데이터
+        String url = "http://jsonplaceholder.typicode.com/posts";
+        String data = "id=1&userId=1";
 
+        String reqid = "";
+        String reqrscs = "";
+
+        //메소드 호출 실시
+        String responData = httpGetConnection(url, data);
+
+        log.debug("응답 데이터 확인 : " + responData);
+
+        JSONParser jsonParser = new JSONParser();
+
+        Object obj = jsonParser.parse(responData);
+        log.info("obj : " + obj );
+        try {
+//            Object reqIdObj   = ((JSONObject) ((JSONArray) obj).get(0)).get("reqid");
+//            Object reqRscsObj = ((JSONObject) ((JSONArray) obj).get(0)).get("reqrscs");
+            //테스트 데이터
+            Object reqIdObj   = ((JSONObject) ((JSONArray) obj).get(0)).get("id");
+            Object reqRscsObj = ((JSONObject) ((JSONArray) obj).get(0)).get("userId");
+
+            reqid   = reqIdObj.toString();
+            reqrscs = reqRscsObj.toString();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
+        hm.put("result", true);
+        hm.put("reqid", reqid);
+        hm.put("reqrscs", reqrscs);
+        hm1_pagination.put("page", 1);
+        hm1_pagination.put("totalCount", 100);
+        hm1.put("pagination", hm1_pagination);
+        hm.put("data", hm1);
+
+        String jsonStr = mapper.writeValueAsString(hm);
+
+        return jsonStr;
+    }
+    //http 요청 함수
+    public static String httpGetConnection(String UrlData, String ParamData) {
+
+        //http 요청 시 url 주소와 파라미터 데이터를 결합하기 위한 변수 선언
+        String totalUrl = "";
+        if(ParamData != null && ParamData.length() > 0 &&
+                !ParamData.equals("") && !ParamData.contains("null")) { //파라미터 값이 널값이 아닌지 확인
+            totalUrl = UrlData.trim().toString() + "?" + ParamData.trim().toString();
+        }
+        else {
+            totalUrl = UrlData.trim().toString();
+        }
+
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("GET");
+
+            //http 요청 실시
+            conn.connect();
+            log.debug("http 요청 방식 : "+"GET");
+            log.debug("http 요청 타입 : "+"application/json");
+            log.debug("http 요청 주소 : "+UrlData);
+            log.debug("http 요청 데이터 : "+ParamData);
+            log.debug("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //http 요청 응답 코드 확인 실시
+            String responseCode = String.valueOf(conn.getResponseCode());
+            log.debug("http 응답 코드 : " + responseCode);
+            log.debug("http 응답 데이터 : " + returnData);
+            return returnData;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "http 통신 실패";
+    }
 }
