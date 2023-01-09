@@ -63,6 +63,7 @@ public class PJTE2100Controller {
         PJTE2100.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE2100.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE2100.setPgm_id(request.getParameter("pgm_id"));
+        PJTE2100.setSqn_cd(request.getParameter("sqn_cd_selected"));
         PJTE2100.setPgm_nm(request.getParameter("pgm_nm"));
         PJTE2100.setPl_no(request.getParameter("pl_no"));
         PJTE2100.setDvlpe_no(request.getParameter("dvlpe_no"));
@@ -121,6 +122,7 @@ public class PJTE2100Controller {
 
             PJTE2100D.setBzcd(PJTE2100.getBzcd());
             PJTE2100D.setPrjt_id(PJTE2100.getLogin_proj_id());
+            PJTE2100D.setSqn_cd(PJTE2100.getSqn_cd());
             PJTE2100D.setBkup_id("0000000000");
 
             pjte2100Service.delete_2100_01(PJTE2100D);

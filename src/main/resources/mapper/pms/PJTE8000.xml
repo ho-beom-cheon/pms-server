@@ -274,7 +274,7 @@
     , #{prg_txt}
     , #{iss_txt}
     , #{req_txt}
-    , #{atfl_mng_id}
+    , ''
     , #{login_emp_no}
     , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
     )
@@ -291,7 +291,6 @@
           ,PRG_TXT	     = #{prg_txt}
           ,ISS_TXT	     = CASE WHEN PM_NO = #{bef_emp_no} OR #{bef_aut_cd} IN ('500','600','900') THEN #{iss_txt} ELSE ISS_TXT END
           ,REQ_TXT	     = #{req_txt}
-          ,ATFL_MNG_ID   = #{atfl_mng_id}
           ,OPR_NO        = #{login_emp_no}
           ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
