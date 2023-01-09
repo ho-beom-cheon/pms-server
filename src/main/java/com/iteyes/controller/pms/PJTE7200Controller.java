@@ -95,7 +95,7 @@ public class PJTE7200Controller {
     }
 
     @PostMapping("/insert_7200_01")
-    public @ResponseBody boolean insert(@RequestBody @NotNull PJTE7200DTO PJTE7200) throws Exception{
+    public @ResponseBody boolean insert(@RequestBody PJTE7200DTO PJTE7200) throws Exception{
         boolean result = false;
 
         ObjectMapper mapper = new ObjectMapper();
@@ -103,8 +103,12 @@ public class PJTE7200Controller {
         PJTE7200DTO PJTE7200S = new PJTE7200DTO();
         PJTE7200DTO PJTE7200D = new PJTE7200DTO();
         PJTE7200DTO PJTE7200N = new PJTE7200DTO();
+
         PJTE7200DTO PJTE7200I = new PJTE7200DTO();
         PJTE7200DTO PJTE7200U = new PJTE7200DTO();
+
+        log.debug("PJTE7200_Controller :: Rqs_id :"+PJTE7200.getRqs_id());
+
 
         if(PJTE7200.getRqs_id().equals("")) {
             PJTE7200S.setPrjt_id(PJTE7200.getPrjt_id());
@@ -150,21 +154,26 @@ public class PJTE7200Controller {
 
             /* dto 값 셋팅*/
             PJTE7200D.setPrjt_id(PJTE7200.getPrjt_id());
+            PJTE7200D.setRqs_id(PJTE7200.getRqs_id());
             PJTE7200D.setBkup_id("0000000000");
 
             result = pjte7200Service.delete_7200_01(PJTE7200D);
         }
 
+        log.debug("PJTE7200_Controller :: getGridData :"+PJTE7200.getGridData());
 
-        for (int i = 0; i < PJTE7200.getRowDatas().size(); i++) {
-            PJTE7200I.setBkup_id("0000000000");
-            PJTE7200I.setPrjt_id(PJTE7200.getPrjt_id());
-            PJTE7200I.setSqno(i+1);
-            PJTE7200I.setTst_case_id(PJTE7200.getRowDatas().get(i).getTst_case_id());
-            PJTE7200I.setMdfc(PJTE7200.getRowDatas().get(i).getMdfc());
-            PJTE7200I.setPck_nm(PJTE7200.getRowDatas().get(i).getPck_nm());
-            PJTE7200I.setLogin_emp_no(PJTE7200.getLogin_emp_no());
-            result = pjte7200Service.insert_7200_02(PJTE7200I);
+        if(PJTE7200.getGridData() != null) {
+            log.debug("PJTE7200_Controller :: getGridData.size :"+PJTE7200.getGridData().size());
+            for (int i = 0; i < PJTE7200.getGridData().size(); i++) {
+                PJTE7200I.setBkup_id("0000000000");
+                PJTE7200I.setPrjt_id(PJTE7200.getPrjt_id());
+                PJTE7200I.setSqno(i + 1);
+                PJTE7200I.setTst_case_id(PJTE7200.getGridData().get(i).getTst_case_id());
+                PJTE7200I.setMdfc(PJTE7200.getGridData().get(i).getMdfc());
+                PJTE7200I.setRqs_pck_nm(PJTE7200.getGridData().get(i).getRqs_pck_nm());
+                PJTE7200I.setLogin_emp_no(PJTE7200.getLogin_emp_no());
+                result = pjte7200Service.insert_7200_02(PJTE7200I);
+            }
         }
 
         return result;

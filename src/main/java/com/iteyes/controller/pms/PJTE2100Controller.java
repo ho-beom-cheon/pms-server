@@ -63,6 +63,7 @@ public class PJTE2100Controller {
         PJTE2100.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE2100.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE2100.setPgm_id(request.getParameter("pgm_id"));
+        PJTE2100.setSqn_cd(request.getParameter("sqn_cd_selected"));
         PJTE2100.setPgm_nm(request.getParameter("pgm_nm"));
         PJTE2100.setPl_no(request.getParameter("pl_no"));
         PJTE2100.setDvlpe_no(request.getParameter("dvlpe_no"));
@@ -121,6 +122,7 @@ public class PJTE2100Controller {
 
             PJTE2100D.setBzcd(PJTE2100.getBzcd());
             PJTE2100D.setPrjt_id(PJTE2100.getLogin_proj_id());
+            PJTE2100D.setSqn_cd(PJTE2100.getSqn_cd());
             PJTE2100D.setBkup_id("0000000000");
 
             pjte2100Service.delete_2100_01(PJTE2100D);
@@ -146,6 +148,7 @@ public class PJTE2100Controller {
             PJTE2100C.setAtfl_mng_id(PJTE2100.getGridData().get(i).getAtfl_mng_id());
             PJTE2100C.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
             PJTE2100C.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+            PJTE2100C.setSqn_cd(PJTE2100.getGridData().get(i).getSqn_cd());
             PJTE2100C.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
             PJTE2100C.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
             PJTE2100C.setCnv_bs_dt(PJTE2100.getGridData().get(i).getCnv_bs_dt());
@@ -195,6 +198,7 @@ public class PJTE2100Controller {
             PJTE2100U.setPal_atfl_mng_id(PJTE2100.getGridData().get(i).getPal_atfl_mng_id());
             PJTE2100U.setEmpno(PJTE2100.getGridData().get(i).getEmpno());
             PJTE2100U.setPgm_id(PJTE2100.getGridData().get(i).getPgm_id());
+            PJTE2100U.setSqn_cd(PJTE2100.getGridData().get(i).getSqn_cd());
             PJTE2100U.setBzcd(PJTE2100.getGridData().get(i).getBzcd());
             PJTE2100U.setRqu_sbh_id(PJTE2100.getGridData().get(i).getRqu_sbh_id());
             PJTE2100U.setCnv_bs_dt(PJTE2100.getGridData().get(i).getCnv_bs_dt());
