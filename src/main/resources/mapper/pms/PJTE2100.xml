@@ -139,6 +139,9 @@
 	  <if test='bzcd != "" and bzcd != null and bzcd != "TTT"'>
 		AND A.BZCD = #{bzcd}
 	  </if>
+	  <if test='sqn_cd != "TTT"'>
+		  AND A.SQN_CD = #{sqn_cd}
+	  </if>
 	  /*개발구분*/
 	  <if test='dvlp_dis_cd != "" and dvlp_dis_cd != null and dvlp_dis_cd != "TTT"'>
 		AND A.DVLP_DIS_CD = #{dvlp_dis_cd}
@@ -305,6 +308,7 @@
 		 WHERE BZCD          = #{bzcd}
 		   AND PRJT_ID       = #{prjt_id}
 		   AND BKUP_ID       = #{bkup_id}
+		   AND SQN_CD        = #{sqn_cd}
 		]]>
   </delete>
 </mapper>
