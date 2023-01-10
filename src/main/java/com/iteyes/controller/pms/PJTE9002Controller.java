@@ -150,6 +150,10 @@ public class PJTE9002Controller {
 		PJTE9002.setBzcd(request.getParameter("bzcd"));
 		PJTE9002.setRoom_sqno(request.getParameter("room_sqno"));
 
+		PJTE9002.setWeek_sqn_cd(request.getParameter("week_sqn_cd"));
+		PJTE9002.setWeek_yymm(request.getParameter("week_yymm"));
+		PJTE9002.setReal_prjt_id(request.getParameter("real_prjt_id"));
+
 		String file_rgs_dscd = request.getParameter("file_rgs_dscd");
 
 
