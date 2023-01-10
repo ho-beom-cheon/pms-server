@@ -187,8 +187,8 @@
         <if test='bzcd != "TTT"'>
          WHERE 1=1
            AND A.BZCD = #{bzcd}
-         ORDER BY A.BZCD, A.SQN_CD
         </if>
+        ORDER BY A.SQN_CD DESC, A.BZCD
       </select>
     <select id="select_2210_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
      <![CDATA[
@@ -370,7 +370,7 @@
              ON  B.EMPNO   = A.DVLPE_ENO
              AND B.PRJT_ID = A.PRJT_ID
              AND B.BKUP_ID = A.BKUP_ID
-          ORDER BY A.BZCD, A.SQN_CD, B.EMPNM
+          ORDER BY A.SQN_CD DESC, A.BZCD, A.SQN_CD, B.EMPNM
     </select>
     <select id="select_2210_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
         /* 결함현황 */
@@ -477,7 +477,7 @@
            AND A.BZCD = #{bzcd}
            </if>
          GROUP BY A.BZCD, A.SQN_CD, A.SQN_NM, A.BZNM
-         ORDER BY A.BZCD, A.SQN_CD
+         ORDER BY A.SQN_CD DESC, A.BZCD
       </select>
 
     <select id="select_2210_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE2210DTO">
@@ -629,8 +629,8 @@
                <if test='bzcd != "TTT"'>
                AND A.BZCD = #{bzcd}
                </if>
-             ORDER BY A.BZCD
-                    , D.SQN_CD
+             ORDER BY D.SQN_CD DESC
+                    , A.BZCD
                     , D.NPRRN_KBN
                     , B.EMPNM
                     , D.DVLPE_CNF_DT
