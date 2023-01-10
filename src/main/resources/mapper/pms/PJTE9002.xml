@@ -150,7 +150,7 @@
           ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
           AND    WEEK_SQN_CD   = #{week_sqn_cd}
-          AND    WEEK_YYMM	   = #{week_yymm}
+          AND    WEEK_YYMM	   = REPLACE(#{week_yymm},'-','')
           AND    REAL_PRJT_ID	 = #{real_prjt_id}
           AND    PRJT_ID       = #{prjt_id}
           AND    BKUP_ID	     = #{bkup_id}

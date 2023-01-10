@@ -188,12 +188,15 @@ public class PJTE7200Controller {
          * */
 
         //데이터 정의 실시
-//        String url = "http://10.94.30.90:14444/nideploy/reqmktar.jsp";
-//        String data = "reqid=" + request.getParameter("reqid") + "&" +"reqrscs=" + request.getParameter("reqrscs");
+        String url = "http://10.94.30.90:14444/nideploy/reqmktar.jsp";
+        String data = "reqid=" + request.getParameter("reqid") + "&" +"reqrscs=" + request.getParameter("reqrscs");
+
+        log.debug("url 데이터 : " + url);
+        log.debug("data 데이터 : " + data);
 
         //테스트 데이터
-        String url = "http://jsonplaceholder.typicode.com/posts";
-        String data = "id=1&userId=1";
+    //    String url = "http://jsonplaceholder.typicode.com/posts";
+    //    String data = "id=1&userId=1";
 
         String reqid = "";
         String reqrscs = "";
