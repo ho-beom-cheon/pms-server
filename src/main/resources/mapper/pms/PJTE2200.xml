@@ -132,7 +132,7 @@
             <if test='dvlpe_sta_dt != "" and dvlpe_sta_dt != null and dvlpe_end_dt != "" and dvlpe_end_dt != null'>
           AND A.DVLPE_CNF_DT BETWEEN #{dvlpe_sta_dt} AND #{dvlpe_end_dt}
             </if>
-        ORDER BY A.BZCD, A.FRCS_STA_DT
+        ORDER BY A.SQN_CD DESC, A.BZCD, A.FRCS_STA_DT
 
      </select>
 

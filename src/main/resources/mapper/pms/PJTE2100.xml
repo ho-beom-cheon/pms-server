@@ -178,7 +178,7 @@
 	  <if test='pl_no != "" and pl_no != null'>
 		AND A.PL_NO = #{pl_no}
 	  </if>
-	  ORDER BY A.DVLP_DIS_CD, A.BZCD, A.FRCS_STA_DT
+	  ORDER BY A.SQN_CD DESC, A.DVLP_DIS_CD, A.BZCD, A.FRCS_STA_DT
     </select>
 
 	<insert id="insert_2100_01" parameterType="Map">
