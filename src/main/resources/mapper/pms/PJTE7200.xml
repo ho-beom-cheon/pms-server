@@ -106,6 +106,27 @@
         AND    PRJT_ID      = #{prjt_id}
     </update>
 
+    <update id="update_7200_02" parameterType="Map">
+        UPDATE rls_rqs_mng
+        SET    PRCS_STTS_CD = #{prcs_stts_cd}
+          ,OPR_NO       = #{login_emp_no}
+          ,DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE  RQS_ID       = #{rqs_id}
+          AND    BKUP_ID      = '0000000000'
+          AND    PRJT_ID      = #{prjt_id}
+    </update>
+
+    <update id="update_7200_03" parameterType="Map">
+        UPDATE rls_pck_lst
+        SET    ERR_MSG_CNT = #{err_msg_cnt}
+          ,OPR_NO       = #{login_emp_no}
+          ,DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        WHERE    SQNO         = #{sqno}
+          AND    RQS_ID       = #{rqs_id}
+          AND    BKUP_ID      = '0000000000'
+          AND    PRJT_ID      = #{prjt_id}
+    </update>
+
     <insert id="insert_7200_01" parameterType="Map">
         INSERT INTO rls_rqs_mng
         (BKUP_ID
@@ -165,7 +186,7 @@
             , #{tst_case_id}
             , #{mdfc}
             , #{rqs_pck_nm}
-            , #{scs_yn}
+            , ''
             , ''
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')

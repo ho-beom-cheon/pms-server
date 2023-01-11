@@ -186,6 +186,9 @@ public class PJTE7200Controller {
          * 2. URL 객체로 connection을 만듭니다
          * 3. 응답받은 결과를 InputStream으로 받아서 버퍼에 순차적으로 쌓습니다
          * */
+        boolean result = false;
+        PJTE7200DTO PJTE7200U = new PJTE7200DTO();
+
 
         //데이터 정의 실시
         String url = "http://10.94.30.90:14444/nideploy/reqmktar.jsp";
@@ -236,6 +239,27 @@ public class PJTE7200Controller {
         hm.put("data", hm1);
 
         String jsonStr = mapper.writeValueAsString(hm);
+
+        //배포메인 상태 업데이트
+    //    PJTE7200U.setBkup_id("0000000000");
+    //    PJTE7200U.setPrjt_id(request.getParameter("prjt_id"));
+    //    PJTE7200U.setRqs_id(request.getParameter("reqid"));
+    //    PJTE7200U.setLogin_emp_no(request.getParameter("login_emp_no"));
+    //    boolean issuc = true;
+    //    if(issuc == true){
+    //        PJTE7200U.setPrcs_stts_cd("190");
+    //    } else {
+    //        PJTE7200U.setPrcs_stts_cd("180");
+    //    }
+
+    //    result = pjte7200Service.update_7200_02(PJTE7200U);
+
+        //배포목록 생성메시지 업데이트
+    //    for (int i = 0; i < PJTE7200.getGridData().size(); i++) {
+    //        PJTE7200U.setSqno(i + 1);
+    //        PJTE7200U.setErr_msg_cnt("");
+    //        result = pjte7200Service.update_7200_03(PJTE7200U);
+    //    }
 
         return jsonStr;
     }
