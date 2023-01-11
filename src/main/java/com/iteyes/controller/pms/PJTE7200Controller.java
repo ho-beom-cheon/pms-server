@@ -4,10 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iteyes.dto.pms.PJTE7200DTO;
 import com.iteyes.service.PJTE7200Service;
 import lombok.extern.log4j.Log4j2;
-import org.jetbrains.annotations.NotNull;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @CrossOrigin
 @Controller
@@ -189,7 +187,6 @@ public class PJTE7200Controller {
         boolean result = false;
         PJTE7200DTO PJTE7200U = new PJTE7200DTO();
 
-
         //데이터 정의 실시
         String url = "http://10.94.30.90:14444/nideploy/reqmktar.jsp";
         String data = "reqid=" + request.getParameter("reqid") + "&" +"reqrscs=" + request.getParameter("reqrscs");
@@ -197,34 +194,57 @@ public class PJTE7200Controller {
         log.debug("url 데이터 : " + url);
         log.debug("data 데이터 : " + data);
 
-        //테스트 데이터
-    //    String url = "http://jsonplaceholder.typicode.com/posts";
-    //    String data = "id=1&userId=1";
-
-        String reqid = "";
-        String reqrscs = "";
-
         //메소드 호출 실시
         String responData = httpGetConnection(url, data);
 
         log.debug("응답 데이터 확인 : " + responData);
 
-        JSONParser jsonParser = new JSONParser();
+        //테스트 데이터
+        //정상테스트
+        String str = "issuc=true,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@1.class&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
+        //오류테스트
+        String str2 = "issuc=false,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@FileNotFound&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
 
-        Object obj = jsonParser.parse(responData);
-        log.info("obj : " + obj );
-        try {
-//            Object reqIdObj   = ((JSONObject) ((JSONArray) obj).get(0)).get("reqid");
-//            Object reqRscsObj = ((JSONObject) ((JSONArray) obj).get(0)).get("reqrscs");
-            //테스트 데이터
-            Object reqIdObj   = ((JSONObject) ((JSONArray) obj).get(0)).get("id");
-            Object reqRscsObj = ((JSONObject) ((JSONArray) obj).get(0)).get("userId");
+        //정규식 데이터 분리
+        str = str + ",";
+        int k = 0;
+        String strArr[] = new String[5];
 
-            reqid   = reqIdObj.toString();
-            reqrscs = reqRscsObj.toString();
-        }catch (NullPointerException e){
-            e.printStackTrace();
+        //패턴설정
+        Pattern pattern = Pattern.compile("[=](.*?)[,]");
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()){
+            log.info("matcher : " + matcher.group(1));
+            strArr[k] = matcher.group(1);
+            k++;
+            if(matcher.group(1) == null) {
+                break;
+            }
         }
+        //값 세팅
+        String issuc    = strArr[0];
+        String reqid    = strArr[1];
+        String tarname  = strArr[2];
+        String reqrscs  = strArr[3];
+        //값 확인 로그
+        log.debug("issuc : "+ issuc);
+        log.debug("reqid : "+ reqid);
+        log.debug("tarname : "+ tarname);
+        log.debug("reqrscs : "+ reqrscs);
+
+        //배포요청 패키지명 분리
+        String reqrscsArr[] = reqrscs.split("&");
+
+        //값 확인
+        for(int i=0; i<reqrscsArr.length; i++){
+            log.debug("reqrscs : " + reqrscsArr[i]);
+            //배포 실패 파일 확인
+            if(reqrscsArr[i].contains("FileNotFound")){
+                log.debug("FileNotFound : " + (i+1) + "번 -> " + reqrscsArr[i]);
+            }
+        }
+
         ObjectMapper mapper = new ObjectMapper();
 
         HashMap<String, Object> hm = new HashMap();
