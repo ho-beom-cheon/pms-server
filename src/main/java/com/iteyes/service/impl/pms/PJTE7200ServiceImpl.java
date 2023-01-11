@@ -51,6 +51,18 @@ public class PJTE7200ServiceImpl implements PJTE7200Service {
         return pjte7200Mapper.update_7200_01(PJTE7200);
     }
 
+    @Override
+    public boolean update_7200_02(PJTE7200DTO PJTE7200) throws Exception {
+
+        return pjte7200Mapper.update_7200_02(PJTE7200);
+    }
+
+    @Override
+    public boolean update_7200_03(PJTE7200DTO PJTE7200) throws Exception {
+
+        return pjte7200Mapper.update_7200_03(PJTE7200);
+    }
+
     /* delete */
     @Override
     public boolean delete_7200_01(PJTE7200DTO PJTE7200) throws Exception {
