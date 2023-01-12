@@ -108,6 +108,7 @@ public class PJTE7200Controller {
         log.debug("PJTE7200_Controller :: Rqs_id :"+PJTE7200.getRqs_id());
 
 
+
         if(PJTE7200.getRqs_id().equals("")) {
             PJTE7200S.setPrjt_id(PJTE7200.getPrjt_id());
             PJTE7200S.setBkup_id("0000000000");
@@ -150,17 +151,19 @@ public class PJTE7200Controller {
 
             result = pjte7200Service.update_7200_01(PJTE7200U);
 
-            /* dto 값 셋팅*/
-            PJTE7200D.setPrjt_id(PJTE7200.getPrjt_id());
-            PJTE7200D.setRqs_id(PJTE7200.getRqs_id());
-            PJTE7200D.setBkup_id("0000000000");
+            if(PJTE7200.getPrcs_stts_cd().equals("100") || PJTE7200.getPrcs_stts_cd().equals("180")) {
+                /* dto 값 셋팅*/
+                PJTE7200D.setPrjt_id(PJTE7200.getPrjt_id());
+                PJTE7200D.setRqs_id(PJTE7200.getRqs_id());
+                PJTE7200D.setBkup_id("0000000000");
 
-            result = pjte7200Service.delete_7200_01(PJTE7200D);
+                result = pjte7200Service.delete_7200_01(PJTE7200D);
+            }
         }
 
         log.debug("PJTE7200_Controller :: getGridData :"+PJTE7200.getGridData());
 
-        if(PJTE7200.getGridData() != null) {
+        if(PJTE7200.getGridData() != null && (PJTE7200.getPrcs_stts_cd().equals("100") || PJTE7200.getPrcs_stts_cd().equals("180"))) {
             log.debug("PJTE7200_Controller :: getGridData.size :"+PJTE7200.getGridData().size());
             for (int i = 0; i < PJTE7200.getGridData().size(); i++) {
                 PJTE7200I.setBkup_id("0000000000");
