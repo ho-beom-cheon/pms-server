@@ -241,7 +241,7 @@ public class PJTE7200Controller {
         PJTE7200U.setPrjt_id(request.getParameter("prjt_id"));
         PJTE7200U.setRqs_id(request.getParameter("reqid"));
         PJTE7200U.setLogin_emp_no(request.getParameter("login_emp_no"));
-        if(issuc.equals("issuc=true")){
+        if(issuc.equals("true")){
             PJTE7200U.setPrcs_stts_cd("190");
         } else {
             PJTE7200U.setPrcs_stts_cd("180");
