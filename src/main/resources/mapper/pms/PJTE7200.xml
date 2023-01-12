@@ -120,6 +120,7 @@
     <update id="update_7200_03" parameterType="Map">
         UPDATE rls_pck_lst
         SET    ERR_MSG_CNT = #{err_msg_cnt}
+          ,SCS_YN       = #{scs_yn}
           ,OPR_NO       = #{login_emp_no}
           ,DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE    SQNO         = #{sqno}
