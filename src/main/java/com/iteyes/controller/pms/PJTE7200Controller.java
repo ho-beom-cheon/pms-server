@@ -189,6 +189,11 @@ public class PJTE7200Controller {
          * */
         boolean result = false;
         PJTE7200DTO PJTE7200U = new PJTE7200DTO();
+        ObjectMapper mapper = new ObjectMapper();
+
+        HashMap<String, Object> hm = new HashMap();
+        HashMap<String, Object> hm1 = new HashMap();
+        HashMap<String, Object> hm1_pagination = new HashMap();
 
         //데이터 정의 실시
         String url = "http://10.94.30.90:14444/nideploy/reqmktar.jsp";
@@ -202,11 +207,6 @@ public class PJTE7200Controller {
 
         log.debug("응답 데이터 확인 : " + responData);
 
-        //테스트 데이터
-        //정상테스트
-        //String str = "issuc=true,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@1.class&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
-        //오류테스트
-        //String str2 = "issuc=false,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@FileNotFound&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
 
         //정규식 데이터 분리
         responData = responData + ",";
@@ -259,17 +259,15 @@ public class PJTE7200Controller {
             PJTE7200U.setErr_msg_cnt(reqrscsArr[i]);
             if(reqrscsArr[i].contains("FileNotFound")){
                 PJTE7200U.setScs_yn("실패");
+                hm.put("result", false);
             } else {
                 PJTE7200U.setScs_yn("성공");
+                hm.put("result", true);
             }
             result = pjte7200Service.update_7200_03(PJTE7200U);
         }
 
-        ObjectMapper mapper = new ObjectMapper();
 
-        HashMap<String, Object> hm = new HashMap();
-        HashMap<String, Object> hm1 = new HashMap();
-        HashMap<String, Object> hm1_pagination = new HashMap();
         hm.put("result", true);
         hm.put("reqid", reqid);
         hm.put("reqrscs", reqrscs);
