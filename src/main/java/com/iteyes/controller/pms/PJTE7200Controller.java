@@ -201,18 +201,18 @@ public class PJTE7200Controller {
 
         //테스트 데이터
         //정상테스트
-        String str = "issuc=true,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@1.class&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
+        //String str = "issuc=true,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@1.class&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
         //오류테스트
-        String str2 = "issuc=false,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@FileNotFound&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
+        //String str2 = "issuc=false,reqid=1000000022,tarname=/NCB/meta/nim/bo/1,reqrscs=/NCB/1.bo@FileNotFound&/NCB/2.bo@2.class&/NCB/3.bo@3.class";
 
         //정규식 데이터 분리
-        str = str + ",";
+        responData = responData + ",";
         int k = 0;
         String strArr[] = new String[5];
 
         //패턴설정
         Pattern pattern = Pattern.compile("[=](.*?)[,]");
-        Matcher matcher = pattern.matcher(str);
+        Matcher matcher = pattern.matcher(responData);
 
         while (matcher.find()){
             log.info("matcher : " + matcher.group(1));
@@ -236,13 +236,30 @@ public class PJTE7200Controller {
         //배포요청 패키지명 분리
         String reqrscsArr[] = reqrscs.split("&");
 
-        //값 확인
+        //배포메인 상태 업데이트
+        PJTE7200U.setBkup_id("0000000000");
+        PJTE7200U.setPrjt_id(request.getParameter("prjt_id"));
+        PJTE7200U.setRqs_id(request.getParameter("reqid"));
+        PJTE7200U.setLogin_emp_no(request.getParameter("login_emp_no"));
+        if(issuc.equals("issuc=true")){
+            PJTE7200U.setPrcs_stts_cd("190");
+        } else {
+            PJTE7200U.setPrcs_stts_cd("180");
+        }
+
+        result = pjte7200Service.update_7200_02(PJTE7200U);
+
+        //배포목록 생성메시지 업데이트
         for(int i=0; i<reqrscsArr.length; i++){
             log.debug("reqrscs : " + reqrscsArr[i]);
-            //배포 실패 파일 확인
+            PJTE7200U.setSqno(i + 1);
+            PJTE7200U.setErr_msg_cnt(reqrscsArr[i]);
             if(reqrscsArr[i].contains("FileNotFound")){
-                log.debug("FileNotFound : " + (i+1) + "번 -> " + reqrscsArr[i]);
+                PJTE7200U.setScs_yn("실패");
+            } else {
+                PJTE7200U.setScs_yn("성공");
             }
+            result = pjte7200Service.update_7200_03(PJTE7200U);
         }
 
         ObjectMapper mapper = new ObjectMapper();
@@ -259,27 +276,6 @@ public class PJTE7200Controller {
         hm.put("data", hm1);
 
         String jsonStr = mapper.writeValueAsString(hm);
-
-        //배포메인 상태 업데이트
-    //    PJTE7200U.setBkup_id("0000000000");
-    //    PJTE7200U.setPrjt_id(request.getParameter("prjt_id"));
-    //    PJTE7200U.setRqs_id(request.getParameter("reqid"));
-    //    PJTE7200U.setLogin_emp_no(request.getParameter("login_emp_no"));
-    //    boolean issuc = true;
-    //    if(issuc == true){
-    //        PJTE7200U.setPrcs_stts_cd("190");
-    //    } else {
-    //        PJTE7200U.setPrcs_stts_cd("180");
-    //    }
-
-    //    result = pjte7200Service.update_7200_02(PJTE7200U);
-
-        //배포목록 생성메시지 업데이트
-    //    for (int i = 0; i < PJTE7200.getGridData().size(); i++) {
-    //        PJTE7200U.setSqno(i + 1);
-    //        PJTE7200U.setErr_msg_cnt("");
-    //        result = pjte7200Service.update_7200_03(PJTE7200U);
-    //    }
 
         return jsonStr;
     }
