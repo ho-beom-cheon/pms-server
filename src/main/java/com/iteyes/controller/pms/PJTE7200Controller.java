@@ -188,6 +188,7 @@ public class PJTE7200Controller {
          * 3. 응답받은 결과를 InputStream으로 받아서 버퍼에 순차적으로 쌓습니다
          * */
         boolean result = false;
+        boolean result1 = false;
         PJTE7200DTO PJTE7200U = new PJTE7200DTO();
         ObjectMapper mapper = new ObjectMapper();
 
@@ -246,11 +247,13 @@ public class PJTE7200Controller {
         PJTE7200U.setLogin_emp_no(request.getParameter("login_emp_no"));
         if(issuc.equals("true")){
             PJTE7200U.setPrcs_stts_cd("190");
+            hm.put("result", true);
         } else {
             PJTE7200U.setPrcs_stts_cd("180");
+            hm.put("result", false);
         }
 
-        result = pjte7200Service.update_7200_02(PJTE7200U);
+        result1 = pjte7200Service.update_7200_02(PJTE7200U);
 
         //배포목록 생성메시지 업데이트
         for(int i=0; i<reqrscsArr.length; i++){
@@ -259,16 +262,12 @@ public class PJTE7200Controller {
             PJTE7200U.setErr_msg_cnt(reqrscsArr[i]);
             if(reqrscsArr[i].contains("FileNotFound")){
                 PJTE7200U.setScs_yn("실패");
-                hm.put("result", false);
             } else {
                 PJTE7200U.setScs_yn("성공");
-                hm.put("result", true);
             }
-            result = pjte7200Service.update_7200_03(PJTE7200U);
+            result1 = pjte7200Service.update_7200_03(PJTE7200U);
         }
 
-
-        hm.put("result", true);
         hm.put("reqid", reqid);
         hm.put("reqrscs", reqrscs);
         hm1_pagination.put("page", 1);
