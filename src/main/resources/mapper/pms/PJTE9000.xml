@@ -1490,6 +1490,7 @@
                ,APRV_NO
                ,RMRMK
                ,ATFL_MNG_ID
+               ,TAR_CHG_TS
                ,OPR_NO                   /*조작자번호*/
                ,DB_CHG_TS   /*DB변경일시*/
           FROM   rls_rqs_mng
