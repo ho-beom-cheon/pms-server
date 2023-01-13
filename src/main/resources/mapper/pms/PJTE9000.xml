@@ -1416,6 +1416,7 @@
                ,PRJT_ID
                ,AS_PGM_ID
                ,AS_PGM_DIS_CD
+               ,SQN_CD
                ,AS_PGM_NM
                ,TO_PGM_ID
                ,TO_PGM_NM
