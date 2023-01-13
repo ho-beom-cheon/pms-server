@@ -20,6 +20,7 @@
         ,A.TRN_STT_CD
         ,A.BKUP_ID
         ,A.PRJT_ID
+        ,A.SQN_CD
         FROM   pms_as_to_map A
         LEFT OUTER JOIN
         pms_emp_info   B
@@ -37,6 +38,9 @@
         <if test='dvlpe_no != "" and dvlpe_no != null'>
             AND    A.DVLPE_NO  = #{dvlpe_no}
         </if>
+        <if test='sqn_cd != "TTT"'>
+            AND A.SQN_CD = #{sqn_cd}
+        </if>
         /*ASIS프로그램구분코드*/
         <if test='info_as_pgm_dis_cd != "" and info_as_pgm_dis_cd != null and info_as_pgm_dis_cd != "TTT" and info_as_pgm_dis_cd != "999"'>
             AND A.AS_PGM_DIS_CD = #{info_as_pgm_dis_cd}
@@ -49,7 +53,7 @@
                                     AND    PRJT_ID  = A.PRJT_ID
                                     AND    BKUP_ID  = A.BKUP_ID)
         </if>
-        ORDER BY A.AS_PGM_DIS_CD DESC, A.AS_PGM_ID
+        ORDER BY A.SQN_CD DESC, A.AS_PGM_DIS_CD DESC, A.AS_PGM_ID
     </select>
 
     <select id="select_7100_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7100DTO">
@@ -75,6 +79,7 @@
     <update id="update_7100_01" parameterType="Map">
         UPDATE pms_as_to_map
         SET    AS_PGM_NM     = #{as_pgm_nm}
+          ,SQN_CD        = #{sqn_cd}
           ,TO_PGM_ID     = #{to_pgm_id}
           ,TO_PGM_NM     = #{to_pgm_nm}
           ,USE_PGM_TXT   = #{use_pgm_txt}
@@ -97,6 +102,7 @@
     <update id="update_7100_02" parameterType="Map">
         UPDATE pms_as_to_map
         SET    AS_PGM_NM     = #{as_pgm_nm}
+          ,SQN_CD        = #{sqn_cd}
           ,TO_PGM_ID     = #{to_pgm_id}
           ,TO_PGM_NM     = #{to_pgm_nm}
           ,USE_PGM_TXT   = #{use_pgm_txt}
@@ -123,6 +129,7 @@
         ,PRJT_ID
         ,AS_PGM_ID
         ,AS_PGM_DIS_CD
+        ,SQN_CD
         ,AS_PGM_NM
         ,TO_PGM_ID
         ,TO_PGM_NM
@@ -143,6 +150,7 @@
             , #{prjt_id}
             , #{as_pgm_id}
             , #{as_pgm_dis_cd}
+            , #{sqn_cd}
             , #{as_pgm_nm}
             , #{to_pgm_id}
             , #{to_pgm_nm}

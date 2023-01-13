@@ -17,6 +17,7 @@ public class PJTE7100DTO {
     private String as_pgm_id;      // ASIS프로그램ID
     private String info_as_pgm_dis_cd;  // ASIS프로그램구분코드
     private String as_pgm_dis_cd;       // ASIS프로그램구분코드
+    private String sqn_cd;       // 차수구분코드
     private String as_pgm_dis_nm;       // ASIS프로그램구분명
     private String as_pgm_nm;       // ASIS프로그램명
     private String to_pgm_id;       // TOBE프로그램ID
