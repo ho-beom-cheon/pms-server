@@ -1410,6 +1410,7 @@
             AND    PRJT_ID = #{prjt_id}
      </insert>
 
+
      <insert id="insert_9000_72" parameterType="Map">
           INSERT INTO pms_as_to_map
           SELECT #{new_bkup_id} AS BKUP_ID
