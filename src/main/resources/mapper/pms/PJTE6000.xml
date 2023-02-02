@@ -28,6 +28,12 @@
 		ON C.EMPNO    = A.PRCPE_NO
 		AND C.PRJT_ID  = A.PRJT_ID
 		AND C.BKUP_ID  = A.BKUP_ID
+		LEFT OUTER JOIN
+		pms_cd_del_mng  D
+		ON  D.DTLS_TYCD = A.REQ_DSCD
+		AND D.GRP_TYCD  = '1000000010'
+		AND D.PRJT_ID   = A.PRJT_ID
+		AND D.BKUP_ID   = A.BKUP_ID
 		WHERE  1 = 1
 		AND    A.BKUP_ID = #{bkup_id}
 		AND    A.PRJT_ID = #{prjt_id}
@@ -58,6 +64,6 @@
 		<if test='req_txt != "" and req_txt != null'>
 			AND    A.REQ_TXT  LIKE CONCAT('%', #{req_txt}, '%')
 		</if>
-		ORDER BY A.BZCD, A.REQ_DT DESC
+		ORDER BY D.SORT_SEQ, A.BZCD, A.REQ_DT DESC
 	</select>
 </mapper>
