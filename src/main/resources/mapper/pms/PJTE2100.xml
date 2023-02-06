@@ -250,8 +250,7 @@
   <update id="update_2100_01" parameterType="Map">
    <![CDATA[
 	  UPDATE pms_pgm_mng
-	  SET SQN_CD       = #{sqn_cd}
-	    , BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
+	  SET BZ_DTLS_TXT  = #{bz_dtls_txt}  /*업무세부내용*/
 		, PGM_NM       = #{pgm_nm}       /*프로그램명*/
 		, DVLP_DIS_CD  = CASE WHEN #{login_aut_cd} IN ('500','600','900') AND #{dvlp_dis_cd} = '900' THEN #{dvlp_dis_cd}
 		                      WHEN #{dvlp_dis_cd} != '900'                                           THEN #{dvlp_dis_cd} ELSE DVLP_DIS_CD END  /*개발구분코드*/
@@ -285,6 +284,7 @@
 		AND BZCD        = #{bzcd}
 		AND PRJT_ID     = #{prjt_id}
 		AND BKUP_ID     = #{bkup_id}
+        AND SQN_CD      = #{sqn_cd}
 	  ]]>
   </update>
 
