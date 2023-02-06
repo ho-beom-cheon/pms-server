@@ -70,17 +70,17 @@
                                          ELSE 0
                                           END
                                    )     AS AF_TOT_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d')AND A.PRC_STEP_CD IN ('200', '300', '400','500','600')
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d')AND A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT >  DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('200', '300', '400','500','600')
+                              , SUM(CASE WHEN A.FRCS_END_DT >  DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS AF_CMPL_CNT
-                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100','110')
+                              , SUM(CASE WHEN A.FRCS_END_DT <= DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -111,12 +111,12 @@
                    FROM (SELECT A.BZCD
                               , A.SQN_CD
                               , COUNT(*) AS TOT_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('200', '300', '400','500','600')
+                              , SUM(CASE WHEN A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
+                              , SUM(CASE WHEN A.PRC_STEP_CD IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -148,12 +148,12 @@
                    FROM (SELECT BZCD
                               , SQN_CD
                               , COUNT(*) AS TOT_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('300', '400','500','600')
+                              , SUM(CASE WHEN A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000060' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
                                    )     AS CMPL_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110','200')
+                              , SUM(CASE WHEN A.PRC_STEP_CD IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000060' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -184,7 +184,7 @@
                    FROM (SELECT BZCD
                               , SQN_CD
                               , COUNT(*) AS TOT_CNT
-                              , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
+                              , SUM(CASE WHEN A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                          THEN 1
                                          ELSE 0
                                           END
@@ -300,10 +300,10 @@
                                       , A.DVLPE_NO
                                       , A.SQN_CD
                                       , COUNT(*) AS TOT_CNT
-                                      , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
+                                      , SUM(CASE WHEN A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                                  THEN 1 ELSE 0
                                              END) AS CMPL_CNT
-                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN ('000', '100','110')
+                                      , SUM(CASE WHEN A.FRCS_END_DT < DATE_FORMAT(#{inp_date},'%Y%m%d') AND A.PRC_STEP_CD IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                                  THEN 1 ELSE 0
                                              END) AS NCMPL_CNT
                                    FROM pms_pgm_mng A
@@ -335,12 +335,12 @@
                                  , A.DVLPE_NO
                                  , A.SQN_CD
                                  , COUNT(*) AS TOT_CNT
-                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
+                                 , SUM(CASE WHEN A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                             THEN 1
                                             ELSE 0
                                              END
                                       )     AS CMPL_CNT
-                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
+                                 , SUM(CASE WHEN A.PRC_STEP_CD IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                             THEN 1
                                             ELSE 0
                                              END
@@ -373,7 +373,7 @@
                                  , A.DVLPE_NO
                                  , A.SQN_CD
                                  , COUNT(*) AS TOT_CNT
-                                 , SUM(CASE WHEN A.PRC_STEP_CD IN ('200','300', '400','500','600')
+                                 , SUM(CASE WHEN A.PRC_STEP_CD NOT IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                             THEN 1
                                             ELSE 0
                                              END
@@ -528,7 +528,7 @@
                               , A.PL_NO       AS PL_ENO
                               , A.PRJT_ID      AS PRJT_ID
                               , A.BKUP_ID     AS BKUP_ID
-                              , CASE WHEN A.PRC_STEP_CD IN ('000', '100','110')
+                              , CASE WHEN A.PRC_STEP_CD IN (SELECT DTLS_TYCD FROM pms_cd_del_mng WHERE  BKUP_ID = A.BKUP_ID AND PRJT_ID = A.PRJT_ID AND GRP_TYCD = '1000000059' AND USE_YN = 'Y')
                                      THEN '부'
                                      ELSE '여'
                                  END AS CRPE_YN
