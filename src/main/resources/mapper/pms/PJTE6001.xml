@@ -99,7 +99,7 @@
 		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '900' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
 		  ,PRC_TXT	       = #{prc_txt}
 		  ,REQ_PRC_STEP_CD = #{req_prc_step_cd}
-		  ,TTMN_SCD_DT     = CASE WHEN TTMN_SCD_DT = '' THEN REPLACE(#{ttmn_scd_dt}, '-', '') ELSE TTMN_SCD_DT END
+		  ,TTMN_SCD_DT     = CASE WHEN TTMN_SCD_DT = '' OR #{login_aut_cd} IN ('500','600','900') THEN REPLACE(#{ttmn_scd_dt}, '-', '') ELSE TTMN_SCD_DT END
 		  ,OPR_NO	       = #{login_emp_no}
 		  ,DB_CHG_TS	   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE  1 = 1
