@@ -25,4 +25,6 @@ public class PJTE6000DTO {
 	private String bkup_id;
 	private String cmpl_yn;
 	private String req_dt;
+
+	private String ttmn_scd_dt;
 }
