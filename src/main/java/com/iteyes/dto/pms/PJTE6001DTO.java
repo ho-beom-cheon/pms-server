@@ -25,4 +25,6 @@ public class PJTE6001DTO {
 	private String bkup_id;
 	private String org_file_nm;
 	private String login_emp_no;
+
+	private String ttmn_scd_dt;
 }

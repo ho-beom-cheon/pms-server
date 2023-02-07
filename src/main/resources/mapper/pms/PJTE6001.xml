@@ -18,6 +18,7 @@
 			 ,A.REQ_PRC_STEP_CD
 			 ,A.ATFL_MNG_ID
 			 ,D.ORG_FILE_NM
+		     ,A.TTMN_SCD_DT
 		FROM   pms_rq_mng A
 				   LEFT OUTER JOIN
 			   pms_emp_info  B
@@ -64,6 +65,7 @@
 		,PRC_TXT
 		,REQ_PRC_STEP_CD
 		,ATFL_MNG_ID
+		,TTMN_SCD_DT
 		,OPR_NO
 		,DB_CHG_TS
 		)
@@ -82,6 +84,7 @@
 		, ''
 		, CASE WHEN #{prcpe_no} = '' OR #{prcpe_no} IS NULL THEN '100' ELSE '200' END
 		, ''
+		, ''
 		, #{login_emp_no}
 		, DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		)
@@ -96,6 +99,7 @@
 		  ,PRC_DT	       = CASE WHEN #{req_prc_step_cd} = '900' THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE '' END
 		  ,PRC_TXT	       = #{prc_txt}
 		  ,REQ_PRC_STEP_CD = #{req_prc_step_cd}
+		  ,TTMN_SCD_DT     = CASE WHEN TTMN_SCD_DT = '' THEN REPLACE(#{ttmn_scd_dt}, '-', '') ELSE TTMN_SCD_DT END
 		  ,OPR_NO	       = #{login_emp_no}
 		  ,DB_CHG_TS	   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
 		WHERE  1 = 1
