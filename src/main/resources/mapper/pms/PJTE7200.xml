@@ -66,7 +66,7 @@
         <if test='cmpl_yn != "Y"'>
             AND    A.PRCS_STTS_CD NOT IN ('900','910')
         </if>
-        ORDER BY A.RQS_DT DESC, A.RQS_ID DESC
+        ORDER BY A.TAR_CHG_TS, A.PRCS_STTS_CD DESC
     </select>
 
     <select id="select_7200_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7200DTO">
@@ -101,6 +101,7 @@
               ,RVW_NO       = #{rvw_no}
               ,APRV_NO      = #{aprv_no}
               ,RMRMK        = #{rmrmk}
+              ,TAR_CHG_TS   = CASE WHEN #{prcs_stts_cd} IN ('100','110') THEN '' ELSE TAR_CHG_TS END
               ,OPR_NO       = #{login_emp_no}
               ,DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  RQS_ID       = #{rqs_id}
