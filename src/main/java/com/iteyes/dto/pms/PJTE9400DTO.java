@@ -14,6 +14,7 @@ public class PJTE9400DTO {
     private String login_catn_dcd;   // 구성원 구분코드
     private String login_aut_cd;     // 권한 ID
     private String login_dept_nm;     // 소속명
+    private String cmpl_yn;
 
 
     // 그리드1_1 (요청인력내역)
@@ -26,6 +27,8 @@ public class PJTE9400DTO {
     private String rmrk;            //비고
     private String atfl_mng_id;     //첨부파일관리ID
     private String coh_hgrn_mng_id; //선택상위관리ID
+    private String use_yn; //사용여부
+    private String del_btn;
 
     private List<PJTE9400DTO> updatedRows;
     private List<PJTE9400DTO> createdRows;

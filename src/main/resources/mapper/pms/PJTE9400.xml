@@ -13,6 +13,8 @@
         ,A.FLD_MNG_ID
         ,A.HGRN_MNG_ID
         ,A.ATFL_MNG_ID
+        ,A.USE_YN
+        ,CASE WHEN A.USE_YN = 'Y' THEN '숨김' ELSE '보기' END AS DEL_BTN
         FROM  (SELECT A.BKUP_ID
                     ,A.PRJT_ID
                     ,A.FLD_MNG_ID
@@ -22,8 +24,12 @@
                     ,A.ATFL_MNG_ID
                     ,<![CDATA[CASE WHEN LENGTH(A.HGRN_MNG_ID)/6 < 3 THEN LENGTH(A.HGRN_MNG_ID)/6 ELSE LENGTH(A.HGRN_MNG_ID)/6+(LENGTH(A.HGRN_MNG_ID)/6-1) END ]]>  AS LEN
                     ,(SELECT COUNT(*) FROM pms_atfl_mng WHERE FILE_RGS_DSCD = '805' AND ATFL_MNG_ID = A.ATFL_MNG_ID AND PRJT_ID = A.PRJT_ID AND BKUP_ID = A.BKUP_ID) AS FILE_CNT
+                    ,A.USE_YN
                     FROM   pms_svn_file_mng A
-                    WHERE  A.USE_YN    = 'Y'
+                    WHERE  1 = 1
+                    <if test='cmpl_yn != "Y"'>
+                    AND    A.USE_YN    = 'Y'
+                    </if>
                     AND    A.BKUP_ID   = #{bkup_id}
                     AND    A.PRJT_ID   = #{prjt_id}) A
         ORDER BY SUBSTR(A.HGRN_MNG_ID,1,6) , A.HGRN_MNG_ID
@@ -45,13 +51,13 @@
 
     <update id="update_9400_02" parameterType="Map">
         UPDATE pms_svn_file_mng
-        SET    USE_YN        = 'N'
-          ,OPR_NO        = #{login_emp_no}
-          ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+        SET    USE_YN        = #{use_yn}
+              ,OPR_NO        = #{login_emp_no}
+              ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
-          AND    BKUP_ID     = '0000000000'
-          AND    PRJT_ID     = #{prjt_id}
-          AND    HGRN_MNG_ID  LIKE CONCAT(#{hgrn_mng_id},'%')
+          AND  BKUP_ID     = '0000000000'
+          AND  PRJT_ID     = #{prjt_id}
+          AND  FLD_MNG_ID  = #{fld_mng_id}
     </update>
 
     <insert id="insert_9400_01" parameterType="Map">

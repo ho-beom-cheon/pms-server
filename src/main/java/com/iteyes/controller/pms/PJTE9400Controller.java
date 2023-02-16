@@ -32,6 +32,9 @@ public class PJTE9400Controller {
         /* dto 값 셋팅*/
         PJTE9400.setPrjt_id(request.getParameter("prjt_nm_selected"));
         PJTE9400.setBkup_id(request.getParameter("bkup_id_selected"));
+        PJTE9400.setCmpl_yn(request.getParameter("check_Yn"));
+        log.info("check_Yn : " + request.getParameter("check_Yn"));
+        log.info("Cmpl_yn : " + PJTE9400.getCmpl_yn());
 
         /* 서비스 요청**/
         List<PJTE9400DTO> list = pjte9400Service.select_9400_01(PJTE9400);
@@ -85,7 +88,7 @@ public class PJTE9400Controller {
         PJTE9400U.setBkup_id         (PJTE9400.getBkup_id         ());
         PJTE9400U.setPrjt_id         (PJTE9400.getPrjt_id         ());
         PJTE9400U.setFld_mng_id      (PJTE9400.getFld_mng_id      ());    //폴더관리ID
-        PJTE9400U.setHgrn_mng_id     (PJTE9400.getHgrn_mng_id     ());    //상위관리ID
+        PJTE9400U.setUse_yn          (PJTE9400.getUse_yn          ());    //상위관리ID
         PJTE9400U.setLogin_emp_no    (PJTE9400.getLogin_emp_no    ());    //직원번호
 
         result = pjte9400Service.update_9400_02(PJTE9400U);
