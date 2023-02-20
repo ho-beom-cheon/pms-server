@@ -256,7 +256,7 @@
                                    WHEN #{err_prc_step_cd} = '300' THEN ''
                                    ELSE REPLACE(#{ttmn_dt}, '-', '') END
           , TTMN_TXT         = #{ttmn_txt}
-          , ERR_PRC_STEP_CD  = #{err_prc_step_cd}
+          , ERR_PRC_STEP_CD  = CASE WHEN #{err_prc_step_cd} = '700' AND PL_NO = #{login_emp_no} THEN '800' ELSE #{err_prc_step_cd} END
           , BFJR_BZCD        = CASE WHEN #{bfjr_bzcd} != #{bzcd}  AND #{err_prc_step_cd} = '400' THEN #{bfjr_bzcd} ELSE BFJR_BZCD END
           , RGS_ATFL_MNG_ID  = #{rgs_atfl_mng_id}
           , TTMN_ATFL_MNG_ID = #{ttmn_atfl_mng_id}
