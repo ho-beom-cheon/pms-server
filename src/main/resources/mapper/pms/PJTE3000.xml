@@ -76,7 +76,7 @@
                   AND A.ERR_PRC_STEP_CD = #{err_prc_step_cd}
               </if>
               <if test='err_prc_step_cd == "TTT" and cmpl_yn != "true"'>
-                  AND A.ERR_PRC_STEP_CD IN ('100','200','300','400','500','600','700')
+                  AND A.ERR_PRC_STEP_CD NOT IN ('800')
               </if>
               <if test='rgpe_no != "" and rgpe_no != null'>
                   AND A.RGPE_NO = #{rgpe_no}
