@@ -35,6 +35,8 @@ public class PJTE7100DTO {
     private String opr_no;       // 조작자번호
     private String db_chg_ts;       // DB변경일시
 
+    private String cnv_bs_dt;       // 전환기준일자
+
     private String save_yn;       // 저장여부
     private String excelUplod;              //
 

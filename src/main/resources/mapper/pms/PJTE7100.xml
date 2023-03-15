@@ -21,6 +21,7 @@
         ,A.BKUP_ID
         ,A.PRJT_ID
         ,A.SQN_CD
+        ,DATE_FORMAT(A.CNV_BS_DT,'%Y-%m-%d') AS CNV_BS_DT
         FROM   pms_as_to_map A
         LEFT OUTER JOIN
         pms_emp_info   B
@@ -90,6 +91,7 @@
           ,STA_DT        = CASE WHEN #{trn_stt_cd} IN ('200','300') AND (STA_DT = '' OR STA_DT IS NULL) THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE STA_DT END
           ,END_DT        = CASE WHEN #{trn_stt_cd} = '300' AND (END_DT = '' OR END_DT IS NULL)          THEN DATE_FORMAT(NOW(),'%Y%m%d') ELSE END_DT END
           ,RMRK          = #{rmrk}
+          ,CNV_BS_DT     = REPLACE(#{cnv_bs_dt}, '-', '')
           ,OPR_NO        = #{login_emp_no}
           ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
@@ -113,6 +115,7 @@
           ,STA_DT        = REPLACE(#{sta_dt}, '-', '')
           ,END_DT        = REPLACE(#{end_dt}, '-', '')
           ,RMRK          = #{rmrk}
+          ,CNV_BS_DT     = REPLACE(#{cnv_bs_dt}, '-', '')
           ,OPR_NO        = #{login_emp_no}
           ,DB_CHG_TS     = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  1 = 1
@@ -141,6 +144,7 @@
         ,STA_DT
         ,END_DT
         ,RMRK
+        ,CNV_BS_DT
         ,OPR_NO
         ,DB_CHG_TS
         )
@@ -162,6 +166,7 @@
             , REPLACE(#{sta_dt}, '-', '')
             , REPLACE(#{end_dt}, '-', '')
             , #{rmrk}
+            , REPLACE(#{cnv_bs_dt}, '-', '')
             , #{login_emp_no}
             , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
             )

@@ -1430,6 +1430,7 @@
                ,STA_DT
                ,END_DT
                ,RMRK
+               ,CNV_BS_DT
                ,OPR_NO                    /*조작자번호*/
                ,DB_CHG_TS    /*DB변경일시*/
           FROM   pms_as_to_map
