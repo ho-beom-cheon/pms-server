@@ -149,6 +149,7 @@ public class PJTE7100Controller {
             PJTE7100C.setFrcs_end_dt(PJTE7100.getRowDatas().get(i).getFrcs_end_dt());
             PJTE7100C.setSta_dt(PJTE7100.getRowDatas().get(i).getSta_dt());
             PJTE7100C.setEnd_dt(PJTE7100.getRowDatas().get(i).getEnd_dt());
+            PJTE7100C.setCnv_bs_dt(PJTE7100.getRowDatas().get(i).getCnv_bs_dt());
 
             PJTE7100C.setPrjt_id(PJTE7100.getLogin_proj_id());
             PJTE7100C.setBkup_id("0000000000");
