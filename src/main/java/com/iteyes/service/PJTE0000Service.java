@@ -23,4 +23,6 @@ public interface PJTE0000Service {
 
     // 비밀번호 변경 정보
     boolean pw_change_0000(PJTE0000DTO user) throws Exception;
+
+    boolean update_0000_01(PJTE0000DTO PJTE0000) throws Exception;
 }

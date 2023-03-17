@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iteyes.dto.pms.PJTE1000DTO;
 import com.iteyes.service.impl.pms.PJTE0000ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -139,6 +140,7 @@ public class PJTE0000Controller {
                 }
             }
 
+            userService.update_0000_01(PJTE0000Dto);
 
         } catch (RuntimeException e) {
             log.error("로그인 실패", e);
@@ -169,5 +171,19 @@ public class PJTE0000Controller {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    @PutMapping(value = "/emp/update")
+    public @ResponseBody
+    boolean update(@RequestBody PJTE0000DTO PJTE0000) throws Exception {
+
+        boolean result = false;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        result = userService.update_0000_01(PJTE0000);
+
+        return result;
+
     }
 }

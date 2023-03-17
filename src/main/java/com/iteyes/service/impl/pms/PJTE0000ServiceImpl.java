@@ -42,6 +42,11 @@ public class PJTE0000ServiceImpl implements PJTE0000Service {
         return PJTE0000Mapper.pw_change_0000(user);
     }
 
+    @Override
+    public boolean update_0000_01(PJTE0000DTO PJTE0000) throws Exception {
+        return PJTE0000Mapper.update_0000_01(PJTE0000);
+    }
+
     // 로그인 계정은 고정값을 이용한다.
 	@Override
     public User signin(String userId, String password, String prjt_id, String btn_gubun) {
