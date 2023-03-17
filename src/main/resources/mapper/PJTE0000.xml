@@ -72,4 +72,13 @@
 		AND A.EMPNO   = #{empno}
 		AND A.PRJT_ID = #{prjt_id}
 	</select>
+
+	<update id="update_0000_01" parameterType="Map" >
+		UPDATE pms_emp_info
+		SET    LST_CHG_TS         = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
+		WHERE  1 = 1
+		  AND    EMPNO	       = #{empno}
+		  AND    PRJT_ID       = #{prjt_id}
+		  AND    BKUP_ID	   = '0000000000'
+	</update>
 </mapper>

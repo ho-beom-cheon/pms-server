@@ -152,6 +152,7 @@
           ,DEL_YN
           ,INP_DT
           ,WTH_DT
+          ,LST_CHG_TS
           ,OPR_NO
           ,DB_CHG_TS
           )
@@ -176,6 +177,7 @@
                </if>
                , REPLACE(#{inp_dt}, '-', '')
                , REPLACE(#{wth_dt}, '-', '')
+               , ''
                , #{login_emp_no}       /*조작자번호*/
                , DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
                )
@@ -899,6 +901,7 @@
                ,DEL_YN
                ,INP_DT
                ,WTH_DT
+               ,LST_CHG_TS
                ,OPR_NO                    /*조작자번호*/
                ,DB_CHG_TS   /*DB변경일시*/
           FROM   pms_emp_info
@@ -1609,6 +1612,7 @@
                ,DEL_YN
                ,INP_DT
                ,WTH_DT
+               ,LST_CHG_TS
                ,#{login_emp_no}                     /*조작자번호*/
                ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')   /*DB변경일시*/
           FROM   pms_emp_info
