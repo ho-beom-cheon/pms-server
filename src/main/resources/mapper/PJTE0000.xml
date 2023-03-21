@@ -41,7 +41,7 @@
 		    		 THEN 'N'
 				WHEN A.DEL_YN = 'Y'
 			         THEN 'X'
-		        WHEN A.LGN_PWD = #{empno} '211111'
+		        WHEN A.LGN_PWD = #{empno} '2111'
 		        	 THEN 'C'
 		        ELSE 'Y'
 		    END AS LOGIN_YN
