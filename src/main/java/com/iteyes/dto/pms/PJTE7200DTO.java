@@ -30,6 +30,12 @@ public class PJTE7200DTO {
     private String atfl_mng_id;     // 첨부파일관리ID
     private String org_file_nm;     // 첨부파일명
 
+    private String ins_dply_ts;     // 검수배포일시
+
+    private String dr_dply_ts;     // DR배포일시
+
+    private String opr_dply_ts;     // 운영배포일시
+
     private String opr_no;         // 조작자번호
     private int sqno;              // 순번
     private String tst_case_id;    // 테스트케이스ID

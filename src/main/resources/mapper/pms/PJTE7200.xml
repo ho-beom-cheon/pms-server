@@ -22,6 +22,9 @@
               ,A.PRJT_ID
               ,E.ORG_FILE_NM
               ,A.TAR_CHG_TS
+              ,A.INS_DPLY_TS
+              ,A.DR_DPLY_TS
+              ,A.OPR_DPLY_TS
         FROM   rls_rqs_mng A
                LEFT OUTER JOIN
                pms_emp_info   B
@@ -101,7 +104,13 @@
               ,RVW_NO       = #{rvw_no}
               ,APRV_NO      = #{aprv_no}
               ,RMRMK        = #{rmrmk}
-              ,TAR_CHG_TS   = CASE WHEN #{prcs_stts_cd} IN ('100','110') THEN '' ELSE TAR_CHG_TS END
+              ,TAR_CHG_TS   = CASE WHEN #{prcs_stts_cd} IN ('100','180') THEN '' ELSE TAR_CHG_TS END
+              ,INS_DPLY_TS  = CASE WHEN #{prcs_stts_cd} IN ('100','180','190') THEN ''
+                                   WHEN #{prcs_stts_cd} = '500' THEN DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') ELSE INS_DPLY_TS END
+              ,DR_DPLY_TS   = CASE WHEN #{prcs_stts_cd} IN ('100','180','190') THEN ''
+                                   WHEN #{prcs_stts_cd} = '510' THEN DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') ELSE DR_DPLY_TS END
+              ,OPR_DPLY_TS  = CASE WHEN #{prcs_stts_cd} IN ('100','180','190') THEN ''
+                                   WHEN #{prcs_stts_cd} = '520' THEN DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s') ELSE OPR_DPLY_TS END
               ,OPR_NO       = #{login_emp_no}
               ,DB_CHG_TS    = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
         WHERE  RQS_ID       = #{rqs_id}
@@ -148,6 +157,9 @@
         ,RMRMK
         ,ATFL_MNG_ID
         ,TAR_CHG_TS
+        ,INS_DPLY_TS
+        ,DR_DPLY_TS
+        ,OPR_DPLY_TS
         ,OPR_NO
         ,DB_CHG_TS
         )
@@ -164,6 +176,9 @@
             , #{rvw_no}
             , #{aprv_no}
             , #{rmrmk}
+            , ''
+            , ''
+            , ''
             , ''
             , ''
             , #{login_emp_no}
