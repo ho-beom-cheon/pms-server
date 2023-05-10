@@ -36,6 +36,8 @@ public class PJTE7200DTO {
 
     private String opr_dply_ts;     // 운영배포일시
 
+    private String save_chg_yn;     // 운영배포일시
+
     private String opr_no;         // 조작자번호
     private int sqno;              // 순번
     private String tst_case_id;    // 테스트케이스ID
