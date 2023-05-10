@@ -25,6 +25,7 @@
               ,A.INS_DPLY_TS
               ,A.DR_DPLY_TS
               ,A.OPR_DPLY_TS
+              ,CASE WHEN A.INS_DPLY_TS = '' AND A.DR_DPLY_TS = '' AND A.OPR_DPLY_TS = '' THEN 'Y' ELSE 'N' END AS SAVE_CHG_YN
         FROM   rls_rqs_mng A
                LEFT OUTER JOIN
                pms_emp_info   B
