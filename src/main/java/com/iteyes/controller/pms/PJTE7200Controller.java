@@ -40,7 +40,8 @@ public class PJTE7200Controller {
         PJTE7200.setBkup_id(request.getParameter("bkup_id_selected"));
         PJTE7200.setRqs_dt(request.getParameter("rqs_dt"));
         PJTE7200.setRls_dt(request.getParameter("rls_dt"));
-        PJTE7200.setPrcs_stts_cd(request.getParameter("prcs_stts_cd_selected"));
+        PJTE7200.setDstr(request.getParameter("dstr_selectedT"));
+        PJTE7200.setPrcs_stts_cd(request.getParameter("prcs_stts_cd_selectedT"));
         PJTE7200.setRqs_no(request.getParameter("rqs_no"));
         PJTE7200.setRvw_no(request.getParameter("rvw_no"));
         PJTE7200.setAprv_no(request.getParameter("aprv_no"));
