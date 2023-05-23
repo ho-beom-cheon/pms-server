@@ -67,10 +67,18 @@
         <if test='aprv_no != "" and aprv_no != null'>
             AND    A.APRV_NO  = #{aprv_no}
         </if>
-        <if test='cmpl_yn != "Y"'>
+        /*배포상태*/
+        <if test='prcs_stts_cd != "" and prcs_stts_cd != null and prcs_stts_cd != "TTT"'>
+            AND A.PRCS_STTS_CD = #{prcs_stts_cd}
+        </if>
+        /*배포구분*/
+        <if test='dstr != "" and dstr != null and dstr != "TTT"'>
+            AND A.DSTR = #{dstr}
+        </if>
+        <if test='prcs_stts_cd == "TTT" and cmpl_yn != "Y"'>
             AND    A.PRCS_STTS_CD NOT IN ('900','910')
         </if>
-        ORDER BY A.TAR_CHG_TS, A.PRCS_STTS_CD DESC
+        ORDER BY A.DSTR, A.PRCS_STTS_CD DESC, A.TAR_CHG_TS
     </select>
 
     <select id="select_7200_02" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7200DTO">
