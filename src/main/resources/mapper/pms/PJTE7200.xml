@@ -75,7 +75,7 @@
         <if test='dstr != "" and dstr != null and dstr != "TTT"'>
             AND A.DSTR = #{dstr}
         </if>
-        <if test='prcs_stts_cd == "TTT" and cmpl_yn != "Y"'>
+        <if test='(prcs_stts_cd == "" or prcs_stts_cd == null or prcs_stts_cd == "TTT") and cmpl_yn != "Y"'>
             AND    A.PRCS_STTS_CD NOT IN ('900','910')
         </if>
         ORDER BY A.DSTR, A.PRCS_STTS_CD DESC, A.TAR_CHG_TS

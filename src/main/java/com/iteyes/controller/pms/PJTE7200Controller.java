@@ -47,6 +47,9 @@ public class PJTE7200Controller {
         PJTE7200.setAprv_no(request.getParameter("aprv_no"));
         PJTE7200.setCmpl_yn(request.getParameter("cmpl_yn"));
 
+        log.debug("PJTE7200_Controller :: setDstr.size :"+PJTE7200.getDstr());
+        log.debug("PJTE7200_Controller :: setPrcs_stts_cd.size :"+PJTE7200.getPrcs_stts_cd());
+
         List<PJTE7200DTO> list = pjte7200Service.select_7200_01(PJTE7200);
         HashMap<String, Object> hm = new HashMap();
         HashMap<String, Object> hm1 = new HashMap();
