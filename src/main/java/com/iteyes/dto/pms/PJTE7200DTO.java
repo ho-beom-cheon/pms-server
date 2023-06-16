@@ -46,6 +46,7 @@ public class PJTE7200DTO {
     private String scs_yn;         // 성공여부
     private String err_msg_cnt;         // 에러메시지
     private String tar_chg_ts;         // TAR생성일시
+    private String sqn_cd;         // 차수
 
     private String cmpl_yn;        // 완료포함여부
     private String max_rqs_id;     // 채번요청ID

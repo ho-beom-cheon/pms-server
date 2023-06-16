@@ -88,7 +88,13 @@
               ,A.RQS_PCK_NM
               ,A.SCS_YN
               ,A.ERR_MSG_CNT
+              ,CASE WHEN B.RQS_PCK_NM IS NULL THEN '2차' ELSE '1차' END AS SQN_CD
         FROM   rls_pck_lst A
+               LEFT OUTER JOIN
+               open_pck_lst   B
+               ON  B.RQS_PCK_NM = A.RQS_PCK_NM
+               AND B.PRJT_ID    = A.PRJT_ID
+               AND B.BKUP_ID    = A.BKUP_ID
         WHERE  A.RQS_ID  = #{rqs_id}
         AND    A.BKUP_ID = #{bkup_id}
         AND    A.PRJT_ID = #{prjt_id}
