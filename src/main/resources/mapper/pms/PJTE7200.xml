@@ -98,7 +98,7 @@
         WHERE  A.RQS_ID  = #{rqs_id}
         AND    A.BKUP_ID = #{bkup_id}
         AND    A.PRJT_ID = #{prjt_id}
-        ORDER BY A.SQNO
+        ORDER BY 7, A.RQS_PCK_NM
     </select>
 
 
