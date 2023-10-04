@@ -72,7 +72,9 @@
                     <if test='dept_cd != "TTT" and dept_cd != "null0000"'>
                     AND    A.ETC_TXT3 = CASE WHEN #{dept_cd} = 'TTT' THEN A.ETC_TXT3 ELSE #{dept_cd} END
                     </if>
+                    <if test='cmpl_yn == "false"'>
                     AND    A.USE_YN   = 'Y'
+                    </if>
                     AND    A.GRP_TYCD = '1000000038'
                     AND    A.PRJT_ID  = #{prjt_id}
                     AND    A.BKUP_ID  = '0000000000') A
