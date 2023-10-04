@@ -57,4 +57,5 @@ public class PJTE8000DTO {
 
     private String db_chg_ts;           /*db변경일시*/
     private String db_chg_yn;           /*db변경여부*/
+    private String cmpl_yn;                    /*완료건 포함 여부*/
 }
