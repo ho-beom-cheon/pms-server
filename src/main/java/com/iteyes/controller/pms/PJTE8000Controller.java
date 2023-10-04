@@ -43,6 +43,7 @@ public class PJTE8000Controller {
         PJTE8000.setWeek_sqn_cd(request.getParameter("week_sqn_cd_selected"));
         PJTE8000.setDept_cd(request.getParameter("dept_cd_selected"));
         PJTE8000.setWeek_seq_val(request.getParameter("week_seq_val"));
+        PJTE8000.setCmpl_yn(request.getParameter("cmpl_yn"));
 
         List<PJTE8000DTO> list = pjte8000Service.select_8000_01(PJTE8000);
 
