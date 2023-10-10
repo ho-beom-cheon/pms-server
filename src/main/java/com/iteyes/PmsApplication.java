@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
+//test
 @SpringBootApplication
 public class PmsApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
 
