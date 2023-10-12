@@ -79,7 +79,7 @@ public class PJTE4000Controller {
         return result;
 
     }
-
+//testtest
     @PostMapping(value = "/insert")
     public @ResponseBody
     boolean insert(@RequestBody PJTE4000DTO PJTE4000C) throws Exception {
