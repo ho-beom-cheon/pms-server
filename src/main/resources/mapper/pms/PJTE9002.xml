@@ -56,7 +56,7 @@
             , #{prjt_id}     /*프로젝트ID*/
             , #{atfl_mng_id}        /*첨부파일관리ID*/
             , #{file_rgs_dscd}      /*파일등록구분코드*/
-            , (SELECT NVL(MAX(A.SQNO)+1,1)
+            , (SELECT COALESCE(MAX(A.SQNO)+1,1)
                FROM   pms_atfl_mng A
                WHERE A.BKUP_ID = '0000000000'
                  AND   A.PRJT_ID = #{prjt_id}
@@ -198,8 +198,8 @@
     </update>
 
     <select id="select_9002_10" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE9002DTO">
-        SELECT CONCAT(CONCAT(#{login_emp_no},#{file_rgs_dscd}),TRIM(LPAD(NVL(MAX(DTLS_TYNM)+1,1),7,'0'))) AS ATFL_MNG_ID
-             ,TRIM(LPAD(NVL(MAX(DTLS_TYNM)+1,1),7,'0')) AS DTLS_TYNM
+        SELECT CONCAT(CONCAT(#{login_emp_no},#{file_rgs_dscd}),TRIM(LPAD(COALESCE(MAX(DTLS_TYNM)+1,1),7,'0'))) AS ATFL_MNG_ID
+             ,TRIM(LPAD(COALESCE(MAX(DTLS_TYNM)+1,1),7,'0')) AS DTLS_TYNM
         FROM pms_cd_del_mng
         WHERE DTLS_TYCD     = CONCAT(#{login_emp_no},#{file_rgs_dscd})
           AND   GRP_TYCD      = '1000000037'

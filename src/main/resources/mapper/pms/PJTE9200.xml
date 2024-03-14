@@ -90,7 +90,7 @@
     </update>
     <insert id="insert_9200_01" parameterType="Map">
         <selectKey resultType = "int" keyProperty="sqno" order="BEFORE">
-            SELECT NVL(MAX(SQNO)+1,1) AS SQNO
+            SELECT COALESCE(MAX(SQNO)+1,1) AS SQNO
             FROM   pms_mtng_room_mng
             WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID      = #{prjt_id}

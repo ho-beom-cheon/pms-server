@@ -7,19 +7,19 @@
 		SELECT A.MNG_ID
 		,A.BZCD
 		,A.REQ_DSCD
-		,NVL(str_to_date(A.REQ_DT, '%Y%m%d'), '') AS REQ_DT
+		,COALESCE(str_to_date(A.REQ_DT, '%Y%m%d'), '') AS REQ_DT
 		,B.EMPNM AS REQPE_NM
 		,A.REQ_TXT
 		,(CASE
-		    WHEN NVL(str_to_date(A.PRC_DT, '%Y%m%d'), '') = '0000-00-00' THEN ''
-		    ELSE NVL(str_to_date(A.PRC_DT, '%Y%m%d'), '')
+		    WHEN COALESCE(str_to_date(A.PRC_DT, '%Y%m%d'), '') = '0000-00-00' THEN ''
+		    ELSE COALESCE(str_to_date(A.PRC_DT, '%Y%m%d'), '')
 		  END) AS PRC_DT
 		,C.EMPNM AS PRCPE_NM
 		,A.PRC_TXT
 		,A.REQ_PRC_STEP_CD
 		,(CASE
-		WHEN NVL(str_to_date(A.TTMN_SCD_DT, '%Y%m%d'), '') = '0000-00-00' THEN ''
-		ELSE NVL(str_to_date(A.TTMN_SCD_DT, '%Y%m%d'), '')
+		WHEN COALESCE(str_to_date(A.TTMN_SCD_DT, '%Y%m%d'), '') = '0000-00-00' THEN ''
+		ELSE COALESCE(str_to_date(A.TTMN_SCD_DT, '%Y%m%d'), '')
 		END) AS TTMN_SCD_DT
 		FROM   pms_rq_mng A
 		LEFT OUTER JOIN

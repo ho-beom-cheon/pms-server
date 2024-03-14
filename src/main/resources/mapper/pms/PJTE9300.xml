@@ -85,7 +85,7 @@
 
 	<update id="update_9300_02" parameterType="Map">
 		UPDATE pms_prj_prs_rqs
-		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(NVL(APLC_DTLS,'')))   = 0 THEN CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')
+		SET APLC_DTLS   = CASE WHEN LENGTH(TRIM(COALESCE(APLC_DTLS,'')))   = 0 THEN CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')
 		                       WHEN INSTR(APLC_DTLS, CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')) = 0 THEN CONCAT(APLC_DTLS,' , ', CONCAT( #{login_emp_nm},'[',#{login_dept_nm},']')) ELSE APLC_DTLS END
 		  ,OPR_NO      = #{login_emp_no}
 		  , DB_CHG_TS   = DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
@@ -111,7 +111,7 @@
 
 	<insert id="insert_9300_01" parameterType="Map">
 		<selectKey resultType = "int" keyProperty="sqno" order="BEFORE">
-			SELECT NVL(MAX(SQNO)+1,1) AS SQNO
+			SELECT COALESCE(MAX(SQNO)+1,1) AS SQNO
 			FROM   pms_prj_prs_rqs
 			WHERE  BKUP_ID      = '0000000000'
 			AND    PRJT_ID      = #{prjt_id}

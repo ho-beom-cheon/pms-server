@@ -174,7 +174,7 @@
                             ELSE 1
                     END   AS SAVE_YN
                      , 9                     AS VLTN_CNT1
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -193,7 +193,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -219,7 +219,7 @@
                      END   AS SAVE_YN
                      , 9                     AS VLTN_CNT1
                      , 9                     AS VLTN_CNT2
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -231,7 +231,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
                 )),0)                 AS VLTN_CNT3
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -243,7 +243,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
                 )),0)                 AS VLTN_CNT4
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -255,7 +255,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
                 )),0)                 AS VLTN_CNT5
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -268,7 +268,7 @@
                                   AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
                 )),0)                 AS VLTN_CNT6
                      , 9                     AS VLTN_CNT7
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -280,7 +280,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
                 )),0)                 AS VLTN_CNT8
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -292,7 +292,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM01 LIKE CONCAT(CONCAT('%',A.COLM01),'%')
                 )),0)                 AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -323,7 +323,7 @@
                      , 9                     AS VLTN_CNT5
                      , 9                     AS VLTN_CNT6
                      , 9                     AS VLTN_CNT7
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -335,7 +335,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
                 )),0)                 AS VLTN_CNT8
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -347,7 +347,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
                 )),0)                 AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -359,7 +359,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM05 LIKE CONCAT(CONCAT('%',A.COLM05),'%')
                 )),0)                 AS VLTN_CNT10
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -389,7 +389,7 @@
                      , 9                     AS VLTN_CNT5
                      , 9                     AS VLTN_CNT6
                      , 9                     AS VLTN_CNT7
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -401,7 +401,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM09 LIKE CONCAT(CONCAT('%',A.COLM09),'%')
                 )),0)                     AS VLTN_CNT8
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -413,7 +413,7 @@
                                   AND S.BKUP_ID = A.BKUP_ID
                                   AND S.COLM09 LIKE CONCAT(CONCAT('%',A.COLM09),'%')
                 )),0)                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -446,7 +446,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -479,7 +479,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -512,7 +512,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -567,7 +567,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 1
                                             ELSE 0
                                             END AS VLTN_CNT
@@ -663,7 +663,7 @@
                             ELSE 1
                     END   AS SAVE_YN
                      , 9                     AS VLTN_CNT1
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -689,7 +689,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -722,7 +722,7 @@
                      END   AS SAVE_YN
                      , 9                     AS VLTN_CNT1
                      , 9                     AS VLTN_CNT2
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -741,7 +741,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM01  = S.COLM01)
                       )),0)              AS VLTN_CNT3
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -760,7 +760,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM01  = S.COLM01)
                       )),0)                 AS VLTN_CNT4
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -779,7 +779,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM01  = S.COLM01)
                       )),0)              AS VLTN_CNT5
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -799,7 +799,7 @@
 								                           AND    T.COLM01  = S.COLM01)
                       )),0)                AS VLTN_CNT6
                      , 9                     AS VLTN_CNT7
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -818,7 +818,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM01  = S.COLM01)
                       )),0)                AS VLTN_CNT8
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -837,7 +837,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM01  = S.COLM01)
                       )),0)                 AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -875,7 +875,7 @@
                      , 9                     AS VLTN_CNT5
                      , 9                     AS VLTN_CNT6
                      , 9                     AS VLTN_CNT7
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -894,7 +894,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM05  = S.COLM05)
                       )),0)                 AS VLTN_CNT8
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -913,7 +913,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM05  = S.COLM05)
                       )),0)                 AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -938,7 +938,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM05  = S.COLM05)
                       )),0)                 AS VLTN_CNT10
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -975,7 +975,7 @@
                      , 9                     AS VLTN_CNT5
                      , 9                     AS VLTN_CNT6
                      , 9                     AS VLTN_CNT7
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -994,7 +994,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM09  = S.COLM09)
                       )),0)                     AS VLTN_CNT8
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -1013,7 +1013,7 @@
 								                           AND    T.BKUP_ID = S.BKUP_ID
 								                           AND    T.COLM09  = S.COLM09)
                       )),0)                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -1053,7 +1053,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -1099,7 +1099,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -1139,7 +1139,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     , NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     , COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                  THEN 0
                                             ELSE 1
                                             END AS VLTN_CNT
@@ -1201,7 +1201,7 @@
                      , 9                     AS VLTN_CNT7
                      , 9                     AS VLTN_CNT8
                      , 9                     AS VLTN_CNT9
-                     ,  NVL(MAX((SELECT CASE WHEN COUNT(*) = 0
+                     ,  COALESCE(MAX((SELECT CASE WHEN COUNT(*) = 0
                                                   THEN 0
                                              ELSE 1
                                              END AS VLTN_CNT
@@ -1275,7 +1275,7 @@
 
     <select id="select_7000_04" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
         SELECT DISTINCT
-        NVL(CASE WHEN #{file_cd1} = '050'
+        COALESCE(CASE WHEN #{file_cd1} = '050'
         THEN A.COLM03
         WHEN #{file_cd1} = '100'
         THEN A.COLM01
@@ -1299,7 +1299,7 @@
         THEN ''
         ELSE  ''
         END ,'')   AS ITEM_CD
-        , NVL(CASE WHEN #{file_cd1} = '050'
+        , COALESCE(CASE WHEN #{file_cd1} = '050'
         THEN A.COLM04
         WHEN #{file_cd1} = '100'
         THEN A.COLM02
@@ -1412,7 +1412,7 @@
 
     <select id="select_7000_05" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7000DTO">
         SELECT DISTINCT
-        NVL(CASE WHEN #{file_cd1} = '050'
+        COALESCE(CASE WHEN #{file_cd1} = '050'
         THEN A.COLM03
         WHEN #{file_cd1} = '100'
         THEN A.COLM01
@@ -1436,7 +1436,7 @@
         THEN ''
         ELSE  ''
         END ,'')   AS ITEM_CD
-        , NVL(CASE WHEN #{file_cd1} = '050'
+        , COALESCE(CASE WHEN #{file_cd1} = '050'
         THEN A.COLM04
         WHEN #{file_cd1} = '100'
         THEN A.COLM02
@@ -1460,7 +1460,7 @@
         THEN A.COLM17
         ELSE  ''
         END, '')   AS ITEM_NM
-        , NVL(CASE WHEN #{file_cd2} = '050'
+        , COALESCE(CASE WHEN #{file_cd2} = '050'
         THEN A.COLM03
         WHEN #{file_cd2} = '100'
         THEN A.COLM01
@@ -1484,7 +1484,7 @@
         THEN ''
         ELSE  ''
         END ,'')  AS MAP_ID
-        , NVL(CASE WHEN #{file_cd2} = '050'
+        , COALESCE(CASE WHEN #{file_cd2} = '050'
         THEN A.COLM04
         WHEN #{file_cd2} = '100'
         THEN A.COLM02

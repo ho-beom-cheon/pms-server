@@ -300,7 +300,7 @@
         VALUES ( '0000000000'
                , #{prjt_id} /*프로젝트ID*/
                , #{man_no}
-               , (SELECT NVL(MAX(SQNO) + 1, 1) AS SQNO
+               , (SELECT COALESCE(MAX(SQNO) + 1, 1) AS SQNO
                   FROM pms_cpy_his_lst ALIAS_FOR_SUBQUERY
                   WHERE BKUP_ID = '0000000000'
                     AND PRJT_ID = #{prjt_id}
@@ -334,7 +334,7 @@
         VALUES ( '0000000000'
                , #{prjt_id} /*프로젝트ID*/
                , #{man_no}
-               , (SELECT NVL(MAX(SQNO) + 1, 1) AS SQNO
+               , (SELECT COALESCE(MAX(SQNO) + 1, 1) AS SQNO
                   FROM pms_career_lst ALIAS_FOR_SUBQUERY
                   WHERE BKUP_ID = '0000000000'
                     AND PRJT_ID = #{prjt_id}

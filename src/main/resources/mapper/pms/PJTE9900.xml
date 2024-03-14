@@ -133,7 +133,7 @@
 
 	<insert id="insert_9900_01" parameterType="Map">
 		<selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
-			SELECT CONCAT(CONCAT(#{dept_etc},LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,2,5) AS INT))+1,1),5,'0'))) AS MNG_ID
+			SELECT CONCAT(CONCAT(#{dept_etc},LPAD(COALESCE(MAX(CAST(SUBSTRING(MNG_ID,2,5) AS INT))+1,1),5,'0'))) AS MNG_ID
 			FROM   pms_kanban_mng
 			WHERE 1=1
 			AND    PRJT_ID    = #{prjt_id}

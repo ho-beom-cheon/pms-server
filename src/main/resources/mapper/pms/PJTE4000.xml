@@ -102,7 +102,7 @@
     </update>
     <insert id="insert_4000_01" parameterType="Map">
         <selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
-            SELECT CONCAT(CONCAT(#{rgs_dis_cd},LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,2,9) AS INT))+1,1),9,'0'))) AS MNG_ID
+            SELECT CONCAT(CONCAT(#{rgs_dis_cd},LPAD(COALESCE(MAX(CAST(SUBSTRING(MNG_ID,2,9) AS INT))+1,1),9,'0'))) AS MNG_ID
             FROM   pms_iss_risk_mng
             WHERE  RGS_DIS_CD = #{rgs_dis_cd}
             AND    PRJT_ID    = #{prjt_id}

@@ -825,7 +825,7 @@
   </update>
   <insert id="insert_1000_01" parameterType="Map">
       <selectKey resultType = "string" keyProperty="mng_id" order="BEFORE">
-          SELECT CONCAT(CONCAT('E','9',LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,3,8) AS INT))+1,0),8,'0'))) AS MNG_ID
+          SELECT CONCAT(CONCAT('E','9',LPAD(COALESCE(MAX(CAST(SUBSTRING(MNG_ID,3,8) AS INT))+1,0),8,'0'))) AS MNG_ID
           FROM   pms_ntar_mng
           WHERE  1=1
           AND    PRJT_ID    = #{prjt_id}

@@ -58,8 +58,9 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     /* mybatis */
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-    /* DB관련 */
+    /* DB관련  mysql*/
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.0.3'
+    implementation 'mysql:mysql-connector-java:8.0.26'
     /* 로그인 관련*/
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
@@ -92,7 +93,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-    /*json관려*/
+    /*json관련*/
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 

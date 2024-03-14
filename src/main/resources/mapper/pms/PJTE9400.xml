@@ -62,7 +62,7 @@
 
     <insert id="insert_9400_01" parameterType="Map">
         <selectKey resultType = "int" keyProperty="fld_mng_id" order="BEFORE">
-            SELECT NVL(MAX(FLD_MNG_ID)+1,1) AS CMNT_NO
+            SELECT COALESCE(MAX(FLD_MNG_ID)+1,1) AS CMNT_NO
             FROM   pms_svn_file_mng
             WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}

@@ -103,7 +103,7 @@
 
 
     <select id="select_7200_03" parameterType="Map" resultType="com.iteyes.dto.pms.PJTE7200DTO">
-        SELECT NVL(MAX(CAST(A.RQS_ID AS INT))+1,'1000000000') AS MAX_RQS_ID
+        SELECT COALESCE(MAX(CAST(A.RQS_ID AS INT))+1,'1000000000') AS MAX_RQS_ID
         FROM   rls_rqs_mng A
         WHERE  A.BKUP_ID = '0000000000'
         AND    A.PRJT_ID = #{prjt_id}

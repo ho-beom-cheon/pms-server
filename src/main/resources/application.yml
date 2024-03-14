@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: pms_dev
-    password: pms_dev!2
-    url: jdbc:mariadb://115.85.183.34:3306/iteyesfintech_dev
+    driver-class-name: com.mysql.jdbc.Driver  # 사용할 JDBC 드라이버
+    url: jdbc:mysql://localhost:3306/pms  # 데이터베이스의 URL
+    username: root  # 데이터베이스에 연결할 사용자 이름
+    password: Cjs414ghqja!  # 데이터베이스에 연결할 비밀번호
   sql:
     init:
       encoding: utf-8

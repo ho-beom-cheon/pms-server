@@ -60,7 +60,7 @@
 
     <insert id="insert_9100_01" parameterType="Map">
         <selectKey resultType = "string" keyProperty="gesipan_id" order="BEFORE">
-            SELECT NVL(LPAD(MAX(GESIPAN_ID)+1,10,'0'),'0000000001') AS GESIPAN_ID
+            SELECT COALESCE(LPAD(MAX(GESIPAN_ID)+1,10,'0'),'0000000001') AS GESIPAN_ID
             FROM   pms_blt_brd_mng
             WHERE  BKUP_ID = '0000000000'
             AND    PRJT_ID = #{prjt_id}

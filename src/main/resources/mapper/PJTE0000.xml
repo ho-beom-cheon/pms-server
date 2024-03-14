@@ -36,7 +36,7 @@
 		 , A.LGN_PWD
 	     , A.REAL_PRJT_ID
 		 , A.DEPT_CD
-	     , NVL(B.DTLS_TYNM,'') AS DEPT_NM
+	     , COALESCE(B.DTLS_TYNM,'') AS DEPT_NM
 		 , CASE WHEN A.LGN_PWD != #{lgn_pwd}
 		    		 THEN 'N'
 				WHEN A.DEL_YN = 'Y'

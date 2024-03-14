@@ -194,7 +194,7 @@
 
 	<insert id="insert_9120_01" parameterType="Map">
 		<selectKey resultType = "string" keyProperty="post_id" order="BEFORE">
-			SELECT NVL(LPAD(MAX(POST_ID)+1,10,'0'),'0000000001') AS POST_ID
+			SELECT COALESCE(LPAD(MAX(POST_ID)+1,10,'0'),'0000000001') AS POST_ID
 			FROM   pms_post_info
 			WHERE  BKUP_ID = '0000000000'
 			AND    PRJT_ID = #{prjt_id}
@@ -232,7 +232,7 @@
 
 	<insert id="insert_9120_02" parameterType="Map">
 		<selectKey resultType = "string" keyProperty="rpl_no" order="BEFORE">
-			SELECT NVL(MAX(RPL_NO)+1,1) AS RPL_NO
+			SELECT COALESCE(MAX(RPL_NO)+1,1) AS RPL_NO
 			FROM   pms_rpl_lst
 			WHERE  BKUP_ID = '0000000000'
 			AND    PRJT_ID = #{prjt_id}
@@ -267,7 +267,7 @@
 
 	<insert id="insert_9120_03" parameterType="Map">
 		<selectKey resultType = "int" keyProperty="cmnt_no" order="BEFORE">
-			SELECT NVL(MAX(CMNT_NO)+1,1) AS CMNT_NO
+			SELECT COALESCE(MAX(CMNT_NO)+1,1) AS CMNT_NO
 			FROM   pms_cmnt_lst
 			WHERE  BKUP_ID = '0000000000'
 			AND    PRJT_ID = #{prjt_id}

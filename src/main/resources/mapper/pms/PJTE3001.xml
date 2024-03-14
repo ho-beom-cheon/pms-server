@@ -269,7 +269,7 @@
     </update>
     <insert id="insert_3001_01" parameterType="Map">
         <selectKey resultType="string" keyProperty="mng_id" order="BEFORE">
-            SELECT CONCAT(CONCAT('E',#{err_tycd}),LPAD(NVL(MAX(CAST(SUBSTRING(MNG_ID,5,6) AS INT))+1,0),6,'0')) AS
+            SELECT CONCAT(CONCAT('E',#{err_tycd}),LPAD(COALESCE(MAX(CAST(SUBSTRING(MNG_ID,5,6) AS INT))+1,0),6,'0')) AS
             MNG_ID
             FROM pms_err_mng
             WHERE MNG_ID LIKE  CONCAT('E',#{err_tycd},'%')

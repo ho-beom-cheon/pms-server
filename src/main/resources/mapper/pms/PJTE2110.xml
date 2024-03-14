@@ -9,26 +9,26 @@
               , A.BZNM                    AS BZNM
               , A.SQN_CD               AS SQN_CD
               , A.SQN_NM               AS SQN_NM
-              , NVL(B.TOT_CNT,0)       AS TOT_CNT
-              , NVL(B.AF_TOT_CNT,0)    AS AF_TOT_CNT
-              , NVL(B.CMPL_CNT,0)      AS CMPL_CNT
-              , NVL(B.AF_CMPL_CNT,0)   AS AF_CMPL_CNT
-              , NVL(B.NCMPL_CNT,0)     AS NCMPL_CNT
-              , NVL(B.PRNR_RT,0)       AS PRNR_RT
-              , NVL(C.TOT_CNT,0)       AS TOT_CNT1
-              , NVL(C.CMPL_CNT,0)      AS CMPL_CNT1
-              , NVL(C.NCMPL_CNT,0)     AS NCMPL_CNT1
-              , NVL(C.PRNR_RT,0)       AS PRNR_RT1
-              , NVL(D.TOT_CNT,0)       AS PL_TOT_CNT
-              , NVL(D.CMPL_CNT,0)      AS PL_CMPL_CNT
-              , NVL(D.NCMPL_CNT,0)     AS PL_NCMPL_CNT
-              , NVL(D.PRNR_RT,0)       AS PL_PRNR_RT
-              , NVL(F.TOT_CNT,0)       AS TOT_CNT2
-              , NVL(F.CMPL_CNT,0)      AS CMPL_CNT2
+              , COALESCE(B.TOT_CNT,0)       AS TOT_CNT
+              , COALESCE(B.AF_TOT_CNT,0)    AS AF_TOT_CNT
+              , COALESCE(B.CMPL_CNT,0)      AS CMPL_CNT
+              , COALESCE(B.AF_CMPL_CNT,0)   AS AF_CMPL_CNT
+              , COALESCE(B.NCMPL_CNT,0)     AS NCMPL_CNT
+              , COALESCE(B.PRNR_RT,0)       AS PRNR_RT
+              , COALESCE(C.TOT_CNT,0)       AS TOT_CNT1
+              , COALESCE(C.CMPL_CNT,0)      AS CMPL_CNT1
+              , COALESCE(C.NCMPL_CNT,0)     AS NCMPL_CNT1
+              , COALESCE(C.PRNR_RT,0)       AS PRNR_RT1
+              , COALESCE(D.TOT_CNT,0)       AS PL_TOT_CNT
+              , COALESCE(D.CMPL_CNT,0)      AS PL_CMPL_CNT
+              , COALESCE(D.NCMPL_CNT,0)     AS PL_NCMPL_CNT
+              , COALESCE(D.PRNR_RT,0)       AS PL_PRNR_RT
+              , COALESCE(F.TOT_CNT,0)       AS TOT_CNT2
+              , COALESCE(F.CMPL_CNT,0)      AS CMPL_CNT2
            FROM (SELECT A.DTLS_TYCD          AS BZCD
                      , A.DTLS_TYNM          AS BZNM
-                     , NVL(B.SQN_CD,'100')  AS SQN_CD
-                     , NVL(C.SQN_NM,'1차수') AS SQN_NM
+                     , COALESCE(B.SQN_CD,'100')  AS SQN_CD
+                     , COALESCE(C.SQN_NM,'1차수') AS SQN_NM
                   FROM pms_cd_del_mng A
                          LEFT OUTER JOIN
                               (SELECT BZCD
@@ -61,7 +61,7 @@
                       , AA.CMPL_CNT
                       , AA.AF_CMPL_CNT
                       , AA.NCMPL_CNT
-                      , NVL2(AA.TOT_CNT,ROUND((((AA.CMPL_CNT + AA.AF_CMPL_CNT)/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                      , COALESCE(AA.TOT_CNT,ROUND((((AA.CMPL_CNT + AA.AF_CMPL_CNT)/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
                    FROM (SELECT A.BZCD
                               , A.SQN_CD
                               , COUNT(*) AS TOT_CNT
@@ -107,7 +107,7 @@
                       , BB.TOT_CNT
                       , BB.CMPL_CNT
                       , BB.NCMPL_CNT
-                      , NVL2(BB.TOT_CNT,ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                      , COALESCE(BB.TOT_CNT,ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
                    FROM (SELECT A.BZCD
                               , A.SQN_CD
                               , COUNT(*) AS TOT_CNT
@@ -144,7 +144,7 @@
                       , CC.TOT_CNT
                       , CC.CMPL_CNT
                       , CC.NCMPL_CNT
-                      , NVL2(CC.TOT_CNT,ROUND(((CC.CMPL_CNT/CC.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                      , COALESCE(CC.TOT_CNT,ROUND(((CC.CMPL_CNT/CC.TOT_CNT) * 100), 2),0) AS PRNR_RT
                    FROM (SELECT BZCD
                               , SQN_CD
                               , COUNT(*) AS TOT_CNT
@@ -260,8 +260,8 @@
                               , A.PRJT_ID    AS PRJT_ID
                               , A.BKUP_ID    AS BKUP_ID
                               , B.DVLPE_NO   AS DVLPE_NO
-                              , NVL(B.SQN_CD,'100')  AS SQN_CD
-                              , NVL(C.SQN_NM,'1차수') AS SQN_NM
+                              , COALESCE(B.SQN_CD,'100')  AS SQN_CD
+                              , COALESCE(C.SQN_NM,'1차수') AS SQN_NM
                            FROM pms_cd_del_mng A
                            LEFT OUTER JOIN
                                        (SELECT BZCD
@@ -295,7 +295,7 @@
                               , AA.TOT_CNT
                               , AA.CMPL_CNT
                               , AA.NCMPL_CNT
-                              , NVL2(AA.TOT_CNT,ROUND(((AA.CMPL_CNT/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                              , COALESCE(AA.TOT_CNT,ROUND(((AA.CMPL_CNT/AA.TOT_CNT) * 100), 2),0) AS PRNR_RT
                            FROM (SELECT A.BZCD
                                       , A.DVLPE_NO
                                       , A.SQN_CD
@@ -330,7 +330,7 @@
                          , BB.TOT_CNT
                          , BB.CMPL_CNT
                          , BB.NCMPL_CNT
-                         , NVL2(BB.TOT_CNT,ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
+                         , COALESCE(BB.TOT_CNT,ROUND(((BB.CMPL_CNT/BB.TOT_CNT) * 100), 2),0) AS PRNR_RT
                       FROM (SELECT A.BZCD
                                  , A.DVLPE_NO
                                  , A.SQN_CD
@@ -454,8 +454,8 @@
                          ELSE 0 END)     AS SPND_CNT
          FROM (SELECT A.DTLS_TYCD          AS BZCD
                      ,A.DTLS_TYNM          AS BZNM
-                     ,NVL(B.SQN_CD,'100')  AS SQN_CD
-                     ,NVL(C.SQN_NM,'1차수') AS SQN_NM
+                     ,COALESCE(B.SQN_CD,'100')  AS SQN_CD
+                     ,COALESCE(C.SQN_NM,'1차수') AS SQN_NM
                      ,B.PRJT_ID            AS PRJT_ID
                      ,B.BKUP_ID            AS BKUP_ID
                FROM   pms_cd_del_mng A
